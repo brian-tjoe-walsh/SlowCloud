@@ -1,0 +1,178 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 46px;
+  background: #323232;
+}
+
+.mainLogo {
+  background-image: linear-gradient(rgb(175, 116, 202), rgb(119, 78, 138));  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainLogoText {
+  width: 130px;
+  background-color: transparent;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.5px; 
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.781);
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.home {
+  width: 20%;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  border-right: 1px solid black;
+  background: transparent;
+  font-size: .9em;
+  color: #c8c8c8;
+}
+
+.home:hover {
+  color: white;
+}
+
+.library {
+  width: 20%;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  border-right: 1px solid black;
+  background: transparent;
+  font-size: .9em;
+  color: #c8c8c8;
+}
+
+.library:hover {
+  color: white;
+}
+
+.components {
+    max-width: 1180px;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.bar {
+    height: 60%;
+    width: 100%;
+    padding: 5px;
+    margin: 10px;
+    background: #dcdcdc;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: .9em;
+    color: #646464;
+}
+
+.upload {
+  width: 10%;
+  border:none;
+  background: transparent;
+  font-size: .9em;
+  color: #c8c8c8;
+}
+
+.upload:hover {
+  color: white;
+}
+
+.profile {
+  width: 30%;
+  border: none;
+  background: transparent;
+  font-size: .9em;
+  color: #c8c8c8;
+}
+
+.profile:hover {
+  color: white;
+}
+
+
+.menu {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  position: static;
+  width: 50px;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  color: #c8c8c8;
+}
+
+.menu:hover {
+  color: white;
+}
+
+.navShoe {
+  width: 40px;
+  height: 30px;
+  opacity: 85%;
+  margin: 20px;
+}
+
+.dropDown{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 50px;
+}
+
+.loggingOut {
+  margin-top: 15px;
+  width: 100px;
+  height: 25px;
+  background: #323232;
+  font-size: .5em;
+  border: none;
+  color:white;
+  z-index: 2;
+}
+
+.flexingRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clicked {
+  background: black;
+  color: white;
+}
+
+.here {
+  background: black;
+  color: white;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: .9em;
+  color: #c8c8c8;
+}

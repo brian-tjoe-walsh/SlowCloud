@@ -1,0 +1,44 @@
+.mainSearch {
+  margin: 50px;
+  max-width: 800px;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.uploadRoute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(175, 116, 202);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 220.5px;
+  height: 44px;
+  font-size: 1em;
+  margin: 5px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.or {
+  font-size: 18px;
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(73, 73, 73);
+}
+
+.splashBar {
+  height: 90%;
+  width: 100%;
+  padding: 5px;
+  margin: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: .9em;
+}
