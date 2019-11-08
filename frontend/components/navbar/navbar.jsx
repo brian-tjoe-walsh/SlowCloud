@@ -54,7 +54,7 @@ class NavBar extends React.Component {
       <div className="navBar">
         <div className="components">
           <Link to="/discover" className="mainLogo">
-            <img className="navShoe" src='/shoe.png' />
+            <img className="navShoe" src={window.shoe} />
             {/* <Link to="/discover" className="mainLogoText">SLOWCLOUD</Link> */}
           </Link>
           <Link to="/discover" className="link home">Home</Link>

@@ -32,7 +32,7 @@ class Greeting extends React.Component {
           <div className="topBar">
             <div className="logo" onClick={() => <Link to="/"/>}>
               <div className="adjusting">
-                <div><img className="shoe" src='/shoe.png'/></div>
+                <div><img className="shoe" src={window.shoe}/></div>
                 <div className="soundcloud"><p className="slow">SLOWCLOUD</p></div>
               </div>
             </div>
