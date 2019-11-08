@@ -29,8 +29,8 @@ class SessionForm extends React.Component {
 
   handleDemo(e) {
     this.setState({
-      username: 'KevinShields',
-      email:'mybloodyvalentine@gmail.com',
+      username: 'GlasgowFan65',
+      email:'iloveshoegaze@gmail.com',
       password: 'shoegaze'
     }, () => this.handleSubmit(e));
   }

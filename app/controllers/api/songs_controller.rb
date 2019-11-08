@@ -2,16 +2,10 @@ class Api::SongsController < ApplicationController
 
   before_action :require_signed_in, only: [:create, :update, :edit, :destroy]
 
-  def artist_index
-    @songs = Song.where(user_id: current_user.id)
-    render :index
-  end
-
   def index
     @songs = Song.all
     render :index
   end
-
 
   def create
     @song = Song.new(song_params)

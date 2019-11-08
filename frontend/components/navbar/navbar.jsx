@@ -11,7 +11,6 @@ class NavBar extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.loc);
     if (this.props.loc.url === "/discover") {
       let background = document.getElementsByClassName("home");
       return ($(background).addClass("here"));
@@ -30,7 +29,6 @@ class NavBar extends React.Component {
   }
 
   // clicked() {
-  //   debugger 
     
   //   return e => {
   //     ele = e.currentTarget;
@@ -68,7 +66,9 @@ class NavBar extends React.Component {
             />
           </form>
           <button className="upload">Upload</button>
+          
           <button className="profile" >{this.props.currentUser.username}</button>
+          
           <div className="menu">
             <div className="dropDown" onClick={this.toggle}>
               {(this.state.open) ? (

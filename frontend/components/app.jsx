@@ -19,11 +19,13 @@ class App extends React.Component {
   render() {
     return(
       <div>
+        {/* <Switch> */}
           <AuthRoute path="/" component={SplashContainer} />
           <AuthRoute path="/login" component={LoginFormContainer} />
           <AuthRoute path="/signup" component={SignupFormContainer} />
           <ProtectedRoute path="/discover" component={DiscoverContainer} />
           <ProtectedRoute path="/library" component={LibraryContainer} />
+        {/* </Switch> */}
       </div>
   )};
 }

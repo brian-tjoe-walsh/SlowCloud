@@ -15,7 +15,6 @@ class Greeting extends React.Component {
   
   
   background() {
-    // debugger
     let background = document.getElementsByClassName("preModal");
     return ($(background).addClass("modal"));
   }
