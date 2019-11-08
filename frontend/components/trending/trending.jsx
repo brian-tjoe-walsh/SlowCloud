@@ -8,8 +8,8 @@ class Trending extends React.Component {
 
   render() {
     return(
-      <div>
-        < Songs />
+      <div className="discPics">
+        < Songs max={4} />
       </div>
     );
   }

@@ -16,12 +16,20 @@ class Discover extends React.Component {
             <div className="leftSide">
               <div className="discoverTitles">
                 <h3>Trending</h3>
+                <p className="miniDesc">The biggest hits, chosen by you</p>
                 <Trending />
+              </div>
+              
+              <div className="navHr">
+                <hr className="navHr"/>
               </div>
 
               <div className="discoverTitles">
                 <h3>New Music Now</h3>
-                <Trending />
+                <p className="miniDesc">See what's on the come up</p>
+                <div className="discPics">
+                  <Trending />
+                </div>
               </div>
             </div>
 

@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => ({
   songs: Object.values(state.entities.songs),
   users: Object.values(state.entities.users),
   currentUser: state.entities.users[state.session.id],
-  filter: ownProps.filter
+  filter: ownProps.filter,
+  max: ownProps.max
 });
 
 const mapDispatchToProps = (dispatch) => ({

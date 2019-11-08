@@ -17,20 +17,45 @@ class Songs extends React.Component {
   }
 
 
+  renderNum(max, songs) {
+    let indices = [];
+    let num;
+
+    if (max < 1000000) {
+      while (indices.length < max) {
+        num = Math.floor(Math.random() * songs.length);
+
+        if (!indices.includes(num)) {
+          indices.push(num);
+        }
+      }
+
+      return indices;
+    } else {
+      return null;
+    }
+  }
 
 
   render() {
     const { songs, users } = this.props;
 
-    if (!songs || users.length <= 1) {
+    if (songs.length < 1 || users.length <= 1) {
+
       return null;
-    } else return(
-      <div className="trendingRow"> 
-        <ul className="listed">
-          {songs.map( (song) => <Song key={song.id} song={song} users={users}/>)}
-        </ul> 
-      </div>
-    );
+
+    } else {
+      let nums = this.renderNum(this.props.max, songs);
+
+      return(
+          <ul className="listed">
+            {(nums !== null) ? 
+              (nums.map( num => <Song key={songs[num].id} type="nums.map" num={num} song={songs[num]} users={users} />)) 
+              : (songs.map( (song) => <Song type="songs.map" key={song.id} song={song} users={users}/>))
+            }
+          </ul> 
+      );
+    }
 
   }
 }
