@@ -90,5 +90,3 @@ GuiltyOfEverything6 = Song.create({title: "Get Well", album: "Guilty Of Everythi
 GuiltyOfEverything7 = Song.create({title: "Beat Around The Bush", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
 GuiltyOfEverything8 = Song.create({title: "B&E", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
 GuiltyOfEverything9 = Song.create({title: "Guilty Of Everything", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
-
-LustLustLust1 = Song.create({title: "Aly, Walk With Me", album: "Lust Lust Lust", genre: "Shoegaze"})
