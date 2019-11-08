@@ -109,7 +109,7 @@ font-family: 'Source Sans Pro', sans-serif; */
   min-width: 1080px;
   max-width: 1250px;
   height: 450px;
-  background-image: url(/Loveless.jpg);
+  background-image: url(../images/Loveless.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 80%;
