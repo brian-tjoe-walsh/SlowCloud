@@ -80,3 +80,15 @@ LesVoyagesDeLame5 = Song.create({title: "Beings Of Light", album: "Les Voyages D
 LesVoyagesDeLame6 = Song.create({title: "Faiseurs De Mondes", album: "Les Voyages De Lame", genre: "Shoegaze/Post-Black Metal", user_id: artist5.id})
 LesVoyagesDeLame7 = Song.create({title: "Havens", album: "Les Voyages De Lame", genre: "Shoegaze/Post-Black Metal", user_id: artist5.id})
 LesVoyagesDeLame8 = Song.create({title: "Summer's Glory", album: "Les Voyages De Lame", genre: "Shoegaze/Post-Black Metal", user_id: artist5.id})
+
+GuiltyOfEverything1 = Song.create({title: "Hymn To The Pillory", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything2 = Song.create({title: "Dig", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything3 = Song.create({title: "Bent Nail", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything4 = Song.create({title: "Endlessly", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything5 = Song.create({title: "Somersault", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything6 = Song.create({title: "Get Well", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything7 = Song.create({title: "Beat Around The Bush", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything8 = Song.create({title: "B&E", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+GuiltyOfEverything9 = Song.create({title: "Guilty Of Everything", album: "Guilty Of Everything", genre: "Shoegaze/Nugaze", user_id: artist6.id})
+
+LustLustLust1 = Song.create({title: "Aly, Walk With Me", album: "Lust Lust Lust", genre: "Shoegaze"})
