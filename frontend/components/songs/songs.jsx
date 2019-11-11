@@ -11,8 +11,9 @@ class Songs extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchSongs();
-    this.props.fetchUsers()
+    this.props.fetchUsers();
+    this.props.fetchAlbums();
+    this.props.fetchSongs()
       .then(this.setState({fetchingUsers: "done"}));
   }
 
@@ -38,20 +39,29 @@ class Songs extends React.Component {
 
 
   render() {
-    const { songs, users } = this.props;
+    const { songs, users, albums } = this.props;
 
-    if (songs.length < 1 || users.length <= 1) {
+    if (songs.length < 1 || users.length <= 1 || albums.length <= 1) {
 
       return null;
 
     } else {
       let nums = this.renderNum(this.props.max, songs);
-
       return(
           <ul className="listed">
             {(nums !== null) ? 
-              (nums.map( num => <Song key={songs[num].id} type="nums.map" num={num} song={songs[num]} users={users} />)) 
-              : (songs.map( (song) => <Song type="songs.map" key={song.id} song={song} users={users}/>))
+              (nums.map( num => <Song key={songs[num].id} 
+                                      type="nums.map" 
+                                      num={num} 
+                                      song={songs[num]} 
+                                      users={users} 
+                                      albums={albums}/>)) 
+
+              : (songs.map( (song) => <Song type="songs.map" 
+                                            key={song.id} 
+                                            song={song} 
+                                            users={users} 
+                                            albums={albums}/>))
             }
           </ul> 
       );

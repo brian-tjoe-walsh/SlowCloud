@@ -3,8 +3,9 @@ import Trending from './trending';
 import { logout } from '../../actions/session_actions';
 
 
-const mapStateToProps = (state) => ({
-  currentUser: state.entities.users[state.session.id]
+const mapStateToProps = (state, ownProps) => ({
+  currentUser: state.entities.users[state.session.id],
+  max: ownProps.max
 });
 
 const mapDispatchToProps = (dispatch) => ({

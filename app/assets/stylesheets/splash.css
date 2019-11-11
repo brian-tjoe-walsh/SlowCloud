@@ -42,3 +42,12 @@
   box-sizing: border-box;
   font-size: .9em;
 }
+
+.splashTrend {
+  width: 100%;
+
+}
+
+.trendingRows {
+  margin: 0px 20px 0px 20px;
+}

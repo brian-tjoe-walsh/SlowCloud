@@ -1,0 +1,34 @@
+.indexBackground {
+  margin-top: 46px;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.indexMidpage {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 100%;
+}
+
+
+.indexRow {
+  width:100%;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  height: 250px;
+}
+
+.indexOrganized {
+  margin-top: 40px;
+  width: 100%;
+  display: flex; 
+  justify-content: space-around;
+}
+

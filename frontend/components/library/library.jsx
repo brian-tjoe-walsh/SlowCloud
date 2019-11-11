@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
 import Trending from '../trending/trending_container';
+import Albums from '../album/albums_container';
 
 class Library extends React.Component {
   render() {
@@ -15,12 +16,12 @@ class Library extends React.Component {
             <div className="leftSide">
               <div className="discoverTitles">
                 <h3>Trending</h3>
-                <Trending />
+                <Albums cateogry="random" max={4} />
               </div>
 
               <div className="discoverTitles">
                 <h3>New Music Now</h3>
-                <Trending />
+                <Albums category="new" max={4} />
               </div>
             </div>
 

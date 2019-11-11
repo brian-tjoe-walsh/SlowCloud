@@ -1,7 +1,8 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
-import Trending from '../trending/trending_container';
+import Albums from '../album/albums_container';
 import Listening from '../listening/listening_container';
+import MediaPlayer from '../mediaPlayer/mediaPlayer';
 
 class Discover extends React.Component {
   render() {
@@ -14,22 +15,36 @@ class Discover extends React.Component {
           <div className="discoverMidPage">
 
             <div className="leftSide">
-              <div className="discoverTitles">
-                <h3>Trending</h3>
-                <p className="miniDesc">The biggest hits, chosen by you</p>
-                <Trending />
+              <div className="discoverRows">
+                <div className="discoverTitles">
+                  <h3>Trending</h3>
+                  <p className="miniDesc">The biggest hits, chosen by you</p>
+                </div>
+                <Albums category="random" max={4} />
               </div>
               
               <div className="navHr">
                 <hr className="navHr"/>
               </div>
 
-              <div className="discoverTitles">
-                <h3>New Music Now</h3>
-                <p className="miniDesc">See what's on the come up</p>
-                <div className="discPics">
-                  <Trending />
+              <div className="discoverRows">
+                <div className="discoverTitles">
+                  <h3>New Music Now</h3>
+                  <p className="miniDesc">See what's on the come up</p>
                 </div>
+                <Albums category="new" max={4} />
+              </div>
+
+              <div className="navHr">
+                <hr className="navHr"/>
+              </div>
+
+              <div className="discoverRows">
+                <div className="discoverTitles">
+                  <h3>The Classics</h3>
+                  <p className="miniDesc">Revisit the albums that defined the genre</p>
+                </div>
+                <Albums category="classic" max={4} />
               </div>
             </div>
 
@@ -42,6 +57,7 @@ class Discover extends React.Component {
           </div> 
         </div>
 
+        <MediaPlayer />
       </div>
     )
   }

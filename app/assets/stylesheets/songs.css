@@ -1,34 +1,49 @@
 .listed {
   display: flex;
   width: 100%;
-  height: 150px;
+  height: 250px;;
   /* width: 1000px; */
   flex-direction: row;
   justify-content: space-around;
 }
 
-.song {
+.album {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   /* max-width: 100%; */
   height: 100%;
+  width: 175px;
   min-width: 117.77px;
-  width: 100%;
   min-height: 117.77px; 
   font-size: 13px;
-  border: solid rgb(197, 197, 197) 1px;
-  background: rgb(227, 198, 255);
+  /* background: rgb(227, 198, 255); */
 }
 
 h3 {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 27px;
   font-weight: lighter;
-  margin-top: 20px;
+  margin: 20px 0px 5px 0px;
 }
 
-.songBoundaries {
-  max-height: 150px;
-  max-width: 150px;
-  margin: 10px;
+.albumArt {
+  border: solid rgb(167, 167, 167) 1px;
+  height: 173px;
+  width: 173px;
+}
+
+.albumArtist {
+  text-decoration: none;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: rgb(201, 200, 200);
+  font-size: 13px;
+  word-wrap: break-word;
+}
+
+.albumTitle {
+  text-decoration: none;
+  color: rgb(97, 97, 97);
+  font-size: 15px;
+  word-wrap: break-word;
 }

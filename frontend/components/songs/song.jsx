@@ -1,7 +1,9 @@
 import React from 'react';
 
-const Song = ({type, num, song, users}) => {
+const Song = ({type, num, song, users, albums}) => {
   let artist;
+  let album;
+  // debugger
 
   for (let i = 0; i < users.length; i++) {
     if(users[i].id === song.user_id) {
@@ -10,12 +12,19 @@ const Song = ({type, num, song, users}) => {
     } 
   }
 
+  for (let i = 0; i < albums.length; i++) {
+    if (albums[i].id === song.album_id) {
+      album = albums[i];
+    }
+  }
+
   return(
     <div className="songBoundaries">
       <li className="song">
-        <p>{song.title}</p>
-        <p>{artist.username}</p>
-        <p>{song.album}</p>
+        <img className="albumArt" src={album.photoUrl}/>
+        <p className="songTitle">{song.title}</p>
+        <p className="songArtist">{artist.username}</p>
+        {/* <p>{album.title}</p> */}
       </li>
     </div>
   )

@@ -9,7 +9,7 @@ class Trending extends React.Component {
   render() {
     return(
       <div className="discPics">
-        < Songs max={4} />
+        < Albums max={this.props.max} />
       </div>
     );
   }

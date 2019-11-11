@@ -18,12 +18,14 @@ class NavBar extends React.Component {
       let background = document.getElementsByClassName("library");
       return ($(background).addClass("here"));
     }
-
   }
 
   componentWillUnmount() {
     if (this.props.loc.url === "/discover") {
       let background = document.getElementsByClassName("home");
+      return ($(background).removeClass("here"));
+    } else if (this.props.loc.url === "/library") {
+      let background = document.getElementsByClassName("library");
       return ($(background).removeClass("here"));
     }
   }
