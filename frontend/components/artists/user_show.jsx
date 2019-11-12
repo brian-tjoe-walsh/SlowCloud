@@ -9,59 +9,48 @@ import { Link, Redirect } from 'react-router-dom';
 class UserShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { artist: null };
+    this.state = {artist: null};
   }
 
-  componentDidMount() {
-    this.props.fetchUsers();
+  componentDidMount() { 
+    // debugger
+
+    this.props.fetchUser(this.props.artistId);
     this.props.fetchAlbums()
-      .then(this.setState({ artist: this.props.users[this.props.artistId] }));
-
+      .then((res) => this.setState({ artist: res.user }));
+    debugger
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.artistId !== this.props.artistId) {
-      this.props.fetchUsers();
-      this.props.fetchAlbums()
-        .then(this.setState({ artist: this.props.users[this.props.artistId] }));
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.artistId !== this.props.artistId) {
+  //     this.props.fetchUser(this.props.artistId);
+  //     this.props.fetchAlbums()
+  //       .then(this.setState({ artist: this.props.users[this.props.artistId] }));
+  //   }
+  // }
 
   getAlbums() {
-    let albums = {};
-    this.props.albums.forEach( (album, index) => {
-      if (album.user_id === this.state.artist.id) {
-        albums[index] = album;
+    artistAlbums = [];
+
+    this.props.albums.forEach((alb) => {
+      if (alb.user_id === this.state.artist.id) {
+        artistAlbums.push(alb);
       }
-    }); 
+    });
 
-    return albums;
-  }
-
-  getArtist() {
-    let artist;
-
-    if (!this.state.artist.id) {
-      this.setState({ artist: this.props.artists[this.props.artistId] });
-    }
-
-    artist = this.state.artist;
-    
-    return artist;
+    debugger
+    return artistAlbums;
   }
 
   render() {
-    const { users, albums } = this.props;
+    const { artist } = this.state;
     const loc = { url: "/artists" };
 
-    if (!this.state.artist) {
+    if (!artist) {
       return null;
     } else {
-      const artist = this.getArtist();
-      const artistAlbums = this.getAlbums(); 
-
-      const albumList = Object.values(artistAlbums);
-      const albumIndices = Object.keys(artistAlbums);
+      let artistAlbums = getAlbums();
+      debugger
 
       return (
         <div className="userShowBackground">
@@ -89,16 +78,16 @@ class UserShow extends React.Component {
 
                 <div className="showLeftAndRight">
                   <div className="userAlbumList">
-                    {albumList.map((album, index) => (
+                    {artist.albums.map((album) => (
                       <div className="userIndividualAlbum" key={album.id}>
-                        <Link to={`/albums/${albumIndices[index]}`}><img className="albumArt" id="showPagePic" src={album.photoUrl}></img></Link>
+                        <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.photoUrl}></img></Link>
                         
                         <div className="showTitleSpacing">
                           <div className="showTitleAdjustments">
                             <i className="fas fa-play-circle" id="showPagePlay"></i>
                             <div className="showJustTitles">
                               <Link to={`/artists/${this.props.artistId}`} className="showAlbumArtist">{artist.username}</Link>
-                              <Link to={`/albums/${albumIndices[index]}`} className="showAlbumTitle">{album.title}</Link>
+                              <Link to={`/albums/${album.id}`} className="showAlbumTitle">{album.title}</Link>
                             </div>
                           </div>
                           <div className="waveFormContainer">
@@ -121,7 +110,7 @@ class UserShow extends React.Component {
             </div>
 
           </div>
-          <MediaPlayer albums={albumList} />
+          {/* <MediaPlayer albums={albumList} /> */}
         </div>
       )
     }

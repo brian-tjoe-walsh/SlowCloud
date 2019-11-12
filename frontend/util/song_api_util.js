@@ -6,12 +6,14 @@ export const fetchSongs = data => (
   })
 );
 
-export const fetchSong = id => (
-  $.ajax({
-    method: 'GET',
-    url: `api/songs/${id}`
-  })
-);
+export const fetchSong = id => {
+  return (
+    $.ajax({
+      method: 'GET',
+      url: `api/songs/${id}`
+    })
+  );
+};
 
 export const createSong = song => (
   $.ajax({

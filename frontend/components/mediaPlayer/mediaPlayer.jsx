@@ -10,27 +10,30 @@ class MediaPlayer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchAlbums()
+    this.props.fetchUsers();
+    this.props.fetchAlbums();
+    this.props.fetchSong(577)
       .then(this.setState({ fetchingUsers: "done" }));
   }
   
   render() {
-    const { users, albums } = this.props;
-    
-    if (this.state.fetchingUsers !== "done") {
+    // debugger 
+
+    if (this.props.albums.length <= 1 || this.props.users.length <= 1 || !this.props.song) {
 
       return null;
 
     } else {
-      debugger
-      justLikeHoney = this.props.albums[10].songs[0];
+    // debugger
+    justLikeHoney = this.props.songs[101];
 
-      return (
-          <div className="mediaBar">
-            media goes here
-          </div>
-      )
-    }
+    return (
+        <div className="mediaBar">
+          <audio controls width="300px" height="50px">
+            <source src={url_for(justLikeHoney.audio_file)} />
+          </audio>
+        </div>
+    )}
   }
 }
 

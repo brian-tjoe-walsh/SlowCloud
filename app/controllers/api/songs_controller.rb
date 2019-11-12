@@ -18,7 +18,7 @@ class Api::SongsController < ApplicationController
   end
 
   def show
-    @songs = Songs.all
+    @song = Song.find(params[:id])
     render :show
   end
 
@@ -41,7 +41,7 @@ class Api::SongsController < ApplicationController
 
   private
   def song_params
-    params.require(:song).permit(:title, :album, :genre)
+    params.require(:song).permit(:id, :title, :album, :genre)
   end
 
 end

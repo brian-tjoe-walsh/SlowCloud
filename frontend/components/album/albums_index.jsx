@@ -6,27 +6,24 @@ import NavBarContainer from '../navbar/navbar_container';
 class AlbumsIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.currentUser = this.props.currentUser;
-    this.state = {fetchingUsers: false};
-    this.filter = this.props.filter;
+    this.state = {albums: false};
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
     this.props.fetchAlbums()
-      .then(this.setState({ fetchingUsers: "done" }));
+      .then((res) => this.setState({ albums: res.albums }));
   }
 
 
   render() {
-    const { users, albums } = this.props;
+    const { albums } = this.state;
     const loc= {url: "/albums"};
-    if (this.state.fetchingUsers !== "done") {
+
+    if (!albums) {
 
       return null;
 
     } else {
-      
       return (
         <div>
           <NavBarContainer className="navShow" loc={loc} />
@@ -40,98 +37,89 @@ class AlbumsIndex extends React.Component {
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [0, 1, 2, 3, 4].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [0, 1, 2, 3, 4].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div> 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [5, 6, 7, 8, 9].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [5, 6, 7, 8, 9].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [10, 11, 12, 13, 14].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [10, 11, 12, 13, 14].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [15, 16, 17, 18, 19].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [15, 16, 17, 18, 19].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [20, 21, 22, 23, 24].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [20, 21, 22, 23, 24].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [25, 26, 27, 28, 29].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [25, 26, 27, 28, 29].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [30, 31, 32, 33, 34].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [30, 31, 32, 33, 34].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [35, 36, 37, 38, 39].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [35, 36, 37, 38, 39].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>
 
               <div className="indexRow">
                 <ul className="indexOrganized">
-                    { [40, 41, 42].map((idx, index) => <Album type="albums.map"
-                      num={idx}
-                      key={albums[idx].id}
-                      album={albums[idx]}
-                      users={users} />)
+                  { [40, 41, 42].map((idx, index) => <Album type="albums.map"
+                    num={idx}
+                    key={albums[idx].id}
+                    album={albums[idx]} />)
                   }
                 </ul>
               </div>

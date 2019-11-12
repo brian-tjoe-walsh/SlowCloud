@@ -16,41 +16,46 @@ import UserShowContainer from './artists/user_show_container';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = this.props.store.getState();
   }
 
   render() {
 
-    return(
-      <div>
-        <AuthRoute path="/" component={SplashContainer} />
-        <AuthRoute exact path="/login" component={LoginFormContainer} />
-        <AuthRoute exact path="/signup" component={SignupFormContainer} />
-        <Route exact path="/artists" component={UsersIndexContainer} />
-        <Route exact path="/artists/:artistId" component={UserShowContainer} />
-        <Route exact path="/albums" component={AlbumsIndexContainer} />
-        <Route exact path="/albums/:albumId" component={AlbumShowContainer} />
-        <Route exact path="/discover" component={DiscoverContainer} />
-        <ProtectedRoute path="/library" component={LibraryContainer} />
-      </div>
-    )
-    // if (!window.currentUser) {
-    //   debugger 
-    //   return (
-    //     <div>
-    //       <AuthRoute path="/" component={SplashContainer} />
-    //       <AuthRoute exact path="/login" component={LoginFormContainer} />
-    //       <AuthRoute exact path="/signup" component={SignupFormContainer} />
-    //     </div>
-    //   )} else {
-    //   return (
-    //     <div>
-    //       <Switch>
-    //         <Route exact path="/albums/:albumId" component={AlbumShowContainer} />
-    //         <Route exact path="/discover" component={DiscoverContainer} />
-    //         <ProtectedRoute path="/library" component={LibraryContainer} />
-    //       </Switch>
-    //     </div>
-    //   )}
+    // return(
+    //   <div>
+    //     <AuthRoute path="/" component={SplashContainer} />
+    //     <AuthRoute exact path="/login" component={LoginFormContainer} />
+    //     <AuthRoute exact path="/signup" component={SignupFormContainer} />
+    //     <Route exact path="/artists" component={UsersIndexContainer} />
+    //     <Route exact path="/artists/:artistId" component={UserShowContainer} />
+    //     <Route exact path="/albums" component={AlbumsIndexContainer} />
+    //     <Route exact path="/albums/:albumId" component={AlbumShowContainer} />
+    //     <Route exact path="/discover" component={DiscoverContainer} />
+    //     <ProtectedRoute path="/library" component={LibraryContainer} />
+    //   </div>
+    // )
+     
+    if (!this.state.session.id) {
+      return (
+        <div>
+          <AuthRoute path="/" component={SplashContainer} />
+          <AuthRoute exact path="/login" component={LoginFormContainer} />
+          <AuthRoute exact path="/signup" component={SignupFormContainer} />
+        </div>
+      )} else {
+      return (
+        <div>
+          <Switch>
+            <Route path="/albums/:albumId" component={AlbumShowContainer} />
+            <Route path="/albums" component={AlbumsIndexContainer} />
+            <Route path="/artists/:artistId" component={UserShowContainer} />  
+            <Route path="/artists" component={UsersIndexContainer} />  
+            <Route path="/discover" component={DiscoverContainer} />
+            <ProtectedRoute path="/library" component={LibraryContainer} />
+            <Redirect to="/discover" />
+          </Switch>
+        </div>
+      )}
     };
   }
 export default App;

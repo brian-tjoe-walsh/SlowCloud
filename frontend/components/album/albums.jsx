@@ -5,66 +5,78 @@ import Album from './album';
 class Albums extends React.Component {
   constructor(props) {
     super(props);
-    this.currentUser = this.props.currentUser;
-    this.state = this.props.state;
-    this.filter = this.props.filter;
+    this.albums = this.props.albums;
+    this.state = {
+      albs: []};
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
     this.props.fetchAlbums()
-      .then(this.setState({ fetchingUsers: "done" }));
+      .then((res) => this.albums = res.albums)
+      .then(() => this.categorize(this.props.max));
   }
 
   categorize(max) {
-    // debugger
-    if (this.props.category === "new") {
-      return [15, 34, 31, 9, 42].slice(0, max);
-    } else if (this.props.category === "random") {
-      let indices = [];
-      let num;
+    let temp;
 
-      if (max < 20) {
-        while (indices.length < max) {
-          num = Math.floor(Math.random() * this.props.albums.length);
+    if (this.state.albs.length) {
+      return this.state.albs;
+    } else {
 
-          if (!indices.includes(num)) {
-            indices.push(num);
+      if (this.props.category === "new") {
+        temp = [this.albums[15], this.albums[34], this.albums[31], this.albums[9], this.albums[42]].slice(0, max);
+        this.setState({albs: temp});
+        return this.state.albs;
+
+      } else if (this.props.category === "random") {
+        let indices = [];
+        let num;
+
+        if (max < 20) {
+          while (indices.length < max) {
+            num = Math.floor(Math.random() * this.albums.length);
+
+            if (!indices.includes(this.albums[num])) {
+              indices.push(this.albums[num]);
+            }
           }
+          this.setState({albs: indices});
+          return this.state.albs;
+        } else {
+          return null;
         }
-
-        return indices;
-      } else {
-        return null;
+      } else if (this.props.category === "classic") {
+        temp = [this.albums[10], this.albums[1], this.albums[4], this.albums[7], this.albums[35]].slice(0, max);
+        this.setState({albs: temp});
+        return this.state.albs;
       }
-    } else if (this.props.category === "classic") {
-      return [10, 1, 4, 7, 35].slice(0, max);
     }
   }
 
 
   render() {
-    const { users, albums } = this.props;
-    if (users.length <= 1 || albums.length <= 1) {
+    const { fetchUser } = this.props;
+    const { albs } = this.state;
+
+    if (!this.albums.length) {
 
       return null;
 
     } else {
-      let nums = this.categorize(this.props.max);
+      debugger
+
       return (
         <ul className="listed">
-          {(nums !== null) ?
-            (nums.map(num => <Album key={albums[num].id}
-              type="nums.map"
-              num={num}
-              album={albums[num]}
-              users={users} />))
+          {(albs.length) ?
+            (albs.map(album => <Album key={album.id}
+              type="albs.map"
+              album={album} 
+              fetchUser={fetchUser} />))
 
-            : (albums.map((album, index) => <Album type="albums.map"
-              num={index}
-              key={album.id}
-              album={album}
-              users={users}/>))
+            : (this.albums.map((album) => <Album key={album.id}
+              type="albums.map"
+              album={album} 
+              fetchUser={fetchUser} />))
           }
         </ul>
       );

@@ -1,30 +1,33 @@
 import React from 'react';
-import Songs from '../songs/songs_container';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Album = ({ type, num, album, users }) => {
-  let artist;
-  let artistIdx;
-  // debugger
-
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].id === album.user_id) {
-      artist = users[i];
-      artistIdx = i;
-      break;
-    }
+class Album extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      album: this.props.album,
+      artist: this.props.album.artist};
   }
 
-  return (
-    <div className="songBoundaries">
-      <li className="album" onClick={() => <Redirect to={`/albums/${num}`} />}>
-        <Link to={`/albums/${num}`}><img className="albumArt" src={album.photoUrl} /></Link>
-        <Link to={`/albums/${num}`} className="albumTitle">{album.title}</Link>
-        <Link to={`/artists/${artistIdx}`} className="albumArtist">{artist.username}</Link>
-        {/* <p>{album.title}</p> */}
-      </li>
-    </div>
-  )
+  render() {
+    const {album, artist} = this.state;
+    
+    if (!album) {
+      return null;
+
+    } else {
+      
+      return (
+        <div className="songBoundaries">
+          <li className="album" >
+            <Link to={`/albums/${album.id}`}><img className="albumArt" src={album.photoUrl} /></Link>
+            <Link to={`/albums/${album.id}`} className="albumTitle">{album.title}</Link>
+            <Link to={`/artists/${album.artist.id}`} className="albumArtist">{artist.username}</Link>
+          </li>
+        </div>
+      )
+    }
+  }
 }
 
 export default Album;

@@ -1,20 +1,19 @@
 import { connect } from 'react-redux';
-import { fetchUsers } from '../../actions/user_actions';
-import { fetchAlbums } from '../../actions/album_actions';
+import { fetchUsers, fetchUser } from '../../actions/user_actions';
+import { fetchAlbums, fetchAlbum } from '../../actions/album_actions';
 import Albums from './albums';
 
 const mapStateToProps = (state, ownProps) => ({
-  users: Object.values(state.entities.users),
-  albums: Object.values(state.entities.albums),
-  currentUser: state.entities.users[state.session.id],
+  albums: {},
   category: ownProps.category,
-  filter: ownProps.filter,
   max: ownProps.max
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUsers: () => dispatch(fetchUsers()),
-  fetchAlbums: () => dispatch(fetchAlbums())
+  fetchAlbums: () => dispatch(fetchAlbums()),
+  fetchUser: (id) => dispatch(fetchUser(id)),
+  fetchAlbum: (id) => dispatch(fetchAlbum(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);

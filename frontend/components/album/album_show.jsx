@@ -7,59 +7,32 @@ import { Link, Redirect } from 'react-router-dom';
 class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {album: "hello"};
+    this.state = {album: "hello",
+                  artist: "null"};
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
-    this.props.fetchAlbums()
-      .then(this.setState({ album: this.props.albums[this.props.albumId] }));
-
+    this.props.fetchAlbum(this.props.albumId)
+      .then((res) => this.setState({
+        album: res.album,
+        artist: res.album.artist
+        }
+      ));
   }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.albumId !== this.props.albumId) {
-      this.props.fetchUsers();
-      this.props.fetchAlbums()
-        .then(this.setState({ album: this.props.albums[this.props.albumId] }));
-    }
-  }
-
-  getArtist() {
-    let artist = {};
-
-    if (!this.state.album.user_id) {
-      this.setState({ album: this.props.albums[this.props.albumId] })
-    }
-
-    this.props.users.forEach( (user, index) => {
-      if (user.id === this.state.album.user_id) {
-        artist[index] = user;
-      }
-    });
-
-    return artist; 
-  }
-
 
   render() {
-    const { users, albums } = this.props;
-    const loc = { url: "/library" };
+    // const { artist, album } = this.state;
+    const { album } = this.state;
+    const { artist } = this.state;
+    const loc = { url: "/album" };
 
 
     if (this.state.album === "hello") {
       return null;
     } else {
-      let artistObj = this.getArtist();
-      let index = Object.keys(artistObj)[0];
-      let artist = Object.values(artistObj)[0];
       return (
         <div>
           <NavBarContainer className="navShow" loc={loc}/>
-
-          {/* <div className="modalBackground">
-            <img className="albumArtBackground" src={this.state.album.photoUrl} />
-          </div> */}
 
           <div className="showFlexing">
             <div className="showMidPage">
@@ -69,17 +42,17 @@ class AlbumShow extends React.Component {
 
                     <div className="showTitles">
                       <div className="showArtist">
-                        <Link to={`/artists/${index}`}className="showArtist">{artist.username}</Link>
+                        <Link to={`/artists/${artist.id}`}className="showArtist">{artist.username}</Link>
                       </div>
                       
                       <div className="showTrack">
-                        <p className="showTrack">{this.state.album.title}</p>
+                        <p className="showTrack">{album.title}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="bannerRight">
-                    <img className="albumArtLarge" src={this.state.album.photoUrl} />
+                    <img className="albumArtLarge" src={album.photoUrl} />
                   </div>
                 </div>
 
@@ -101,7 +74,7 @@ class AlbumShow extends React.Component {
 
             </div>
           </div>
-          <MediaPlayer />
+          {/* <MediaPlayer /> */}
         </div>
       )
     }

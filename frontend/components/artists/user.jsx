@@ -6,10 +6,9 @@ const Album = ({ type, num, user }) => {
 
   return (
     <div className="songBoundaries">
-      <li className="album" onClick={() => <Redirect to={`/albums/${num}`} />}>
-        <Link to={`/artists/${num}`}><img className="artistArt" src={user.photoUrl} /></Link>
-        <Link to={`/artists/${num}`} className="albumTitle">{user.username}</Link>
-        {/* <p>{album.title}</p> */}
+      <li className="album" >
+        <Link to={`/artists/${user.id}`}><img className="artistArt" src={user.photoUrl} /></Link>
+        <Link to={`/artists/${user.id}`} className="albumTitle">{user.username}</Link>
       </li>
     </div>
   )

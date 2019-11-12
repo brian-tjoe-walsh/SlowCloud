@@ -1,16 +1,20 @@
 import { connect } from 'react-redux';
 import { fetchAlbums } from '../../actions/album_actions';
+import {fetchUsers} from '../../actions/user_actions';
+import {fetchSong} from '../../actions/song_actions';
 import MediaPlayer from './mediaPlayer';
 
 
 const mapStateToProps = (state) => ({
   users: Object.values(state.entities.users),
   albums: Object.values(state.entities.albums),
-  currentUser: state.entities.users[state.session.id],
+  song: null,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchAlbums: () => dispatch(fetchAlbums())
+  fetchAlbums: () => dispatch(fetchAlbums()),
+  fetchUsers: () => dispatch(fetchUsers()),
+  fetchSong: (id) => dispatch(fetchSong(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaPlayer);

@@ -6,25 +6,25 @@ import NavBarContainer from '../navbar/navbar_container';
 class UsersIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.currentUser = this.props.currentUser;
-    this.state = { fetchingUsers: false };
-    this.filter = this.props.filter;
+    this.state = { users: false };
   }
 
   componentDidMount() {
     this.props.fetchUsers()
-      .then(this.setState({ fetchingUsers: "done" }));
+      .then((res) => this.setState({ users: Object.values(res.users) }));
   }
 
 
   render() {
-    const { users } = this.props;
+    const { users } = this.state;
     const loc = { url: "/artists" };
-    if (this.state.fetchingUsers !== "done") {
+
+    if (!this.state.users) {
 
       return null;
 
     } else {
+      debugger
 
       return (
         <div>

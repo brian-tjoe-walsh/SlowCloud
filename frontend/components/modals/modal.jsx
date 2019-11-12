@@ -8,14 +8,6 @@ class Modal extends React.Component {
     this.state = {go: false};
   }
 
-
-
-  // componentDidMount() {
-  //   this.something = document.getElementsByClassName("preModal");
-
-  //   this.something.addEventListener("click", this.goHome);
-  // }
-
   goHome() {
     this.setState({ go: true });
   }

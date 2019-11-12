@@ -3,7 +3,7 @@ import {
 } from '../actions/session_actions';
 
 import {
-  RECEIVE_USERS
+  RECEIVE_USERS, RECEIVE_USER
 } from '../actions/user_actions';
 
 const usersReducer = (oldState= {}, action) => {
@@ -17,6 +17,10 @@ const usersReducer = (oldState= {}, action) => {
 
     case RECEIVE_USERS:
       newState = action.users;
+      return newState;
+
+    case RECEIVE_USER:
+      newState[action.user.id] = action.user;
       return newState;
 
     default:
