@@ -34,6 +34,10 @@ class AlbumsIndex extends React.Component {
           <div className="indexBackground">
             <div className="indexMidpage">
 
+              <div className="discoverTitles">
+                <h3>All Albums On SlowCloud</h3>
+              </div>
+
               <div className="indexRow">
                 <ul className="indexOrganized">
                     { [0, 1, 2, 3, 4].map((idx, index) => <Album type="albums.map"

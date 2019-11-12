@@ -2,7 +2,7 @@ import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
 import Albums from '../album/albums_container';
 import Listening from '../listening/listening_container';
-import MediaPlayer from '../mediaPlayer/mediaPlayer';
+import MediaPlayer from '../mediaPlayer/mediaPlayer_container';
 
 class Discover extends React.Component {
   render() {

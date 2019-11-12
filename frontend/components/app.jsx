@@ -9,6 +9,8 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import LibraryContainer from './library/library_container';
 import AlbumShowContainer from './album/album_show_container';
 import AlbumsIndexContainer from './album/albums_index_container';
+import UsersIndexContainer from './artists/users_index_container';
+import UserShowContainer from './artists/user_show_container';
 
 
 class App extends React.Component {
@@ -23,6 +25,8 @@ class App extends React.Component {
         <AuthRoute path="/" component={SplashContainer} />
         <AuthRoute exact path="/login" component={LoginFormContainer} />
         <AuthRoute exact path="/signup" component={SignupFormContainer} />
+        <Route exact path="/artists" component={UsersIndexContainer} />
+        <Route exact path="/artists/:artistId" component={UserShowContainer} />
         <Route exact path="/albums" component={AlbumsIndexContainer} />
         <Route exact path="/albums/:albumId" component={AlbumShowContainer} />
         <Route exact path="/discover" component={DiscoverContainer} />
@@ -30,13 +34,12 @@ class App extends React.Component {
       </div>
     )
     // if (!window.currentUser) {
+    //   debugger 
     //   return (
     //     <div>
-    //       <Switch>
-    //         <AuthRoute path="/" component={SplashContainer} />
-    //         <AuthRoute exact path="/login" component={LoginFormContainer} />
-    //         <AuthRoute exact path="/signup" component={SignupFormContainer} />
-    //       </Switch>
+    //       <AuthRoute path="/" component={SplashContainer} />
+    //       <AuthRoute exact path="/login" component={LoginFormContainer} />
+    //       <AuthRoute exact path="/signup" component={SignupFormContainer} />
     //     </div>
     //   )} else {
     //   return (
@@ -48,7 +51,6 @@ class App extends React.Component {
     //       </Switch>
     //     </div>
     //   )}
-    // };
+    };
   }
-}
 export default App;
