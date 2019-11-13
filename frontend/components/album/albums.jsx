@@ -63,7 +63,6 @@ class Albums extends React.Component {
       return null;
 
     } else {
-      debugger
 
       return (
         <ul className="listed">

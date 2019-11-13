@@ -24,7 +24,6 @@ class UsersIndex extends React.Component {
       return null;
 
     } else {
-      debugger
 
       return (
         <div>

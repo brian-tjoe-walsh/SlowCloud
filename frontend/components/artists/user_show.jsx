@@ -9,16 +9,21 @@ import { Link, Redirect } from 'react-router-dom';
 class UserShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {artist: null};
+    this.state = {
+      artist: null,
+      albums: null};
   }
 
   componentDidMount() { 
-    // debugger
+    let artst;
 
-    this.props.fetchUser(this.props.artistId);
-    this.props.fetchAlbums()
-      .then((res) => this.setState({ artist: res.user }));
-    debugger
+    this.props.fetchUser(this.props.artistId)
+      .then((res) => artst = res.user)
+      .then(() => this.props.fetchAlbums())
+      .then((res) => this.setState({ 
+        artist: artst,
+        albums: res.albums
+       }));
   }
 
   // componentDidUpdate(prevProps) {
@@ -30,15 +35,14 @@ class UserShow extends React.Component {
   // }
 
   getAlbums() {
-    artistAlbums = [];
+    let artistAlbums = [];
 
-    this.props.albums.forEach((alb) => {
+    this.state.albums.forEach((alb) => {
       if (alb.user_id === this.state.artist.id) {
         artistAlbums.push(alb);
       }
     });
 
-    debugger
     return artistAlbums;
   }
 
@@ -49,8 +53,7 @@ class UserShow extends React.Component {
     if (!artist) {
       return null;
     } else {
-      let artistAlbums = getAlbums();
-      debugger
+      let artistAlbums = this.getAlbums();
 
       return (
         <div className="userShowBackground">
@@ -78,7 +81,7 @@ class UserShow extends React.Component {
 
                 <div className="showLeftAndRight">
                   <div className="userAlbumList">
-                    {artist.albums.map((album) => (
+                    {artistAlbums.map((album) => (
                       <div className="userIndividualAlbum" key={album.id}>
                         <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.photoUrl}></img></Link>
                         

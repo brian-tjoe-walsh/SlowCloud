@@ -5,7 +5,8 @@ import UserShow from './user_show';
 
 const mapStateToProps = (state, ownProps) => ({
   artistId: ownProps.match.params.artistId,
-  albums: {}
+  albums: {},
+  user: {}
 });
 
 const mapDispatchToProps = (dispatch) => ({

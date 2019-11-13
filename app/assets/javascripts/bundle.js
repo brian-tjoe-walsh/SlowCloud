@@ -726,7 +726,6 @@ function (_React$Component) {
       if (!this.albums.length) {
         return null;
       } else {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "listed"
         }, albs.length ? albs.map(function (album) {
@@ -1258,7 +1257,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserShow).call(this, props));
     _this.state = {
-      artist: null
+      artist: null,
+      albums: null
     };
     return _this;
   }
@@ -1268,14 +1268,17 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // debugger
-      this.props.fetchUser(this.props.artistId);
-      this.props.fetchAlbums().then(function (res) {
+      var artst;
+      this.props.fetchUser(this.props.artistId).then(function (res) {
+        return artst = res.user;
+      }).then(function () {
+        return _this2.props.fetchAlbums();
+      }).then(function (res) {
         return _this2.setState({
-          artist: res.user
+          artist: artst,
+          albums: res.albums
         });
       });
-      debugger;
     } // componentDidUpdate(prevProps) {
     //   if (prevProps.artistId !== this.props.artistId) {
     //     this.props.fetchUser(this.props.artistId);
@@ -1289,13 +1292,12 @@ function (_React$Component) {
     value: function getAlbums() {
       var _this3 = this;
 
-      artistAlbums = [];
-      this.props.albums.forEach(function (alb) {
+      var artistAlbums = [];
+      this.state.albums.forEach(function (alb) {
         if (alb.user_id === _this3.state.artist.id) {
           artistAlbums.push(alb);
         }
       });
-      debugger;
       return artistAlbums;
     }
   }, {
@@ -1311,9 +1313,7 @@ function (_React$Component) {
       if (!artist) {
         return null;
       } else {
-        var _artistAlbums = getAlbums();
-
-        debugger;
+        var artistAlbums = this.getAlbums();
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -1344,7 +1344,7 @@ function (_React$Component) {
           className: "showLeftAndRight"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
-        }, artist.albums.map(function (album) {
+        }, artistAlbums.map(function (album) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "userIndividualAlbum",
             key: album.id
@@ -1410,7 +1410,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     artistId: ownProps.match.params.artistId,
-    albums: {}
+    albums: {},
+    user: {}
   };
 };
 
@@ -1505,7 +1506,6 @@ function (_React$Component) {
       if (!this.state.users) {
         return null;
       } else {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           className: "navShow",
           loc: loc
