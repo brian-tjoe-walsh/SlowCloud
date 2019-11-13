@@ -50,7 +50,7 @@ class Splash extends React.Component {
 
         </div> 
           <div>
-            {/* <MediaPlayer /> */}
+            <MediaPlayer />
           </div>
       </div>
     );

@@ -24,3 +24,9 @@ export const fetchUser = (id) => dispatch => {
     .then((user) => dispatch(receiveUser(user))
     ));
 };
+
+export const createUser = (user) => dispatch => {
+  return (UserApiUtil.createUser(user)
+    .thern((user) => dispatch(receiveUser(user))
+  ));
+};

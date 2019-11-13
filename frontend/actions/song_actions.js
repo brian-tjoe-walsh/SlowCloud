@@ -21,6 +21,12 @@ const removeSong = (songId) => ({
   songId: songId
 });
 
+export const createSong = (song) => dispatch => (
+  SongApiUtil.createSong(song)
+    .then(song => dispatch(receiveSong(song))
+  )
+);
+
 export const fetchSongs = (filters) => dispatch => (
   SongApiUtil.fetchSongs(filters)
     .then(songs => dispatch(receiveSongs(songs))

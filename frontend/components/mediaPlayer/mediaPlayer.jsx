@@ -5,32 +5,31 @@ class MediaPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.currentUser;
-    this.state = { fetchingUsers: false };
+    this.state = { song: null };
     this.filter = this.props.filter;
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
-    this.props.fetchAlbums();
-    this.props.fetchSong(577)
-      .then(this.setState({ fetchingUsers: "done" }));
+    if (!this.state.song) {
+      this.props.fetchSong(577)
+        .then( (res) => this.setState({ song: res.song }));
+    }
   }
   
   render() {
-    // debugger 
 
-    if (this.props.albums.length <= 1 || this.props.users.length <= 1 || !this.props.song) {
+    if (!this.state.song) {
 
       return null;
 
     } else {
     // debugger
-    justLikeHoney = this.props.songs[101];
+    let justLikeHoney = this.state.song;
 
     return (
         <div className="mediaBar">
-          <audio controls width="300px" height="50px">
-            <source src={url_for(justLikeHoney.audio_file)} />
+          <audio controls width="100%" height="50px">
+          <source src={justLikeHoney.audio_fileUrl} />
           </audio>
         </div>
     )}

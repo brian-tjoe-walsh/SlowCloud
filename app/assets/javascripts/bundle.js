@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/album_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALBUMS, RECEIVE_ALBUM, REMOVE_ALBUM, fetchAlbums, fetchAlbum, deleteAlbum */
+/*! exports provided: RECEIVE_ALBUMS, RECEIVE_ALBUM, REMOVE_ALBUM, fetchAlbums, fetchAlbum, deleteAlbum, createAlbum */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101,6 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbums", function() { return fetchAlbums; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbum", function() { return fetchAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAlbum", function() { return deleteAlbum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAlbum", function() { return createAlbum; });
 /* harmony import */ var _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/album_api_util */ "./frontend/util/album_api_util.js");
 
 var RECEIVE_ALBUMS = "RECEIVE_ALBUMS";
@@ -146,6 +147,13 @@ var deleteAlbum = function deleteAlbum(albumId) {
   return function (dispatch) {
     return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteAlbum"](albumId).then(function () {
       return dispatch(removeAlbum(albumId));
+    });
+  };
+};
+var createAlbum = function createAlbum(album) {
+  return function (dispatch) {
+    return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createAlbum"](album).then(function (album) {
+      return dispatch(receiveAlbum(album));
     });
   };
 };
@@ -233,7 +241,7 @@ var signup = function signup(user) {
 /*!******************************************!*\
   !*** ./frontend/actions/song_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_SONGS, RECEIVE_SONG, REMOVE_SONG, fetchSongs, fetchSong, deleteSong */
+/*! exports provided: RECEIVE_SONGS, RECEIVE_SONG, REMOVE_SONG, createSong, fetchSongs, fetchSong, deleteSong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -241,6 +249,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SONGS", function() { return RECEIVE_SONGS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SONG", function() { return RECEIVE_SONG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_SONG", function() { return REMOVE_SONG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSong", function() { return createSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSongs", function() { return fetchSongs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSong", function() { return fetchSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteSong", function() { return deleteSong; });
@@ -271,6 +280,13 @@ var removeSong = function removeSong(songId) {
   };
 };
 
+var createSong = function createSong(song) {
+  return function (dispatch) {
+    return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["createSong"](song).then(function (song) {
+      return dispatch(receiveSong(song));
+    });
+  };
+};
 var fetchSongs = function fetchSongs(filters) {
   return function (dispatch) {
     return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchSongs"](filters).then(function (songs) {
@@ -299,7 +315,7 @@ var deleteSong = function deleteSong(songId) {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USERS, RECEIVE_USER, fetchUsers, fetchUser */
+/*! exports provided: RECEIVE_USERS, RECEIVE_USER, fetchUsers, fetchUser, createUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -308,6 +324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
 /* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
 
 var RECEIVE_USERS = "RECEIVE_USERS";
@@ -337,6 +354,13 @@ var fetchUsers = function fetchUsers() {
 var fetchUser = function fetchUser(id) {
   return function (dispatch) {
     return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](id).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+var createUser = function createUser(user) {
+  return function (dispatch) {
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).thern(function (user) {
       return dispatch(receiveUser(user));
     });
   };
@@ -1056,6 +1080,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _album_albums_index_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./album/albums_index_container */ "./frontend/components/album/albums_index_container.jsx");
 /* harmony import */ var _artists_users_index_container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./artists/users_index_container */ "./frontend/components/artists/users_index_container.jsx");
 /* harmony import */ var _artists_user_show_container__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./artists/user_show_container */ "./frontend/components/artists/user_show_container.jsx");
+/* harmony import */ var _uploading_uploading_container__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./uploading/uploading_container */ "./frontend/components/uploading/uploading_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1073,6 +1098,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1106,19 +1132,6 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      // return(
-      //   <div>
-      //     <AuthRoute path="/" component={SplashContainer} />
-      //     <AuthRoute exact path="/login" component={LoginFormContainer} />
-      //     <AuthRoute exact path="/signup" component={SignupFormContainer} />
-      //     <Route exact path="/artists" component={UsersIndexContainer} />
-      //     <Route exact path="/artists/:artistId" component={UserShowContainer} />
-      //     <Route exact path="/albums" component={AlbumsIndexContainer} />
-      //     <Route exact path="/albums/:albumId" component={AlbumShowContainer} />
-      //     <Route exact path="/discover" component={DiscoverContainer} />
-      //     <ProtectedRoute path="/library" component={LibraryContainer} />
-      //   </div>
-      // )
       if (!this.state.session.id) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
           path: "/",
@@ -1151,6 +1164,9 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
           path: "/library",
           component: _library_library_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+          path: "/upload",
+          component: _uploading_uploading_container__WEBPACK_IMPORTED_MODULE_13__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Redirect"], {
           to: "/discover"
         })));
@@ -1377,7 +1393,7 @@ function (_React$Component) {
           }))));
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRight"
-        }, "stuff goes in here"))))));
+        }, "stuff goes in here"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
       }
     }
   }]);
@@ -1881,7 +1897,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MediaPlayer).call(this, props));
     _this.currentUser = _this.props.currentUser;
     _this.state = {
-      fetchingUsers: false
+      song: null
     };
     _this.filter = _this.props.filter;
     return _this;
@@ -1890,29 +1906,32 @@ function (_React$Component) {
   _createClass(MediaPlayer, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchUsers();
-      this.props.fetchAlbums();
-      this.props.fetchSong(577).then(this.setState({
-        fetchingUsers: "done"
-      }));
+      var _this2 = this;
+
+      if (!this.state.song) {
+        this.props.fetchSong(577).then(function (res) {
+          return _this2.setState({
+            song: res.song
+          });
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      // debugger 
-      if (this.props.albums.length <= 1 || this.props.users.length <= 1 || !this.props.song) {
+      if (!this.state.song) {
         return null;
       } else {
         // debugger
-        justLikeHoney = this.props.songs[101];
+        var justLikeHoney = this.state.song;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
           controls: true,
-          width: "300px",
+          width: "100%",
           height: "50px"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-          src: url_for(justLikeHoney.audio_file)
+          src: justLikeHoney.audio_fileUrl
         })));
       }
     }
@@ -2157,6 +2176,10 @@ function (_React$Component) {
         var _background = document.getElementsByClassName("library");
 
         return $(_background).addClass("here");
+      } else if (this.props.loc.url === "/upload") {
+        var _background2 = document.getElementsByClassName("upload");
+
+        return $(_background2).addClass("here");
       }
     }
   }, {
@@ -2166,9 +2189,13 @@ function (_React$Component) {
         var background = document.getElementsByClassName("home");
         return $(background).removeClass("here");
       } else if (this.props.loc.url === "/library") {
-        var _background2 = document.getElementsByClassName("library");
+        var _background3 = document.getElementsByClassName("library");
 
-        return $(_background2).removeClass("here");
+        return $(_background3).removeClass("here");
+      } else if (this.props.loc.url === "/upload") {
+        var _background4 = document.getElementsByClassName("upload");
+
+        return $(_background4).removeClass("here");
       }
     } // clicked() {
     //   return e => {
@@ -2219,8 +2246,9 @@ function (_React$Component) {
         type: "text",
         className: "bar",
         placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "upload"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/upload",
+        className: "link upload"
       }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "profile"
       }, this.props.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2749,7 +2777,8 @@ function (_React$Component) {
     _this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      photoUrl: window.shoe
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -2768,7 +2797,7 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
-      this.props.processForm(user); // .then(() => this.props.history.push('/discover'));
+      this.props.processForm(user);
     }
   }, {
     key: "handleDemo",
@@ -3067,7 +3096,7 @@ function (_React$Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/discover",
         className: "uploadRoute"
-      }, "Explore Trending Songs")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
+      }, "Explore Trending Songs")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
     }
   }]);
 
@@ -3436,6 +3465,235 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_trending__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/uploading/uploading.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/uploading/uploading.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
+/* harmony import */ var _mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mediaPlayer/mediaPlayer_container */ "./frontend/components/mediaPlayer/mediaPlayer_container.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Uploading =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Uploading, _React$Component);
+
+  function Uploading(props) {
+    var _this;
+
+    _classCallCheck(this, Uploading);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Uploading).call(this, props));
+    _this.state = {
+      name: "",
+      audioFile: null,
+      album: "",
+      picture: null,
+      picName: null,
+      title: "",
+      description: ""
+    };
+    return _this;
+  }
+
+  _createClass(Uploading, [{
+    key: "createAlbum",
+    value: function createAlbum() {}
+  }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      // debugger
+      this.setState({
+        name: e.currentTarget.files[0].name,
+        audioFile: e.currentTarget.files[0]
+      });
+    }
+  }, {
+    key: "handlePic",
+    value: function handlePic(e) {
+      // debugger
+      this.setState({
+        picture: e.currentTarget.files[0],
+        picName: e.currentTarget.files[0].name
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append('song[name]', this.state.name);
+      formData.append('song[audioFile]', this.state.audioFile);
+      formData.append('song[picture]', this.state.picture);
+      formData.append('song[picName]', this.state.picName);
+      formData.append('song[title]', this.state.title);
+      formData.append('song[description]', this.state.description);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var loc = {
+        url: "/upload"
+      }; // debugger
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flexing"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        loc: loc
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadMidPage"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadForm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadTitle"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Don't wait around, start uploading now!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadButton"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handleFile.bind(this),
+        className: "chooseFile"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "fakeButton"
+      }, "Choose file to upload ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadFinePrint"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Provide FLAC, WAV, ALAC or AIFF for best audio quality."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadInputFields"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadFilename"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadSubBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadSubTop"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadPic"
+      }, this.state.picture ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.picture
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadPicButton"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handlePic.bind(this),
+        className: "choosePicFile"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "fakePicButton"
+      }, "Upload Image"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadDescription"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadTitleBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "titleInput",
+        type: "text",
+        value: this.state.title,
+        onChange: this.update('title'),
+        placeholder: "Name your song"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadTitleBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadAlbumList"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        value: ""
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        value: ""
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        value: "New Album"
+      }, "New Album"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadDescriptionBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "textArea",
+        cols: "30",
+        rows: "10",
+        value: this.state.description,
+        onChange: this.update('description'),
+        placeholder: "Describe your song"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadSubBottom"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "uploadCancel"
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "uploadUpload"
+      }, "Upload"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+    }
+  }]);
+
+  return Uploading;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Uploading);
+
+/***/ }),
+
+/***/ "./frontend/components/uploading/uploading_container.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/uploading/uploading_container.jsx ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _uploading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uploading */ "./frontend/components/uploading/uploading.jsx");
+/* harmony import */ var _actions_song_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/song_actions */ "./frontend/actions/song_actions.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    song: {}
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createSong: function createSong(song) {
+      return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_2__["createSong"])(song));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_uploading__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -4038,13 +4296,14 @@ var deleteSong = function deleteSong(songId) {
 /*!****************************************!*\
   !*** ./frontend/util/user_api_util.js ***!
   \****************************************/
-/*! exports provided: fetchUsers, fetchUser */
+/*! exports provided: fetchUsers, fetchUser, createUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
 var fetchUsers = function fetchUsers() {
   return $.ajax({
     method: 'GET',
@@ -4055,6 +4314,15 @@ var fetchUser = function fetchUser(id) {
   return $.ajax({
     method: 'GET',
     url: "api/users/".concat(id)
+  });
+};
+var createUser = function createUser(user) {
+  return $.ajax({
+    method: 'POST',
+    url: "api/users",
+    data: {
+      user: user
+    }
   });
 };
 

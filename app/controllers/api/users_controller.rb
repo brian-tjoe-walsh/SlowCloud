@@ -24,8 +24,16 @@ class Api::UsersController < ApplicationController
     end
   end
 
+
+  def delete
+    @user = User.find(params[:id])
+    @user.destroy
+    render :index
+  end
+
+
   private
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :photoUrl)
   end
 end

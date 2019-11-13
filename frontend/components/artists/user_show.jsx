@@ -113,7 +113,7 @@ class UserShow extends React.Component {
             </div>
 
           </div>
-          {/* <MediaPlayer albums={albumList} /> */}
+          <MediaPlayer />
         </div>
       )
     }

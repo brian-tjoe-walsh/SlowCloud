@@ -17,6 +17,9 @@ class NavBar extends React.Component {
     } else if (this.props.loc.url === "/library") {
       let background = document.getElementsByClassName("library");
       return ($(background).addClass("here"));
+    } else if (this.props.loc.url === "/upload") {
+      let background = document.getElementsByClassName("upload");
+      return ($(background).addClass("here"));
     }
   }
 
@@ -26,6 +29,9 @@ class NavBar extends React.Component {
       return ($(background).removeClass("here"));
     } else if (this.props.loc.url === "/library") {
       let background = document.getElementsByClassName("library");
+      return ($(background).removeClass("here"));
+    } else if (this.props.loc.url === "/upload") {
+      let background = document.getElementsByClassName("upload");
       return ($(background).removeClass("here"));
     }
   }
@@ -67,7 +73,7 @@ class NavBar extends React.Component {
               placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
             />
           </form>
-          <button className="upload">Upload</button>
+          <Link to="/upload" className="link upload">Upload</Link>
           
           <button className="profile" >{this.props.currentUser.username}</button>
           
