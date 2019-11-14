@@ -697,7 +697,12 @@ ActiveRecord::Base.transaction do
 end
 # import the files with specific indices written out
 
-# Beer.all.each_with_index do |beer, idx|
-#   file = open(**url of image**)
-#   beer.photo.attach(io: file, filename: *interpolate file name*)
-# end
+User.all.each_with_index do |artist, idx|
+  file = open("https://slowcloud-dev.s3-us-west-1.amazonaws.com/users/artist#{idx}.jpg")
+  artist.photo.attach(io: file, filename: "artist#{idx}.jpg")
+end
+
+Album.all.each_with_index do |album, idx|
+  file = open("https://slowcloud-dev.s3-us-west-1.amazonaws.com/albums/album#{idx}.jpg")
+  album.photo.attach(io: file, filename: "album#{idx}.jpg")
+end
