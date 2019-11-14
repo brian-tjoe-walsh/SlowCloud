@@ -21,14 +21,17 @@ class UsersIndex extends React.Component {
 
     if (!this.state.users) {
 
-      return null;
+      return (
+      <div>
+        <NavBarContainer loc={loc} />
+      </div>
+      );
 
     } else {
 
       return (
         <div>
-          <NavBarContainer className="navShow" loc={loc} />
-
+          <NavBarContainer loc={loc}/>
           <div className="indexBackground">
             <div className="indexMidpage">
 

@@ -1,0 +1,40 @@
+.listeningAlbums {
+  margin-top: 10px;
+  border-top: 1px solid rgb(228, 228, 228);
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.listeningAlbum {
+  margin: 10px 0px 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.listeningTitles {
+  margin: 0px 10px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.listeningPhoto {
+  margin: 0px 10px 0px 0px;
+  width: 100px;
+  height: 100px;
+}
+
+.listeningAlbumTitle {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: rgb(87, 87, 87);
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.listeningAlbumArtist {
+  color: rgb(192, 192, 192);
+  text-decoration: none;
+}

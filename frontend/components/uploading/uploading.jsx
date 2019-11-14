@@ -1,7 +1,5 @@
 import React from 'react';
-import NavBarContainer from '../navbar/navbar_container'; 
-import MediaPlayer from '../mediaPlayer/mediaPlayer_container';
-
+import NavBarContainer from '../navbar/navbar_container';
 
 class Uploading extends React.Component {
   constructor(props) {
@@ -133,7 +131,6 @@ class Uploading extends React.Component {
             </div>
           </div>
         </div>
-        <MediaPlayer />
       </div>
     )
   }

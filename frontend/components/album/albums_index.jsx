@@ -21,13 +21,14 @@ class AlbumsIndex extends React.Component {
 
     if (!albums) {
 
-      return null;
+      return (<div>
+        <NavBarContainer loc={loc} />
+      </div>)
 
     } else {
       return (
-        <div>
-          <NavBarContainer className="navShow" loc={loc} />
-          
+        <div>     
+          <NavBarContainer loc={loc} />     
           <div className="indexBackground">
             <div className="indexMidpage">
 

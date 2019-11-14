@@ -3,8 +3,9 @@ import Listening from './listening';
 import { logout } from '../../actions/session_actions';
 
 
-const mapStateToProps = (state) => ({
-  currentUser: state.entities.users[state.session.id]
+const mapStateToProps = (state, ownProps) => ({
+  currentUser: state.entities.users[state.session.id],
+  albums: ownProps.albums
 });
 
 const mapDispatchToProps = (dispatch) => ({

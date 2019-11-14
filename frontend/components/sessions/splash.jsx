@@ -4,7 +4,6 @@ import {Redirect} from 'react-router-dom';
 import Modal from '../modals/modal_container';
 import Albums from '../album/albums_container';
 import { Link } from 'react-router-dom';
-import MediaPlayer from '../mediaPlayer/mediaPlayer_container';
 
 class Splash extends React.Component {
 
@@ -50,7 +49,6 @@ class Splash extends React.Component {
 
         </div> 
           <div>
-            <MediaPlayer />
           </div>
       </div>
     );

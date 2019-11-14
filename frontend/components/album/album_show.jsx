@@ -1,8 +1,7 @@
 import React from 'react';
 import Songs from '../songs/songs_container';
-import NavBarContainer from '../navbar/navbar_container';
-import MediaPlayer from '../mediaPlayer/mediaPlayer_container';
 import { Link, Redirect } from 'react-router-dom';
+import NavBarContainer from '../navbar/navbar_container';
 
 class AlbumShow extends React.Component {
   constructor(props) {
@@ -28,12 +27,14 @@ class AlbumShow extends React.Component {
 
 
     if (this.state.album === "hello") {
-      return null;
+      return (<div>
+        <NavBarContainer loc={loc} />
+      </div>)
     } else {
+      debugger
       return (
         <div>
-          <NavBarContainer className="navShow" loc={loc}/>
-
+          <NavBarContainer loc={loc} />
           <div className="showFlexing">
             <div className="showMidPage">
                 <div className="songBanner">
@@ -74,7 +75,6 @@ class AlbumShow extends React.Component {
 
             </div>
           </div>
-          {/* <MediaPlayer /> */}
         </div>
       )
     }

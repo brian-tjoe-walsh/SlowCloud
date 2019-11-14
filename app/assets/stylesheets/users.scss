@@ -125,8 +125,21 @@
 }
 
 .showMidRight {
-  width: 20%;
+  width: 30%;
   border-left: 1px solid #f0f0f0;
+}
+
+.showMidRightCont {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  font-size: 15px;
+  color: #cacaca;
+}
+
+.showMidRightNum {
+  margin: 5px 0px 0px 0px;
+  font-size: 20px;
 }
 
 .showLeftAndRight {
@@ -188,5 +201,6 @@
 }
 
 .waveFormContainer {
-  width: 50%;
+  margin: 10px 0px 0px 10px;
+  width: 90%;
 }

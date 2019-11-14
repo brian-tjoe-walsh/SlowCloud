@@ -1,10 +1,8 @@
 import React from 'react';
 import Albums from '../album/album';
-import NavBarContainer from '../navbar/navbar_container';
-import MediaPlayer from '../mediaPlayer/mediaPlayer_container';
 import Album from '../album/album';
 import { Link, Redirect } from 'react-router-dom';
-
+import NavBarContainer from '../navbar/navbar_container';
 
 class UserShow extends React.Component {
   constructor(props) {
@@ -51,14 +49,15 @@ class UserShow extends React.Component {
     const loc = { url: "/artists" };
 
     if (!artist) {
-      return null;
+      return(<div>
+        <NavBarContainer loc={loc} />
+      </div>);
     } else {
       let artistAlbums = this.getAlbums();
 
       return (
         <div className="userShowBackground">
-          <NavBarContainer className="navShow" loc={loc} />
-
+          <NavBarContainer loc={loc} />
           <div className="userShowMid">
 
             <div className="userBanner">
@@ -102,7 +101,12 @@ class UserShow extends React.Component {
                   </div>
 
                   <div className="showMidRight">
-                    stuff goes in here
+                    <div className="showMidRightCont">
+                      Albums
+                      <div className="showMidRightNum">
+                        {artistAlbums.length}
+                      </div>
+                    </div>
                   </div>
 
                 </div>
@@ -113,7 +117,6 @@ class UserShow extends React.Component {
             </div>
 
           </div>
-          <MediaPlayer />
         </div>
       )
     }

@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBarContainer from '../navbar/navbar_container';
 import Trending from '../trending/trending_container';
 import Albums from '../album/albums_container';
+import NavBarContainer from '../navbar/navbar_container';
 
 class Library extends React.Component {
   render() {

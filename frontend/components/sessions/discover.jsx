@@ -1,8 +1,7 @@
 import React from 'react';
-import NavBarContainer from '../navbar/navbar_container';
 import Albums from '../album/albums_container';
 import Listening from '../listening/listening_container';
-import MediaPlayer from '../mediaPlayer/mediaPlayer_container';
+import NavBarContainer from '../navbar/navbar_container';
 
 class Discover extends React.Component {
 
@@ -20,15 +19,19 @@ class Discover extends React.Component {
 
 
   render() {
-    if (this.props.albums.length <= 1 || this.props.users.length <= 1) {
+    const loc = { url: "/discover" };
 
-      return null;
+    if (this.props.albums.length <= 1 || this.props.users.length <= 1) {
+      return (
+        <div>
+          <NavBarContainer loc={loc}/> 
+        </div>
+      );
 
     } else {
-      const loc = {url: "/discover"};
       return(
         <div className="discoverWebPage">
-          <NavBarContainer loc={loc} />
+          <NavBarContainer loc={loc}/>
 
           <div className="flexing">
             <div className="discoverMidPage">
@@ -69,14 +72,13 @@ class Discover extends React.Component {
 
               <div className="rightSide">
                 <div className="listeningHistory">
-                  <h3>Listening History</h3>
-                  <Listening />
+                  <p>Listening History</p>
+                  <Listening albums={this.props.albums}/>
                 </div>
               </div>
             </div> 
           </div>
 
-          <MediaPlayer />
         </div>
       )
     }
