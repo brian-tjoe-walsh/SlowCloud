@@ -470,6 +470,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _songs_songs_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../songs/songs_container */ "./frontend/components/songs/songs_container.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
+/* harmony import */ var _songs_album_show_song__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../songs/album_show_song */ "./frontend/components/songs/album_show_song.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -493,6 +494,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var AlbumShow =
 /*#__PURE__*/
 function (_React$Component) {
@@ -504,6 +506,8 @@ function (_React$Component) {
     _classCallCheck(this, AlbumShow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AlbumShow).call(this, props));
+    _this.currentUser = _this.props.state.entities.users[_this.props.state.session.id]; // debugger
+
     _this.state = {
       album: "hello",
       artist: "null"
@@ -516,6 +520,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      // debugger 
       this.props.fetchAlbum(this.props.albumId).then(function (res) {
         return _this2.setState({
           album: res.album,
@@ -526,6 +531,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // const { artist, album } = this.state;
       var album = this.state.album;
       var artist = this.state.artist;
@@ -538,7 +545,7 @@ function (_React$Component) {
           loc: loc
         }));
       } else {
-        debugger;
+        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -573,15 +580,35 @@ function (_React$Component) {
           className: "albumShowMidLeft"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "addComment"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "albumShowMiniProfPic",
+          src: this.currentUser.photoUrl
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           className: "addingComment",
           placeholder: "Write a comment"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: ""
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "stats"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "albumShowTracklist"
+        }, this.state.album.songs.map(function (song, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_songs_album_show_song__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            key: index,
+            index: index,
+            song: song,
+            album: _this3.state.album
+          });
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowMidRight"
-        }, "stuff goes in here")))));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "showMidRightCont"
+        }, "Songs", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "showMidRightNum"
+        }, this.state.album.songs.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "shamelessPlug"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fab fa-linkedin"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fab fa-github"
+        })))))));
       }
     }
   }]);
@@ -612,7 +639,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // debugger
   return {
+    state: state,
     artist: {},
     album: {},
     albumId: ownProps.match.params.albumId
@@ -1139,47 +1168,75 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      if (!this.state.session.id) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
-          path: "/",
-          component: _sessions_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
-          exact: true,
-          path: "/login",
-          component: _sessions_login_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
-          exact: true,
-          path: "/signup",
-          component: _sessions_signup_form_container__WEBPACK_IMPORTED_MODULE_1__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Redirect"], {
-          to: "/"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_15__["default"], null));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
-          path: "/albums/:albumId",
-          component: _album_album_show_container__WEBPACK_IMPORTED_MODULE_9__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
-          path: "/albums",
-          component: _album_albums_index_container__WEBPACK_IMPORTED_MODULE_10__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
-          path: "/artists/:artistId",
-          component: _artists_user_show_container__WEBPACK_IMPORTED_MODULE_12__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
-          path: "/artists",
-          component: _artists_users_index_container__WEBPACK_IMPORTED_MODULE_11__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
-          path: "/discover",
-          component: _sessions_discover_container__WEBPACK_IMPORTED_MODULE_3__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
-          path: "/library",
-          component: _library_library_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
-          path: "/upload",
-          component: _uploading_uploading_container__WEBPACK_IMPORTED_MODULE_13__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Redirect"], {
-          to: "/discover"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_15__["default"], null));
-      }
+      // debugger
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        exact: true,
+        path: "/albums/:albumId",
+        component: _album_album_show_container__WEBPACK_IMPORTED_MODULE_9__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        exact: true,
+        path: "/albums",
+        component: _album_albums_index_container__WEBPACK_IMPORTED_MODULE_10__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        exact: true,
+        path: "/artists/:artistId",
+        component: _artists_user_show_container__WEBPACK_IMPORTED_MODULE_12__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        exact: true,
+        path: "/artists",
+        component: _artists_users_index_container__WEBPACK_IMPORTED_MODULE_11__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        path: "/discover",
+        component: _sessions_discover_container__WEBPACK_IMPORTED_MODULE_3__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        path: "/library",
+        component: _library_library_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+        path: "/upload",
+        component: _uploading_uploading_container__WEBPACK_IMPORTED_MODULE_13__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+        path: "/",
+        component: _sessions_splash_container__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+        exact: true,
+        path: "/login",
+        component: _sessions_login_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+        exact: true,
+        path: "/signup",
+        component: _sessions_signup_form_container__WEBPACK_IMPORTED_MODULE_1__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Redirect"], {
+        to: "/discover"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mediaPlayer_mediaPlayer_container__WEBPACK_IMPORTED_MODULE_15__["default"], null)); // if (!this.state.session.id) {
+      //   return (
+      //     <div>
+      //       <AuthRoute path="/" component={SplashContainer} />
+      //       <AuthRoute exact path="/login" component={LoginFormContainer} />
+      //       <AuthRoute exact path="/signup" component={SignupFormContainer} />
+      //       {/* <Route exact path="/albums/:albumId" component={AlbumShowContainer} />
+      //       <Route exact path="/albums" component={AlbumsIndexContainer} />
+      //       <Route exact path="/artists/:artistId" component={UserShowContainer} />
+      //       <Route exact path="/artists" component={UsersIndexContainer} />
+      //       <Route exact path="/discover" component={DiscoverContainer} /> */}
+      //       <Redirect to="/" />
+      //       <MediaPlayerContainer />
+      //     </div>
+      //   )} else {
+      //   return (
+      //     <div>
+      //       <Switch>
+      //         <Route path="/albums/:albumId" component={AlbumShowContainer} />
+      //         <Route path="/albums" component={AlbumsIndexContainer} />
+      //         <Route path="/artists/:artistId" component={UserShowContainer} />  
+      //         <Route path="/artists" component={UsersIndexContainer} />  
+      //         <ProtectedRoute path="/discover" component={DiscoverContainer} />
+      //         <ProtectedRoute path="/library" component={LibraryContainer} />
+      //         <ProtectedRoute path="/upload" component={UploadingContainer} />
+      //         <Redirect to="/discover" />
+      //       </Switch>
+      //       <MediaPlayerContainer />
+      //     </div>
+      //   )}
     }
   }]);
 
@@ -1280,6 +1337,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserShow).call(this, props));
     _this.state = {
+      currentUserId: _this.props.currentUserId,
       artist: null,
       albums: null
     };
@@ -1302,22 +1360,35 @@ function (_React$Component) {
           albums: res.albums
         });
       });
-    } // componentDidUpdate(prevProps) {
-    //   if (prevProps.artistId !== this.props.artistId) {
-    //     this.props.fetchUser(this.props.artistId);
-    //     this.props.fetchAlbums()
-    //       .then(this.setState({ artist: this.props.users[this.props.artistId] }));
-    //   }
-    // }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this3 = this;
 
+      var artst; // debugger
+
+      if (prevProps.artistId !== this.props.artistId) {
+        this.props.fetchUser(this.props.artistId).then(function (res) {
+          return artst = res.user;
+        }).then(function () {
+          return _this3.props.fetchAlbums();
+        }).then(function (res) {
+          return _this3.setState({
+            artist: artst,
+            albums: res.albums
+          });
+        });
+      }
+    }
   }, {
     key: "getAlbums",
     value: function getAlbums() {
-      var _this3 = this;
+      var _this4 = this;
 
       var artistAlbums = [];
       this.state.albums.forEach(function (alb) {
-        if (alb.user_id === _this3.state.artist.id) {
+        if (alb.user_id === _this4.state.artist.id) {
           artistAlbums.push(alb);
         }
       });
@@ -1326,8 +1397,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
+      // debugger
       var artist = this.state.artist;
       var loc = {
         url: "/artists"
@@ -1339,6 +1411,14 @@ function (_React$Component) {
         }));
       } else {
         var artistAlbums = this.getAlbums();
+
+        if (artist.id === this.state.currentUserId) {
+          loc = {
+            url: "/library"
+          };
+        } // debugger
+
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1388,7 +1468,7 @@ function (_React$Component) {
           }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "showJustTitles"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-            to: "/artists/".concat(_this4.props.artistId),
+            to: "/artists/".concat(_this5.props.artistId),
             className: "showAlbumArtist"
           }, artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/albums/".concat(album.id),
@@ -1405,7 +1485,13 @@ function (_React$Component) {
           className: "showMidRightCont"
         }, "Albums", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightNum"
-        }, artistAlbums.length))))))));
+        }, artistAlbums.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "shamelessPlug"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fab fa-linkedin"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fab fa-github"
+        }))))))));
       }
     }
   }]);
@@ -1437,6 +1523,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
+    currentUserId: state.session.id,
     artistId: ownProps.match.params.artistId,
     albums: {},
     user: {}
@@ -1714,11 +1801,13 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "discoverTitles"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Trending"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        albums: this.props.albums,
         cateogry: "random",
         max: 4
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "discoverTitles"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "New Music Now"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        albums: this.props.albums,
         category: "new",
         max: 4
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1837,12 +1926,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var indices = this.getRandom();
-      debugger;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var indices = this.getRandom(); // debugger
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "listeningBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listeningAlbums"
       }, indices.map(function (album) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: album.id,
           className: "listeningAlbum"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/artists/".concat(album.artist.id)
@@ -1858,6 +1950,12 @@ function (_React$Component) {
           to: "/albums/".concat(album.id),
           className: "listeningAlbumTitle"
         }, album.title)));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "shamelessPlug"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-linkedin"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-github"
       })));
     }
   }]);
@@ -2282,6 +2380,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      // debugger
       if (this.state.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "navBar"
@@ -2308,9 +2407,16 @@ function (_React$Component) {
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/upload",
           className: "link upload"
-        }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/artists/".concat(this.state.currentUser.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "navBarProfile"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.state.currentUser.photoUrl,
+          className: "albumShowMiniPic navBarProfPic"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "profile"
-        }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, this.state.currentUser.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "menu"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "dropDown",
@@ -3243,6 +3349,48 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/songs/album_show_song.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/songs/album_show_song.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var AlbumShowSong = function AlbumShowSong(_ref) {
+  var index = _ref.index,
+      song = _ref.song,
+      album = _ref.album;
+  // debugger
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "albumShowSong"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "albumShowMiniPic",
+    src: album.photoUrl
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "albumSpread"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "albumShowText"
+  }, index + 1, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "albumShowTitle"
+  }, song.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "albumShowTitleRightSide"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-play"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "playCount"
+  }, 500))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AlbumShowSong);
+
+/***/ }),
+
 /***/ "./frontend/components/songs/song.jsx":
 /*!********************************************!*\
   !*** ./frontend/components/songs/song.jsx ***!
@@ -3638,7 +3786,16 @@ function (_React$Component) {
       this.setState({
         name: e.currentTarget.files[0].name,
         audioFile: e.currentTarget.files[0]
-      });
+      }); // debugger
+
+      var midPage = document.getElementsByClassName("uploadForm");
+      $(midPage).addClass("uploadFormAfterClick");
+      var slideForm = document.getElementsByClassName("uploadInputFields");
+      $(slideForm).addClass("afterClicked");
+      var title = document.getElementsByClassName("uploadTitle");
+      $(title).addClass("uploadTitleAfterClick");
+      var uploadFinePrint = document.getElementsByClassName("uploadFinePrint");
+      $(uploadFinePrint).addClass("uploadFinePrintAfterClick");
     }
   }, {
     key: "handlePic",
@@ -3729,15 +3886,11 @@ function (_React$Component) {
         placeholder: "Name your song"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadTitleBox"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "uploadAlbumList"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        value: ""
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        value: ""
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        value: "New Album"
-      }, "New Album"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "titleInput",
+        placeholder: "Name your album"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadDescriptionBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         className: "textArea",
@@ -4264,6 +4417,7 @@ var Auth = function Auth(_ref) {
       path = _ref.path,
       loggedIn = _ref.loggedIn,
       exact = _ref.exact;
+  // debugger 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: path,
     exact: exact,
@@ -4287,7 +4441,7 @@ var Protected = function Protected(_ref2) {
     exact: exact,
     render: function render(props) {
       return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/login"
+        to: "/"
       });
     }
   });

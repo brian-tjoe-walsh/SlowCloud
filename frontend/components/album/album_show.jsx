@@ -2,15 +2,20 @@ import React from 'react';
 import Songs from '../songs/songs_container';
 import { Link, Redirect } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
+import AlbumShowSong from '../songs/album_show_song';
 
 class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
+    this.currentUser = this.props.state.entities.users[this.props.state.session.id];
+    // debugger
     this.state = {album: "hello",
                   artist: "null"};
   }
 
   componentDidMount() {
+    // debugger 
+
     this.props.fetchAlbum(this.props.albumId)
       .then((res) => this.setState({
         album: res.album,
@@ -31,7 +36,7 @@ class AlbumShow extends React.Component {
         <NavBarContainer loc={loc} />
       </div>)
     } else {
-      debugger
+      // debugger
       return (
         <div>
           <NavBarContainer loc={loc} />
@@ -60,17 +65,26 @@ class AlbumShow extends React.Component {
                 <div className="albumShowLeftAndRight">
                   <div className="albumShowMidLeft">
                     <div className="addComment">
+                    <img className="albumShowMiniProfPic" src={this.currentUser.photoUrl} />
                       <input type="text" className="addingComment"placeholder="Write a comment"/>
                     </div>
-                    <div className="">
-                      <p>stats</p>
+                    <div className="albumShowTracklist">
+                      {this.state.album.songs.map( (song, index) => <AlbumShowSong key={index} index={index} song={song} album={this.state.album}/>)}
                     </div>
                   </div>
                   
                   <div className="albumShowMidRight">
-                    stuff goes in here
+                    <div className="showMidRightCont">
+                      Songs
+                        <div className="showMidRightNum">
+                        {this.state.album.songs.length}
+                      </div>
                     </div>
-
+                    <div className="shamelessPlug">
+                      <i className="fab fa-linkedin"></i>
+                      <i className="fab fa-github"></i>
+                    </div>
+                  </div>
                 </div>
 
             </div>

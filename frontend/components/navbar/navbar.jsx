@@ -62,6 +62,7 @@ class NavBar extends React.Component {
   }
 
   render() {
+    // debugger
     if (this.state.currentUser) {
       return (
         <div className="navBar">
@@ -81,7 +82,12 @@ class NavBar extends React.Component {
             <Link to="/upload" className="link upload">Upload</Link>
 
             {/* <button className="profile">This is empty</button> */}
-            <button className="profile" >{this.state.currentUser.username}</button>
+            <Link to={`/artists/${this.state.currentUser.id}`}>
+              <div className="navBarProfile">
+                <img src={this.state.currentUser.photoUrl} className="albumShowMiniPic navBarProfPic"/>
+                <div className="profile" >{this.state.currentUser.username}</div>
+              </div>
+            </Link>
 
             <div className="menu">
               <div className="dropDown" onClick={this.toggle}>

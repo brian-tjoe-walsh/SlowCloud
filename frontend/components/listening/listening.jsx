@@ -23,12 +23,12 @@ class Listening extends React.Component {
 
   render() {
     let indices = this.getRandom();
-    debugger
+    // debugger
     return (
-      <div>
+      <div className="listeningBox">
        <div className="listeningAlbums">
         {indices.map((album) => (
-          <div className="listeningAlbum">
+          <div key={album.id} className="listeningAlbum">
             <Link to={`/artists/${album.artist.id}`}><img className="listeningPhoto" src={album.photoUrl} /></Link>
             <div className="listeningTitles">
               <Link to={`/artists/${album.artist.id}`} className="listeningAlbumArtist">{album.artist.username}</Link>
@@ -37,7 +37,10 @@ class Listening extends React.Component {
           </div>
         ))}
        </div>
-       
+       <div className="shamelessPlug">
+          <i className="fab fa-linkedin"></i>
+          <i className="fab fa-github"></i>
+       </div>
       </div>
     );
   }

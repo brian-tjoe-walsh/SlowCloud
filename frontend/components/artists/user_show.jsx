@@ -8,6 +8,7 @@ class UserShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentUserId: this.props.currentUserId,
       artist: null,
       albums: null};
   }
@@ -24,13 +25,20 @@ class UserShow extends React.Component {
        }));
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.artistId !== this.props.artistId) {
-  //     this.props.fetchUser(this.props.artistId);
-  //     this.props.fetchAlbums()
-  //       .then(this.setState({ artist: this.props.users[this.props.artistId] }));
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    let artst;
+    // debugger
+
+    if (prevProps.artistId !== this.props.artistId) {
+      this.props.fetchUser(this.props.artistId)
+        .then((res) => artst = res.user)
+        .then(() => this.props.fetchAlbums())
+        .then((res) => this.setState({
+          artist: artst,
+          albums: res.albums
+        }));
+    }
+  }
 
   getAlbums() {
     let artistAlbums = [];
@@ -45,8 +53,10 @@ class UserShow extends React.Component {
   }
 
   render() {
+    // debugger
     const { artist } = this.state;
-    const loc = { url: "/artists" };
+    
+    let loc = { url: "/artists" };
 
     if (!artist) {
       return(<div>
@@ -54,7 +64,11 @@ class UserShow extends React.Component {
       </div>);
     } else {
       let artistAlbums = this.getAlbums();
+      if (artist.id === this.state.currentUserId) {
+        loc = {url: "/library"};
+      }
 
+      // debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} />
@@ -106,6 +120,11 @@ class UserShow extends React.Component {
                       <div className="showMidRightNum">
                         {artistAlbums.length}
                       </div>
+                    </div>
+                    
+                    <div className="shamelessPlug">
+                      <i className="fab fa-linkedin"></i>
+                      <i className="fab fa-github"></i>
                     </div>
                   </div>
 

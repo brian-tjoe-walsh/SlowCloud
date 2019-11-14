@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   background: white;
-  height:1400px;
+  // height:1400px;
 }
 
 .songBanner {
@@ -62,12 +62,6 @@
   color: white;
 }
 
-.modalBackground {
-
-}
-
-
-
 .albumArtBackground {
   width: 100%;
   height: 100%;
@@ -80,7 +74,7 @@
   display: flex;
   flex-direction: column;
   background: white;
-  height:1400px;
+  // height:1400px;
 }
 
 .showFlexing {
@@ -99,26 +93,34 @@
 }
 
 .albumShowMidRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 20%;
-  height: 100%;
   border-left: 1px solid #f0f0f0;
+  margin: 0px 0px 40px 0px;
+  // position: fixed;
+  // height: 700px;
 }
 
 .albumShowLeftAndRight {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  // margin-bottom: 100px;
 }
 
 .addComment {
   height: 43px;
   margin: 20px;
-  padding: 1px;
+  // padding: 1px;
   max-width: 800px;
   background-color: #e6e6e6;
-  border-color:d #c0bebe; 
+  // border: 1px solid  #c0bebe; 
   width: 95%;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
 }
@@ -134,4 +136,58 @@
   box-sizing: border-box;
   font-size: .9em;
   color: #a89e9e;
+}
+
+.albumShowTracklist {
+  margin: 20px 20px 100px 20px;
+}
+
+.albumShowTitle {
+  // font-family: 'Lato', sans-serif;
+  // font-weight: lighter;
+  
+  margin: 0px 0px 0px 10px;
+}
+
+.albumShowText {
+  display: flex;
+  flex-direction: row;
+  margin: 0px 0px 0px 10px;
+  color: rgb(109, 108, 108);
+}
+
+.albumShowMiniPic {
+  width: 30px;
+  height: 30px;
+}
+
+.albumSpread {
+  color: rgb(87, 87, 87);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fa-play {
+  font-size: 12px;
+  color: rgb(196, 196, 196);
+  margin: 0px 5px 0px 5px;
+}
+
+.albumShowMiniProfPic {
+  padding: 5px;
+  width: 34px;
+  height: 34px;
+  background: rgb(245, 245, 245);
+  // border-left: 1px solid rgb(245, 245, 245);
+}
+
+.playCount {
+  color: rgb(196, 196, 196); 
+}
+
+.albumShowTitleRightSide {
+  display: flex;
+  flex-direction: row;
 }

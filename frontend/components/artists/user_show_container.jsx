@@ -4,6 +4,7 @@ import { fetchAlbums } from '../../actions/album_actions';
 import UserShow from './user_show';
 
 const mapStateToProps = (state, ownProps) => ({
+  currentUserId: state.session.id,
   artistId: ownProps.match.params.artistId,
   albums: {},
   user: {}

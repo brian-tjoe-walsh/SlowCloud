@@ -16,12 +16,12 @@ class Library extends React.Component {
             <div className="leftSide">
               <div className="discoverTitles">
                 <h3>Trending</h3>
-                <Albums cateogry="random" max={4} />
+                <Albums albums={this.props.albums} cateogry="random" max={4} />
               </div>
 
               <div className="discoverTitles">
                 <h3>New Music Now</h3>
-                <Albums category="new" max={4} />
+                <Albums albums={this.props.albums} category="new" max={4} />
               </div>
             </div>
 

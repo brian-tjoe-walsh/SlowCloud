@@ -26,7 +26,21 @@ class Uploading extends React.Component {
       name: e.currentTarget.files[0].name,
       audioFile: e.currentTarget.files[0]
     });
-    
+
+    // debugger
+    let midPage =document.getElementsByClassName("uploadForm");
+    $(midPage).addClass("uploadFormAfterClick");
+
+
+    let slideForm = document.getElementsByClassName("uploadInputFields");
+    $(slideForm).addClass("afterClicked");
+
+    let title = document.getElementsByClassName("uploadTitle");
+    $(title).addClass("uploadTitleAfterClick");
+
+    let uploadFinePrint = document.getElementsByClassName("uploadFinePrint");
+    $(uploadFinePrint).addClass("uploadFinePrintAfterClick");
+
   }
 
   handlePic(e) {
@@ -106,11 +120,12 @@ class Uploading extends React.Component {
 
                   <div className="uploadTitleBox">
                     <p>Album</p>
-                    <div className="uploadAlbumList">
+                    <input type="text" className="titleInput" placeholder="Name your album"/>
+                    {/* <div className="uploadAlbumList">
                       <div value=""></div>
                       <div value=""></div>
                       <div value="New Album">New Album</div>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="uploadDescriptionBox">

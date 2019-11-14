@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: row;
   background: white;
-  height:1400px;
+  height:1200px;
 }
 
 .midSplit{
@@ -65,6 +65,7 @@
   color: rgb(192, 192, 192);
   font-size: 18px;
   margin: 50px 0px 20px 20px;
+  height: 100%;
 
 }
 
