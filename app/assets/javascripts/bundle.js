@@ -2060,9 +2060,9 @@ function (_React$Component) {
       var _this2 = this;
 
       if (!this.state.song) {
-        this.props.fetchSong(102).then(function (res) {
+        this.props.fetchSongs().then(function (res) {
           return _this2.setState({
-            song: res.song
+            songs: res.songs
           });
         });
       }
@@ -2073,8 +2073,9 @@ function (_React$Component) {
       if (!this.state.song) {
         return null;
       } else {
-        // debugger
-        var justLikeHoney = this.state.song;
+        console.log(this.state.songs); // debugger
+
+        var justLikeHoney = this.state.songs[101];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {

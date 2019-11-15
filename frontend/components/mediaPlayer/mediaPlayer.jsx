@@ -11,8 +11,8 @@ class MediaPlayer extends React.Component {
 
   componentDidMount() {
     if (!this.state.song) {
-      this.props.fetchSong(102)
-        .then( (res) => this.setState({ song: res.song }));
+      this.props.fetchSongs()
+        .then( (res) => this.setState({ songs: res.songs }));
     }
   }
   
@@ -23,8 +23,9 @@ class MediaPlayer extends React.Component {
       return null;
 
     } else {
+      console.log(this.state.songs)
     // debugger
-    let justLikeHoney = this.state.song;
+    let justLikeHoney = this.state.songs[101];
 
     return (
         <div className="mediaBar">
