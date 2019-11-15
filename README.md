@@ -61,6 +61,6 @@ let midPage = document.getElementsByClassName("uploadForm");
 ```
 
 ### Planned future features
-Comments
-Playlists
-Likes
+* Comments
+* Playlists
+* Likes
