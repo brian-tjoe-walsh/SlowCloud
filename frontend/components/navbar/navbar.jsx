@@ -123,8 +123,11 @@ class NavBar extends React.Component {
                 className="bar"
                 placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
               />
+              <div>
+                <i className="far fa-search"></i>
+              </div>
             </form>
-            <Link to="/upload" className="link upload">Upload</Link>
+            <Link to="/upload" className="upload">Upload</Link>
 
             {/* <button className="profile">This is empty</button> */}
             <Link to="/login" className="profile" >Login</Link>

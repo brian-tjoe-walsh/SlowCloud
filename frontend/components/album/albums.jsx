@@ -49,6 +49,16 @@ class Albums extends React.Component {
         temp = [this.albums[10], this.albums[1], this.albums[4], this.albums[7], this.albums[35]].slice(0, max);
         this.setState({albs: temp});
         return this.state.albs;
+      } else if (this.props.category === "heavy") {
+        // debugger
+        temp = [this.albums[13], this.albums[16], this.albums[20], this.albums[24]].slice(0, max);
+        this.setState({albs: temp});
+        return this.state.albs;
+      } else if (this.props.category === "dream") {
+        // debugger
+        temp = [this.albums[11], this.albums[14], this.albums[25], this.albums[30]].slice(0, max);
+        this.setState({ albs: temp });
+        return this.state.albs;
       }
     }
   }
@@ -63,7 +73,7 @@ class Albums extends React.Component {
       return null;
 
     } else {
-
+      // debugger
       return (
         <ul className="listed">
           {(albs.length) ?

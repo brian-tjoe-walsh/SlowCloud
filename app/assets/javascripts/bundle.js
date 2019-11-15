@@ -771,6 +771,20 @@ function (_React$Component) {
             albs: temp
           });
           return this.state.albs;
+        } else if (this.props.category === "heavy") {
+          // debugger
+          temp = [this.albums[13], this.albums[16], this.albums[20], this.albums[24]].slice(0, max);
+          this.setState({
+            albs: temp
+          });
+          return this.state.albs;
+        } else if (this.props.category === "dream") {
+          // debugger
+          temp = [this.albums[11], this.albums[14], this.albums[25], this.albums[30]].slice(0, max);
+          this.setState({
+            albs: temp
+          });
+          return this.state.albs;
         }
       }
     }
@@ -783,6 +797,7 @@ function (_React$Component) {
       if (!this.albums.length) {
         return null;
       } else {
+        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "listed"
         }, albs.length ? albs.map(function (album) {
@@ -1756,6 +1771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _trending_trending_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../trending/trending_container */ "./frontend/components/trending/trending_container.jsx");
 /* harmony import */ var _album_albums_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../album/albums_container */ "./frontend/components/album/albums_container.jsx");
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
+/* harmony import */ var _artists_user_show_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../artists/user_show_container */ "./frontend/components/artists/user_show_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1773,6 +1789,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1800,29 +1817,9 @@ function (_React$Component) {
         className: "discoverWebPage"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         loc: loc
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "flexing"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "discoverMidPage"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "leftSide"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "discoverTitles"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Trending"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        albums: this.props.albums,
-        cateogry: "random",
-        max: 4
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "discoverTitles"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "New Music Now"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        albums: this.props.albums,
-        category: "new",
-        max: 4
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "rightSide"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "listeningHistory"
-      }, "RAAAWR")))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_artists_user_show_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        artistId: this.props.currentUser.id
+      }));
     }
   }]);
 
@@ -1934,8 +1931,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var indices = this.getRandom(); // debugger
-
+      var indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listeningBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2471,9 +2468,11 @@ function (_React$Component) {
           type: "text",
           className: "bar",
           placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "far fa-search"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/upload",
-          className: "link upload"
+          className: "upload"
         }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login",
           className: "profile"
@@ -2686,6 +2685,32 @@ function (_React$Component) {
           className: "miniDesc"
         }, "Revisit the albums that defined the genre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           category: "classic",
+          max: 4
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "navHr"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+          className: "navHr"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "discoverRows"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "discoverTitles"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Heavier Things"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "miniDesc"
+        }, "Enjoy these barbed wire kisses")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          category: "heavy",
+          max: 4
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "navHr"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+          className: "navHr"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "discoverRows"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "discoverTitles"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sonic Dreams"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "miniDesc"
+        }, "Wrap your ears in a bed of warmth")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          category: "dream",
           max: 4
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "rightSide"

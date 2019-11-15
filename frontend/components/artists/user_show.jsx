@@ -65,7 +65,7 @@ class UserShow extends React.Component {
     } else {
       let artistAlbums = this.getAlbums();
       if (artist.id === this.state.currentUserId) {
-        loc = {url: "/library"};
+        loc = { url: "/library" };
       }
 
       // debugger

@@ -2,6 +2,7 @@ import React from 'react';
 import Trending from '../trending/trending_container';
 import Albums from '../album/albums_container';
 import NavBarContainer from '../navbar/navbar_container';
+import UserShowContainer from '../artists/user_show_container';
 
 class Library extends React.Component {
   render() {
@@ -10,29 +11,7 @@ class Library extends React.Component {
       <div className="discoverWebPage">
         <NavBarContainer loc={loc} />
 
-        <div className="flexing">
-          <div className="discoverMidPage">
-
-            <div className="leftSide">
-              <div className="discoverTitles">
-                <h3>Trending</h3>
-                <Albums albums={this.props.albums} cateogry="random" max={4} />
-              </div>
-
-              <div className="discoverTitles">
-                <h3>New Music Now</h3>
-                <Albums albums={this.props.albums} category="new" max={4} />
-              </div>
-            </div>
-
-            <div className="rightSide">
-              <div className="listeningHistory">
-                RAAAWR
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <UserShowContainer artistId={this.props.currentUser.id}/>
       </div>
     )
   }

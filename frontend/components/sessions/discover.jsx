@@ -68,6 +68,30 @@ class Discover extends React.Component {
                   </div>
                   <Albums category="classic" max={4} />
                 </div>
+
+                <div className="navHr">
+                  <hr className="navHr" />
+                </div>
+
+                <div className="discoverRows">
+                  <div className="discoverTitles">
+                    <h3>Heavier Things</h3>
+                    <p className="miniDesc">Enjoy these barbed wire kisses</p>
+                  </div>
+                  <Albums category="heavy" max={4} />
+                </div>
+
+                <div className="navHr">
+                  <hr className="navHr" />
+                </div>
+
+                <div className="discoverRows">
+                  <div className="discoverTitles">
+                    <h3>Sonic Dreams</h3>
+                    <p className="miniDesc">Wrap your ears in a bed of warmth</p>
+                  </div>
+                  <Albums category="dream" max={4} />
+                </div>
               </div>
 
               <div className="rightSide">
@@ -78,7 +102,6 @@ class Discover extends React.Component {
               </div>
             </div> 
           </div>
-
         </div>
       )
     }

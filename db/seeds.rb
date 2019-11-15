@@ -81,7 +81,7 @@ ActiveRecord::Base.transaction do
 
   # theRaveonettes
   lustLustLust = Album.create({title: "Lust Lust Lust", user_id: theRaveonettes.id})
-  ravenInTheGrave = Album.create({title: "Raven In THe Grave", user_id: theRaveonettes.id})
+  ravenInTheGrave = Album.create({title: "Raven In The Grave", user_id: theRaveonettes.id})
   observator = Album.create({title: "Observator", user_id: theRaveonettes.id})
   peahi = Album.create({title: "Pe'ahi", user_id: theRaveonettes.id})
 
@@ -113,7 +113,7 @@ ActiveRecord::Base.transaction do
   ladiesAndGentlemenWeAreFloatingInSpace = Album.create({title: "Ladies and Gentlemen We Are Floating In Space", user_id: spiritualized.id})
 
   # hatchie
-  sugarAndSpice = Album.create({title: "Super & Spice - EP", user_id: hatchie.id})
+  sugarAndSpice = Album.create({title: "Sugar & Spice - EP", user_id: hatchie.id})
   keepsake = Album.create({title: "Keepsake", user_id: hatchie.id})
 
   # diiv
