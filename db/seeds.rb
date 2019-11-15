@@ -1,3 +1,4 @@
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -7,17 +8,18 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ActiveRecord::Base.transaction do
+  require 'open-uri'
   User.destroy_all
   Album.destroy_all
   Song.destroy_all
 
 
-  demo_user = User.create({username: "GlasgowFan65", email: "iloveshoegaze@gmail.com", password: "shoegaze"})
-
-
+  
+  
   # ******************* artists ******************* 
-
-
+  
+  
+  demo_user = User.create({username: "GlasgowFan65", email: "iloveshoegaze@gmail.com", password: "shoegaze"})
   myBloodyValentine = User.create({username: "My Bloody Valentine", email: "iloveshoegaze@gmail.com", password: "shoegaze"})
   slowdive = User.create({username: "Slowdive", email: "slowdive@gmail.com", password: "shoegaze"})
   ride = User.create({username: "Ride", email: "ride@gmail.com", password: "shoegaze"})
@@ -694,15 +696,16 @@ ActiveRecord::Base.transaction do
   onTheEchoingGreen8 = Song.create({title: "Dancers At The Spring", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
   onTheEchoingGreen9 = Song.create({title: "Door To Night", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
 
+  User.all.each_with_index do |artist, idx|
+      file = open("http://slowcloud-dev.s3-us-west-1.amazonaws.com/users/artist#{idx}.jpg")
+      artist.photo.attach(io: file, filename: "artist#{idx}.jpg")
+  end
+
+  Album.all.each_with_index do |album, idx|
+    file = open("https://slowcloud-dev.s3-us-west-1.amazonaws.com/albums/album#{idx}.jpg")
+    album.photo.attach(io: file, filename: "album#{idx}.jpg")
+  end
+
 end
 # import the files with specific indices written out
 
-User.all.each_with_index do |artist, idx|
-  file = open("https://slowcloud-dev.s3-us-west-1.amazonaws.com/users/artist#{idx}.jpg")
-  artist.photo.attach(io: file, filename: "artist#{idx}.jpg")
-end
-
-Album.all.each_with_index do |album, idx|
-  file = open("https://slowcloud-dev.s3-us-west-1.amazonaws.com/albums/album#{idx}.jpg")
-  album.photo.attach(io: file, filename: "album#{idx}.jpg")
-end
