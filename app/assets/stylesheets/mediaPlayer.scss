@@ -9,3 +9,13 @@
   position:fixed;
   bottom:0;
 }
+
+.mediaPlayer {
+  width: 100%;
+}
+
+.mediaPlayer:focus {
+  // width: 100%;
+  outline: 0;
+}
+

@@ -28,11 +28,11 @@ class MediaPlayer extends React.Component {
     } else {
       console.log(this.state.songs);
     // debugger
-    let justLikeHoney = this.state.songs[1902];
+    let justLikeHoney = Object.values(this.state.songs)[101];
 
     return (
         <div className="mediaBar">
-          <audio controls width="100%" height="50px">
+          <audio className="mediaPlayer" controls width="100%" height="50px">
           <source src={justLikeHoney.audio_fileUrl} />
           </audio>
         </div>

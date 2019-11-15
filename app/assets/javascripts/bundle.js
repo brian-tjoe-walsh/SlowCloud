@@ -604,11 +604,15 @@ function (_React$Component) {
           className: "showMidRightNum"
         }, this.state.album.songs.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-linkedin"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://github.com/bbriannwalshh"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-github"
-        })))))));
+        }))))))));
       }
     }
   }]);
@@ -1487,11 +1491,15 @@ function (_React$Component) {
           className: "showMidRightNum"
         }, artistAlbums.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-linkedin"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://github.com/bbriannwalshh"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-github"
-        }))))))));
+        })))))))));
       }
     }
   }]);
@@ -1952,11 +1960,15 @@ function (_React$Component) {
         }, album.title)));
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "shamelessPlug"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-linkedin"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://github.com/bbriannwalshh"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-github"
-      })));
+      }))));
     }
   }]);
 
@@ -2077,10 +2089,11 @@ function (_React$Component) {
       } else {
         console.log(this.state.songs); // debugger
 
-        var justLikeHoney = this.state.songs[1902];
+        var justLikeHoney = Object.values(this.state.songs)[101];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
+          className: "mediaPlayer",
           controls: true,
           width: "100%",
           height: "50px"
