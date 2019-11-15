@@ -706,6 +706,8 @@ ActiveRecord::Base.transaction do
     album.photo.attach(io: file, filename: "album#{idx}.jpg")
   end
 
+  file = open("https://slowcloud-dev.s3-us-west-1.amazonaws.com/songs/01psychocandy.mp3")
+  Song.all[101].audio_file.attach(io: file, filename: "01psychocandy.mp3")
 end
 # import the files with specific indices written out
 

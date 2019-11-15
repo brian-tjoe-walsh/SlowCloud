@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
+import {Link} from 'react-router-dom';
 
 class Uploading extends React.Component {
   constructor(props) {
@@ -140,8 +141,8 @@ class Uploading extends React.Component {
                 </div>
               </div>
               <div className="uploadSubBottom">
-                <button className="uploadCancel">Cancel</button>
-                <button className="uploadUpload">Upload</button>
+                <Link to="/discover" className="uploadCancel">Cancel</Link>
+                <Link to="/library" className="uploadUpload">Upload</Link>
               </div>
             </div>
           </div>
