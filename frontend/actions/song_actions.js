@@ -27,8 +27,8 @@ export const createSong = (song) => dispatch => (
   )
 );
 
-export const fetchSongs = (filters) => dispatch => (
-  SongApiUtil.fetchSongs(filters)
+export const fetchSongs = () => dispatch => (
+  SongApiUtil.fetchSongs()
     .then(songs => dispatch(receiveSongs(songs))
   )
 );

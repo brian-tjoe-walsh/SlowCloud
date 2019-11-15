@@ -287,9 +287,9 @@ var createSong = function createSong(song) {
     });
   };
 };
-var fetchSongs = function fetchSongs(filters) {
+var fetchSongs = function fetchSongs() {
   return function (dispatch) {
-    return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchSongs"](filters).then(function (songs) {
+    return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchSongs"]().then(function (songs) {
       return dispatch(receiveSongs(songs));
     });
   };
@@ -2048,7 +2048,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MediaPlayer).call(this, props));
     _this.currentUser = _this.props.currentUser;
     _this.state = {
-      song: null
+      songs: null
     };
     _this.filter = _this.props.filter;
     return _this;
@@ -2059,23 +2059,25 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (!this.state.song) {
+      if (!this.state.songs) {
+        // debugger
         this.props.fetchSongs().then(function (res) {
           return _this2.setState({
             songs: res.songs
           });
         });
-      }
+      } // debugger
+
     }
   }, {
     key: "render",
     value: function render() {
-      if (!this.state.song) {
+      if (!this.state.songs) {
         return null;
       } else {
         console.log(this.state.songs); // debugger
 
-        var justLikeHoney = this.state.songs[101];
+        var justLikeHoney = this.state.songs[102];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
@@ -2134,6 +2136,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchSong: function fetchSong(id) {
       return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_3__["fetchSong"])(id));
+    },
+    fetchSongs: function fetchSongs(id) {
+      return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_3__["fetchSongs"])());
     }
   };
 };

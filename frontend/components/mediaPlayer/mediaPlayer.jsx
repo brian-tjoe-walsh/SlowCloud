@@ -5,27 +5,30 @@ class MediaPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.currentUser;
-    this.state = { song: null };
+    this.state = { songs: null };
     this.filter = this.props.filter;
   }
 
   componentDidMount() {
-    if (!this.state.song) {
+    if (!this.state.songs) {
+      // debugger
       this.props.fetchSongs()
         .then( (res) => this.setState({ songs: res.songs }));
     }
+
+    // debugger
   }
   
   render() {
 
-    if (!this.state.song) {
+    if (!this.state.songs) {
 
       return null;
 
     } else {
-      console.log(this.state.songs)
+      console.log(this.state.songs);
     // debugger
-    let justLikeHoney = this.state.songs[101];
+    let justLikeHoney = this.state.songs[102];
 
     return (
         <div className="mediaBar">
