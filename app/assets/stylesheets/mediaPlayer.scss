@@ -1,4 +1,7 @@
 .mediaBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   border-top: 1px solid #c8c8c8;  
   height: 49px;
   width: 100%;
