@@ -47,3 +47,41 @@ h3 {
   font-size: 15px;
   word-wrap: break-word;
 }
+
+.playSong {
+    display: none;
+    position: relative;
+    width: 55px;
+    height: 55px;
+    left: 60px;
+    bottom: 150px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+}
+.visibleButton {
+    display: initial;
+    position: relative;
+    width: 55px;
+    height: 55px;
+    left: 60px;
+    bottom: 150px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+}
+
+button i {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  /* color: #ff5700; */
+  font-size: 55pt;
+}
+.playHovered {
+  /* position: absolute; */
+  /* top: -3px; */
+  /* left: -4px; */
+  color: rgb(148, 98, 172);
+  /* font-size: 46pt; */
+}

@@ -2,7 +2,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './frontend/soundcloud.jsx',
+  entry: './frontend/slowcloud.jsx',
   output: {
     path: path.resolve(__dirname, "app", "assets", "javascripts"),
     filename: './bundle.js',

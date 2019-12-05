@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./frontend/soundcloud.jsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./frontend/slowcloud.jsx");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -390,9 +390,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -414,12 +414,53 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Album).call(this, props));
     _this.state = {
       album: _this.props.album,
-      artist: _this.props.album.artist
+      artist: _this.props.album.artist,
+      hover: null
     };
+    _this.addClass = _this.addClass.bind(_assertThisInitialized(_this));
+    _this.removeClass = _this.removeClass.bind(_assertThisInitialized(_this));
+    _this.addHover = _this.addHover.bind(_assertThisInitialized(_this));
+    _this.removeHover = _this.removeHover.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Album, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var ele = document.getElementById("pic".concat(this.state.album.id));
+      ele.addEventListener("mouseover", this.addClass);
+      ele.addEventListener("mouseleave", this.removeClass);
+      var button = document.getElementById("play".concat(this.state.album.id));
+      button.addEventListener("mouseover", this.addClass);
+      button.addEventListener("mouseover", this.addHover);
+      button.addEventListener("mouseleave", this.removeClass);
+      button.addEventListener("mouseleave", this.removeHover);
+    }
+  }, {
+    key: "addClass",
+    value: function addClass() {
+      var ele = document.getElementById("play".concat(this.state.album.id));
+      $(ele).addClass("visibleButton");
+    }
+  }, {
+    key: "addHover",
+    value: function addHover() {
+      var eles = document.getElementById("playButton".concat(this.state.album.id));
+      $(eles).addClass("playHovered");
+    }
+  }, {
+    key: "removeHover",
+    value: function removeHover() {
+      var eles = document.getElementById("playButton".concat(this.state.album.id));
+      $(eles).removeClass("playHovered");
+    }
+  }, {
+    key: "removeClass",
+    value: function removeClass() {
+      var ele = document.getElementById("play".concat(this.state.album.id));
+      $(ele).removeClass("visibleButton");
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
@@ -434,7 +475,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "album"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/albums/".concat(album.id)
+          to: "/albums/".concat(album.id),
+          id: "pic".concat(album.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "albumArt",
           src: album.photoUrl
@@ -444,7 +486,13 @@ function (_React$Component) {
         }, album.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/artists/".concat(album.artist.id),
           className: "albumArtist"
-        }, artist.username)));
+        }, artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "playSong",
+          id: "play".concat(album.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-play-circle",
+          id: "playButton".concat(album.id)
+        }))));
       }
     }
   }]);
@@ -1931,8 +1979,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
-      debugger;
+      var indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]]; // debugger
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listeningBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2864,7 +2912,7 @@ function (_React$Component) {
           className: "shoe",
           src: window.shoe
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "soundcloud"
+          className: "slowcloud"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "slow"
         }, "SLOWCLOUD")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2902,9 +2950,6 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Greeting);
-{}
-/* <Link className="soundcloud" to="/">Soundcloud</Link> */
-// export default Greeting;
 
 /***/ }),
 
@@ -4276,10 +4321,10 @@ var usersReducer = function usersReducer() {
 
 /***/ }),
 
-/***/ "./frontend/soundcloud.jsx":
-/*!*********************************!*\
-  !*** ./frontend/soundcloud.jsx ***!
-  \*********************************/
+/***/ "./frontend/slowcloud.jsx":
+/*!********************************!*\
+  !*** ./frontend/slowcloud.jsx ***!
+  \********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

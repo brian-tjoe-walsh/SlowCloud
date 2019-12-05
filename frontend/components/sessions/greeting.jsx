@@ -33,7 +33,7 @@ class Greeting extends React.Component {
             <div className="logo" onClick={() => <Link to="/"/>}>
               <div className="adjusting">
                 <div><img className="shoe" src={window.shoe}/></div>
-                <div className="soundcloud"><p className="slow">SLOWCLOUD</p></div>
+                <div className="slowcloud"><p className="slow">SLOWCLOUD</p></div>
               </div>
             </div>
             <div className="links">
@@ -69,6 +69,3 @@ class Greeting extends React.Component {
 }
 
 export default Greeting;
-{/* <Link className="soundcloud" to="/">Soundcloud</Link> */}
-
-// export default Greeting;
