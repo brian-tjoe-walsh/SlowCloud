@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LoginButton from '../sessions/login_button';
+import SignupButton from '../sessions/signup_button';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class NavBar extends React.Component {
       currentUser: this.props.currentUser,
       open: false };
     this.toggle = this.toggle.bind(this);
+    this.loggingOut = this.loggingOut.bind(this);
   }
 
   componentDidMount() {
@@ -40,29 +43,23 @@ class NavBar extends React.Component {
     }
   }
 
-  // clicked() {
-    
-  //   return e => {
-  //     ele = e.currentTarget;
-  //     ($(ele).addClass("clicked"));
-  //   };
-  // }
-
   toggle() {
-    // return e => {
       if (this.state.open) {
         this.setState({open: false});
       } else {
         this.setState({open: true});
       }
-    
-      // ele = e.currentTarget;
-      // return ($(ele).addClass("clicked"));
-    // };
+  }
+
+  loggingOut() {
+    debugger
+    this.logout()
+    .then(() => { window.location.reload(); });
+    // .then( () => this.forceUpdate());
   }
 
   render() {
-    // debugger
+    debugger
     if (this.state.currentUser) {
       return (
         <div className="navBar">
@@ -96,7 +93,7 @@ class NavBar extends React.Component {
                     <div>...</div>
                     <div className="flexingRight">
                       <button
-                        onClick={this.logout}
+                        onClick={this.loggingOut}
                         className="loggingOut"
                       >Logout
                     </button>
@@ -123,30 +120,14 @@ class NavBar extends React.Component {
                 className="bar"
                 placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
               />
-              <div>
+              {/* <div>
                 <i className="far fa-search"></i>
-              </div>
+              </div> */}
             </form>
-            <Link to="/upload" className="upload">Upload</Link>
+            <div className="logSign">
+              <LoginButton background="navBarLogin" />
 
-            {/* <button className="profile">This is empty</button> */}
-            <Link to="/login" className="profile" >Login</Link>
-
-            <div className="menu">
-              <div className="dropDown" onClick={this.toggle}>
-                {(this.state.open) ? (
-                  <div className="dropDown">
-                    <div>...</div>
-                    <div className="flexingRight">
-                      <button
-                        onClick={this.logout}
-                        className="loggingOut"
-                      >Logout
-                    </button>
-                    </div>
-                  </div>
-                ) : <div>...</div>}
-              </div>
+              <SignupButton background="navBarSignup" />
             </div>
           </div>
         </div>

@@ -1,29 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LoginButton from '../sessions/login_button';
+import SignupButton from '../sessions/signup_button';
 
 class Greeting extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.currentUser;
     this.logout = this.props.logout;
-  }
-
-  // componentDidMount() {
-  //   let background = document.getElementsByClassName("preModal");
-  //   return ($(background).removeClass("modal"));
-  // }
-  
-  
-  background() {
-    let background = document.getElementsByClassName("preModal");
-    return ($(background).addClass("modal"));
-  }
+  }  
 
   render() {
     if (this.currentUser) {
       return (
         <div> 
-          Beep Boop you're on the wrong page!
           <button onClick={() => this.logout()}>Logout</button>
         </div>)
     } else {
@@ -37,17 +27,9 @@ class Greeting extends React.Component {
               </div>
             </div>
             <div className="links">
-              <Link 
-                onClick={this.background} 
-                className="login" 
-                to="/login"
-                >Sign In</Link>
+              <LoginButton background="login"/>
 
-              <Link 
-                onClick={this.background} 
-                className="signup" 
-                to="/signup"
-                >Create Account</Link>
+              <SignupButton background="signup"/>
             </div>
           </div>
           <div className="lower">

@@ -201,3 +201,43 @@
 a {
   text-decoration: none;
 }
+
+.logSign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.719);
+  border: 1px solid rgba(255, 255, 255, 0.644);
+  border-radius: 4px;
+  width: 90px;
+  height: 25px;
+  font-size: 15px;
+  margin: 0px 0px 0px 20px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+}
+.navBarSignup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(175, 116, 202);
+  color: rgba(255, 255, 255, 0.767);
+  border-radius: 4px;
+  width: 130px;
+  height: 25px;
+  font-size: 15px;
+  margin: 0px 0px 0px 30px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+}
+
+

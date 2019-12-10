@@ -134,30 +134,36 @@ font-family: 'Source Sans Pro', sans-serif; */
   display: flex;
   flex-direction: column;
   background: white;
-  width: 450px;
   height: 625px;
   align-items: center;
   justify-content: center;
   animation-name: slideDown;
   animation-duration: 1s;
-}
-
-#animate {
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   position: absolute;
   top: 100px;
   left: 50%;
   margin-left: -220px;
   width: 360px;
   padding: 20px;
-  z-index: 100;
+  z-index: 11;
+  height: 550px;
+  border-radius: 5px;
+  border: 1px solid rgba(199, 198, 198, 0.26);
 }
+
+// .form {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+
+//   position: absolute;
+//   top: 100px;
+//   left: 50%;
+//   margin-left: -220px;
+//   width: 360px;
+//   padding: 20px;
+//   z-index: 11;
+// }
 
 
 
@@ -201,17 +207,17 @@ label {
     font-weight: lighter;
 }
 
-.modal {
+.preModal {
  /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 50; /* Sit on top */
+  z-index: 11; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(255, 255, 255, 0.3);
   animation-name: fuzz;
   animation-duration: 1s;
 }
@@ -221,7 +227,7 @@ label {
     background: rgba(0,0,0,0);
     }
   to {
-    background: rgba(0,0,0,0.3);
+    background: rgba(255, 255, 255, 0.3);
   }
 }
 

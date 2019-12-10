@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import Modal from '../modals/modal_container';
+import Modal from '../modals/modal';
 import NavBarContainer from '../navbar/navbar_container';
 
 class Listening extends React.Component {

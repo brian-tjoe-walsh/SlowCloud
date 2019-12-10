@@ -10,6 +10,8 @@ class SessionForm extends React.Component {
       password: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
+    debugger
   }
 
   componentDidMount() {
@@ -22,12 +24,17 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    debugger
+    this.props.processForm(user)
+    .then(() => this.props.history.push('/discover'))
+    .then(() => this.props.closeModal());
   }
 
   handleDemo(e) {
+    e.preventDefault();
+    debugger
     this.setState({
       username: 'GlasgowFan65',
       email:'iloveshoegaze@gmail.com',
@@ -81,9 +88,12 @@ class SessionForm extends React.Component {
               <button className="button" id="demo" onClick={(e) => this.handleDemo(e)}>
                 <div className="innerText">Demo User</div>
               </button>
-              <a className="button" id="switch" href="/#/signup">
+              <div className="button" id="switch">
+                <div className="innerText">{this.props.otherForm}</div>
+              </div>
+              {/* <div className="button" id="switch" onClick={this.props.otherForm}>
                 <div className="innerText">{header.linkButton}</div>
-              </a>
+              </div> */}
 
               <div className="or">
                 <hr />

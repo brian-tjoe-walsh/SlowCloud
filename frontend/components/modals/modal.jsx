@@ -1,32 +1,44 @@
 import React from 'react';
-import {Redirect} from "react-router-dom";
+import { closeModal } from '../../actions/modal_actions';
+import { connect } from 'react-redux';
+import LoginFormContainer from '../sessions/login_form_container';
+import SignupFormContainer from '../sessions/signup_form_container';
 
-class Modal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.goHome = this.goHome.bind(this);
-    this.state = {go: false};
+function Modal({ modal, closeModal }) {
+  if (!modal) {
+    return null;
+  }
+  let component;
+  switch (modal) {
+    case 'login':
+      component = <LoginFormContainer />;
+      break;
+    case 'signup':
+      component = <SignupFormContainer />;
+      break;
+    default:
+      return null;
   }
 
-  goHome() {
-    this.setState({ go: true });
-  }
-
-  setBack() {
-    this.setState({go: false});
-  }
-  
-  render() {
-    if (this.state.go) {
-      this.setBack();
-      return <Redirect to="/"></Redirect>
-    }
-    return(
-      <div className="preModal" onClick={this.goHome}>
-
+  return (
+    <div className="preModal" onClick={closeModal}>
+      <div onClick={e => e.stopPropagation()}>
+        {component}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Modal;
+const mapStateToProps = state => {
+  return {
+    modal: state.ui.modal
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

@@ -8,13 +8,13 @@ class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.state.entities.users[this.props.state.session.id];
-    // debugger
+    debugger
     this.state = {album: "hello",
                   artist: "null"};
   }
 
   componentDidMount() {
-    // debugger 
+    debugger 
 
     this.props.fetchAlbum(this.props.albumId)
       .then((res) => this.setState({
@@ -29,6 +29,14 @@ class AlbumShow extends React.Component {
     const { album } = this.state;
     const { artist } = this.state;
     const loc = { url: "/album" };
+    let profilePic;
+
+    debugger
+    if (this.currentUser) {
+      profilePic = this.currentUser.photoUrl;
+    } else {
+      profilePic = null;
+    }
 
 
     if (this.state.album === "hello") {
@@ -36,7 +44,7 @@ class AlbumShow extends React.Component {
         <NavBarContainer loc={loc} />
       </div>)
     } else {
-      // debugger
+      debugger
       return (
         <div>
           <NavBarContainer loc={loc} />
@@ -65,7 +73,7 @@ class AlbumShow extends React.Component {
                 <div className="albumShowLeftAndRight">
                   <div className="albumShowMidLeft">
                     <div className="addComment">
-                    <img className="albumShowMiniProfPic" src={this.currentUser.photoUrl} />
+                    <img className="albumShowMiniProfPic" src={profilePic} />
                       <input type="text" className="addingComment"placeholder="Write a comment"/>
                     </div>
                     <div className="albumShowTracklist">

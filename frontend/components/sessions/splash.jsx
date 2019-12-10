@@ -1,7 +1,7 @@
 import React from 'react';
 import GreetingContainer from './greeting_container';
 import {Redirect} from 'react-router-dom';
-import Modal from '../modals/modal_container';
+import Modal from '../modals/modal';
 import Albums from '../album/albums_container';
 import { Link } from 'react-router-dom';
 
