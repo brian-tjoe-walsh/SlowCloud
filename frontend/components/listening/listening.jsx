@@ -10,7 +10,7 @@ class Listening extends React.Component {
     let num;
 
     while (indices.length < 3) {
-      num = Math.floor(Math.random() * this.props.albums.length);
+      num = Math.floor(Math.random() * Object.keys(this.props.albums).length);
 
       if (!indices.includes(this.props.albums[num])) {
         indices.push(this.props.albums[num]);
@@ -22,7 +22,8 @@ class Listening extends React.Component {
 
 
   render() {
-    let indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
+    // let indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
+    let indices = this.getRandom();
     // debugger
     return (
       <div className="listeningBox">

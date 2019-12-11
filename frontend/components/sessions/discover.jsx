@@ -11,10 +11,14 @@ class Discover extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
-    this.props.fetchAlbums()
-    // this.props.fetchSongs()
-      .then(this.setState({ fetchingUsers: "done" }));
+    debugger
+    if (this.props.state.entities.albums[6]) {
+      this.setState({ fetchingUsers: "done" });
+    } else {
+      this.props.fetchUsers();
+      this.props.fetchAlbums()
+        .then(this.setState({ fetchingUsers: "done" }));
+    }
   }
 
 
@@ -30,7 +34,7 @@ class Discover extends React.Component {
       );
 
     } else {
-      // debugger
+      debugger
       return(
         <div className="discoverWebPage">
           <NavBarContainer loc={loc}/>
@@ -99,7 +103,7 @@ class Discover extends React.Component {
               <div className="rightSide">
                 <div className="listeningHistory">
                   <p>Listening History</p>
-                  <Listening albums={this.props.albums}/>
+                  <Listening albums={this.props.state.entities.albums}/>
                 </div>
               </div>
             </div> 

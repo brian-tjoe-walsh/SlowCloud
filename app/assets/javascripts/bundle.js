@@ -470,11 +470,7 @@ function (_React$Component) {
     _classCallCheck(this, Album);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Album).call(this, props));
-    _this.state = {
-      album: _this.props.album,
-      artist: _this.props.album.artist,
-      hover: null
-    };
+    debugger;
     _this.addClass = _this.addClass.bind(_assertThisInitialized(_this));
     _this.removeClass = _this.removeClass.bind(_assertThisInitialized(_this));
     _this.addHover = _this.addHover.bind(_assertThisInitialized(_this));
@@ -486,16 +482,16 @@ function (_React$Component) {
   _createClass(Album, [{
     key: "playSong",
     value: function playSong() {
-      var play = this.state.album.songs[0];
-      this.props.addSong(play); // .then((res) => {debugger});
+      var play = this.props.album.songs[0];
+      this.props.addSong(play);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var ele = document.getElementById("pic".concat(this.state.album.id));
+      var ele = document.getElementById("pic".concat(this.props.album.id));
       ele.addEventListener("mouseover", this.addClass);
       ele.addEventListener("mouseleave", this.removeClass);
-      var button = document.getElementById("play".concat(this.state.album.id));
+      var button = document.getElementById("play".concat(this.props.album.id));
       button.addEventListener("mouseover", this.addClass);
       button.addEventListener("mouseover", this.addHover);
       button.addEventListener("mouseleave", this.removeClass);
@@ -504,37 +500,36 @@ function (_React$Component) {
   }, {
     key: "addClass",
     value: function addClass() {
-      var ele = document.getElementById("play".concat(this.state.album.id));
+      var ele = document.getElementById("play".concat(this.props.album.id));
       $(ele).addClass("visibleButton");
     }
   }, {
     key: "addHover",
     value: function addHover() {
-      var eles = document.getElementById("playButton".concat(this.state.album.id));
+      var eles = document.getElementById("playButton".concat(this.props.album.id));
       $(eles).addClass("playHovered");
     }
   }, {
     key: "removeHover",
     value: function removeHover() {
-      var eles = document.getElementById("playButton".concat(this.state.album.id));
+      var eles = document.getElementById("playButton".concat(this.props.album.id));
       $(eles).removeClass("playHovered");
     }
   }, {
     key: "removeClass",
     value: function removeClass() {
-      var ele = document.getElementById("play".concat(this.state.album.id));
+      var ele = document.getElementById("play".concat(this.props.album.id));
       $(ele).removeClass("visibleButton");
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$state = this.state,
-          album = _this$state.album,
-          artist = _this$state.artist;
+      var album = this.props.album;
 
       if (!album) {
         return null;
       } else {
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songBoundaries"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -551,7 +546,7 @@ function (_React$Component) {
         }, album.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/artists/".concat(album.artist.id),
           className: "albumArtist"
-        }, artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, album.artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "playSong",
           id: "play".concat(album.id),
           onClick: this.playSong
@@ -830,7 +825,7 @@ function (_React$Component) {
     _classCallCheck(this, Albums);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Albums).call(this, props));
-    _this.albums = _this.props.albums;
+    _this.albums = _this.props.state.entities.albums;
     _this.state = {
       state: _this.props.state,
       albs: []
@@ -843,11 +838,17 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.fetchAlbums().then(function (res) {
-        return _this2.albums = res.albums;
-      }).then(function () {
-        return _this2.categorize(_this2.props.max);
-      });
+      debugger;
+
+      if (this.albums[6]) {
+        this.categorize(this.props.max);
+      } else {
+        this.props.fetchAlbums().then(function (res) {
+          return _this2.albums = res.albums;
+        }).then(function () {
+          return _this2.categorize(_this2.props.max);
+        });
+      }
     }
   }, {
     key: "categorize",
@@ -869,7 +870,7 @@ function (_React$Component) {
 
           if (max < 20) {
             while (indices.length < max) {
-              num = Math.floor(Math.random() * this.albums.length);
+              num = Math.floor(Math.random() * Object.keys(this.albums).length);
 
               if (!indices.includes(this.albums[num])) {
                 indices.push(this.albums[num]);
@@ -912,28 +913,35 @@ function (_React$Component) {
       var fetchUser = this.props.fetchUser;
       var albs = this.state.albs;
 
-      if (!this.albums.length) {
+      if (this.props.state.entities.albums.length < 5) {
         return null;
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-          className: "listed"
-        }, albs.length ? albs.map(function (album) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            key: album.id,
-            state: _this3.props.state,
-            type: "albs.map",
-            album: album,
-            addSong: _this3.props.addSong
-          });
-        }) : this.albums.map(function (album) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            key: album.id,
-            state: _this3.props.state,
-            type: "albums.map",
-            album: album,
-            addSong: _this3.props.addSong
-          });
-        }));
+        if (this.props.category) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+            className: "listed"
+          }, albs.map(function (album) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              key: album.id,
+              state: _this3.props.state,
+              type: "albs.map",
+              album: album,
+              addSong: _this3.props.addSong
+            });
+          }));
+        } else {
+          debugger;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+            className: "listed"
+          }, this.albums.map(function (album) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              key: album.id,
+              state: _this3.props.state,
+              type: "albums.map",
+              album: album,
+              addSong: _this3.props.addSong
+            });
+          }));
+        }
       }
     }
   }]);
@@ -1996,7 +2004,7 @@ function (_React$Component) {
       var num;
 
       while (indices.length < 3) {
-        num = Math.floor(Math.random() * this.props.albums.length);
+        num = Math.floor(Math.random() * Object.keys(this.props.albums).length);
 
         if (!indices.includes(this.props.albums[num])) {
           indices.push(this.props.albums[num]);
@@ -2008,7 +2016,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]]; // debugger
+      // let indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
+      var indices = this.getRandom(); // debugger
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listeningBox"
@@ -2099,7 +2108,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2117,7 +2125,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2160,7 +2167,7 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      debugger;
+      // debugger
       var currentSong = this.props.state.ui.mediaPlayer[0];
 
       if (currentSong) {
@@ -2178,7 +2185,7 @@ function (_React$Component) {
   }, {
     key: "play",
     value: function play() {
-      debugger;
+      // debugger
       var player = document.getElementById("media");
       player.load();
       player.play();
@@ -2680,11 +2687,18 @@ function (_React$Component) {
   _createClass(Discover, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchUsers();
-      this.props.fetchAlbums() // this.props.fetchSongs()
-      .then(this.setState({
-        fetchingUsers: "done"
-      }));
+      debugger;
+
+      if (this.props.state.entities.albums[6]) {
+        this.setState({
+          fetchingUsers: "done"
+        });
+      } else {
+        this.props.fetchUsers();
+        this.props.fetchAlbums().then(this.setState({
+          fetchingUsers: "done"
+        }));
+      }
     }
   }, {
     key: "render",
@@ -2698,7 +2712,7 @@ function (_React$Component) {
           loc: loc
         }));
       } else {
-        // debugger
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "discoverWebPage"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2775,7 +2789,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "listeningHistory"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Listening History"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listening_listening_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          albums: this.props.albums
+          albums: this.props.state.entities.albums
         }))))));
       }
     }

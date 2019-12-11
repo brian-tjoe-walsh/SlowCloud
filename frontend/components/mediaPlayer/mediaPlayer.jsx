@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class MediaPlayer extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class MediaPlayer extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     let currentSong = this.props.state.ui.mediaPlayer[0];
 
     if (currentSong) {
@@ -39,7 +38,7 @@ class MediaPlayer extends React.Component {
   }
 
   play() {
-    debugger
+    // debugger
     let player = document.getElementById("media");
     player.load();
     player.play();
