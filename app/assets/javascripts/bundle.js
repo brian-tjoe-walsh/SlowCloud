@@ -1497,7 +1497,6 @@ function (_React$Component) {
     value: function render() {
       var _this5 = this;
 
-      // debugger
       var artist = this.state.artist;
       var loc = {
         url: "/artists"
@@ -1514,8 +1513,7 @@ function (_React$Component) {
           loc = {
             url: "/library"
           };
-        } // debugger
-
+        }
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
@@ -2141,6 +2139,7 @@ function (_React$Component) {
       currentSong: null
     };
     _this.filter = _this.props.filter;
+    _this.currentSong = null;
     _this.play = _this.play.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -2165,16 +2164,14 @@ function (_React$Component) {
       var currentSong = this.props.state.ui.mediaPlayer[0];
 
       if (currentSong) {
-        if (this.state.currentSong) {
-          if (this.state.currentSong.id !== currentSong.id) {
-            this.setState({
-              currentSong: currentSong
-            });
+        if (this.currentSong) {
+          if (this.currentSong.id !== currentSong.id) {
+            this.currentSong = currentSong;
+            this.play();
           }
         } else {
-          this.setState({
-            currentSong: currentSong
-          });
+          this.currentSong = currentSong;
+          this.play();
         }
       }
     }
@@ -2194,18 +2191,14 @@ function (_React$Component) {
       } else {
         var currentSong;
 
-        if (this.state.currentSong) {
-          currentSong = this.state.currentSong;
+        if (this.currentSong) {
+          currentSong = this.currentSong;
         } else {
           currentSong = Object.values(this.state.songs)[101];
         }
 
         if (!currentSong.audio_fileUrl) {
           currentSong = Object.values(this.state.songs)[101];
-        }
-
-        if (this.state.currentSong) {
-          this.play();
         }
 
         debugger;

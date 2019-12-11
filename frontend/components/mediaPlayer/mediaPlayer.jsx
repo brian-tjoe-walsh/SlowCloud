@@ -10,6 +10,7 @@ class MediaPlayer extends React.Component {
       songs: null,
       currentSong: null };
     this.filter = this.props.filter;
+    this.currentSong = null;
     this.play = this.play.bind(this);
   }
 
@@ -25,12 +26,14 @@ class MediaPlayer extends React.Component {
     let currentSong = this.props.state.ui.mediaPlayer[0];
 
     if (currentSong) {
-      if (this.state.currentSong) {
-        if (this.state.currentSong.id !== currentSong.id) {
-          this.setState({ currentSong: currentSong });
+      if (this.currentSong) {
+        if (this.currentSong.id !== currentSong.id) {
+          this.currentSong = currentSong;
+          this.play();
         }
       } else {
-        this.setState({ currentSong: currentSong });
+        this.currentSong = currentSong;
+        this.play();
       }
     }
   }
@@ -53,8 +56,8 @@ class MediaPlayer extends React.Component {
     } else {
       let currentSong;
     
-      if (this.state.currentSong) {
-        currentSong = this.state.currentSong;
+      if (this.currentSong) {
+        currentSong = this.currentSong;
       } else {
         currentSong = Object.values(this.state.songs)[101];
       }
@@ -63,9 +66,6 @@ class MediaPlayer extends React.Component {
         currentSong = Object.values(this.state.songs)[101];
       }
 
-      if (this.state.currentSong) {
-        this.play();
-      }
       debugger
 
       console.log(currentSong);

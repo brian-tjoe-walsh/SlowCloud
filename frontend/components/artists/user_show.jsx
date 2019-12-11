@@ -52,7 +52,6 @@ class UserShow extends React.Component {
   }
 
   render() {
-    // debugger
     const { artist } = this.state;
     
     let loc = { url: "/artists" };
@@ -67,7 +66,6 @@ class UserShow extends React.Component {
         loc = { url: "/library" };
       }
 
-      // debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} />
