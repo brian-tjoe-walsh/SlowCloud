@@ -42,4 +42,4 @@ export const deleteAlbum = (albumId) => dispatch => (
 export const createAlbum = (album) => dispatch => (
   AlbumApiUtil.createAlbum(album)
     .then((album) => dispatch(receiveAlbum(album)))
-)
+);

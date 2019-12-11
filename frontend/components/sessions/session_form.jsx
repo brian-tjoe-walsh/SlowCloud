@@ -11,7 +11,7 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
-    debugger
+    // debugger
   }
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     
     const user = Object.assign({}, this.state);
-    debugger
+    // debugger
     this.props.processForm(user)
     .then(() => this.props.history.push('/discover'))
     .then(() => this.props.closeModal());
@@ -34,7 +34,7 @@ class SessionForm extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
-    debugger
+    // debugger
     this.setState({
       username: 'GlasgowFan65',
       email:'iloveshoegaze@gmail.com',

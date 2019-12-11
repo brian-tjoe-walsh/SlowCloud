@@ -160,6 +160,35 @@ var createAlbum = function createAlbum(album) {
 
 /***/ }),
 
+/***/ "./frontend/actions/mediaPlayer_actions.js":
+/*!*************************************************!*\
+  !*** ./frontend/actions/mediaPlayer_actions.js ***!
+  \*************************************************/
+/*! exports provided: ADD_SONG, REMOVE_SONG, addSong, removeSong */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_SONG", function() { return ADD_SONG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_SONG", function() { return REMOVE_SONG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addSong", function() { return addSong; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeSong", function() { return removeSong; });
+var ADD_SONG = 'ADD_SONG';
+var REMOVE_SONG = 'REMOVE_SONG';
+var addSong = function addSong(song) {
+  return {
+    type: ADD_SONG,
+    song: song
+  };
+};
+var removeSong = function removeSong() {
+  return {
+    type: REMOVE_SONG
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -176,7 +205,6 @@ __webpack_require__.r(__webpack_exports__);
 var OPEN_MODAL = 'OPEN_MODAL';
 var CLOSE_MODAL = 'CLOSE_MODAL';
 var openModal = function openModal(modal) {
-  debugger;
   return {
     type: OPEN_MODAL,
     modal: modal
@@ -451,10 +479,17 @@ function (_React$Component) {
     _this.removeClass = _this.removeClass.bind(_assertThisInitialized(_this));
     _this.addHover = _this.addHover.bind(_assertThisInitialized(_this));
     _this.removeHover = _this.removeHover.bind(_assertThisInitialized(_this));
+    _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Album, [{
+    key: "playSong",
+    value: function playSong() {
+      var play = this.state.album.songs[0];
+      this.props.addSong(play); // .then((res) => {debugger});
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var ele = document.getElementById("pic".concat(this.state.album.id));
@@ -518,7 +553,8 @@ function (_React$Component) {
           className: "albumArtist"
         }, artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "playSong",
-          id: "play".concat(album.id)
+          id: "play".concat(album.id),
+          onClick: this.playSong
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fas fa-play-circle",
           id: "playButton".concat(album.id)
@@ -585,7 +621,6 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AlbumShow).call(this, props));
     _this.currentUser = _this.props.state.entities.users[_this.props.state.session.id];
-    debugger;
     _this.state = {
       album: "hello",
       artist: "null"
@@ -598,7 +633,6 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      debugger;
       this.props.fetchAlbum(this.props.albumId).then(function (res) {
         return _this2.setState({
           album: res.album,
@@ -618,7 +652,6 @@ function (_React$Component) {
         url: "/album"
       };
       var profilePic;
-      debugger;
 
       if (this.currentUser) {
         profilePic = this.currentUser.photoUrl;
@@ -631,7 +664,6 @@ function (_React$Component) {
           loc: loc
         }));
       } else {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -729,7 +761,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // debugger
   return {
     state: state,
     artist: {},
@@ -801,6 +832,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Albums).call(this, props));
     _this.albums = _this.props.albums;
     _this.state = {
+      state: _this.props.state,
       albs: []
     };
     return _this;
@@ -858,14 +890,12 @@ function (_React$Component) {
           });
           return this.state.albs;
         } else if (this.props.category === "heavy") {
-          // debugger
           temp = [this.albums[13], this.albums[16], this.albums[20], this.albums[24]].slice(0, max);
           this.setState({
             albs: temp
           });
           return this.state.albs;
         } else if (this.props.category === "dream") {
-          // debugger
           temp = [this.albums[11], this.albums[14], this.albums[25], this.albums[30]].slice(0, max);
           this.setState({
             albs: temp
@@ -877,28 +907,31 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var fetchUser = this.props.fetchUser;
       var albs = this.state.albs;
 
       if (!this.albums.length) {
         return null;
       } else {
-        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "listed"
         }, albs.length ? albs.map(function (album) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: album.id,
+            state: _this3.props.state,
             type: "albs.map",
             album: album,
-            fetchUser: fetchUser
+            addSong: _this3.props.addSong
           });
         }) : this.albums.map(function (album) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: album.id,
+            state: _this3.props.state,
             type: "albums.map",
             album: album,
-            fetchUser: fetchUser
+            addSong: _this3.props.addSong
           });
         }));
       }
@@ -925,6 +958,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _albums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./albums */ "./frontend/components/album/albums.jsx");
+/* harmony import */ var _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/mediaPlayer_actions */ "./frontend/actions/mediaPlayer_actions.js");
+
 
 
 
@@ -932,6 +967,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
+    state: state,
     albums: {},
     category: ownProps.category,
     max: ownProps.max
@@ -951,6 +987,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchAlbum: function fetchAlbum(id) {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAlbum"])(id));
+    },
+    addSong: function addSong(song) {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["addSong"])(song));
     }
   };
 };
@@ -1425,7 +1464,7 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
-      var artst; // debugger
+      var artst;
 
       if (prevProps.artistId !== this.props.artistId) {
         this.props.fetchUser(this.props.artistId).then(function (res) {
@@ -2073,9 +2112,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2097,9 +2136,12 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MediaPlayer).call(this, props));
     _this.currentUser = _this.props.currentUser;
     _this.state = {
-      songs: null
+      state: _this.props.state,
+      songs: null,
+      currentSong: null
     };
     _this.filter = _this.props.filter;
+    _this.play = _this.play.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2109,14 +2151,40 @@ function (_React$Component) {
       var _this2 = this;
 
       if (!this.state.songs) {
-        // debugger
         this.props.fetchSongs().then(function (res) {
           return _this2.setState({
             songs: res.songs
           });
         });
-      } // debugger
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      debugger;
+      var currentSong = this.props.state.ui.mediaPlayer[0];
 
+      if (currentSong) {
+        if (this.state.currentSong) {
+          if (this.state.currentSong.id !== currentSong.id) {
+            this.setState({
+              currentSong: currentSong
+            });
+          }
+        } else {
+          this.setState({
+            currentSong: currentSong
+          });
+        }
+      }
+    }
+  }, {
+    key: "play",
+    value: function play() {
+      debugger;
+      var player = document.getElementById("media");
+      player.load();
+      player.play();
     }
   }, {
     key: "render",
@@ -2124,18 +2192,34 @@ function (_React$Component) {
       if (!this.state.songs) {
         return null;
       } else {
-        console.log(this.state.songs); // debugger
+        var currentSong;
 
-        var justLikeHoney = Object.values(this.state.songs)[101];
+        if (this.state.currentSong) {
+          currentSong = this.state.currentSong;
+        } else {
+          currentSong = Object.values(this.state.songs)[101];
+        }
+
+        if (!currentSong.audio_fileUrl) {
+          currentSong = Object.values(this.state.songs)[101];
+        }
+
+        if (this.state.currentSong) {
+          this.play();
+        }
+
+        debugger;
+        console.log(currentSong);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
           className: "mediaPlayer",
+          id: "media",
           controls: true,
           width: "100%",
           height: "50px"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
-          src: justLikeHoney.audio_fileUrl
+          src: currentSong.audio_fileUrl
         })));
       }
     }
@@ -2170,6 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    state: state,
     users: Object.values(state.entities.users),
     albums: Object.values(state.entities.albums),
     song: null
@@ -2380,7 +2465,7 @@ function (_React$Component) {
   }, {
     key: "loggingOut",
     value: function loggingOut() {
-      debugger;
+      // debugger
       this.logout().then(function () {
         window.location.reload();
       }); // .then( () => this.forceUpdate());
@@ -2388,8 +2473,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
-
+      // debugger
       if (this.state.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "navBar"
@@ -2604,7 +2688,8 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUsers();
-      this.props.fetchAlbums().then(this.setState({
+      this.props.fetchAlbums() // this.props.fetchSongs()
+      .then(this.setState({
         fetchingUsers: "done"
       }));
     }
@@ -2620,6 +2705,7 @@ function (_React$Component) {
           loc: loc
         }));
       } else {
+        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "discoverWebPage"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2723,6 +2809,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
+/* harmony import */ var _actions_song_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/song_actions */ "./frontend/actions/song_actions.js");
+
 
 
 
@@ -2732,6 +2820,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     currentUser: state.entities.users[state.session.id],
+    state: state,
     users: Object.values(state.entities.users),
     albums: Object.values(state.entities.albums)
   };
@@ -2747,6 +2836,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUsers"])());
+    },
+    fetchSongs: function fetchSongs() {
+      return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_5__["fetchSongs"])());
     }
   };
 };
@@ -3031,8 +3123,8 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var user = Object.assign({}, this.state);
-      debugger;
+      var user = Object.assign({}, this.state); // debugger
+
       this.props.processForm(user).then(function () {
         return _this2.props.closeModal();
       }).then(function () {
@@ -3044,8 +3136,8 @@ function (_React$Component) {
     value: function handleDemo(e) {
       var _this3 = this;
 
-      e.preventDefault();
-      debugger;
+      e.preventDefault(); // debugger
+
       this.setState({
         username: 'GlasgowFan65',
         password: 'shoegaze'
@@ -3058,7 +3150,7 @@ function (_React$Component) {
     value: function update(field) {
       var _this4 = this;
 
-      debugger;
+      // debugger
       return function (e) {
         _this4.setState(_defineProperty({}, field, e.currentTarget.value));
       };
@@ -3305,8 +3397,8 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var user = Object.assign({}, this.state);
-      debugger;
+      var user = Object.assign({}, this.state); // debugger
+
       this.props.processForm(user).then(function () {
         return _this2.props.history.push('/discover');
       }).then(function () {
@@ -3320,8 +3412,8 @@ function (_React$Component) {
     value: function handleDemo(e) {
       var _this3 = this;
 
-      e.preventDefault();
-      debugger;
+      e.preventDefault(); // debugger
+
       this.setState({
         username: 'GlasgowFan65',
         password: 'shoegaze'
@@ -3526,6 +3618,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      // debugger
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "webPage"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3583,11 +3676,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _splash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./splash */ "./frontend/components/sessions/splash.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 
 
-
-
+ // import { openModal } from '../../actions/modal_actions';
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -4292,6 +4383,40 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 
 /***/ }),
 
+/***/ "./frontend/reducers/mediaPlayer_reducer.js":
+/*!**************************************************!*\
+  !*** ./frontend/reducers/mediaPlayer_reducer.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return mediaPlayerReducer; });
+/* harmony import */ var _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/mediaPlayer_actions */ "./frontend/actions/mediaPlayer_actions.js");
+
+function mediaPlayerReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(oldState);
+  var newState = Object.assign([], oldState);
+
+  switch (action.type) {
+    case _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_0__["ADD_SONG"]:
+      newState.push(action.song);
+      return newState;
+
+    case _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_SONG"]:
+      delete newState[action.song.id];
+      return null;
+
+    default:
+      return oldState;
+  }
+}
+
+/***/ }),
+
 /***/ "./frontend/reducers/modal_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/modal_reducer.js ***!
@@ -4486,10 +4611,13 @@ var songsReducer = function songsReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _modal_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal_reducer */ "./frontend/reducers/modal_reducer.js");
+/* harmony import */ var _mediaPlayer_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mediaPlayer_reducer */ "./frontend/reducers/mediaPlayer_reducer.js");
+
 
 
 var uiReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  modal: _modal_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  modal: _modal_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mediaPlayer: _mediaPlayer_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (uiReducer);
 

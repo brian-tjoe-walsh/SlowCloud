@@ -6,6 +6,7 @@ import MediaPlayer from './mediaPlayer';
 
 
 const mapStateToProps = (state) => ({
+  state: state,
   users: Object.values(state.entities.users),
   albums: Object.values(state.entities.albums),
   song: null,

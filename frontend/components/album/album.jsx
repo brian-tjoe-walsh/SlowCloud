@@ -13,6 +13,13 @@ class Album extends React.Component {
     this.removeClass = this.removeClass.bind(this);
     this.addHover = this.addHover.bind(this);
     this.removeHover = this.removeHover.bind(this);
+    this.playSong = this.playSong.bind(this);
+  }
+
+  playSong() {
+    let play = this.state.album.songs[0];
+    this.props.addSong(play);
+      // .then((res) => {debugger});
   }
 
   componentDidMount() {
@@ -56,7 +63,7 @@ class Album extends React.Component {
             <Link to={`/albums/${album.id}`} id={`pic${album.id}`}><img className="albumArt" src={album.photoUrl} /></Link>
             <Link to={`/albums/${album.id}`} className="albumTitle">{album.title}</Link>
             <Link to={`/artists/${album.artist.id}`} className="albumArtist">{artist.username}</Link>
-            <button className="playSong" id={`play${album.id}`}>
+            <button className="playSong" id={`play${album.id}`} onClick={this.playSong}>
               <i className="fas fa-play-circle" id={`playButton${album.id}`}></i>
             </button>
           </li>

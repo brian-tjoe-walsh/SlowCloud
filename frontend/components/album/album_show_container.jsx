@@ -4,7 +4,6 @@ import { fetchAlbum } from '../../actions/album_actions';
 import AlbumShow from './album_show';
 
 const mapStateToProps = (state, ownProps) => {
-  // debugger
   return({
   state: state,
   artist: {},

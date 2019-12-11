@@ -7,6 +7,7 @@ class Albums extends React.Component {
     super(props);
     this.albums = this.props.albums;
     this.state = {
+      state: this.props.state,
       albs: []};
   }
 
@@ -50,12 +51,10 @@ class Albums extends React.Component {
         this.setState({albs: temp});
         return this.state.albs;
       } else if (this.props.category === "heavy") {
-        // debugger
         temp = [this.albums[13], this.albums[16], this.albums[20], this.albums[24]].slice(0, max);
         this.setState({albs: temp});
         return this.state.albs;
       } else if (this.props.category === "dream") {
-        // debugger
         temp = [this.albums[11], this.albums[14], this.albums[25], this.albums[30]].slice(0, max);
         this.setState({ albs: temp });
         return this.state.albs;
@@ -73,19 +72,20 @@ class Albums extends React.Component {
       return null;
 
     } else {
-      // debugger
       return (
         <ul className="listed">
           {(albs.length) ?
             (albs.map(album => <Album key={album.id}
+              state={this.props.state} 
               type="albs.map"
               album={album} 
-              fetchUser={fetchUser} />))
+              addSong = {this.props.addSong}/>))
 
             : (this.albums.map((album) => <Album key={album.id}
+              state={this.props.state} 
               type="albums.map"
               album={album} 
-              fetchUser={fetchUser} />))
+              addSong={this.props.addSong} />))
           }
         </ul>
       );

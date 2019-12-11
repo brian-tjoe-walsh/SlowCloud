@@ -52,14 +52,14 @@ class NavBar extends React.Component {
   }
 
   loggingOut() {
-    debugger
+    // debugger
     this.logout()
     .then(() => { window.location.reload(); });
     // .then( () => this.forceUpdate());
   }
 
   render() {
-    debugger
+    // debugger
     if (this.state.currentUser) {
       return (
         <div className="navBar">

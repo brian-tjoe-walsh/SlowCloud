@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     const user = Object.assign({}, this.state);
-    debugger
+    // debugger
     this.props.processForm(user)
       .then(() => this.props.closeModal())
       .then(() => {window.location.reload(); });
@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
-    debugger
+    // debugger
     this.setState({
       username: 'GlasgowFan65',
       password: 'shoegaze'
@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
   }
 
   update(field) {
-    debugger
+    // debugger
     return e => {
       this.setState({ [field]: e.currentTarget.value });
     };

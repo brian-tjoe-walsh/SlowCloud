@@ -5,19 +5,44 @@ class MediaPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.currentUser;
-    this.state = { songs: null };
+    this.state = { 
+      state: this.props.state,
+      songs: null,
+      currentSong: null };
     this.filter = this.props.filter;
+    this.play = this.play.bind(this);
   }
 
   componentDidMount() {
     if (!this.state.songs) {
-      // debugger
       this.props.fetchSongs()
         .then( (res) => this.setState({ songs: res.songs }));
     }
-
-    // debugger
   }
+
+  componentDidUpdate() {
+    debugger
+    let currentSong = this.props.state.ui.mediaPlayer[0];
+
+    if (currentSong) {
+      if (this.state.currentSong) {
+        if (this.state.currentSong.id !== currentSong.id) {
+          this.setState({ currentSong: currentSong });
+        }
+      } else {
+        this.setState({ currentSong: currentSong });
+      }
+    }
+  }
+
+  play() {
+    debugger
+    let player = document.getElementById("media");
+    player.load();
+    player.play();
+
+  }
+  
   
   render() {
 
@@ -26,17 +51,33 @@ class MediaPlayer extends React.Component {
       return null;
 
     } else {
-      console.log(this.state.songs);
-    // debugger
-    let justLikeHoney = Object.values(this.state.songs)[101];
+      let currentSong;
+    
+      if (this.state.currentSong) {
+        currentSong = this.state.currentSong;
+      } else {
+        currentSong = Object.values(this.state.songs)[101];
+      }
 
-    return (
+      if (!currentSong.audio_fileUrl) {
+        currentSong = Object.values(this.state.songs)[101];
+      }
+
+      if (this.state.currentSong) {
+        this.play();
+      }
+      debugger
+
+      console.log(currentSong);
+
+      return (
         <div className="mediaBar">
-          <audio className="mediaPlayer" controls width="100%" height="50px">
-          <source src={justLikeHoney.audio_fileUrl} />
+          <audio className="mediaPlayer" id="media" controls width="100%" height="50px">
+          <source src={currentSong.audio_fileUrl} />
           </audio>
         </div>
-    )}
+      )
+    }
   }
 }
 

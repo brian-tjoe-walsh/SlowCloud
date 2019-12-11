@@ -8,13 +8,11 @@ class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.state.entities.users[this.props.state.session.id];
-    debugger
     this.state = {album: "hello",
                   artist: "null"};
   }
 
   componentDidMount() {
-    debugger 
 
     this.props.fetchAlbum(this.props.albumId)
       .then((res) => this.setState({
@@ -31,7 +29,6 @@ class AlbumShow extends React.Component {
     const loc = { url: "/album" };
     let profilePic;
 
-    debugger
     if (this.currentUser) {
       profilePic = this.currentUser.photoUrl;
     } else {
@@ -44,7 +41,6 @@ class AlbumShow extends React.Component {
         <NavBarContainer loc={loc} />
       </div>)
     } else {
-      debugger
       return (
         <div>
           <NavBarContainer loc={loc} />

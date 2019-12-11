@@ -27,7 +27,6 @@ class UserShow extends React.Component {
 
   componentDidUpdate(prevProps) {
     let artst;
-    // debugger
 
     if (prevProps.artistId !== this.props.artistId) {
       this.props.fetchUser(this.props.artistId)

@@ -13,6 +13,7 @@ class Discover extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
     this.props.fetchAlbums()
+    // this.props.fetchSongs()
       .then(this.setState({ fetchingUsers: "done" }));
   }
 
@@ -29,6 +30,7 @@ class Discover extends React.Component {
       );
 
     } else {
+      // debugger
       return(
         <div className="discoverWebPage">
           <NavBarContainer loc={loc}/>
