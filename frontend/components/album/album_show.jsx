@@ -13,13 +13,21 @@ class AlbumShow extends React.Component {
   }
 
   componentDidMount() {
-
-    this.props.fetchAlbum(this.props.albumId)
-      .then((res) => this.setState({
-        album: res.album,
-        artist: res.album.artist
-        }
-      ));
+    // debugger
+    let id = +this.props.albumId - 1;
+    if (this.props.state.entities.albums[id]) {
+      this.setState({
+        album: this.props.state.entities.albums[id],
+        artist: this.props.state.entities.albums[id].artist
+      });
+    } else {
+      this.props.fetchAlbum(this.props.albumId)
+        .then((res) => this.setState({
+          album: res.album,
+          artist: res.album.artist
+          }
+        ));
+    }
   }
 
   render() {

@@ -65,7 +65,7 @@ class MediaPlayer extends React.Component {
         currentSong = Object.values(this.state.songs)[101];
       }
 
-      debugger
+      // debugger
 
       console.log(currentSong);
 

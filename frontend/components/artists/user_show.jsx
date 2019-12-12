@@ -15,7 +15,7 @@ class UserShow extends React.Component {
   }
 
   componentDidMount() { 
-    debugger
+    // debugger
     if (this.props.state.entities.users[this.props.artistId]) {
       
       this.setState({
@@ -44,7 +44,7 @@ class UserShow extends React.Component {
 
   getAlbums() {
     let artistAlbums = [];
-    debugger
+    // debugger
     let albums; 
     if (Array.isArray(this.state.albums)) {
       albums = this.state.albums;
@@ -74,7 +74,7 @@ class UserShow extends React.Component {
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };
       }
-      debugger
+      // debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} />
@@ -101,7 +101,7 @@ class UserShow extends React.Component {
                 <div className="showLeftAndRight">
                   <div className="userAlbumList">
                     {artistAlbums.map((album) => {
-                      debugger 
+                      // debugger 
                       return (
                       <div className="userIndividualAlbum" key={album.id}>
                         <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.albumUrl}></img></Link>

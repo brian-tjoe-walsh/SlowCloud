@@ -66,7 +66,6 @@ class NavBar extends React.Component {
           <div className="components">
             <Link to="/discover" className="mainLogo">
               <img className="navShoe" src={window.shoe} />
-              {/* <Link to="/discover" className="mainLogoText">SLOWCLOUD</Link> */}
             </Link>
             <Link to="/discover" className="link home">Home</Link>
             <Link to={`/artists/${this.state.currentUser.id}`} className="link library">Library</Link>
@@ -78,7 +77,6 @@ class NavBar extends React.Component {
             </form>
             <Link to="/upload" className="link upload">Upload</Link>
 
-            {/* <button className="profile">This is empty</button> */}
             <Link to={`/artists/${this.state.currentUser.id}`}>
               <div className="navBarProfile">
                 <img src={this.state.currentUser.photoUrl} className="albumShowMiniPic navBarProfPic"/>
@@ -111,7 +109,6 @@ class NavBar extends React.Component {
           <div className="components">
             <Link to="/discover" className="mainLogo">
               <img className="navShoe" src={window.shoe} />
-              {/* <Link to="/discover" className="mainLogoText">SLOWCLOUD</Link> */}
             </Link>
             <Link to="/discover" className="link home">Home</Link>
             <Link to="/library" className="link library">Library</Link>
@@ -120,9 +117,9 @@ class NavBar extends React.Component {
                 className="bar"
                 placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
               />
-              {/* <div>
-                <i className="far fa-search"></i>
-              </div> */}
+              <div>
+                <i class="fas fa-search"></i>              
+              </div>
             </form>
             <div className="logSign">
               <LoginButton background="navBarLogin" />

@@ -75,6 +75,15 @@
   position: relative;
 }
 
+.fa-search {
+  color: gray;
+  position:absolute;
+  top: 15px;
+  right: 20px;
+  /* left: 510px; */
+  font-size: 15px;
+}
+
 .bar {
     height: 60%;
     width: 100%;

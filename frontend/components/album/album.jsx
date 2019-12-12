@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Album extends React.Component {
   constructor(props) {
     super(props);
-    debugger
+    // debugger
     this.addClass = this.addClass.bind(this);
     this.removeClass = this.removeClass.bind(this);
     this.addHover = this.addHover.bind(this);
@@ -51,7 +51,7 @@ class Album extends React.Component {
       return null;
 
     } else {
-      debugger
+      // debugger
       return (
         <div className="songBoundaries">
           <li className="album" >

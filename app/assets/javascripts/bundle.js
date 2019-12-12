@@ -469,8 +469,8 @@ function (_React$Component) {
 
     _classCallCheck(this, Album);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Album).call(this, props));
-    debugger;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Album).call(this, props)); // debugger
+
     _this.addClass = _this.addClass.bind(_assertThisInitialized(_this));
     _this.removeClass = _this.removeClass.bind(_assertThisInitialized(_this));
     _this.addHover = _this.addHover.bind(_assertThisInitialized(_this));
@@ -529,7 +529,7 @@ function (_React$Component) {
       if (!album) {
         return null;
       } else {
-        debugger;
+        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songBoundaries"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -628,12 +628,22 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.fetchAlbum(this.props.albumId).then(function (res) {
-        return _this2.setState({
-          album: res.album,
-          artist: res.album.artist
+      // debugger
+      var id = +this.props.albumId - 1;
+
+      if (this.props.state.entities.albums[id]) {
+        this.setState({
+          album: this.props.state.entities.albums[id],
+          artist: this.props.state.entities.albums[id].artist
         });
-      });
+      } else {
+        this.props.fetchAlbum(this.props.albumId).then(function (res) {
+          return _this2.setState({
+            album: res.album,
+            artist: res.album.artist
+          });
+        });
+      }
     }
   }, {
     key: "render",
@@ -838,8 +848,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      debugger;
-
+      // debugger
       if (this.albums[6]) {
         this.categorize(this.props.max);
       } else {
@@ -929,7 +938,7 @@ function (_React$Component) {
             });
           }));
         } else {
-          debugger;
+          // debugger
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             className: "listed"
           }, this.albums.map(function (album) {
@@ -1455,8 +1464,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      debugger;
-
+      // debugger
       if (this.props.state.entities.users[this.props.artistId]) {
         this.setState({
           artist: this.props.state.entities.users[this.props.artistId],
@@ -1490,8 +1498,8 @@ function (_React$Component) {
     value: function getAlbums() {
       var _this4 = this;
 
-      var artistAlbums = [];
-      debugger;
+      var artistAlbums = []; // debugger
+
       var albums;
 
       if (Array.isArray(this.state.albums)) {
@@ -1528,9 +1536,9 @@ function (_React$Component) {
           loc = {
             url: "/library"
           };
-        }
+        } // debugger
 
-        debugger;
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1561,7 +1569,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
         }, artistAlbums.map(function (album) {
-          debugger;
+          // debugger 
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "userIndividualAlbum",
             key: album.id
@@ -2214,9 +2222,9 @@ function (_React$Component) {
 
         if (!currentSong.audio_fileUrl) {
           currentSong = Object.values(this.state.songs)[101];
-        }
+        } // debugger
 
-        debugger;
+
         console.log(currentSong);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar"
@@ -2553,7 +2561,9 @@ function (_React$Component) {
           type: "text",
           className: "bar",
           placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          "class": "fas fa-search"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "logSign"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_login_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
           background: "navBarLogin"
@@ -2695,8 +2705,7 @@ function (_React$Component) {
   _createClass(Discover, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
-
+      // debugger
       if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
         this.setState({
           fetchingUsers: "done"
