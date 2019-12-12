@@ -6,6 +6,7 @@
   width: 100%;
   height: 46px;
   background: #323232;
+  /* background: #3f3f3f; */
   z-index: 5;
 }
 
@@ -79,7 +80,7 @@
   color: gray;
   position:absolute;
   top: 15px;
-  right: 20px;
+  right: 17px;
   /* left: 510px; */
   font-size: 15px;
 }
@@ -250,3 +251,10 @@ a {
 }
 
 
+
+
+.navBarArrange {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

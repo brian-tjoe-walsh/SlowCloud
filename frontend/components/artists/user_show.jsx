@@ -15,6 +15,7 @@ class UserShow extends React.Component {
   }
 
   componentDidMount() { 
+    window.scrollTo(0, 0);
     // debugger
     if (this.props.state.entities.users[this.props.artistId]) {
       

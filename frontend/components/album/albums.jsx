@@ -35,6 +35,7 @@ class Albums extends React.Component {
         return this.state.albs;
 
       } else if (this.props.category === "random") {
+        let avoid = [15, 34, 31, 9, 42, 10, 1, 4, 7, 13, 16, 20, 24, 11, 14, 25, 30];
         let indices = [];
         let num;
 
@@ -42,7 +43,7 @@ class Albums extends React.Component {
           while (indices.length < max) {
             num = Math.floor(Math.random() * Object.keys(this.albums).length);
 
-            if (!indices.includes(this.albums[num])) {
+            if (!indices.includes(this.albums[num]) && !avoid.includes(num)) {
               indices.push(this.albums[num]);
             }
           }

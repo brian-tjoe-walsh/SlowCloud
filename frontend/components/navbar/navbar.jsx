@@ -59,77 +59,65 @@ class NavBar extends React.Component {
   }
 
   render() {
-    // debugger
-    if (this.state.currentUser) {
-      return (
-        <div className="navBar">
-          <div className="components">
-            <Link to="/discover" className="mainLogo">
-              <img className="navShoe" src={window.shoe} />
-            </Link>
-            <Link to="/discover" className="link home">Home</Link>
-            <Link to={`/artists/${this.state.currentUser.id}`} className="link library">Library</Link>
-            <form className="search" >
-              <input type="text"
-                className="bar"
-                placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
-              />
-            </form>
-            <Link to="/upload" className="link upload">Upload</Link>
-
-            <Link to={`/artists/${this.state.currentUser.id}`}>
-              <div className="navBarProfile">
-                <img src={this.state.currentUser.photoUrl} className="albumShowMiniPic navBarProfPic"/>
-                <div className="profile" >{this.state.currentUser.username}</div>
-              </div>
-            </Link>
-
-            <div className="menu">
-              <div className="dropDown" onClick={this.toggle}>
-                {(this.state.open) ? (
-                  <div className="dropDown">
-                    <div>...</div>
-                    <div className="flexingRight">
-                      <button
-                        onClick={this.loggingOut}
-                        className="loggingOut"
-                      >Logout
-                    </button>
-                    </div>
-                  </div>
-                ) : <div>...</div>}
-              </div>
+    return (
+      <div className="navBar">
+        <div className="components">
+          <Link to="/discover" className="mainLogo">
+            <img className="navShoe" src={window.shoe} />
+          </Link>
+          <Link to="/discover" className="link home">Home</Link>
+          {(this.state.currentUser) ? 
+          (<Link to={`/artists/${this.state.currentUser.id}`} className="link library">Library</Link>)
+          :
+          (<Link to="/library" className="link library">Library</Link>)
+          }
+          <form className="search" >
+            <input type="text"
+              className="bar"
+              placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
+            />
+            <div>
+              <i className="fas fa-search"></i>
             </div>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="navBar">
-          <div className="components">
-            <Link to="/discover" className="mainLogo">
-              <img className="navShoe" src={window.shoe} />
-            </Link>
-            <Link to="/discover" className="link home">Home</Link>
-            <Link to="/library" className="link library">Library</Link>
-            <form className="search" >
-              <input type="text"
-                className="bar"
-                placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
-              />
-              <div>
-                <i class="fas fa-search"></i>              
+          </form>
+          {
+          (this.state.currentUser) ? 
+            (<div className="navBarArrange">
+              <Link to="/upload" className="link upload">Upload</Link>
+
+              <Link to={`/artists/${this.state.currentUser.id}`}>
+                <div className="navBarProfile">
+                  <img src={this.state.currentUser.photoUrl} className="albumShowMiniPic navBarProfPic" />
+                  <div className="profile" >{this.state.currentUser.username}</div>
+                </div>
+              </Link>
+              <div className="menu">
+                <div className="dropDown" onClick={this.toggle}>
+                  {(this.state.open) ? (
+                    <div className="dropDown">
+                      <div>...</div>
+                      <div className="flexingRight">
+                        <button
+                          onClick={this.loggingOut}
+                          className="loggingOut"
+                        >Logout
+                    </button>
+                      </div>
+                    </div>
+                  ) : <div>...</div>}
+                </div>
               </div>
-            </form>
-            <div className="logSign">
+            </div>)
+          :
+            (<div className="logSign">
               <LoginButton background="navBarLogin" />
 
               <SignupButton background="navBarSignup" />
-            </div>
-          </div>
+            </div>)
+          }
         </div>
-      )
-    }
+      </div>
+    )
   }
 }
 

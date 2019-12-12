@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 class Splash extends React.Component {
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     let background = document.getElementsByClassName("preModal");
     return ($(background).removeClass("modal"));
   }

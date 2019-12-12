@@ -476,26 +476,104 @@ function (_React$Component) {
     _this.addHover = _this.addHover.bind(_assertThisInitialized(_this));
     _this.removeHover = _this.removeHover.bind(_assertThisInitialized(_this));
     _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
+    _this.state = {
+      state: _this.props.state,
+      currentSong: false,
+      playing: false
+    };
     return _this;
   }
 
   _createClass(Album, [{
+    key: "afterClick",
+    value: function afterClick(player) {
+      if (player.paused) {
+        var ele = document.getElementById("pic".concat(this.props.album.id));
+        ele.removeEventListener("mouseover", this.addClass);
+        ele.removeEventListener("mouseleave", this.removeClass);
+        var button = document.getElementById("play".concat(this.props.album.id));
+        button.removeEventListener("mouseover", this.addClass);
+        button.removeEventListener("mouseleave", this.removeClass);
+        button.addEventListener("mouseover", this.addPauseHover);
+        button.addEventListener("mouseleave", this.removePauseHover);
+      } else {
+        var _ele = document.getElementById("pic".concat(this.props.album.id));
+
+        _ele.addEventListener("mouseover", this.addClass);
+
+        _ele.addEventListener("mouseleave", this.removeClass);
+
+        var _button = document.getElementById("play".concat(this.props.album.id));
+
+        _button.addEventListener("mouseover", this.addClass);
+
+        _button.addEventListener("mouseleave", this.removeClass);
+
+        _button.removeEventListener("mouseover", this.addPauseHover);
+
+        _button.removeEventListener("mouseleave", this.removePauseHover);
+      }
+    }
+  }, {
     key: "playSong",
     value: function playSong() {
-      var play = this.props.album.songs[0];
-      this.props.addSong(play);
+      var player = document.getElementById("media");
+      var button = document.getElementById("play".concat(this.props.album.id));
+      debugger;
+
+      if (this.state.currentSong) {
+        if (player.paused) {
+          this.afterClick(player);
+          player.play();
+          $(button).addClass("visibleButton");
+          this.setState({
+            playing: true
+          });
+        } else {
+          this.afterClick(player);
+          player.pause();
+          this.setState({
+            playing: false
+          });
+        }
+      } else {
+        this.afterClick(player);
+        var play = this.props.album.songs[0];
+        this.props.addSong(play);
+        $(button).addClass("visibleButton");
+        this.setState({
+          currentSong: true,
+          playing: true
+        });
+      }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var ele = document.getElementById("pic".concat(this.props.album.id));
-      ele.addEventListener("mouseover", this.addClass);
-      ele.addEventListener("mouseleave", this.removeClass);
-      var button = document.getElementById("play".concat(this.props.album.id));
-      button.addEventListener("mouseover", this.addClass);
-      button.addEventListener("mouseover", this.addHover);
-      button.addEventListener("mouseleave", this.removeClass);
-      button.addEventListener("mouseleave", this.removeHover);
+      if (this.props.state.ui.mediaPlayer[0] && this.props.state.ui.mediaPlayer[0].album_id === this.props.album.id) {
+        var button = document.getElementById("play".concat(this.props.album.id));
+        $(button).addClass("visibleButton");
+        button.addEventListener("mouseover", this.addPauseHover);
+        button.addEventListener("mouseleave", this.removePauseHover);
+        this.setState({
+          currentSong: true,
+          playing: true
+        });
+      } else {
+        var ele = document.getElementById("pic".concat(this.props.album.id));
+        ele.addEventListener("mouseover", this.addClass);
+        ele.addEventListener("mouseleave", this.removeClass);
+
+        var _button2 = document.getElementById("play".concat(this.props.album.id));
+
+        _button2.addEventListener("mouseover", this.addClass);
+
+        _button2.addEventListener("mouseover", this.addHover);
+
+        _button2.addEventListener("mouseleave", this.removeClass);
+
+        _button2.addEventListener("mouseleave", this.removeHover);
+      }
     }
   }, {
     key: "addClass",
@@ -516,6 +594,19 @@ function (_React$Component) {
       $(eles).removeClass("playHovered");
     }
   }, {
+    key: "addPauseHover",
+    value: function addPauseHover() {
+      // debugger
+      var eles = document.getElementById("pauseButton");
+      $(eles).addClass("playHovered");
+    }
+  }, {
+    key: "removePauseHover",
+    value: function removePauseHover() {
+      var eles = document.getElementById("pauseButton");
+      $(eles).removeClass("playHovered");
+    }
+  }, {
     key: "removeClass",
     value: function removeClass() {
       var ele = document.getElementById("play".concat(this.props.album.id));
@@ -529,7 +620,7 @@ function (_React$Component) {
       if (!album) {
         return null;
       } else {
-        // debugger
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songBoundaries"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -550,7 +641,10 @@ function (_React$Component) {
           className: "playSong",
           id: "play".concat(album.id),
           onClick: this.playSong
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        }, this.state.playing ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-pause-circle",
+          id: "pauseButton"
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fas fa-play-circle",
           id: "playButton".concat(album.id)
         }))));
@@ -629,6 +723,7 @@ function (_React$Component) {
       var _this2 = this;
 
       // debugger
+      window.scrollTo(0, 0);
       var id = +this.props.albumId - 1;
 
       if (this.props.state.entities.albums[id]) {
@@ -874,6 +969,7 @@ function (_React$Component) {
           });
           return this.state.albs;
         } else if (this.props.category === "random") {
+          var avoid = [15, 34, 31, 9, 42, 10, 1, 4, 7, 13, 16, 20, 24, 11, 14, 25, 30];
           var indices = [];
           var num;
 
@@ -881,7 +977,7 @@ function (_React$Component) {
             while (indices.length < max) {
               num = Math.floor(Math.random() * Object.keys(this.albums).length);
 
-              if (!indices.includes(this.albums[num])) {
+              if (!indices.includes(this.albums[num]) && !avoid.includes(num)) {
                 indices.push(this.albums[num]);
               }
             }
@@ -1074,6 +1170,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      window.scrollTo(0, 0);
       this.props.fetchAlbums().then(function (res) {
         return _this2.setState({
           albums: res.albums
@@ -1464,7 +1561,8 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // debugger
+      window.scrollTo(0, 0); // debugger
+
       if (this.props.state.entities.users[this.props.artistId]) {
         this.setState({
           artist: this.props.state.entities.users[this.props.artistId],
@@ -1728,6 +1826,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      window.scrollTo(0, 0);
       this.props.fetchUsers().then(function (res) {
         return _this2.setState({
           users: Object.values(res.users)
@@ -2489,88 +2588,66 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
-      if (this.state.currentUser) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navBar"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "components"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/discover",
-          className: "mainLogo"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "navShoe",
-          src: window.shoe
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/discover",
-          className: "link home"
-        }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/artists/".concat(this.state.currentUser.id),
-          className: "link library"
-        }, "Library"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          className: "search"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          className: "bar",
-          placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/upload",
-          className: "link upload"
-        }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/artists/".concat(this.state.currentUser.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navBarProfile"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.state.currentUser.photoUrl,
-          className: "albumShowMiniPic navBarProfPic"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "profile"
-        }, this.state.currentUser.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "menu"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "dropDown",
-          onClick: this.toggle
-        }, this.state.open ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "dropDown"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "flexingRight"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: this.loggingOut,
-          className: "loggingOut"
-        }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "...")))));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navBar"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "components"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/discover",
-          className: "mainLogo"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "navShoe",
-          src: window.shoe
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/discover",
-          className: "link home"
-        }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/library",
-          className: "link library"
-        }, "Library"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          className: "search"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          className: "bar",
-          placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          "class": "fas fa-search"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "logSign"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_login_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          background: "navBarLogin"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_signup_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          background: "navBarSignup"
-        }))));
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navBar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "components"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/discover",
+        className: "mainLogo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "navShoe",
+        src: window.shoe
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/discover",
+        className: "link home"
+      }, "Home"), this.state.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/artists/".concat(this.state.currentUser.id),
+        className: "link library"
+      }, "Library") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/library",
+        className: "link library"
+      }, "Library"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "search"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "bar",
+        placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-search"
+      }))), this.state.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navBarArrange"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/upload",
+        className: "link upload"
+      }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/artists/".concat(this.state.currentUser.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navBarProfile"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.currentUser.photoUrl,
+        className: "albumShowMiniPic navBarProfPic"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile"
+      }, this.state.currentUser.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "menu"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropDown",
+        onClick: this.toggle
+      }, this.state.open ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropDown"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flexingRight"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.loggingOut,
+        className: "loggingOut"
+      }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "...")))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "logSign"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_login_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        background: "navBarLogin"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_signup_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        background: "navBarSignup"
+      }))));
     }
   }]);
 
@@ -2706,6 +2783,8 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // debugger
+      window.scrollTo(0, 0);
+
       if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
         this.setState({
           fetchingUsers: "done"
@@ -3652,6 +3731,7 @@ function (_React$Component) {
   _createClass(Splash, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      window.scrollTo(0, 0);
       var background = document.getElementsByClassName("preModal");
       return $(background).removeClass("modal");
     }

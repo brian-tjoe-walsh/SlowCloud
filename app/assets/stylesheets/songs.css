@@ -49,16 +49,21 @@ h3 {
 }
 
 .playSong {
-    display: none;
-    position: relative;
-    width: 55px;
-    height: 55px;
-    left: 60px;
-    bottom: 150px;
-    background: white;
-    border: none;
-    border-radius: 50%;
+  display: none;
+  position: relative;
+  width: 55px;
+  height: 55px;
+  left: 60px;
+  bottom: 150px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  outline: none;
 }
+/* 
+#pauseButton {
+  display: initial;
+} */
 
 .visibleButton {
     display: initial;

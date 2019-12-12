@@ -4,7 +4,7 @@ import Album from '../album/album';
 import { Link, Redirect } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
 
-class UserShow extends React.Component {
+class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +15,8 @@ class UserShow extends React.Component {
   }
 
   componentDidMount() {
+      window.scrollTo(0, 0)
+
     let artst;
 
     this.props.fetchUser(this.props.artistId)
@@ -140,4 +142,4 @@ class UserShow extends React.Component {
   }
 }
 
-export default UserShow;
+export default SearchPage;

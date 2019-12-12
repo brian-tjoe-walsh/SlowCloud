@@ -14,6 +14,7 @@ class AlbumShow extends React.Component {
 
   componentDidMount() {
     // debugger
+    window.scrollTo(0, 0);
     let id = +this.props.albumId - 1;
     if (this.props.state.entities.albums[id]) {
       this.setState({

@@ -10,6 +10,7 @@ class UsersIndex extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.fetchUsers()
       .then((res) => this.setState({ users: Object.values(res.users) }));
   }

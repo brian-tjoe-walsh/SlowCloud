@@ -10,6 +10,7 @@ class AlbumsIndex extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.fetchAlbums()
       .then((res) => this.setState({ albums: res.albums }));
   }
