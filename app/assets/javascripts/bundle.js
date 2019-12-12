@@ -1455,34 +1455,32 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var artst;
-      this.props.fetchUser(this.props.artistId).then(function (res) {
-        return artst = res.user;
-      }).then(function () {
-        return _this2.props.fetchAlbums();
-      }).then(function (res) {
-        return _this2.setState({
-          artist: artst,
-          albums: res.albums
+      debugger;
+
+      if (this.props.state.entities.users[this.props.artistId]) {
+        this.setState({
+          artist: this.props.state.entities.users[this.props.artistId],
+          albums: this.props.state.entities.users[this.props.artistId].albums
         });
-      });
+      } else {
+        this.props.fetchUser(this.props.artistId).then(function (res) {
+          return _this2.setState({
+            artist: res.user,
+            albums: res.user.albums
+          });
+        });
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
-      var artst;
-
       if (prevProps.artistId !== this.props.artistId) {
         this.props.fetchUser(this.props.artistId).then(function (res) {
-          return artst = res.user;
-        }).then(function () {
-          return _this3.props.fetchAlbums();
-        }).then(function (res) {
           return _this3.setState({
-            artist: artst,
-            albums: res.albums
+            artist: res.user,
+            albums: res.user.albums
           });
         });
       }
@@ -1493,7 +1491,16 @@ function (_React$Component) {
       var _this4 = this;
 
       var artistAlbums = [];
-      this.state.albums.forEach(function (alb) {
+      debugger;
+      var albums;
+
+      if (Array.isArray(this.state.albums)) {
+        albums = this.state.albums;
+      } else {
+        albums = Object.values(this.state.albums);
+      }
+
+      albums.forEach(function (alb) {
         if (alb.user_id === _this4.state.artist.id) {
           artistAlbums.push(alb);
         }
@@ -1523,6 +1530,7 @@ function (_React$Component) {
           };
         }
 
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1553,6 +1561,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
         }, artistAlbums.map(function (album) {
+          debugger;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "userIndividualAlbum",
             key: album.id
@@ -1561,7 +1570,7 @@ function (_React$Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             className: "albumArt",
             id: "showPagePic",
-            src: album.photoUrl
+            src: album.albumUrl
           })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "showTitleSpacing"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1632,9 +1641,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     currentUserId: state.session.id,
-    artistId: ownProps.match.params.artistId,
-    albums: {},
-    user: {}
+    state: state,
+    artistId: ownProps.match.params.artistId
   };
 };
 
@@ -2689,7 +2697,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       debugger;
 
-      if (this.props.state.entities.albums[6]) {
+      if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
         this.setState({
           fetchingUsers: "done"
         });
@@ -2706,92 +2714,108 @@ function (_React$Component) {
       var loc = {
         url: "/discover"
       };
-
-      if (this.props.albums.length <= 1 || this.props.users.length <= 1) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
-        }));
-      } else {
-        debugger;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverWebPage"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "flexing"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverMidPage"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "leftSide"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverRows"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverTitles"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Trending"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "miniDesc"
-        }, "The biggest hits, chosen by you")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          category: "random",
-          max: 4
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navHr"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-          className: "navHr"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverRows"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverTitles"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "New Music Now"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "miniDesc"
-        }, "See what's on the come up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          category: "new",
-          max: 4
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navHr"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-          className: "navHr"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverRows"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverTitles"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "The Classics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "miniDesc"
-        }, "Revisit the albums that defined the genre")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          category: "classic",
-          max: 4
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navHr"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-          className: "navHr"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverRows"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverTitles"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Heavier Things"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "miniDesc"
-        }, "Enjoy these barbed wire kisses")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          category: "heavy",
-          max: 4
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "navHr"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-          className: "navHr"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverRows"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "discoverTitles"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sonic Dreams"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "miniDesc"
-        }, "Wrap your ears in a bed of warmth")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          category: "dream",
-          max: 4
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "rightSide"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "listeningHistory"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Listening History"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listening_listening_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          albums: this.props.state.entities.albums
-        }))))));
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverWebPage"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        loc: loc
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flexing"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverMidPage"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "leftSide"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverRows"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverTitles"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Trending"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "miniDesc"
+      }, "The biggest hits, chosen by you")), this.props.albums.length <= 1 || this.props.users.length <= 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loaderContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        category: "random",
+        max: 4
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navHr"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "navHr"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverRows"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverTitles"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "New Music Now"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "miniDesc"
+      }, "See what's on the come up")), this.props.albums.length <= 1 || this.props.users.length <= 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loaderContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        category: "new",
+        max: 4
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navHr"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "navHr"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverRows"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverTitles"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "The Classics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "miniDesc"
+      }, "Revisit the albums that defined the genre")), this.props.albums.length <= 1 || this.props.users.length <= 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loaderContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        category: "classic",
+        max: 4
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navHr"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "navHr"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverRows"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverTitles"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Heavier Things"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "miniDesc"
+      }, "Enjoy these barbed wire kisses")), this.props.albums.length <= 1 || this.props.users.length <= 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loaderContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        category: "heavy",
+        max: 4
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navHr"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "navHr"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverRows"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverTitles"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sonic Dreams"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "miniDesc"
+      }, "Wrap your ears in a bed of warmth")), this.props.albums.length <= 1 || this.props.users.length <= 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loaderContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        category: "dream",
+        max: 4
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "rightSide"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "listeningHistory"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Listening History"), this.props.albums.length <= 1 || this.props.users.length <= 1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loaderContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listening_listening_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        albums: this.props.state.entities.albums
+      }))))));
     }
   }]);
 

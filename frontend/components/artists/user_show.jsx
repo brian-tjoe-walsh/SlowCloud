@@ -10,39 +10,48 @@ class UserShow extends React.Component {
     this.state = {
       currentUserId: this.props.currentUserId,
       artist: null,
-      albums: null};
+      albums: null
+    };
   }
 
   componentDidMount() { 
-    let artst;
+    debugger
+    if (this.props.state.entities.users[this.props.artistId]) {
+      
+      this.setState({
+        artist: this.props.state.entities.users[this.props.artistId],
+        albums: this.props.state.entities.users[this.props.artistId].albums
+      });
+    } else {   
 
-    this.props.fetchUser(this.props.artistId)
-      .then((res) => artst = res.user)
-      .then(() => this.props.fetchAlbums())
-      .then((res) => this.setState({ 
-        artist: artst,
-        albums: res.albums
-       }));
+      this.props.fetchUser(this.props.artistId)
+        .then((res) => this.setState({ 
+          artist: res.user,
+          albums: res.user.albums
+        }));
+    }
   }
 
   componentDidUpdate(prevProps) {
-    let artst;
-
     if (prevProps.artistId !== this.props.artistId) {
       this.props.fetchUser(this.props.artistId)
-        .then((res) => artst = res.user)
-        .then(() => this.props.fetchAlbums())
         .then((res) => this.setState({
-          artist: artst,
-          albums: res.albums
+          artist: res.user,
+          albums: res.user.albums
         }));
     }
   }
 
   getAlbums() {
     let artistAlbums = [];
-
-    this.state.albums.forEach((alb) => {
+    debugger
+    let albums; 
+    if (Array.isArray(this.state.albums)) {
+      albums = this.state.albums;
+    } else {
+      albums = Object.values(this.state.albums);
+    }
+    albums.forEach((alb) => {
       if (alb.user_id === this.state.artist.id) {
         artistAlbums.push(alb);
       }
@@ -65,7 +74,7 @@ class UserShow extends React.Component {
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };
       }
-
+      debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} />
@@ -91,9 +100,11 @@ class UserShow extends React.Component {
 
                 <div className="showLeftAndRight">
                   <div className="userAlbumList">
-                    {artistAlbums.map((album) => (
+                    {artistAlbums.map((album) => {
+                      debugger 
+                      return (
                       <div className="userIndividualAlbum" key={album.id}>
-                        <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.photoUrl}></img></Link>
+                        <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.albumUrl}></img></Link>
                         
                         <div className="showTitleSpacing">
                           <div className="showTitleAdjustments">
@@ -108,7 +119,7 @@ class UserShow extends React.Component {
                           </div>
                         </div>
                       </div>
-                      ))}
+                      )})}
                   </div>
 
                   <div className="showMidRight">
