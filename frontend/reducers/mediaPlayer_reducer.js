@@ -1,15 +1,26 @@
-import { ADD_SONG, REMOVE_SONG } from '../actions/mediaPlayer_actions';
+import { ADD_SONG, REMOVE_SONG, PAUSE_SONG, PLAY_SONG } from '../actions/mediaPlayer_actions';
 
-export default function mediaPlayerReducer(oldState = [], action) {
+export default function mediaPlayerReducer(oldState = {}, action) {
   Object.freeze(oldState);
-  let newState = Object.assign([], oldState);
+  let newState = Object.assign({}, oldState);
 
   switch (action.type) {
     case ADD_SONG:
-      newState.push(action.song);
+      debugger
+      if (newState.songs) {
+        newState.songs.push(action.song);
+      } else {
+        newState.songs = [action.song];
+      }
+      return newState;
+    case PAUSE_SONG:
+      newState.playing = false;
+      return newState;
+    case PLAY_SONG:
+      newState.playing = true;
       return newState;
     case REMOVE_SONG:
-      delete newState[action.song.id];
+      delete newState.songs[action.song.id];
       return null;
     default:
       return oldState;

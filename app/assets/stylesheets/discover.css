@@ -115,6 +115,14 @@ a {
   height: 50px;
   animation: spin 2s linear infinite;
 }
+#mediaLoader {
+  border: 2px solid #eeecec; /* Light grey */
+  border-top: 2px solid rgb(175, 116, 202); /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }

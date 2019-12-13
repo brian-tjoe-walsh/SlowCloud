@@ -85,7 +85,9 @@ class Albums extends React.Component {
                 state={this.props.state} 
                 type="albs.map"
                 album={album} 
-                addSong = {this.props.addSong}/>))
+                addSong = {this.props.addSong}
+                playSong = {this.props.playSong}
+                pauseSong = {this.props.pauseSong}/>))
             }
           </ul>
         );
@@ -97,7 +99,9 @@ class Albums extends React.Component {
                 state={this.props.state} 
                 type="albums.map"
                 album={album} 
-                addSong={this.props.addSong} />) }
+                addSong={this.props.addSong}
+                playSong={this.props.playSong}
+                pauseSong={this.props.pauseSong}/>) }
           </ul>
         );
       }
