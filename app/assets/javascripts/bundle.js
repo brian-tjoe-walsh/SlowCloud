@@ -4097,7 +4097,7 @@ function (_React$Component) {
 
       debugger;
 
-      if (!this.state.currentSong) {
+      if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
         var play = this.props.state.entities.songs[this.props.song.id];
 
         if (this.props.state.ui.mediaPlayer.songs) {

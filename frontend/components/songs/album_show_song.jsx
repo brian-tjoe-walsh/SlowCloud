@@ -16,7 +16,7 @@ class AlbumShowSong extends React.Component {
     // let button = document.getElementById(`play${this.props.album.id}`);
 
     debugger
-    if (!this.state.currentSong) {
+    if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
       let play = this.props.state.entities.songs[this.props.song.id];
       if (this.props.state.ui.mediaPlayer.songs) {
         debugger
