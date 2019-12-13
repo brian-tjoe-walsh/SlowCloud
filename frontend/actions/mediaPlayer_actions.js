@@ -23,7 +23,7 @@ export const playSong = () => {
 };
 
 export const deleteSong = song => {
-  debugger
+  // debugger
   return {
     type: REMOVE_SONG,
     song

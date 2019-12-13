@@ -198,7 +198,7 @@ var playSong = function playSong() {
   };
 };
 var deleteSong = function deleteSong(song) {
-  debugger;
+  // debugger
   return {
     type: REMOVE_SONG,
     song: song
@@ -577,8 +577,9 @@ function (_React$Component) {
         var play = this.props.album.songs[0];
 
         if (this.props.state.ui.mediaPlayer.songs) {
-          debugger;
+          // debugger
           this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
+          this.props.pauseSong();
         }
 
         this.props.addSong(play);
@@ -837,7 +838,12 @@ function (_React$Component) {
             key: index,
             index: index,
             song: song,
-            album: _this3.state.album
+            album: _this3.state.album,
+            state: _this3.props.state,
+            addSong: _this3.props.addSong,
+            playSong: _this3.props.playSong,
+            deleteSong: _this3.props.deleteSong,
+            pauseSong: _this3.props.pauseSong
           });
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowMidRight"
@@ -880,6 +886,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _album_show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./album_show */ "./frontend/components/album/album_show.jsx");
+/* harmony import */ var _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/mediaPlayer_actions */ "./frontend/actions/mediaPlayer_actions.js");
+
 
 
 
@@ -901,6 +909,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchAlbum: function fetchAlbum(id) {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAlbum"])(id));
+    },
+    addSong: function addSong(song) {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["addSong"])(song));
+    },
+    deleteSong: function deleteSong(song) {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["deleteSong"])(song));
+    },
+    playSong: function playSong() {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["playSong"])());
+    },
+    pauseSong: function pauseSong() {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["pauseSong"])());
     }
   };
 };
@@ -2310,6 +2330,7 @@ function (_React$Component) {
     _this.currentSong = null;
     _this.play = _this.play.bind(_assertThisInitialized(_this));
     _this.getTime = _this.getTime.bind(_assertThisInitialized(_this));
+    _this.clicked = _this.clicked.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2331,7 +2352,7 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      debugger;
+      // debugger
       var currentSong = null; // = this.props.state.ui.mediaPlayer.songs[0];
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
@@ -2340,7 +2361,7 @@ function (_React$Component) {
 
       if (currentSong) {
         if (this.state.currentSong) {
-          if (currentSong.id !== Object.values(this.state.songs)[102].id && this.state.currentSong.id !== currentSong.id) {
+          if (this.state.currentSong.id !== currentSong.id) {
             this.setState({
               currentSong: currentSong,
               playing: true
@@ -2417,18 +2438,18 @@ function (_React$Component) {
   }, {
     key: "play",
     value: function play() {
-      debugger;
+      // debugger
       var currentSong = null; // debugger
 
       if (this.state.currentSong) {
         currentSong = this.state.songs[this.state.currentSong.id];
       } else {
-        debugger;
+        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
 
       if (!currentSong.audio_fileUrl) {
-        debugger;
+        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
 
@@ -2445,7 +2466,13 @@ function (_React$Component) {
     }
   }, {
     key: "clicked",
-    value: function clicked() {// debugger
+    value: function clicked() {
+      // debugger
+      if (this.props.state.ui.mediaPlayer.playing) {
+        this.play();
+      } else {
+        this.pause();
+      }
     }
   }, {
     key: "currentTime",
@@ -2472,16 +2499,16 @@ function (_React$Component) {
         if (this.state.currentSong) {
           currentSong = this.state.songs[this.state.currentSong.id];
         } else {
-          debugger;
+          // debugger
           currentSong = Object.values(this.state.songs)[102];
         }
 
         if (!currentSong.audio_fileUrl) {
-          debugger;
+          // debugger
           currentSong = Object.values(this.state.songs)[102];
-        }
+        } // debugger
 
-        debugger;
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar",
           onClick: this.clicked
@@ -4023,33 +4050,142 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-var AlbumShowSong = function AlbumShowSong(_ref) {
-  var index = _ref.index,
-      song = _ref.song,
-      album = _ref.album;
-  // debugger
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "albumShowSong"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "albumShowMiniPic",
-    src: album.photoUrl
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "albumSpread"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "albumShowText"
-  }, index + 1, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "albumShowTitle"
-  }, song.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "albumShowTitleRightSide"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-play"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "playCount"
-  }, 500))));
-};
 
+var AlbumShowSong =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(AlbumShowSong, _React$Component);
+
+  function AlbumShowSong(props) {
+    var _this;
+
+    _classCallCheck(this, AlbumShowSong);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AlbumShowSong).call(this, props));
+    _this.state = {
+      currentSong: null,
+      playing: false
+    };
+    _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
+    _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AlbumShowSong, [{
+    key: "playSong",
+    value: function playSong() {
+      var player = document.getElementById("media"); // let button = document.getElementById(`play${this.props.album.id}`);
+
+      debugger;
+
+      if (!this.state.currentSong) {
+        var play = this.props.state.entities.songs[this.props.song.id];
+
+        if (this.props.state.ui.mediaPlayer.songs) {
+          debugger;
+          this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
+          this.props.pauseSong();
+          player.pause();
+        }
+
+        this.props.addSong(play); // let visible = document.getElementsByClassName("visibleButton");
+        // $(visible).removeClass("visibleButton");
+        // $(button).addClass("visibleButton");
+
+        this.setState({
+          currentSong: play,
+          playing: true
+        });
+      }
+
+      debugger;
+      this.afterClick(player);
+    }
+  }, {
+    key: "afterClick",
+    value: function afterClick(player) {
+      debugger;
+
+      if (player.paused) {
+        this.props.playSong(); // let ele = document.getElementById(`pic${this.props.album.id}`);
+        // ele.removeEventListener("mouseover", this.addClass);
+        // ele.removeEventListener("mouseleave", this.removeClass);
+        // let button = document.getElementById(`play${this.props.album.id}`);
+        // button.removeEventListener("mouseover", this.addClass);
+        // button.removeEventListener("mouseleave", this.removeClass);
+        // button.addEventListener("mouseover", this.addPauseHover);
+        // button.addEventListener("mouseleave", this.removePauseHover);
+        // $(button).addClass("visibleButton");
+
+        this.setState({
+          playing: true
+        });
+      } else {
+        debugger;
+        this.props.pauseSong(); // let ele = document.getElementById(`pic${this.props.album.id}`);
+        // ele.addEventListener("mouseover", this.addClass);
+        // ele.addEventListener("mouseleave", this.removeClass);
+        // let button = document.getElementById(`play${this.props.album.id}`);
+        // $(button).removeClass("visibleButton");
+        // button.addEventListener("mouseover", this.addClass);
+        // button.addEventListener("mouseleave", this.removeClass);
+        // button.removeEventListener("mouseover", this.addPauseHover);
+        // button.removeEventListener("mouseleave", this.removePauseHover);
+
+        this.setState({
+          playing: false
+        });
+      } // }
+
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "albumShowSong",
+        onClick: this.playSong
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "albumShowMiniPic",
+        src: this.props.album.photoUrl
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "albumSpread"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "albumShowText"
+      }, this.props.index + 1, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "albumShowTitle"
+      }, this.props.song.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "albumShowTitleRightSide"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-play"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "playCount"
+      }, 500))));
+    }
+  }]);
+
+  return AlbumShowSong;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
 /* harmony default export */ __webpack_exports__["default"] = (AlbumShowSong);
 
 /***/ }),

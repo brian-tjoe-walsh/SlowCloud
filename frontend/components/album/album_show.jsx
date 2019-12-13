@@ -82,7 +82,16 @@ class AlbumShow extends React.Component {
                       <input type="text" className="addingComment"placeholder="Write a comment"/>
                     </div>
                     <div className="albumShowTracklist">
-                      {this.state.album.songs.map( (song, index) => <AlbumShowSong key={index} index={index} song={song} album={this.state.album}/>)}
+                      {this.state.album.songs.map( (song, index) => <AlbumShowSong 
+                        key={index} 
+                        index={index} 
+                        song={song} 
+                        album={this.state.album}
+                        state={this.props.state}
+                        addSong={this.props.addSong}
+                        playSong={this.props.playSong}
+                        deleteSong={this.props.deleteSong}
+                        pauseSong={this.props.pauseSong}/>)}
                     </div>
                   </div>
                   

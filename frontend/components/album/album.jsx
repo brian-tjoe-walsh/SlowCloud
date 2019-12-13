@@ -76,8 +76,9 @@ class Album extends React.Component {
     if (!this.state.currentSong) {
       let play = this.props.album.songs[0];
       if (this.props.state.ui.mediaPlayer.songs) {
-        debugger
+        // debugger
         this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
+        this.props.pauseSong();
       }
       this.props.addSong(play);
       let visible = document.getElementsByClassName("visibleButton");

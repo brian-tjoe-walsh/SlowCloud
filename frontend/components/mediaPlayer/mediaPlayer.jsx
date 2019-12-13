@@ -18,6 +18,7 @@ class MediaPlayer extends React.Component {
     this.currentSong = null;
     this.play = this.play.bind(this);
     this.getTime = this.getTime.bind(this);
+    this.clicked = this.clicked.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +29,7 @@ class MediaPlayer extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     let currentSong = null;
     
     // = this.props.state.ui.mediaPlayer.songs[0];
@@ -38,7 +39,7 @@ class MediaPlayer extends React.Component {
 
     if (currentSong) {
       if (this.state.currentSong) {
-        if (currentSong.id !== Object.values(this.state.songs)[102].id && this.state.currentSong.id !== currentSong.id) {
+        if (this.state.currentSong.id !== currentSong.id) {
           this.setState({
             currentSong: currentSong,
             playing: true
@@ -111,7 +112,7 @@ class MediaPlayer extends React.Component {
   }
 
   play() {
-    debugger
+    // debugger
     let currentSong = null;
     // debugger
 
@@ -119,12 +120,12 @@ class MediaPlayer extends React.Component {
       currentSong = this.state.songs[this.state.currentSong.id]
     }
     else {
-      debugger
+      // debugger
       currentSong = Object.values(this.state.songs)[102];
     }
 
     if (!currentSong.audio_fileUrl) {
-      debugger
+      // debugger
       currentSong = Object.values(this.state.songs)[102];
     }
 
@@ -142,6 +143,11 @@ class MediaPlayer extends React.Component {
 
   clicked() {
     // debugger
+    if (this.props.state.ui.mediaPlayer.playing) {
+      this.play();
+    } else {
+      this.pause();
+    }
   }
 
   currentTime() {
@@ -168,16 +174,16 @@ class MediaPlayer extends React.Component {
         currentSong = this.state.songs[this.state.currentSong.id]
       } 
       else {
-        debugger
+        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
       
       if (!currentSong.audio_fileUrl) {
-        debugger
+        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
       
-      debugger
+      // debugger
       return (
         <div className="mediaBar" onClick={this.clicked}>
           <audio src={currentSong.audio_fileUrl} className="mediaPlayer" id="media" controls width="100%" height="50px"></audio>
