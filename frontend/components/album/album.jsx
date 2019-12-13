@@ -18,7 +18,7 @@ class Album extends React.Component {
 
   
   componentDidMount() {
-    debugger
+    // debugger
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && 
     this.props.state.ui.mediaPlayer.songs[0] && 
     this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -72,10 +72,16 @@ class Album extends React.Component {
     let player = document.getElementById("media");
     let button = document.getElementById(`play${this.props.album.id}`);
 
-    debugger
+    // debugger
     if (!this.state.currentSong) {
       let play = this.props.album.songs[0];
+      if (this.props.state.ui.mediaPlayer.songs) {
+        debugger
+        this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
+      }
       this.props.addSong(play);
+      let visible = document.getElementsByClassName("visibleButton");
+      $(visible).removeClass("visibleButton");
       $(button).addClass("visibleButton"); 
       this.setState({
         currentSong: true,
@@ -86,7 +92,7 @@ class Album extends React.Component {
   }
   
   afterClick(player) {
-    debugger
+    // debugger
     if (player.paused) {
       this.props.playSong();
       let ele = document.getElementById(`pic${this.props.album.id}`);
@@ -132,7 +138,7 @@ class Album extends React.Component {
             <Link to={`/albums/${album.id}`} className="albumTitle">{album.title}</Link>
             <Link to={`/artists/${album.artist.id}`} className="albumArtist">{album.artist.username}</Link>
             <button className="playSong" id={`play${album.id}`} onClick={this.playSong}>
-              {(this.props.state.ui.mediaPlayer.playing) ? 
+              {(this.state.playing) ? 
                 <i className="fas fa-pause-circle" id={`pauseButton`}></i>
               : 
                 <i className="fas fa-play-circle" id={`playButton${album.id}`}></i>

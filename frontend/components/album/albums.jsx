@@ -87,6 +87,7 @@ class Albums extends React.Component {
                 album={album} 
                 addSong = {this.props.addSong}
                 playSong = {this.props.playSong}
+                deleteSong = {this.props.deleteSong}
                 pauseSong = {this.props.pauseSong}/>))
             }
           </ul>
@@ -101,6 +102,7 @@ class Albums extends React.Component {
                 album={album} 
                 addSong={this.props.addSong}
                 playSong={this.props.playSong}
+                deleteSong={this.props.deleteSong}
                 pauseSong={this.props.pauseSong}/>) }
           </ul>
         );

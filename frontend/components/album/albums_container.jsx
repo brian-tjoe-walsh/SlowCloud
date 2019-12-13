@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchUsers, fetchUser } from '../../actions/user_actions';
 import { fetchAlbums, fetchAlbum } from '../../actions/album_actions';
 import Albums from './albums';
-import { addSong, playSong, pauseSong } from '../../actions/mediaPlayer_actions';
+import { addSong, playSong, pauseSong, deleteSong } from '../../actions/mediaPlayer_actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUser: (id) => dispatch(fetchUser(id)),
   fetchAlbum: (id) => dispatch(fetchAlbum(id)),
   addSong: (song) => dispatch(addSong(song)),
+  deleteSong: (song) => dispatch(deleteSong(song)),
   playSong: () => dispatch(playSong()),
   pauseSong: () => dispatch(pauseSong()),
 });
