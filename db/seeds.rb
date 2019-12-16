@@ -19,7 +19,7 @@ ActiveRecord::Base.transaction do
   # ******************* artists ******************* 
   
   
-  demo_user = User.create({username: "GlasgowFan65", email: "iloveshoegaze@gmail.com", password: "shoegaze"})
+  glassPark = User.create({username: "Glass Park", email: "glassPark@gmail.com", password: "shoegaze"})
   myBloodyValentine = User.create({username: "My Bloody Valentine", email: "iloveshoegaze@gmail.com", password: "shoegaze"})
   slowdive = User.create({username: "Slowdive", email: "slowdive@gmail.com", password: "shoegaze"})
   ride = User.create({username: "Ride", email: "ride@gmail.com", password: "shoegaze"})
@@ -53,6 +53,7 @@ ActiveRecord::Base.transaction do
   mazzyStar = User.create({username: "Mazzy Star", email: "mazzyStar@gmail.com", password: "shoegaze"})
   japaneseBreakfast = User.create({username: "Japanese Breakfast", email: "japaneseBreakfast@gmail.com", password: "shoegaze"})
   haveANiceLife = User.create({username: "Have A Nice Life", email: "haveANiceLife@gmail.com", password: "shoegaze"})
+  demoResource = User.create({username: "ShoegazeFan91", email: "iloveshoegaze@gmail.com", password: "shoegaze"})
 
   # *******************albums*******************
 
@@ -143,14 +144,14 @@ ActiveRecord::Base.transaction do
   colourTrip = Album.create({title: "Colour Trip", user_id: ringoDeathstarr.id})
 
   #orchidTapes
-  boringEcstacy = Album.create({title: "Boring Ecstacy", user_id: boringEcstacy.id})
+  boringEcstasy = Album.create({title: "Boring Ecstasy", user_id: boringEcstasy.id})
 
   #wildNothing
   gemini = Album.create({title: "Gemini", user_id: wildNothing.id})
   nocturne = Album.create({title: "Nocturne", user_id: wildNothing.id})
 
   #widowspeak
-  theSwamp = Album.create({title: "The Swamp", user_id: widowspeak.id})
+  theSwamps = Album.create({title: "The Swamps", user_id: widowspeak.id})
 
   #theBlackRyder
   buyTheTicketTakeTheRide = Album.create({title: "Buy The Ticket, Take The Ride", user_id: theBlackRyder.id})
@@ -177,6 +178,8 @@ ActiveRecord::Base.transaction do
   #haveANiceLife
   deathconsciousness = Album.create({title: "Deathconsciousness", user_id: haveANiceLife.id})
   
+  #glassPark
+  inAnticipationOfOurPast = Album.create({title: "In Anticipation Of Our Past", user_id: glassPark.id})
 
 
 
@@ -453,6 +456,7 @@ ActiveRecord::Base.transaction do
   today7 = Song.create({title: "It's Getting Late", album_id: today.id, genre: "Shoegaze/Slowcore", user_id: galaxie500.id})
   today8 = Song.create({title: "Instrumental", album_id: today.id, genre: "Shoegaze/Slowcore", user_id: galaxie500.id})
   today9 = Song.create({title: "Tugboat", album_id: today.id, genre: "Shoegaze/Slowcore", user_id: galaxie500.id})
+  today10 = Song.create({title: "King Of Spain", album_id: today.id, genre: "Shoegaze/Slowcore", user_id: galaxie500.id})
 
 
   #DEAFHEAVEN
@@ -632,7 +636,7 @@ ActiveRecord::Base.transaction do
   heavenOrLasVegas9 = Song.create({title: "Road, River And Rail", album_id: heavenOrLasVegas.id, genre: "Shoegaze", user_id: cocteauTwins.id})
   heavenOrLasVegas10 = Song.create({title: "Frou-Frou Foxes In Midsummer Fires", album_id: heavenOrLasVegas.id, genre: "Shoegaze", user_id: cocteauTwins.id})
 
-  
+
   #M83
 
   deadCitiesRedSeasAndLostGhosts1 = Song.create({title: "Birds", album_id: deadCitiesRedSeasAndLostGhosts.id, genre: "Shoegaze/Electronic", user_id: m83.id})
@@ -678,17 +682,232 @@ ActiveRecord::Base.transaction do
   split12 = Song.create({title: "When I Die", album_id: split.id, genre: "Shoegaze", user_id: lush.id})
 
 
-  #JEFRE_CANTU_LEDESMA
+  #ringoDeathstarr
 
-  onTheEchoingGreen1 = Song.create({title: "In A Copse", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen2 = Song.create({title: "A Song Of Summer", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen3 = Song.create({title: "Echoing Green", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen4 = Song.create({title: "The Faun", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen5 = Song.create({title: "Tenderness", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen6 = Song.create({title: "Vulgar Latin", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen7 = Song.create({title: "Autumn", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen8 = Song.create({title: "Dancers At The Spring", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
-  onTheEchoingGreen9 = Song.create({title: "Door To Night", album_id: onTheEchoingGreen.id, genre: "Shoegaze", user_id: jefreCantuLedesma.id})
+  colourTrip1 = Song.create({title: "Imagine Hearts", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip2 = Song.create({title: "Do It Every Time", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip3 = Song.create({title: "So High", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip4 = Song.create({title: "Two Girls", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip5 = Song.create({title: "Kaleidoscope", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip6 = Song.create({title: "Day Dreamy", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip7 = Song.create({title: "Tambourine Girl", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip8 = Song.create({title: "Chloe", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip9 = Song.create({title: "Never Drive", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip10 = Song.create({title: "You Don't Listen", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+  colourTrip11 = Song.create({title: "Other Things", album_id: colourTrip.id, genre: "Shoegaze", user_id: ringoDeathstarr.id})
+
+
+  #orchidTapes
+
+  boringEcstasy1 = Song.create({title: "Can You See It's Bloom", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy2 = Song.create({title: "Cards", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy3 = Song.create({title: "Everything's Cool", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy4 = Song.create({title: "Nobody's Baby", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy5 = Song.create({title: "Hazy Past", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy6 = Song.create({title: "Catching Hours", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy7 = Song.create({title: "Without You", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy8 = Song.create({title: "Spoiled", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy9 = Song.create({title: "N.M.S.S. (Amy's Demo Tape)", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy10 = Song.create({title: "Spirit Week", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy11 = Song.create({title: "Badges", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy12 = Song.create({title: "Rearrange", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy13 = Song.create({title: "Change", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+  boringEcstasy14 = Song.create({title: "Sincerity", album_id: boringEcstasy.id, genre: "Shoegaze", user_id: orchidTapes.id })
+
+
+  #wildNothing
+
+  gemini1 = Song.create({title: "Live In Dreams", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini2 = Song.create({title: "Summer Holiday", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini3 = Song.create({title: "Drifter", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini4 = Song.create({title: "Pessimist", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini5 = Song.create({title: "O, Lilac", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini6 = Song.create({title: "Bored Games", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini7 = Song.create({title: "Confirmation", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini8 = Song.create({title: "My Angel Lonely", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini9 = Song.create({title: "The Witching Hour", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini10 = Song.create({title: "Chinatown", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini11 = Song.create({title: "Our Composition Book", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+  gemini12 = Song.create({title: "Gemini", album_id: gemini.id, genre: "Shoegaze", user_id: wildNothing.id})
+
+  nocturne1 = Song.create({title: "Shadow", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne2 = Song.create({title: "Midnight Song", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne3 = Song.create({title: "Nocturne", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne4 = Song.create({title: "Through The Glass", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne5 = Song.create({title: "Only Heather", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne6 = Song.create({title: "This Chain Won't Break", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne7 = Song.create({title: "Disappear Always", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne8 = Song.create({title: "Paradise", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne9 = Song.create({title: "Counting Days", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne10 = Song.create({title: "The Blue Dress", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+  nocturne11 = Song.create({title: "Rheya", album_id: nocturne.id, genre: "Shoegaze", user_id: wildNothing.id})
+
+
+  #widowspeak
+
+  theSwamps1 = Song.create({title: "Theme From The Swamps", album_id: theSwamps.id, genre: "Shoegaze", user_id: widowspeak.id})
+  theSwamps2 = Song.create({title: "Smoke And Mirrors", album_id: theSwamps.id, genre: "Shoegaze", user_id: widowspeak.id})
+  theSwamps3 = Song.create({title: "Calico", album_id: theSwamps.id, genre: "Shoegaze", user_id: widowspeak.id})
+  theSwamps4 = Song.create({title: "Brass Bed", album_id: theSwamps.id, genre: "Shoegaze", user_id: widowspeak.id})
+  theSwamps5 = Song.create({title: "True Believer", album_id: theSwamps.id, genre: "Shoegaze", user_id: widowspeak.id})
+  theSwamps6 = Song.create({title: "The Swamps", album_id: theSwamps.id, genre: "Shoegaze", user_id: widowspeak.id})
+
+
+  #theBlackRyder
+
+  buyTheTicketTakeTheRide1 = Song.create({title: "To Never Know You", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide2 = Song.create({title: "Let It Go", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide3 = Song.create({title: "Grass", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide4 = Song.create({title: "Outside", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide5 = Song.create({title: "Gone Without Feeling", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide6 = Song.create({title: "The Greatest Fall", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide7 = Song.create({title: "What's Foresaken", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide8 = Song.create({title: "All That We See", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide9 = Song.create({title: "Sweet Come Down", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide10 = Song.create({title: "Burn And Fade", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  buyTheTicketTakeTheRide11 = Song.create({title: "Rise", album_id: buyTheTicketTakeTheRide.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+
+  theDoorBehindTheDoor1 = Song.create({title: "Babylon", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor2 = Song.create({title: "Seventh Moon", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor3 = Song.create({title: "The Going Up Was Worth The Coming Down", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor4 = Song.create({title: "Let Me Be Your Light", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor5 = Song.create({title: "Santaria", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor6 = Song.create({title: "Throwing Stones", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor7 = Song.create({title: "All That We Are", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor8 = Song.create({title: "Until The Calm Of Dawn", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+  theDoorBehindTheDoor9 = Song.create({title: "(Le Dernier Sommeil) The Final Sleep", album_id: theDoorBehindTheDoor.id, genre: "Shoegaze", user_id: theBlackRyder.id})
+
+
+  #lostInTranslation
+
+  lostInTranslationSoundtrack1 = Song.create({title: "Intro / Tokyo", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack2 = Song.create({title: "City Girl", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack3 = Song.create({title: "Fantino", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack4 = Song.create({title: "Tommib", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack5 = Song.create({title: "Girls", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack6 = Song.create({title: "Goodbye", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack7 = Song.create({title: "Too Young", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack8 = Song.create({title: "Kaze Wo Atsumete", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack9 = Song.create({title: "On The Subway", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack10 = Song.create({title: "Ikebana", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack11 = Song.create({title: "Sometimes", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack12 = Song.create({title: "Alone In Kyoto", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack13 = Song.create({title: "Shibuya", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack14 = Song.create({title: "Are You Awake", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+  lostInTranslationSoundtrack15 = Song.create({title: "Just Like Honey", album_id: lostInTranslationSoundtrack.id, genre: "Shoegaze", user_id: lostInTranslation.id})
+
+
+  #myrkur
+
+  myrkurAlbum1 = Song.create({title: "Ravnens Banner (Raven's Banner)", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+  myrkurAlbum2 = Song.create({title: "Frosne Vind (Frozen Wind)", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+  myrkurAlbum3 = Song.create({title: "Ma Du Braende i Helvede (May you burn in Hell)", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+  myrkurAlbum4 = Song.create({title: "Latvian Feguro", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+  myrkurAlbum5 = Song.create({title: "Dybt i Skoven (Deep in the Forest)", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+  myrkurAlbum6 = Song.create({title: "Nattens Barn (Night's Child)", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+  myrkurAlbum7 = Song.create({title: "Ulvesangen (The Wolf Song)", album_id: myrkurAlbum.id, genre: "Shoegaze/Post-Black Metal", user_id: myrkur.id})
+
+
+  #foxesInFiction
+
+  ontarioGothic1 = Song.create({title: "March 2011", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+  ontarioGothic2 = Song.create({title: "Into The Fields", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+  ontarioGothic3 = Song.create({title: "Glow (v079)", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+  ontarioGothic4 = Song.create({title: "Shadow's Song", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+  ontarioGothic5 = Song.create({title: "Ontario Gothic", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+  ontarioGothic6 = Song.create({title: "Amanda", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+  ontarioGothic7 = Song.create({title: "Altars", album_id: ontarioGothic.id, genre: "Shoegaze/Dream Pop", user_id: foxesInFiction.id})
+
+
+  #mazzyStar
+
+  sheHangsBrightly1 = Song.create({title: "Holah", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly2 = Song.create({title: "Blue Flowers", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly3 = Song.create({title: "Ride It On", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly4 = Song.create({title: "She Hangs Brightly", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly5 = Song.create({title: "I'm Sailin'", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly6 = Song.create({title: "Give You My Lovin'", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly7 = Song.create({title: "Be My Angel", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly8 = Song.create({title: "Taste Of Blood", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly9 = Song.create({title: "That Highway", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly10 = Song.create({title: "Free", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  sheHangsBrightly11 = Song.create({title: "Before I Sleep", album_id: sheHangsBrightly.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+
+  soTonightThatIMightSee1 = Song.create({title: "Fade Into You", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee2 = Song.create({title: "Bells Ring", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee3 = Song.create({title: "Mary Of Silence", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee4 = Song.create({title: "Five String Serenade", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee5 = Song.create({title: "Blue Light", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee6 = Song.create({title: "She's My Baby", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee7 = Song.create({title: "Unreflected", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee8 = Song.create({title: "Wasted", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee9 = Song.create({title: "Into Dust", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  soTonightThatIMightSee10 = Song.create({title: "So Tonight That I Might See", album_id: soTonightThatIMightSee.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  
+  amongMySwans1 = Song.create({title: "Disappear", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans2 = Song.create({title: "Flowers In December", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans3 = Song.create({title: "Rhymes Of An Hour", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans4 = Song.create({title: "Cry, Cry", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans5 = Song.create({title: "Take Everything", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans6 = Song.create({title: "Still Cold", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans7 = Song.create({title: "All Your Sisters", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans8 = Song.create({title: "I've Been Let Down", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans9 = Song.create({title: "Roseblood", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans10 = Song.create({title: "Happy", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans11 = Song.create({title: "Umbilical", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  amongMySwans12 = Song.create({title: "Look On Down From The Bridge", album_id: amongMySwans.id, genre: "Shoeagaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+
+  seasonsOfYourDay1 = Song.create({title: "In The Kingdom", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay2 = Song.create({title: "California", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay3 = Song.create({title: "I've Gotta Stop", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay4 = Song.create({title: "Does Someone Have Your Baby Now", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay5 = Song.create({title: "Common Burn", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay6 = Song.create({title: "Seasons Of Your Day", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay7 = Song.create({title: "Flying Low", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay8 = Song.create({title: "Sparrow", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay9 = Song.create({title: "Spoon", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+  seasonsOfYourDay10 = Song.create({title: "Lay Myself Down", album_id: seasonsOfYourDay.id, genre: "Shoegaze/Dream Pop/Slowcore", user_id: mazzyStar.id})
+
+
+  #japaneseBreakfast
+
+  psychopomp1 = Song.create({title: "In Heaven", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp2 = Song.create({title: "The Woman That Loves You", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp3 = Song.create({title: "Rugged Country", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp4 = Song.create({title: "Everybody Wants To Love You", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp5 = Song.create({title: "Psychopomp", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp6 = Song.create({title: "Jane Cum", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp7 = Song.create({title: "Heft", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp8 = Song.create({title: "Moon On The Bath", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+  psychopomp9 = Song.create({title: "Triple 7", album_id: psychopomp.id, genre: "Shoegaze/Indie", user_id: japaneseBreakfast.id})
+
+
+  #haveANiceLife
+
+  deathconsciousness1 = Song.create({title: "A Quick One Before The Eternal Worm Devours Connecticut", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness2 = Song.create({title: "Bloodhail", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness3 = Song.create({title: "The Big Gloom", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness4 = Song.create({title: "Hunter", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness5 = Song.create({title: "Telephony", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness6 = Song.create({title: "Who Would Leave Their Son Out In The Sun", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness7 = Song.create({title: "There Is No Food", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness8 = Song.create({title: "Waiting For Black Metal Records To Come In The Mail (The Future)", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness9 = Song.create({title: "Holy Fucking Shit: 40,000 (The Future)", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness10 = Song.create({title: "The Future (The Future)", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness11 = Song.create({title: "Deep, Deep (The Future)", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness12 = Song.create({title: "I Don't Love (The Future)", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+  deathconsciousness13 = Song.create({title: "Earthmover (The Future)", album_id: deathconsciousness.id, genre: "Shoegaze/Industrial", user_id: haveANiceLife.id})
+
+
+  #glassPark
+  inAnticipationOfOurPast1 = Song.create({title: "Intro", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast2 = Song.create({title: "Prufrock", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast3 = Song.create({title: "Undone", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast4 = Song.create({title: "Another Day", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast5 = Song.create({title: "Endless Twilight", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast6 = Song.create({title: "Some May Say", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast7 = Song.create({title: "Plays Pretty For Baby", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
+  inAnticipationOfOurPast8 = Song.create({title: "All I See", album_id: inAnticipationOfOurPast.id, genre: "Shoegaze", user_id: glassPark.id})
 
   User.all.each_with_index do |artist, idx|
       file = open("http://slowcloud-dev.s3-us-west-1.amazonaws.com/users/artist#{idx}.jpg")
