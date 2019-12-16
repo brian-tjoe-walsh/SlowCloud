@@ -144,7 +144,7 @@ ActiveRecord::Base.transaction do
   colourTrip = Album.create({title: "Colour Trip", user_id: ringoDeathstarr.id})
 
   #orchidTapes
-  boringEcstasy = Album.create({title: "Boring Ecstasy", user_id: boringEcstasy.id})
+  boringEcstasy = Album.create({title: "Boring Ecstasy", user_id: orchidTapes.id})
 
   #wildNothing
   gemini = Album.create({title: "Gemini", user_id: wildNothing.id})
