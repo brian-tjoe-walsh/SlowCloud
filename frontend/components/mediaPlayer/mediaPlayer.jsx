@@ -19,6 +19,7 @@ class MediaPlayer extends React.Component {
     this.play = this.play.bind(this);
     this.getTime = this.getTime.bind(this);
     this.clicked = this.clicked.bind(this);
+    this.clicking = this.clicking.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +30,7 @@ class MediaPlayer extends React.Component {
   }
 
   componentDidUpdate() {
-    // debugger
+    debugger
     let currentSong = null;
     
     // = this.props.state.ui.mediaPlayer.songs[0];
@@ -155,6 +156,14 @@ class MediaPlayer extends React.Component {
     this.setState({currentTime: player.currentTime});
   }
   
+  clicking() {
+    debugger
+    if (this.props.state.ui.mediaPlayer.playing) {
+      this.props.pauseSong();
+    } else {
+      this.props.playSong();
+    }
+  }
   
   render() {
 
@@ -194,11 +203,11 @@ class MediaPlayer extends React.Component {
               <i className="fas fa-step-backward" id="mediaBack"></i>
             </button>
 
-            <button className="mediaPlay">
+            <button className="mediaPlay" onClick={this.clicking}>
               {(this.props.state.ui.mediaPlayer.playing) ? 
-              <i className="fas fa-pause" id="mediaPause"></i>
+                <i className="fas fa-pause" id="mediaPause"></i>
               :
-              <i className="fas fa-play" id="mediaPlay"></i>
+                <i className="fas fa-play" id="mediaPlay"></i>
               }
             </button>
 
@@ -218,7 +227,7 @@ class MediaPlayer extends React.Component {
               <div className="pink-juice"></div>
             </div>
             <div className="mediaRemainingTime">
-              {(this.state.totalTime)}
+              {(this.state.totalTime) ? (this.state.totalTime) : (null)}
             </div>
             
           </div>

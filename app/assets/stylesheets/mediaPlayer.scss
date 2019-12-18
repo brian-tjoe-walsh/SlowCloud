@@ -77,22 +77,30 @@ button {
   padding: 0px;
   justify-content: center;
   align-items: center;
+  outline: none;
+}
+
+*:focus {
+    outline: none;
 }
 
 #mediaBack {
   position: static;
   font-size: 14px;
   color: rgb(204, 202, 202);
+  outline: none;
 }
 #mediaPlay {
   position: static;
   font-size: 14px;
   color: rgb(92, 91, 91);
+  outline: none;
 }
 #mediaPause {
   position: static;
   font-size: 14px;
   color: rgb(92, 91, 91);
+  outline: none;
 }
 #mediaForward {
   position: static;

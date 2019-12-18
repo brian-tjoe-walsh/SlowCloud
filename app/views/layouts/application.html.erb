@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -15,6 +16,7 @@
     <script type="text/javascript">
       window.loveless ="<%= image_url('Loveless.jpg') %>"
       window.shoe ="<%= image_url('shoe.png') %>"
+      window.song ="<%= audio_url('song92.mp3') %>"
       window.waveform ="<%= image_url('waveform.png') %>"
     </script>
   </head>

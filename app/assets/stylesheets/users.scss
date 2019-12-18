@@ -197,7 +197,13 @@
   width: 158px;
 }
 
-#showPagePlay {
+.user-play {
+  font-size: 40px;
+  margin-right: 8px;
+  text-shadow: -1px 1px 3px rgb(151, 151, 151);
+}
+
+.user-pause {
   font-size: 40px;
   margin-right: 8px;
   text-shadow: -1px 1px 3px rgb(151, 151, 151);
@@ -224,4 +230,9 @@
 
 .albumShowSong:hover {
   background-color: rgb(245, 245, 245);
+}
+
+.albumShowSongPlaying {
+  background-color: rgb(245, 245, 245);
+  color: #af74ca; 
 }

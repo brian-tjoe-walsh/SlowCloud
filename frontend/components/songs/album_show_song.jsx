@@ -4,11 +4,83 @@ class AlbumShowSong extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       currentSong: null,
       playing: false};
     this.playSong = this.playSong.bind(this);
     this.afterClick = this.afterClick.bind(this);
+  }
+
+  componentDidMount() {
+    debugger
+    window.scrollTo(0, 0);
+
+    if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
+      this.props.state.ui.mediaPlayer.songs[0]) {
+
+      if (this.props.state.ui.mediaPlayer.playing && this.props.state.ui.mediaPlayer.songs[0].id === this.props.song.id) {
+        let song = document.getElementById(`albumShowSong${this.props.song.id}`);
+        let text = document.getElementById(`albumShowText${this.props.song.id}`);
+        let title = document.getElementById(`albumShowTitle${this.props.song.id}`);
+
+        $(song).addClass(`albumShowSongPlaying`);
+        $(text).addClass(`albumShowSongPlaying`);
+        $(title).addClass(`albumShowSongPlaying`);
+        
+        this.setState({
+          currentSong: this.props.state.ui.mediaPlayer.songs[0],
+          playing: true
+        });
+      } else if (!this.props.state.ui.mediaPlayer.playing && this.props.state.ui.mediaPlayer.songs[0].id === this.props.song.id) {
+        this.setState({
+          currentSong: this.props.state.ui.mediaPlayer.songs[0]
+        });
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
+      this.props.state.ui.mediaPlayer.songs[0]) {
+      if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.song.id) {
+        debugger
+        let song = document.getElementById(`albumShowSong${this.props.song.id}`);
+        let text = document.getElementById(`albumShowText${this.props.song.id}`);
+        let title = document.getElementById(`albumShowTitle${this.props.song.id}`);
+
+        if (this.props.state.ui.mediaPlayer.playing && !this.state.playing) {
+          $(song).addClass(`albumShowSongPlaying`);
+          $(text).addClass(`albumShowSongPlaying`);
+          $(title).addClass(`albumShowSongPlaying`);
+          this.setState({
+            playing: true
+          });
+        } else if (!this.props.state.ui.mediaPlayer.playing && this.state.playing) {
+          $(song).removeClass(`albumShowSongPlaying`);
+          $(text).removeClass(`albumShowSongPlaying`);
+          $(title).removeClass(`albumShowSongPlaying`);
+          this.setState({
+            playing: false
+          });
+        } else if (!this.state.currentSong) {
+          this.setState({
+            currentSong: this.props.album
+          });
+        }
+      } else {
+        debugger
+        let song = document.getElementById(`albumShowSong${this.props.song.id}`);
+        let text = document.getElementById(`albumShowText${this.props.song.id}`);
+        let title = document.getElementById(`albumShowTitle${this.props.song.id}`);
+
+        $(song).removeClass(`albumShowSongPlaying`);
+        $(text).removeClass(`albumShowSongPlaying`);
+        $(title).removeClass(`albumShowSongPlaying`);
+
+      }
+    } else {
+      null;
+    }
   }
 
   playSong() {
@@ -51,6 +123,13 @@ class AlbumShowSong extends React.Component {
       // button.addEventListener("mouseleave", this.removePauseHover);
 
       // $(button).addClass("visibleButton");
+      let song = document.getElementById(`albumShowSong${this.props.song.id}`);
+      let text = document.getElementById(`albumShowText${this.props.song.id}`);
+      let title = document.getElementById(`albumShowTitle${this.props.song.id}`);
+      $(song).addClass(`albumShowSongPlaying`);
+      $(text).addClass(`albumShowSongPlaying`);
+      $(title).addClass(`albumShowSongPlaying`);
+
       this.setState({ playing: true });
 
     } else {
@@ -65,6 +144,13 @@ class AlbumShowSong extends React.Component {
         // button.addEventListener("mouseleave", this.removeClass);
         // button.removeEventListener("mouseover", this.addPauseHover);
         // button.removeEventListener("mouseleave", this.removePauseHover);
+      let song = document.getElementById(`albumShowSong${this.props.song.id}`);
+      let text = document.getElementById(`albumShowText${this.props.song.id}`);
+      let title = document.getElementById(`albumShowTitle${this.props.song.id}`);
+      $(song).removeClass(`albumShowSongPlaying`);
+      $(text).removeClass(`albumShowSongPlaying`);
+      $(title).removeClass(`albumShowSongPlaying`);
+
         this.setState({ playing: false });
       }
 
@@ -72,18 +158,22 @@ class AlbumShowSong extends React.Component {
   }
 
   render() {
+    const { album } = this.props;
+
     return(
-      <div className="albumShowSong" onClick={this.playSong}>
-        <img className="albumShowMiniPic" src={this.props.album.photoUrl}/>
+      <div className="albumShowSong" id={`albumShowSong${this.props.song.id}`} onClick={this.playSong}>
+        <div className="albumSongPic">
+          <img className="albumShowMiniPic" src={this.props.album.photoUrl}/>
+        </div>
         <div className="albumSpread">
-          <div className="albumShowText">
+          <div className="albumShowText" id={`albumShowText${this.props.song.id}`}>
             {this.props.index + 1}
           
             <div className="albumShowTitle">
               {this.props.song.title}  
             </div>
           </div>
-          <div className="albumShowTitleRightSide">
+          <div className="albumShowTitleRightSide" id={`albumShowTitle${this.props.song.id}`}>
             <i className="fas fa-play"></i>
             <div className="playCount">{500}</div>
           </div>

@@ -60,6 +60,53 @@ h3 {
   border-radius: 50%;
   outline: none;
 }
+
+
+.songPlaySong {
+  /* display: none; */
+  position: relative;
+  width: 19px;
+  height: 19px;
+  left: 5px;
+  bottom: 27px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+}
+
+.albumSongPic {
+  height: 30px;
+  width: 30px;
+}
+.songPosition {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  right: 10px;
+  left: -1px;
+  top: 0px;
+}
+
+
+.albumPlaySong {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  opacity: 0.9;
+}
+
+
+#albumPlayButton {
+  height: 65px;
+  width: 65px;
+  font-size: 70px;
+  opacity: 1;
+}
 /* 
 #pauseButton {
   display: initial;

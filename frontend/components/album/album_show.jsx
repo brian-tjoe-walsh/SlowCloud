@@ -8,14 +8,27 @@ class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.currentUser = this.props.state.entities.users[this.props.state.session.id];
-    this.state = {album: "hello",
-                  artist: "null"};
+    this.state = {
+      album: "hello",           
+      artist: "null",
+      currentSong: null,
+      playing: false
+    };
+
+    this.playSong = this.playSong.bind(this);
+    this.afterClick = this.afterClick.bind(this);
+    this.addHover = this.addHover.bind(this);
+    this.removeHover = this.removeHover.bind(this);
+    this.addPauseHover = this.addPauseHover.bind(this);
+    this.removePauseHover = this.removePauseHover.bind(this);
   }
 
   componentDidMount() {
     // debugger
     window.scrollTo(0, 0);
+
     let id = +this.props.albumId - 1;
+
     if (this.props.state.entities.albums[id]) {
       this.setState({
         album: this.props.state.entities.albums[id],
@@ -28,6 +41,148 @@ class AlbumShow extends React.Component {
           artist: res.album.artist
           }
         ));
+    }
+    if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
+      this.props.state.ui.mediaPlayer.songs[0]) {
+
+        if (this.props.state.ui.mediaPlayer.playing && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
+          this.setState({
+            currentSong: this.props.state.ui.mediaPlayer.songs[0],
+            playing: true
+          });
+        } else if (!this.props.state.ui.mediaPlayer.playing && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
+          this.setState({
+            currentSong: this.props.state.ui.mediaPlayer.songs[0]
+          });
+        }
+    }
+  }
+
+  componentDidUpdate() {
+    let button = document.getElementById(`albumPlayButton`);
+
+    debugger
+
+    if (button) {
+      if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
+        this.props.state.ui.mediaPlayer.songs[0]) {
+        if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.state.album.id) {
+          // debugger
+          button.removeEventListener("mouseover", this.addHover);
+          button.removeEventListener("mouseleave", this.removeHover);
+          button.addEventListener("mouseover", this.addPauseHover);
+          button.addEventListener("mouseleave", this.removePauseHover);
+  
+          if (this.props.state.ui.mediaPlayer.playing && !this.state.playing) {
+            this.setState({
+              playing: true
+            });
+          } else if (!this.props.state.ui.mediaPlayer.playing && this.state.playing) {
+            this.setState({
+              playing: false
+            });
+          } else if (!this.state.currentSong) {
+            this.setState({
+              currentSong: this.props.album
+            });
+          }
+        } else {
+          button.removeEventListener("mouseover", this.addPauseHover);
+          button.removeEventListener("mouseleave", this.removePauseHover);
+          button.addEventListener("mouseover", this.addHover);
+          button.addEventListener("mouseleave", this.removeHover);
+        }
+      } else {
+        button.removeEventListener("mouseover", this.addPauseHover);
+        button.removeEventListener("mouseleave", this.removePauseHover);
+        button.addEventListener("mouseover", this.addHover);
+        button.addEventListener("mouseleave", this.removeHover);
+      }
+    }
+
+
+    
+    // let button = document.getElementById(`albumPlayButton`);
+    // if (button) {
+    //   if (this.state.currentSong && this.state.playing) {
+    //     button.removeEventListener("mouseover", this.addHover);
+    //     button.removeEventListener("mouseleave", this.removeHover);
+    //     button.addEventListener("mouseover", this.addPauseHover);
+    //     button.addEventListener("mouseleave", this.removePauseHover);
+    //   } else { 
+    //     debugger
+    //     button.removeEventListener("mouseover", this.addPauseHover);
+    //     button.removeEventListener("mouseleave", this.removePauseHover);
+    //     button.addEventListener("mouseover", this.addHover);
+    //     button.addEventListener("mouseleave", this.removeHover);
+    //   }
+    // }
+  }
+
+  addHover() {
+    let eles = document.getElementById(`albumPlayButton`);
+    $(eles).addClass("playHovered");
+  }
+  removeHover() {
+    let eles = document.getElementById(`albumPlayButton`);
+    $(eles).removeClass("playHovered");
+  }
+  addPauseHover() {
+    // debugger
+    let eles = document.getElementById(`albumPlayButton`);
+    $(eles).addClass("playHovered");
+  }
+  removePauseHover() {
+    let eles = document.getElementById(`albumPlayButton`);
+    $(eles).removeClass("playHovered");
+  }
+
+  playSong() {
+    let player = document.getElementById("media");
+    let button = document.getElementById(`albumPlayButton`);
+
+    debugger
+    if (!this.state.currentSong) {
+      let play = this.state.album.songs[0];
+      if (this.props.state.ui.mediaPlayer.songs) {
+        // debugger
+        this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
+        this.props.pauseSong();
+        player.pause();
+      }
+      this.props.addSong(play);
+      let visible = document.getElementsByClassName("visibleButton");
+      $(visible).removeClass("visibleButton");
+      $(button).addClass("visibleButton");
+      this.setState({
+        currentSong: true,
+        playing: true
+      });
+    }
+    this.afterClick(player);
+  }
+
+  afterClick(player) {
+    // debugger
+    if (player.paused) {
+      this.props.playSong();
+      let button = document.getElementById(`albumPlayButton`);
+      button.removeEventListener("mouseover", this.addHover);
+      button.removeEventListener("mouseleave", this.removeHover);
+      button.addEventListener("mouseover", this.addPauseHover);
+      button.addEventListener("mouseleave", this.removePauseHover);
+
+      this.setState({ playing: true });
+
+    } else {
+      this.props.pauseSong();
+      let button = document.getElementById(`albumPlayButton`);
+      button.removeEventListener("mouseover", this.addPauseHover);
+      button.removeEventListener("mouseleave", this.removePauseHover);
+      button.addEventListener("mouseover", this.addHover);
+      button.addEventListener("mouseleave", this.removeHover);
+      this.setState({ playing: false });
+
     }
   }
 
@@ -50,6 +205,7 @@ class AlbumShow extends React.Component {
         <NavBarContainer loc={loc} />
       </div>)
     } else {
+      debugger
       return (
         <div>
           <NavBarContainer loc={loc} />
@@ -57,7 +213,13 @@ class AlbumShow extends React.Component {
             <div className="showMidPage">
                 <div className="songBanner">
                   <div className="bannerLeft">
-                    <i className="fas fa-play-circle"></i>
+                    <button className="albumPlaySong" id={`play${album.id}`} onClick={this.playSong}>
+                      {(this.state.playing) ?
+                        <i className="fas fa-pause-circle" id={`albumPlayButton`}></i>
+                        :
+                        <i className="fas fa-play-circle" id={`albumPlayButton`}></i>
+                      }
+                    </button>
 
                     <div className="showTitles">
                       <div className="showArtist">
@@ -82,7 +244,7 @@ class AlbumShow extends React.Component {
                       <input type="text" className="addingComment"placeholder="Write a comment"/>
                     </div>
                     <div className="albumShowTracklist">
-                      {this.state.album.songs.map( (song, index) => <AlbumShowSong 
+                      {Object.values(this.state.album.songs).map( (song, index) => <AlbumShowSong 
                         key={index} 
                         index={index} 
                         song={song} 

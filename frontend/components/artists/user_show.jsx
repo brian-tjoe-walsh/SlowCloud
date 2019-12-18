@@ -3,14 +3,17 @@ import Albums from '../album/album';
 import Album from '../album/album';
 import { Link, Redirect } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
+import UserShowAlbum from './user_show_album';
 
 class UserShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentUserId: this.props.currentUserId,
+      currentAlbum: null,
       artist: null,
-      albums: null
+      albums: null,
+      playing: false
     };
   }
 
@@ -39,14 +42,15 @@ class UserShow extends React.Component {
         .then((res) => this.setState({
           artist: res.user,
           albums: res.user.albums
-        }));
+        })
+      );
     }
   }
 
   getAlbums() {
     let artistAlbums = [];
-    // debugger
     let albums; 
+    
     if (Array.isArray(this.state.albums)) {
       albums = this.state.albums;
     } else {
@@ -104,22 +108,17 @@ class UserShow extends React.Component {
                     {artistAlbums.map((album) => {
                       // debugger 
                       return (
-                      <div className="userIndividualAlbum" key={album.id}>
-                        <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.albumUrl}></img></Link>
-                        
-                        <div className="showTitleSpacing">
-                          <div className="showTitleAdjustments">
-                            <i className="fas fa-play-circle" id="showPagePlay"></i>
-                            <div className="showJustTitles">
-                              <Link to={`/artists/${this.props.artistId}`} className="showAlbumArtist">{artist.username}</Link>
-                              <Link to={`/albums/${album.id}`} className="showAlbumTitle">{album.title}</Link>
-                            </div>
-                          </div>
-                          <div className="waveFormContainer">
-                            <img className="waveForm" src={window.waveform} />
-                          </div>
-                        </div>
-                      </div>
+                        <UserShowAlbum 
+                          key={album.id}
+                          album={album}
+                          state={this.props.state}
+                          artist={artist}
+                          artistId={this.props.artistId}
+                          addSong={this.props.addSong}
+                          deleteSong={this.props.deleteSong}
+                          pauseSong={this.props.pauseSong}
+                          playSong={this.props.playSong}
+                        />
                       )})}
                   </div>
 
