@@ -1883,11 +1883,11 @@ function (_React$Component) {
         path: "/artists",
         component: _artists_users_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-        path: "/search",
-        component: _sessions_discover_container__WEBPACK_IMPORTED_MODULE_1__["default"]
+        path: "/search/:searchedItem",
+        component: _search_searchPage_container__WEBPACK_IMPORTED_MODULE_13__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/discover",
-        component: _search_searchPage_container__WEBPACK_IMPORTED_MODULE_13__["default"]
+        component: _sessions_discover_container__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
         path: "/library",
         component: _library_library_container__WEBPACK_IMPORTED_MODULE_5__["default"]
