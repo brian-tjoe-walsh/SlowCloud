@@ -1,78 +1,133 @@
 import React from 'react';
-import Albums from '../album/album';
-import Album from '../album/album';
-import { Link, Redirect } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
 
 class SearchPage extends React.Component {
   constructor(props) {
+    // debugger
     super(props);
     this.state = {
-      currentUserId: this.props.currentUserId,
-      artist: null,
-      albums: null
+      search: null,
+      fetchingUsers: false,
+      searched: false
     };
   }
 
   componentDidMount() {
-      window.scrollTo(0, 0)
+    console.log(this.props.search);
 
-    let artst;
+    let search = this.props.search.split("%20").join(" ");
 
-    this.props.fetchUser(this.props.artistId)
-      .then((res) => artst = res.user)
-      .then(() => this.props.fetchAlbums())
-      .then((res) => this.setState({
-        artist: artst,
-        albums: res.albums
-      }));
-  }
-
-  componentDidUpdate(prevProps) {
-    let artst;
-
-    if (prevProps.artistId !== this.props.artistId) {
-      this.props.fetchUser(this.props.artistId)
-        .then((res) => artst = res.user)
-        .then(() => this.props.fetchAlbums())
-        .then((res) => this.setState({
-          artist: artst,
-          albums: res.albums
+    if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
+      this.setState({ 
+        fetchingUsers: "done",
+        search: search 
+      });
+    } else {
+      this.props.fetchUsers();
+      this.props.fetchAlbums()
+        .then(this.setState({ 
+          fetchingUsers: "done",
+          search: search 
         }));
     }
   }
 
-  getAlbums() {
-    let artistAlbums = [];
+  componentDidUpdate(prevProps) {
+    if (this.props.state.entities.albums[10] && this.props.state.entities.users[10] && this.props.state.entities.songs[10]) {
+      // debugger
+      if (!this.state.searched || this.props.search !== prevProps.location.search.split("=")[1]) {
+        let searched = {artists:[], albums:[], songs:[]};
 
-    this.state.albums.forEach((alb) => {
-      if (alb.user_id === this.state.artist.id) {
-        artistAlbums.push(alb);
+        Object.values(this.props.state.entities.users).forEach((user) => {
+          let username = user.username.toLowerCase();
+          
+          if (username.includes(this.state.search.toLowerCase())) {
+            searched.artists.push(user);
+          }
+        });
+        Object.values(this.props.state.entities.albums).forEach((album) => {
+          let title = album.title.toLowerCase();
+          let artist = album.artist.username.toLowerCase();
+
+          if (title.includes(this.state.search.toLowerCase()) || artist.includes(this.state.search.toLowerCase())) {
+            searched.albums.push(album);
+          }
+        });
+        Object.values(this.props.state.entities.songs).forEach((song) => {
+          let title = song.title.toLowerCase();
+          let album = song.album.title.toLowerCase();
+          let artist = song.artist.username.toLowerCase();
+
+          if (title.includes(this.state.search.toLowerCase()) || album.includes(this.state.search.toLowerCase()) || artist.includes(this.state.search.toLowerCase())) {
+            searched.songs.push(song);
+          }
+        });
+
+        console.log(searched);
+        debugger
+        this.setState({searched: searched});
       }
-    });
 
-    return artistAlbums;
+      let temp = this.props.location.search.split("=")[1].split("%20").join(" ");
+      // temp = temp.split("%20").join(" ");
+      if (this.state.search !== temp) {
+        this.setState({
+          search: temp,
+          searched: null
+        });
+      }
+    }
+
+    // if (prevProps.artistId !== this.props.artistId) {
+    //   this.props.fetchUser(this.props.artistId)
+    //     .then((res) => artst = res.user)
+    //     .then(() => this.props.fetchAlbums())
+    //     .then((res) => this.setState({
+    //       artist: artst,
+    //       albums: res.albums
+    //     }));
+    // }
+  }
+
+  getAlbums() {
+    // let artistAlbums = [];
+
+    // this.state.albums.forEach((alb) => {
+    //   if (alb.user_id === this.state.artist.id) {
+    //     artistAlbums.push(alb);
+    //   }
+    // });
+
+    // return artistAlbums;
   }
 
   render() {
-    const { artist } = this.state;
-
     let loc = { url: "/artists" };
 
-    if (!artist) {
+    if (!this.state.searched) {
       return (<div>
         <NavBarContainer loc={loc} />
       </div>);
     } else {
-      let artistAlbums = this.getAlbums();
-      if (artist.id === this.state.currentUserId) {
-        loc = { url: "/library" };
-      }
-
+      let artists = this.state.searched.artists;
+      let albums = this.state.searched.albums;
+      let songs = this.state.searched.songs;
+      debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} />
-          <div className="userShowMid">
+          <div className="searchSection">
+            {artists.map( (ele, idx) => {
+              return (<div key={idx}>{JSON.stringify(ele.username)}</div>)
+            })}
+            {albums.map( (ele, idx) => {
+              return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
+            })}
+            {songs.map( (ele, idx) => {
+              return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
+            })}
+          </div>
+          {/* <div className="userShowMid">
 
             <div className="userBanner">
               <div className="artistBannerPic">
@@ -135,7 +190,7 @@ class SearchPage extends React.Component {
 
             </div>
 
-          </div>
+          </div> */}
         </div>
       )
     }

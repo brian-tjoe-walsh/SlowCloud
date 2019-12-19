@@ -15,7 +15,7 @@ class UserShowAlbum extends React.Component {
   }
 
   componentDidMount() {
-    debugger
+    // debugger
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
       if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -64,7 +64,7 @@ class UserShowAlbum extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -122,7 +122,7 @@ class UserShowAlbum extends React.Component {
 
   playSong() {
     let player = document.getElementById("media");
-    debugger
+    // debugger
     if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
       let play = this.props.state.entities.songs[this.props.album.songs[0].id];
       if (this.props.state.ui.mediaPlayer.songs) {

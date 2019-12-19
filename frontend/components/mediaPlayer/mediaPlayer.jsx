@@ -30,7 +30,7 @@ class MediaPlayer extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     let currentSong = null;
     
     // = this.props.state.ui.mediaPlayer.songs[0];
@@ -157,7 +157,7 @@ class MediaPlayer extends React.Component {
   }
   
   clicking() {
-    debugger
+    // debugger
     if (this.props.state.ui.mediaPlayer.playing) {
       this.props.pauseSong();
     } else {

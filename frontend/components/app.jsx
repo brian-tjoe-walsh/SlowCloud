@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route exact path="/albums" component={AlbumsIndexContainer} />
           <Route exact path="/artists/:artistId" component={UserShowContainer} />  
           <Route exact path="/artists" component={UsersIndexContainer} />  
-          <Route path="/search/:searchedItem" component={SearchContainer} />
+          <Route path="/search" component={SearchContainer} />
           <Route path="/discover" component={DiscoverContainer} />
           <ProtectedRoute path="/library" component={LibraryContainer} />
           <ProtectedRoute path="/upload" component={UploadingContainer} />

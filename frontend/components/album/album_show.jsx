@@ -61,7 +61,7 @@ class AlbumShow extends React.Component {
   componentDidUpdate() {
     let button = document.getElementById(`albumPlayButton`);
 
-    debugger
+    // debugger
 
     if (button) {
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
@@ -141,7 +141,7 @@ class AlbumShow extends React.Component {
     let player = document.getElementById("media");
     let button = document.getElementById(`albumPlayButton`);
 
-    debugger
+    // debugger
     if (!this.state.currentSong) {
       let play = this.state.album.songs[0];
       if (this.props.state.ui.mediaPlayer.songs) {

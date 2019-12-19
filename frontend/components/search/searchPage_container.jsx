@@ -1,20 +1,18 @@
 import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/user_actions';
+import { fetchUsers } from '../../actions/user_actions';
 import { fetchAlbums } from '../../actions/album_actions';
 import SearchPage from './searchPage';
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   return({
   currentUserId: state.session.id,
-  artistId: ownProps.match.params.artistId,
-  albums: {},
-  user: {}
+  state: state,
+  search: ownProps.history.location.search.split("=")[1]
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchUser: (id) => dispatch(fetchUser(id)),
+  fetchUsers: () => dispatch(fetchUsers()),
   fetchAlbums: () => dispatch(fetchAlbums())
 });
 

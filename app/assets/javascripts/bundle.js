@@ -1003,8 +1003,7 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      var button = document.getElementById("albumPlayButton");
-      debugger;
+      var button = document.getElementById("albumPlayButton"); // debugger
 
       if (button) {
         if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
@@ -1086,8 +1085,7 @@ function (_React$Component) {
     key: "playSong",
     value: function playSong() {
       var player = document.getElementById("media");
-      var button = document.getElementById("albumPlayButton");
-      debugger;
+      var button = document.getElementById("albumPlayButton"); // debugger
 
       if (!this.state.currentSong) {
         var play = this.state.album.songs[0];
@@ -1883,7 +1881,7 @@ function (_React$Component) {
         path: "/artists",
         component: _artists_users_index_container__WEBPACK_IMPORTED_MODULE_8__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-        path: "/search/:searchedItem",
+        path: "/search",
         component: _search_searchPage_container__WEBPACK_IMPORTED_MODULE_13__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/discover",
@@ -2220,8 +2218,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      debugger;
-
+      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
           // debugger
@@ -2289,8 +2286,7 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      debugger;
-
+      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
           // debugger
@@ -2373,8 +2369,7 @@ function (_React$Component) {
   }, {
     key: "playSong",
     value: function playSong() {
-      var player = document.getElementById("media");
-      debugger;
+      var player = document.getElementById("media"); // debugger
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
         var play = this.props.state.entities.songs[this.props.album.songs[0].id];
@@ -3039,7 +3034,7 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      debugger;
+      // debugger
       var currentSong = null; // = this.props.state.ui.mediaPlayer.songs[0];
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
@@ -3172,8 +3167,7 @@ function (_React$Component) {
   }, {
     key: "clicking",
     value: function clicking() {
-      debugger;
-
+      // debugger
       if (this.props.state.ui.mediaPlayer.playing) {
         this.props.pauseSong();
       } else {
@@ -3664,9 +3658,7 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _album_album__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../album/album */ "./frontend/components/album/album.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
+/* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3688,9 +3680,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-
-
 var SearchPage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -3701,11 +3690,12 @@ function (_React$Component) {
 
     _classCallCheck(this, SearchPage);
 
+    // debugger
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchPage).call(this, props));
     _this.state = {
-      currentUserId: _this.props.currentUserId,
-      artist: null,
-      albums: null
+      search: null,
+      fetchingUsers: false,
+      searched: false
     };
     return _this;
   }
@@ -3713,154 +3703,130 @@ function (_React$Component) {
   _createClass(SearchPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      console.log(this.props.search);
+      var search = this.props.search.split("%20").join(" ");
 
-      window.scrollTo(0, 0);
-      var artst;
-      this.props.fetchUser(this.props.artistId).then(function (res) {
-        return artst = res.user;
-      }).then(function () {
-        return _this2.props.fetchAlbums();
-      }).then(function (res) {
-        return _this2.setState({
-          artist: artst,
-          albums: res.albums
+      if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
+        this.setState({
+          fetchingUsers: "done",
+          search: search
         });
-      });
+      } else {
+        this.props.fetchUsers();
+        this.props.fetchAlbums().then(this.setState({
+          fetchingUsers: "done",
+          search: search
+        }));
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this3 = this;
+      var _this2 = this;
 
-      var artst;
+      if (this.props.state.entities.albums[10] && this.props.state.entities.users[10] && this.props.state.entities.songs[10]) {
+        // debugger
+        if (!this.state.searched || this.props.search !== prevProps.location.search.split("=")[1]) {
+          var searched = {
+            artists: [],
+            albums: [],
+            songs: []
+          };
+          Object.values(this.props.state.entities.users).forEach(function (user) {
+            var username = user.username.toLowerCase();
 
-      if (prevProps.artistId !== this.props.artistId) {
-        this.props.fetchUser(this.props.artistId).then(function (res) {
-          return artst = res.user;
-        }).then(function () {
-          return _this3.props.fetchAlbums();
-        }).then(function (res) {
-          return _this3.setState({
-            artist: artst,
-            albums: res.albums
+            if (username.includes(_this2.state.search.toLowerCase())) {
+              searched.artists.push(user);
+            }
           });
-        });
-      }
+          Object.values(this.props.state.entities.albums).forEach(function (album) {
+            var title = album.title.toLowerCase();
+            var artist = album.artist.username.toLowerCase();
+
+            if (title.includes(_this2.state.search.toLowerCase()) || artist.includes(_this2.state.search.toLowerCase())) {
+              searched.albums.push(album);
+            }
+          });
+          Object.values(this.props.state.entities.songs).forEach(function (song) {
+            var title = song.title.toLowerCase();
+            var album = song.album.title.toLowerCase();
+            var artist = song.artist.username.toLowerCase();
+
+            if (title.includes(_this2.state.search.toLowerCase()) || album.includes(_this2.state.search.toLowerCase()) || artist.includes(_this2.state.search.toLowerCase())) {
+              searched.songs.push(song);
+            }
+          });
+          console.log(searched);
+          debugger;
+          this.setState({
+            searched: searched
+          });
+        }
+
+        var temp = this.props.location.search.split("=")[1].split("%20").join(" "); // temp = temp.split("%20").join(" ");
+
+        if (this.state.search !== temp) {
+          this.setState({
+            search: temp,
+            searched: null
+          });
+        }
+      } // if (prevProps.artistId !== this.props.artistId) {
+      //   this.props.fetchUser(this.props.artistId)
+      //     .then((res) => artst = res.user)
+      //     .then(() => this.props.fetchAlbums())
+      //     .then((res) => this.setState({
+      //       artist: artst,
+      //       albums: res.albums
+      //     }));
+      // }
+
     }
   }, {
     key: "getAlbums",
-    value: function getAlbums() {
-      var _this4 = this;
-
-      var artistAlbums = [];
-      this.state.albums.forEach(function (alb) {
-        if (alb.user_id === _this4.state.artist.id) {
-          artistAlbums.push(alb);
-        }
-      });
-      return artistAlbums;
+    value: function getAlbums() {// let artistAlbums = [];
+      // this.state.albums.forEach((alb) => {
+      //   if (alb.user_id === this.state.artist.id) {
+      //     artistAlbums.push(alb);
+      //   }
+      // });
+      // return artistAlbums;
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
-
-      var artist = this.state.artist;
       var loc = {
         url: "/artists"
       };
 
-      if (!artist) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      if (!this.state.searched) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           loc: loc
         }));
       } else {
-        var artistAlbums = this.getAlbums();
-
-        if (artist.id === this.state.currentUserId) {
-          loc = {
-            url: "/library"
-          };
-        }
-
+        var artists = this.state.searched.artists;
+        var albums = this.state.searched.albums;
+        var songs = this.state.searched.songs;
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           loc: loc
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "userShowMid"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "userBanner"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "artistBannerPic"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "artistMainArt",
-          src: artist.photoUrl
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "artistShowTitleOuter"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-          className: "artistShowTitle"
-        }, artist.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showMidLower"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showMidLeft"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showUserTitles"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-          className: "showUserTitle"
-        }, " Albums")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showLeftAndRight"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "userAlbumList"
-        }, artistAlbums.map(function (album) {
+          className: "searchSection"
+        }, artists.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "userIndividualAlbum",
-            key: album.id
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-            to: "/albums/".concat(album.id)
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            className: "albumArt",
-            id: "showPagePic",
-            src: album.photoUrl
-          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "showTitleSpacing"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "showTitleAdjustments"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "fas fa-play-circle",
-            id: "showPagePlay"
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "showJustTitles"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-            to: "/artists/".concat(_this5.props.artistId),
-            className: "showAlbumArtist"
-          }, artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-            to: "/albums/".concat(album.id),
-            className: "showAlbumTitle"
-          }, album.title))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "waveFormContainer"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            className: "waveForm",
-            src: window.waveform
-          }))));
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showMidRight"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showMidRightCont"
-        }, "Albums", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "showMidRightNum"
-        }, artistAlbums.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "shamelessPlug"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fab fa-linkedin"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://github.com/bbriannwalshh"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fab fa-github"
-        })))))))));
+            key: idx
+          }, JSON.stringify(ele.username));
+        }), albums.map(function (ele, idx) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: idx
+          }, JSON.stringify(ele.title));
+        }), songs.map(function (ele, idx) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: idx
+          }, JSON.stringify(ele.title));
+        })));
       }
     }
   }]);
@@ -3891,19 +3857,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   return {
     currentUserId: state.session.id,
-    artistId: ownProps.match.params.artistId,
-    albums: {},
-    user: {}
+    state: state,
+    search: ownProps.history.location.search.split("=")[1]
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchUser: function fetchUser(id) {
-      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchUser"])(id));
+    fetchUsers: function fetchUsers() {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchUsers"])());
     },
     fetchAlbums: function fetchAlbums() {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAlbums"])());
