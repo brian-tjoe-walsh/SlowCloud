@@ -9,7 +9,7 @@ class Library extends React.Component {
     const loc = { url: "/library" };
     return (
       <div className="discoverWebPage">
-        <NavBarContainer loc={loc} />
+        <NavBarContainer loc={loc} history={this.props.history} />
 
         <UserShowContainer artistId={this.props.currentUser.id}/>
       </div>

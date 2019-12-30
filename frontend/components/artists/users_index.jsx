@@ -24,7 +24,7 @@ class UsersIndex extends React.Component {
 
       return (
       <div>
-        <NavBarContainer loc={loc} />
+          <NavBarContainer loc={loc} history={this.props.history} />
       </div>
       );
 
@@ -32,7 +32,7 @@ class UsersIndex extends React.Component {
 
       return (
         <div>
-          <NavBarContainer loc={loc}/>
+          <NavBarContainer loc={loc} history={this.props.history}/>
           <div className="indexBackground">
             <div className="indexMidpage">
 

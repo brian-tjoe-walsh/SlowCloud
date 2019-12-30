@@ -202,13 +202,15 @@ class AlbumShow extends React.Component {
 
     if (this.state.album === "hello") {
       return (<div>
-        <NavBarContainer loc={loc} />
+        <NavBarContainer 
+          loc={loc}
+          history={this.props.history} />
       </div>)
     } else {
-      debugger
+      // debugger
       return (
         <div>
-          <NavBarContainer loc={loc} />
+          <NavBarContainer loc={loc} history={this.props.history}/>
           <div className="showFlexing">
             <div className="showMidPage">
                 <div className="songBanner">

@@ -1,15 +1,18 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
+import SearchUser from './searchUser';
+import SearchAlbum from './searchAlbum';
+import SearchSong from './searchSong';
 
 class SearchPage extends React.Component {
   constructor(props) {
-    // debugger
     super(props);
     this.state = {
       search: null,
       fetchingUsers: false,
       searched: false
     };
+    // debugger
   }
 
   componentDidMount() {
@@ -64,7 +67,7 @@ class SearchPage extends React.Component {
         });
 
         console.log(searched);
-        debugger
+        // debugger
         this.setState({searched: searched});
       }
 
@@ -106,26 +109,61 @@ class SearchPage extends React.Component {
 
     if (!this.state.searched) {
       return (<div>
-        <NavBarContainer loc={loc} />
+        <NavBarContainer loc={loc} history={this.props.history} />
+        <div className="searchPageLoading">
+          <p>Waiting For Searches To Load</p>
+          <div className="loader" id="searchLoader"></div>
+        </div>
       </div>);
     } else {
       let artists = this.state.searched.artists;
       let albums = this.state.searched.albums;
       let songs = this.state.searched.songs;
-      debugger
+      let categories;
+
+      if (artists && albums && songs) {
+        categories = [artists, albums, songs] 
+      } else if (artists && albums && !songs) {
+        categories = [artists, albums]
+      } else if (artists && songs && !albums) {
+        categories = [artists, songs]
+      } else if (!artists && albums && songs) {
+        categories = [albums, songs]
+      } else if (!artists && !albums && songs) {
+        categories = [songs]
+      } else if (!artists && albums && !songs) {
+        categories = [albums]
+      } else if (artists && !albums && !songs) {
+        categories = [songs]
+      }
+      // debugger
       return (
         <div className="userShowBackground">
-          <NavBarContainer loc={loc} />
-          <div className="searchSection">
-            {artists.map( (ele, idx) => {
-              return (<div key={idx}>{JSON.stringify(ele.username)}</div>)
-            })}
-            {albums.map( (ele, idx) => {
-              return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
-            })}
-            {songs.map( (ele, idx) => {
-              return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
-            })}
+          <NavBarContainer loc={loc} history={this.props.history}/>
+          <div className="searchMainPage">
+            <div className="searchMidPage">
+              <div className="searchMidSection">
+                <div className="searchResultHeader">
+                  Search Results for "{this.state.search}"
+                </div>
+                <div className="searchBottom">
+                  <div className="searchCategory">
+                    
+                  </div>
+                  <div className="searchResults">
+                    {artists.map( (ele, idx) => {
+                      return (<div key={idx}><SearchUser ele={ele}/></div>)
+                    })}
+                    {albums.map( (ele, idx) => {
+                      return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
+                    })}
+                    {songs.map( (ele, idx) => {
+                      return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           {/* <div className="userShowMid">
 

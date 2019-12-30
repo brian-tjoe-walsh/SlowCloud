@@ -10,9 +10,14 @@ class NavBar extends React.Component {
     this.logout = this.props.logout;
     this.state = { 
       currentUser: this.props.currentUser,
-      open: false };
+      open: false,
+      search: "" 
+    };
     this.toggle = this.toggle.bind(this);
     this.loggingOut = this.loggingOut.bind(this);
+    this.sendSearch = this.sendSearch.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
+    debugger
   }
 
   componentDidMount() {
@@ -58,6 +63,19 @@ class NavBar extends React.Component {
     // .then( () => this.forceUpdate());
   }
 
+  updateSearch(search) {
+    return (e) => {
+      // debugger
+      this.setState({ [search]: e.currentTarget.value});
+    }
+  }
+
+  sendSearch() {
+    let search = this.state.search.split(" ").join("%20");
+    debugger
+    this.props.history.push(`/search?query=${search}`);
+  }
+
   render() {
     return (
       <div className="navBar">
@@ -72,12 +90,14 @@ class NavBar extends React.Component {
           (<Link to="/library" className="link library">Library</Link>)
           }
           <form className="search" >
-            <input type="text"
-              className="bar"
+            <input className="bar"
+              type="text"
+              value={this.state.search}
+              onChange={this.updateSearch('search')}
               placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
             />
             <div>
-              <i className="fas fa-search"></i>
+              <i className="fas fa-search" onClick={this.sendSearch}></i>
             </div>
           </form>
           {

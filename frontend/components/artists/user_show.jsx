@@ -72,7 +72,7 @@ class UserShow extends React.Component {
 
     if (!artist) {
       return(<div>
-        <NavBarContainer loc={loc} />
+        <NavBarContainer loc={loc} history={this.props.history} />
       </div>);
     } else {
       let artistAlbums = this.getAlbums();
@@ -82,7 +82,7 @@ class UserShow extends React.Component {
       // debugger
       return (
         <div className="userShowBackground">
-          <NavBarContainer loc={loc} />
+          <NavBarContainer loc={loc} history={this.props.history} />
           <div className="userShowMid">
 
             <div className="userBanner">

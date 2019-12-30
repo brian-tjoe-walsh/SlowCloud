@@ -29,7 +29,7 @@ class Discover extends React.Component {
 
     return(
       <div className="discoverWebPage">
-        <NavBarContainer loc={loc}/>
+        <NavBarContainer loc={loc} history={this.props.history}/>
 
         <div className="flexing">
           <div className="discoverMidPage">

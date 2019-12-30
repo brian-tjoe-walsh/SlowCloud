@@ -77,7 +77,7 @@ class Uploading extends React.Component {
     // debugger
     return(
       <div className="flexing">
-        <NavBarContainer loc={loc}/>
+        <NavBarContainer loc={loc} history={this.props.history}/>
         <div className="uploadMidPage">
           <div className="uploadForm">
             <div className="uploadTitle">

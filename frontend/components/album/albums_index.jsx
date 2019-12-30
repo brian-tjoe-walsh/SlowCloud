@@ -23,13 +23,13 @@ class AlbumsIndex extends React.Component {
     if (!albums) {
 
       return (<div>
-        <NavBarContainer loc={loc} />
+        <NavBarContainer loc={loc} history={this.props.history} />
       </div>)
 
     } else {
       return (
         <div>     
-          <NavBarContainer loc={loc} />     
+          <NavBarContainer loc={loc} history={this.props.history} />     
           <div className="indexBackground">
             <div className="indexMidpage">
 

@@ -1,0 +1,115 @@
+.searchPageLoading {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  width: 100%;
+  font-size: 30px;
+  color: rgba(128, 128, 128, 0.74);
+  animation: fade 1s linear infinite;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0.5 }
+  50% { opacity: 1 }
+}
+
+#searchLoader {
+  margin: 50px;
+  border: 5px solid #eeecec; /* Light grey */
+  border-top: 5px solid rgb(175, 116, 202); /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+.searchSection {
+  margin: 60px;
+  width: 100%;
+}
+
+.searchUser {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.searchUser-pic {
+  height: 150px;
+  width: 150px;
+}
+.searchUser-pic-photo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+.searchUser-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.searchMidPage {
+  width: 100%;
+  max-width: 1180px;
+  min-width: 750px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  min-height:1000px;
+  margin: 46px 0px;
+}
+
+.searchMidSection {
+  // padding: 34px 0 10px 0;
+  margin: 0 30px;
+}
+
+.searchMainPage {
+  width: 80%;
+  max-width: 1180px;
+  min-width: 750px;
+  display: flex;
+  flex-direction: row;
+  background: white;
+  // height:1900px;
+}
+
+.searchResultHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22.4px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: #323232;
+  border-bottom: 1px solid #f0f0f0;
+  width: 76%;
+  min-width: 700px;
+  padding-bottom: 4px;
+  position: fixed;
+  padding: 35px 0 10px 0;
+  z-index: 5;
+  background: white;
+}
+
+.searchBottom {
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.searchCategory {
+  width: 20%;
+  position: fixed;
+}
+
+.searchResults {
+  width: 80%;
+  margin-left:20%;
+}

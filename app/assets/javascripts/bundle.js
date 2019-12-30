@@ -1162,12 +1162,14 @@ function (_React$Component) {
 
       if (this.state.album === "hello") {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }));
       } else {
-        debugger;
+        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showFlexing"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1631,11 +1633,13 @@ function (_React$Component) {
 
       if (!albums) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "indexBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1857,7 +1861,8 @@ function (_React$Component) {
     _classCallCheck(this, App);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = _this.props.store.getState();
+    _this.state = _this.props.store.getState(); // debugger
+
     return _this;
   }
 
@@ -2077,7 +2082,8 @@ function (_React$Component) {
 
       if (!artist) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }));
       } else {
         var artistAlbums = this.getAlbums();
@@ -2092,7 +2098,8 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowMid"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2584,11 +2591,13 @@ function (_React$Component) {
 
       if (!this.state.users) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "indexBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2757,7 +2766,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "discoverWebPage"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        loc: loc
+        loc: loc,
+        history: this.props.history
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_artists_user_show_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         artistId: this.props.currentUser.id
       }));
@@ -3407,6 +3417,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sessions_signup_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sessions/signup_button */ "./frontend/components/sessions/signup_button.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3443,10 +3455,14 @@ function (_React$Component) {
     _this.logout = _this.props.logout;
     _this.state = {
       currentUser: _this.props.currentUser,
-      open: false
+      open: false,
+      search: ""
     };
     _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
     _this.loggingOut = _this.loggingOut.bind(_assertThisInitialized(_this));
+    _this.sendSearch = _this.sendSearch.bind(_assertThisInitialized(_this));
+    _this.updateSearch = _this.updateSearch.bind(_assertThisInitialized(_this));
+    debugger;
     return _this;
   }
 
@@ -3508,6 +3524,23 @@ function (_React$Component) {
       }); // .then( () => this.forceUpdate());
     }
   }, {
+    key: "updateSearch",
+    value: function updateSearch(search) {
+      var _this2 = this;
+
+      return function (e) {
+        // debugger
+        _this2.setState(_defineProperty({}, search, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "sendSearch",
+    value: function sendSearch() {
+      var search = this.state.search.split(" ").join("%20");
+      debugger;
+      this.props.history.push("/search?query=".concat(search));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3532,11 +3565,14 @@ function (_React$Component) {
       }, "Library"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "search"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
         className: "bar",
+        type: "text",
+        value: this.state.search,
+        onChange: this.updateSearch('search'),
         placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-search"
+        className: "fas fa-search",
+        onClick: this.sendSearch
       }))), this.state.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "navBarArrange"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -3597,9 +3633,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  debugger;
   return {
     currentUser: state.entities.users[state.session.id],
-    loc: ownProps.loc
+    loc: ownProps.loc,
+    history: ownProps.history
   };
 };
 
@@ -3647,6 +3685,51 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/search/searchAlbum.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/search/searchAlbum.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var SearchAlbum =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchAlbum, _React$Component);
+
+  function SearchAlbum() {
+    _classCallCheck(this, SearchAlbum);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SearchAlbum).apply(this, arguments));
+  }
+
+  return SearchAlbum;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchAlbum);
+
+/***/ }),
+
 /***/ "./frontend/components/search/searchPage.jsx":
 /*!***************************************************!*\
   !*** ./frontend/components/search/searchPage.jsx ***!
@@ -3659,6 +3742,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
+/* harmony import */ var _searchUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./searchUser */ "./frontend/components/search/searchUser.jsx");
+/* harmony import */ var _searchAlbum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./searchAlbum */ "./frontend/components/search/searchAlbum.jsx");
+/* harmony import */ var _searchSong__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./searchSong */ "./frontend/components/search/searchSong.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3680,6 +3766,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
 var SearchPage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -3690,13 +3779,13 @@ function (_React$Component) {
 
     _classCallCheck(this, SearchPage);
 
-    // debugger
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchPage).call(this, props));
     _this.state = {
       search: null,
       fetchingUsers: false,
       searched: false
-    };
+    }; // debugger
+
     return _this;
   }
 
@@ -3756,8 +3845,8 @@ function (_React$Component) {
               searched.songs.push(song);
             }
           });
-          console.log(searched);
-          debugger;
+          console.log(searched); // debugger
+
           this.setState({
             searched: searched
           });
@@ -3801,23 +3890,62 @@ function (_React$Component) {
 
       if (!this.state.searched) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          loc: loc
-        }));
+          loc: loc,
+          history: this.props.history
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchPageLoading"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Waiting For Searches To Load"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "loader",
+          id: "searchLoader"
+        })));
       } else {
         var artists = this.state.searched.artists;
         var albums = this.state.searched.albums;
         var songs = this.state.searched.songs;
-        debugger;
+        var categories;
+
+        if (artists && albums && songs) {
+          categories = [artists, albums, songs];
+        } else if (artists && albums && !songs) {
+          categories = [artists, albums];
+        } else if (artists && songs && !albums) {
+          categories = [artists, songs];
+        } else if (!artists && albums && songs) {
+          categories = [albums, songs];
+        } else if (!artists && !albums && songs) {
+          categories = [songs];
+        } else if (!artists && albums && !songs) {
+          categories = [albums];
+        } else if (artists && !albums && !songs) {
+          categories = [songs];
+        } // debugger
+
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          loc: loc
+          loc: loc,
+          history: this.props.history
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "searchSection"
+          className: "searchMainPage"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchMidPage"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchMidSection"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchResultHeader"
+        }, "Search Results for \"", this.state.search, "\""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchBottom"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchCategory"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "searchResults"
         }, artists.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
-          }, JSON.stringify(ele.username));
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchUser__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            ele: ele
+          }));
         }), albums.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
@@ -3826,7 +3954,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, JSON.stringify(ele.title));
-        })));
+        })))))));
       }
     }
   }]);
@@ -3857,7 +3985,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // debugger
   return {
+    history: ownProps.history,
     currentUserId: state.session.id,
     state: state,
     search: ownProps.history.location.search.split("=")[1]
@@ -3876,6 +4006,120 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_searchPage__WEBPACK_IMPORTED_MODULE_3__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/search/searchSong.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/search/searchSong.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var SearchSong =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchSong, _React$Component);
+
+  function SearchSong() {
+    _classCallCheck(this, SearchSong);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SearchSong).apply(this, arguments));
+  }
+
+  return SearchSong;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchSong);
+
+/***/ }),
+
+/***/ "./frontend/components/search/searchUser.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/search/searchUser.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var SearchUser =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchUser, _React$Component);
+
+  function SearchUser(props) {
+    _classCallCheck(this, SearchUser);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(SearchUser).call(this, props)); // debugger
+  }
+
+  _createClass(SearchUser, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchUser"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchUser-pic"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.props.ele.photoUrl,
+        className: "searchUser-pic-photo"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchUser-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchUser-title"
+      }, this.props.ele.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchUser-albums"
+      }, "Albums: ", Object.values(this.props.ele.albums).length)));
+    }
+  }]);
+
+  return SearchUser;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchUser);
 
 /***/ }),
 
@@ -3959,7 +4203,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "discoverWebPage"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        loc: loc
+        loc: loc,
+        history: this.props.history
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flexing"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5657,7 +5902,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flexing"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        loc: loc
+        loc: loc,
+        history: this.props.history
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadMidPage"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
