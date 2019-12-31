@@ -17,7 +17,7 @@ class NavBar extends React.Component {
     this.loggingOut = this.loggingOut.bind(this);
     this.sendSearch = this.sendSearch.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
-    debugger
+    // debugger
   }
 
   componentDidMount() {
@@ -72,7 +72,7 @@ class NavBar extends React.Component {
 
   sendSearch() {
     let search = this.state.search.split(" ").join("%20");
-    debugger
+    // debugger
     this.props.history.push(`/search?query=${search}`);
   }
 

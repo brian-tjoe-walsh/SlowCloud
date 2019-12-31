@@ -10,8 +10,10 @@ class SearchPage extends React.Component {
     this.state = {
       search: null,
       fetchingUsers: false,
-      searched: false
+      searched: false,
+      category: "Everything"
     };
+    this.changeState = this.changeState.bind(this);
     // debugger
   }
 
@@ -92,6 +94,13 @@ class SearchPage extends React.Component {
     // }
   }
 
+  changeState(ele) {
+    // debugger
+    if (this.state.category !== ele) {
+      this.setState({category: ele});
+    }
+  }
+
   getAlbums() {
     // let artistAlbums = [];
 
@@ -119,26 +128,27 @@ class SearchPage extends React.Component {
       let artists = this.state.searched.artists;
       let albums = this.state.searched.albums;
       let songs = this.state.searched.songs;
-      let categories;
+      let categories = {"Everything": [artists, albums, songs]};
+      let category = this.state.category;
 
-      if (artists && albums && songs) {
-        categories = [artists, albums, songs] 
-      } else if (artists && albums && !songs) {
-        categories = [artists, albums]
-      } else if (artists && songs && !albums) {
-        categories = [artists, songs]
-      } else if (!artists && albums && songs) {
-        categories = [albums, songs]
-      } else if (!artists && !albums && songs) {
-        categories = [songs]
-      } else if (!artists && albums && !songs) {
-        categories = [albums]
-      } else if (artists && !albums && !songs) {
-        categories = [songs]
+      if (artists) {
+        categories["artists"] = artists;
       }
+      if (albums) {
+        categories["albums"] = albums;
+      }
+      if (songs) {
+        categories["songs"] = songs;
+      }
+      
+
+      // debugger
+      // if (!this.state.category) {
+      //   this.setState({category: "Everything"})
+      // }
       // debugger
       return (
-        <div className="userShowBackground">
+        <div className="searchShowBackground">
           <NavBarContainer loc={loc} history={this.props.history}/>
           <div className="searchMainPage">
             <div className="searchMidPage">
@@ -148,19 +158,58 @@ class SearchPage extends React.Component {
                 </div>
                 <div className="searchBottom">
                   <div className="searchCategory">
-                    
+                    <div className="searchCategorySubSec">
+                      {Object.keys(categories).map( ele => {
+                        // debugger
+                        if (ele === category) {
+                          return(
+                            <div className="searchHighlighted">
+                              {ele.charAt(0).toUpperCase() + ele.slice(1)}
+                            </div>
+                          )
+                        } else {
+                          return (
+                            <div className="searchSubCat" onClick={ e => this.changeState(ele)}>
+                              {ele.charAt(0).toUpperCase() + ele.slice(1)}
+                            </div>
+                          )
+                        }
+                      }
+                    )}
+                    </div>
                   </div>
-                  <div className="searchResults">
+                  {(this.state.category === "Everything") ?
+                  (<div className="searchResults">
                     {artists.map( (ele, idx) => {
                       return (<div key={idx}><SearchUser ele={ele}/></div>)
                     })}
                     {albums.map( (ele, idx) => {
-                      return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
+                      return (<div key={idx}><SearchAlbum ele={ele} /></div>)
                     })}
                     {songs.map( (ele, idx) => {
-                      return (<div key={idx}>{JSON.stringify(ele.title)}</div>)
+                      return (<div key={idx}><SearchSong ele={ele} state={this.props.state} /></div>)
                     })}
-                  </div>
+                  </div>)
+                    : (this.state.category === "artists") ? (<div className="searchResults">
+                        {this.state.searched[this.state.category].map( (ele, idx) => {
+                        return (<div key={idx}><SearchUser ele={ele} /></div>)
+                        })} 
+                      </div>
+                    )
+                    : (this.state.category === "albums") ? 
+                      (<div className="searchResults">
+                        {this.state.searched[this.state.category].map((ele, idx) => {
+                          return (<div key={idx}><SearchAlbum ele={ele} /></div>)
+                        })}
+                      </div>)
+                    : 
+                      (<div className="searchResults">
+                        {this.state.searched[this.state.category].map((ele, idx) => {
+                          return (<div key={idx}><SearchSong ele={ele} state={this.props.state} /></div>)
+                        })}
+                      </div>
+                    )
+                  }
                 </div>
               </div>
             </div>

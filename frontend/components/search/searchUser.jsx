@@ -17,7 +17,8 @@ class SearchUser extends React.Component {
             {this.props.ele.username}
           </div>
           <div className="searchUser-albums">
-            Albums: {Object.values(this.props.ele.albums).length}
+            <i class="fas fa-compact-disc"></i>
+            {Object.values(this.props.ele.albums).length}
           </div>
         </div>
       </div>
