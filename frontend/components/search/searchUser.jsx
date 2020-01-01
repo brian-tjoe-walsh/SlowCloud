@@ -3,6 +3,7 @@ import React from 'react';
 class SearchUser extends React.Component {
   constructor(props) {
     super(props);
+    debugger
   }
 
   render() {
@@ -17,7 +18,7 @@ class SearchUser extends React.Component {
           </div>
           <div className="searchUser-albums">
             <i class="fas fa-compact-disc"></i>
-            {Object.values(this.props.ele.albums).length}
+            {(this.props.ele.albums) ? (Object.values(this.props.ele.albums).length) : ("0")}
           </div>
         </div>
       </div>

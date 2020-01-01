@@ -3680,8 +3680,7 @@ function (_React$Component) {
           "Everything": [artists, albums, songs]
         };
         var category = this.state.category;
-        var paragraph = null;
-        debugger;
+        var paragraph = null; // debugger
 
         if (artists.length) {
           categories["artists"] = artists;
@@ -4190,9 +4189,13 @@ function (_React$Component) {
   _inherits(SearchUser, _React$Component);
 
   function SearchUser(props) {
+    var _this;
+
     _classCallCheck(this, SearchUser);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchUser).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchUser).call(this, props));
+    debugger;
+    return _this;
   }
 
   _createClass(SearchUser, [{
@@ -4213,7 +4216,7 @@ function (_React$Component) {
         className: "searchUser-albums"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-compact-disc"
-      }), Object.values(this.props.ele.albums).length)));
+      }), this.props.ele.albums ? Object.values(this.props.ele.albums).length : "0")));
     }
   }]);
 

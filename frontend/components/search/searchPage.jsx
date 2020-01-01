@@ -107,7 +107,7 @@ class SearchPage extends React.Component {
       let category = this.state.category;
       let paragraph = null;
       
-      debugger
+      // debugger
       if (artists.length) {
         categories["artists"] = artists;
         if (!paragraph) {
