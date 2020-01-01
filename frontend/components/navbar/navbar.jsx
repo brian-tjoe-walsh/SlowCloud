@@ -17,6 +17,7 @@ class NavBar extends React.Component {
     this.loggingOut = this.loggingOut.bind(this);
     this.sendSearch = this.sendSearch.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -71,6 +72,13 @@ class NavBar extends React.Component {
     this.props.history.push(`/search?query=${search}`);
   }
 
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      let search = this.state.search.split(" ").join("%20");
+      this.props.history.push(`/search?query=${search}`);
+    }
+  }
+
   render() {
     return (
       <div className="navBar">
@@ -90,6 +98,7 @@ class NavBar extends React.Component {
               value={this.state.search}
               onChange={this.updateSearch('search')}
               placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
+              onKeyPress={this.handleKeyPress}
             />
             <div>
               <i className="fas fa-search" onClick={this.sendSearch}></i>

@@ -194,31 +194,31 @@ class SearchPage extends React.Component {
                   {(this.state.category === "Everything") ?
                   (<div className="searchResults">
                     {artists.map( (ele, idx) => {
-                      return (<div key={idx}><SearchUser ele={ele}/></div>)
+                      return (<div key={idx}><SearchUser ele={ele} history={this.props.history}/></div>)
                     })}
                     {albums.map( (ele, idx) => {
-                      return (<div key={idx}><SearchAlbum ele={ele} /></div>)
+                      return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
                     })}
                     {songs.map( (ele, idx) => {
-                      return (<div key={idx}><SearchSong ele={ele} state={this.props.state} /></div>)
+                      return (<div key={idx}><SearchSong ele={ele} state={this.props.state} history={this.props.history} /></div>)
                     })}
                   </div>)
                     : (this.state.category === "artists") ? (<div className="searchResults">
                         {this.state.searched[this.state.category].map( (ele, idx) => {
-                        return (<div key={idx}><SearchUser ele={ele} /></div>)
+                          return (<div key={idx}><SearchUser ele={ele} history={this.props.history} /></div>)
                         })} 
                       </div>
                     )
                     : (this.state.category === "albums") ? 
                       (<div className="searchResults">
                         {this.state.searched[this.state.category].map((ele, idx) => {
-                          return (<div key={idx}><SearchAlbum ele={ele} /></div>)
+                          return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
                         })}
                       </div>)
                     : 
                       (<div className="searchResults">
                         {this.state.searched[this.state.category].map((ele, idx) => {
-                          return (<div key={idx}><SearchSong ele={ele} state={this.props.state} /></div>)
+                          return (<div key={idx}><SearchSong ele={ele} state={this.props.state} history={this.props.history} /></div>)
                         })}
                       </div>
                     )

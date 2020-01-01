@@ -3220,6 +3220,7 @@ function (_React$Component) {
     _this.loggingOut = _this.loggingOut.bind(_assertThisInitialized(_this));
     _this.sendSearch = _this.sendSearch.bind(_assertThisInitialized(_this));
     _this.updateSearch = _this.updateSearch.bind(_assertThisInitialized(_this));
+    _this.handleKeyPress = _this.handleKeyPress.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3295,6 +3296,14 @@ function (_React$Component) {
       this.props.history.push("/search?query=".concat(search));
     }
   }, {
+    key: "handleKeyPress",
+    value: function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        var search = this.state.search.split(" ").join("%20");
+        this.props.history.push("/search?query=".concat(search));
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3323,7 +3332,8 @@ function (_React$Component) {
         type: "text",
         value: this.state.search,
         onChange: this.updateSearch('search'),
-        placeholder: "Search for artists or songs (e.g.My Bloody Valentine)"
+        placeholder: "Search for artists or songs (e.g.My Bloody Valentine)",
+        onKeyPress: this.handleKeyPress
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search",
         onClick: this.sendSearch
@@ -3459,9 +3469,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -3475,29 +3485,48 @@ function (_React$Component) {
   _inherits(SearchAlbum, _React$Component);
 
   function SearchAlbum(props) {
+    var _this;
+
     _classCallCheck(this, SearchAlbum);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchAlbum).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchAlbum).call(this, props));
+    _this.goToAlbum = _this.goToAlbum.bind(_assertThisInitialized(_this));
+    _this.goToArtist = _this.goToArtist.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(SearchAlbum, [{
+    key: "goToAlbum",
+    value: function goToAlbum() {
+      this.props.history.push("/albums/".concat(this.props.ele.id));
+    }
+  }, {
+    key: "goToArtist",
+    value: function goToArtist() {
+      this.props.history.push("/artists/".concat(this.props.ele.artist.id));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "searchUser"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "searchUser-pic"
+        className: "searchUser-pic",
+        onClick: this.goToAlbum
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: this.props.ele.photoUrl,
         className: "searchAlbum-pic-photo"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "searchUser-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "searchAlbum-artist"
+        className: "searchAlbum-artist",
+        onClick: this.goToArtist
       }, this.props.ele.artist.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "searchAlbum-title"
+        className: "searchAlbum-title",
+        onClick: this.goToAlbum
       }, this.props.ele.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "searchUser-albums"
+        className: "searchUser-albums",
+        onClick: this.goToAlbum
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-music"
       }), Object.values(this.props.ele.songs).length)));
@@ -3778,20 +3807,23 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchUser__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            ele: ele
+            ele: ele,
+            history: _this3.props.history
           }));
         }), albums.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchAlbum__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            ele: ele
+            ele: ele,
+            history: _this3.props.history
           }));
         }), songs.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchSong__WEBPACK_IMPORTED_MODULE_4__["default"], {
             ele: ele,
-            state: _this3.props.state
+            state: _this3.props.state,
+            history: _this3.props.history
           }));
         })) : this.state.category === "artists" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchResults"
@@ -3799,7 +3831,8 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchUser__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            ele: ele
+            ele: ele,
+            history: _this3.props.history
           }));
         })) : this.state.category === "albums" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchResults"
@@ -3807,7 +3840,8 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchAlbum__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            ele: ele
+            ele: ele,
+            history: _this3.props.history
           }));
         })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchResults"
@@ -3816,7 +3850,8 @@ function (_React$Component) {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchSong__WEBPACK_IMPORTED_MODULE_4__["default"], {
             ele: ele,
-            state: _this3.props.state
+            state: _this3.props.state,
+            history: _this3.props.history
           }));
         })))))));
       }
@@ -4173,9 +4208,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -4194,11 +4229,16 @@ function (_React$Component) {
     _classCallCheck(this, SearchUser);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchUser).call(this, props));
-    debugger;
+    _this.goHome = _this.goHome.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SearchUser, [{
+    key: "goHome",
+    value: function goHome() {
+      this.props.history.push("/artists/".concat(this.props.ele.id));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4207,13 +4247,16 @@ function (_React$Component) {
         className: "searchUser-pic"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: this.props.ele.photoUrl,
-        className: "searchUser-pic-photo"
+        className: "searchUser-pic-photo",
+        onClick: this.goHome
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "searchUser-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "searchUser-title"
+        className: "searchUser-title",
+        onClick: this.goHome
       }, this.props.ele.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "searchUser-albums"
+        className: "searchUser-albums",
+        onClick: this.goHome
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-compact-disc"
       }), this.props.ele.albums ? Object.values(this.props.ele.albums).length : "0")));
