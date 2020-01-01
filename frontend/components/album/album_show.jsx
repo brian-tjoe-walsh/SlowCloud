@@ -24,7 +24,6 @@ class AlbumShow extends React.Component {
   }
 
   componentDidMount() {
-    // debugger
     window.scrollTo(0, 0);
 
     let id = +this.props.albumId - 1;
@@ -61,13 +60,11 @@ class AlbumShow extends React.Component {
   componentDidUpdate() {
     let button = document.getElementById(`albumPlayButton`);
 
-    // debugger
 
     if (button) {
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
         this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.state.album.id) {
-          // debugger
           button.removeEventListener("mouseover", this.addHover);
           button.removeEventListener("mouseleave", this.removeHover);
           button.addEventListener("mouseover", this.addPauseHover);
@@ -110,7 +107,6 @@ class AlbumShow extends React.Component {
     //     button.addEventListener("mouseover", this.addPauseHover);
     //     button.addEventListener("mouseleave", this.removePauseHover);
     //   } else { 
-    //     debugger
     //     button.removeEventListener("mouseover", this.addPauseHover);
     //     button.removeEventListener("mouseleave", this.removePauseHover);
     //     button.addEventListener("mouseover", this.addHover);
@@ -128,7 +124,6 @@ class AlbumShow extends React.Component {
     $(eles).removeClass("playHovered");
   }
   addPauseHover() {
-    // debugger
     let eles = document.getElementById(`albumPlayButton`);
     $(eles).addClass("playHovered");
   }
@@ -141,11 +136,9 @@ class AlbumShow extends React.Component {
     let player = document.getElementById("media");
     let button = document.getElementById(`albumPlayButton`);
 
-    // debugger
     if (!this.state.currentSong) {
       let play = this.state.album.songs[0];
       if (this.props.state.ui.mediaPlayer.songs) {
-        // debugger
         this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
         this.props.pauseSong();
         player.pause();
@@ -163,7 +156,6 @@ class AlbumShow extends React.Component {
   }
 
   afterClick(player) {
-    // debugger
     if (player.paused) {
       this.props.playSong();
       let button = document.getElementById(`albumPlayButton`);
@@ -207,7 +199,6 @@ class AlbumShow extends React.Component {
           history={this.props.history} />
       </div>)
     } else {
-      // debugger
       return (
         <div>
           <NavBarContainer loc={loc} history={this.props.history}/>

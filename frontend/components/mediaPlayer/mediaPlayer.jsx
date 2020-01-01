@@ -30,10 +30,8 @@ class MediaPlayer extends React.Component {
   }
 
   componentDidUpdate() {
-    // debugger
     let currentSong = null;
     
-    // = this.props.state.ui.mediaPlayer.songs[0];
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
       currentSong = this.props.state.ui.mediaPlayer.songs[0];
     } 
@@ -59,7 +57,6 @@ class MediaPlayer extends React.Component {
     } else if (this.props.state.ui.mediaPlayer.playing === false) {
       this.pause();
     }
-    // debugger
     if (this.state.player || document.getElementById('media') ) {
       if (!this.state.player) {
         this.setState({ player: document.getElementById('media')});
@@ -69,19 +66,16 @@ class MediaPlayer extends React.Component {
         let mediaPlayer = this.state.player
         let juice = document.getElementsByClassName('pink-juice');
         mediaPlayer.addEventListener('timeupdate', () => {
-          // debugger
           let juicePos = mediaPlayer.currentTime / mediaPlayer.duration;
           let currentTime = document.getElementsByClassName('mediaCurrentTime');
           juice[0].style.width = juicePos * 100 + "%";
 
-          // debugger
           let time = Math.floor(mediaPlayer.currentTime);
           currentTime[0].innerHTML = this.getTime(time);
          
 
           let remainingTime = document.getElementsByClassName('mediaRemainingTime');
           time = Math.floor(mediaPlayer.duration) - Math.floor(mediaPlayer.currentTime);
-          // debugger
           remainingTime[0].innerHTML = this.getTime(time);
         });
 
@@ -113,37 +107,30 @@ class MediaPlayer extends React.Component {
   }
 
   play() {
-    // debugger
     let currentSong = null;
-    // debugger
 
     if (this.state.currentSong) {
       currentSong = this.state.songs[this.state.currentSong.id]
     }
     else {
-      // debugger
       currentSong = Object.values(this.state.songs)[102];
     }
 
     if (!currentSong.audio_fileUrl) {
-      // debugger
       currentSong = Object.values(this.state.songs)[102];
     }
 
     let player = document.getElementById("media");
-    // player.load();
     player.play();
   }
 
   pause() {
-    // debugger
     let player = document.getElementById("media");
     player.pause();
 
   }
 
   clicked() {
-    // debugger
     if (this.props.state.ui.mediaPlayer.playing) {
       this.play();
     } else {
@@ -157,7 +144,6 @@ class MediaPlayer extends React.Component {
   }
   
   clicking() {
-    // debugger
     if (this.props.state.ui.mediaPlayer.playing) {
       this.props.pauseSong();
     } else {
@@ -177,22 +163,18 @@ class MediaPlayer extends React.Component {
 
     } else {
       let currentSong = null;
-      // debugger
     
       if (this.state.currentSong) {
         currentSong = this.state.songs[this.state.currentSong.id]
       } 
       else {
-        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
       
       if (!currentSong.audio_fileUrl) {
-        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
       
-      // debugger
       return (
         <div className="mediaBar" onClick={this.clicked}>
           <audio src={currentSong.audio_fileUrl} className="mediaPlayer" id="media" controls width="100%" height="50px"></audio>

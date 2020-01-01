@@ -12,7 +12,6 @@ class Albums extends React.Component {
   }
 
   componentDidMount() {
-    // debugger
     if (this.albums[6]) {
       this.categorize(this.props.max);
     } else {
@@ -93,7 +92,6 @@ class Albums extends React.Component {
           </ul>
         );
       } else {
-        // debugger
         return (
           <ul className="listed">
             {this.albums.map((album) => <Album key={album.id}

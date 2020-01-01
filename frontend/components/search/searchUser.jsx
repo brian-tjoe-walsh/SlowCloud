@@ -3,7 +3,6 @@ import React from 'react';
 class SearchUser extends React.Component {
   constructor(props) {
     super(props);
-    // debugger
   }
 
   render() {

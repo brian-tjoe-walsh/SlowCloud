@@ -14,7 +14,6 @@ class SearchPage extends React.Component {
       category: "Everything"
     };
     this.changeState = this.changeState.bind(this);
-    // debugger
   }
 
   componentDidMount() {
@@ -38,8 +37,9 @@ class SearchPage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    window.scrollTo(0,0);
+
     if (this.props.state.entities.albums[10] && this.props.state.entities.users[10] && this.props.state.entities.songs[10]) {
-      // debugger
       if (!this.state.searched || this.props.search !== prevProps.location.search.split("=")[1]) {
         let searched = {artists:[], albums:[], songs:[]};
 
@@ -69,12 +69,10 @@ class SearchPage extends React.Component {
         });
 
         console.log(searched);
-        // debugger
         this.setState({searched: searched});
       }
 
       let temp = this.props.location.search.split("=")[1].split("%20").join(" ");
-      // temp = temp.split("%20").join(" ");
       if (this.state.search !== temp) {
         this.setState({
           search: temp,
@@ -82,35 +80,12 @@ class SearchPage extends React.Component {
         });
       }
     }
-
-    // if (prevProps.artistId !== this.props.artistId) {
-    //   this.props.fetchUser(this.props.artistId)
-    //     .then((res) => artst = res.user)
-    //     .then(() => this.props.fetchAlbums())
-    //     .then((res) => this.setState({
-    //       artist: artst,
-    //       albums: res.albums
-    //     }));
-    // }
   }
 
   changeState(ele) {
-    // debugger
     if (this.state.category !== ele) {
       this.setState({category: ele});
     }
-  }
-
-  getAlbums() {
-    // let artistAlbums = [];
-
-    // this.state.albums.forEach((alb) => {
-    //   if (alb.user_id === this.state.artist.id) {
-    //     artistAlbums.push(alb);
-    //   }
-    // });
-
-    // return artistAlbums;
   }
 
   render() {
@@ -130,23 +105,56 @@ class SearchPage extends React.Component {
       let songs = this.state.searched.songs;
       let categories = {"Everything": [artists, albums, songs]};
       let category = this.state.category;
-
-      if (artists) {
+      let paragraph = null;
+      
+      debugger
+      if (artists.length) {
         categories["artists"] = artists;
+        if (!paragraph) {
+          if (artists.length === 1) {
+            paragraph = [`Found ${artists.length} artist`]
+          } else {
+            paragraph = [`Found ${artists.length} artists`]
+          }
+        }
       }
-      if (albums) {
+      if (albums.length) {
         categories["albums"] = albums;
+        if (!paragraph) {
+          if (albums.length === 1) {
+            paragraph = [`Found ${albums.length} album`]
+          } else {
+            paragraph = [`Found ${albums.length} albums`]
+          }
+        } else {
+          if (albums.length === 1) {
+            paragraph.push(`${albums.length} album`)
+          } else {
+            paragraph.push(`${albums.length} albums`)
+          }
+        }
       }
-      if (songs) {
+      if (songs.length) {
         categories["songs"] = songs;
+        if (!paragraph) {
+          if (songs.length === 1) {
+            paragraph = [`Found ${songs.length} song`]
+          } else {
+            paragraph = [`Found ${songs.length} songs`]
+          }
+        } else {
+          if (songs.length === 1) {
+            paragraph.push(`${songs.length} song`)
+          } else {
+            paragraph.push(`${songs.length} songs`)
+          }
+        }
+      }
+
+      if (paragraph) { 
+        paragraph = paragraph.join(", ") 
       }
       
-
-      // debugger
-      // if (!this.state.category) {
-      //   this.setState({category: "Everything"})
-      // }
-      // debugger
       return (
         <div className="searchShowBackground">
           <NavBarContainer loc={loc} history={this.props.history}/>
@@ -160,11 +168,15 @@ class SearchPage extends React.Component {
                   <div className="searchCategory">
                     <div className="searchCategorySubSec">
                       {Object.keys(categories).map( ele => {
-                        // debugger
                         if (ele === category) {
                           return(
-                            <div className="searchHighlighted">
-                              {ele.charAt(0).toUpperCase() + ele.slice(1)}
+                            <div className="highLighted">
+                              <div className="searchHighlighted">
+                                {ele.charAt(0).toUpperCase() + ele.slice(1)}
+                              </div>
+                              <div className="searchHighlightedTriangle">
+                                *Triangle*
+                              </div>
                             </div>
                           )
                         } else {
@@ -178,6 +190,7 @@ class SearchPage extends React.Component {
                     )}
                     </div>
                   </div>
+                    <p className="foundParagraph"> {paragraph} </p>
                   {(this.state.category === "Everything") ?
                   (<div className="searchResults">
                     {artists.map( (ele, idx) => {

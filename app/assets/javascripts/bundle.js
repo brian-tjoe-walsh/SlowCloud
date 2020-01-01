@@ -198,7 +198,6 @@ var playSong = function playSong() {
   };
 };
 var deleteSong = function deleteSong(song) {
-  // debugger
   return {
     type: REMOVE_SONG,
     song: song
@@ -508,8 +507,7 @@ function (_React$Component) {
 
     _classCallCheck(this, Album);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Album).call(this, props)); // debugger
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Album).call(this, props));
     _this.addClass = _this.addClass.bind(_assertThisInitialized(_this));
     _this.removeClass = _this.removeClass.bind(_assertThisInitialized(_this));
     _this.addHover = _this.addHover.bind(_assertThisInitialized(_this));
@@ -525,7 +523,6 @@ function (_React$Component) {
   _createClass(Album, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0] && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
         var button = document.getElementById("play".concat(this.props.album.id));
         $(button).addClass("visibleButton");
@@ -572,7 +569,6 @@ function (_React$Component) {
   }, {
     key: "addPauseHover",
     value: function addPauseHover() {
-      // debugger
       var eles = document.getElementById("pauseButton");
       $(eles).addClass("playHovered");
     }
@@ -592,13 +588,12 @@ function (_React$Component) {
     key: "playSong",
     value: function playSong() {
       var player = document.getElementById("media");
-      var button = document.getElementById("play".concat(this.props.album.id)); // debugger
+      var button = document.getElementById("play".concat(this.props.album.id));
 
       if (!this.state.currentSong) {
         var play = this.props.album.songs[0];
 
         if (this.props.state.ui.mediaPlayer.songs) {
-          // debugger
           this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
           this.props.pauseSong();
           player.pause();
@@ -619,7 +614,6 @@ function (_React$Component) {
   }, {
     key: "afterClick",
     value: function afterClick(player) {
-      // debugger
       if (player.paused) {
         this.props.playSong();
         var ele = document.getElementById("pic".concat(this.props.album.id));
@@ -668,7 +662,6 @@ function (_React$Component) {
       if (!album) {
         return null;
       } else {
-        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "songBoundaries"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -703,198 +696,7 @@ function (_React$Component) {
   return Album;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Album); // import React from 'react';
-// import { Link } from 'react-router-dom';
-// class Album extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       currentSong: null,
-//       playing: false
-//     };
-//     this.playSong = this.playSong.bind(this);
-//     this.afterClick = this.afterClick.bind(this);
-//     this.addHover = this.addHover.bind(this);
-//     this.addClass = this.addClass.bind(this);
-//     this.removeHover = this.removeHover.bind(this);
-//     this.removeClass = this.removeClass.bind(this);
-//     this.addPauseHover = this.addPauseHover.bind(this);
-//     this.removePauseHover = this.removePauseHover.bind(this);
-//   }
-//   componentDidMount() {
-//     // debugger
-//     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
-//       this.props.state.ui.mediaPlayer.songs[0] &&
-//       this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
-//       let button = document.getElementById(`playButton${this.props.album.id}`);
-//       $(button).addClass("visibleButton");
-//       button.addEventListener("mouseover", this.addPauseHover);
-//       button.addEventListener("mouseleave", this.removePauseHover);
-//       this.setState({
-//         currentSong: this.props.state.ui.mediaPlayer.songs[0],
-//         playing: true
-//       });
-//     } else {
-//       let ele = document.getElementById(`pic${this.props.album.id}`);
-//       ele.addEventListener("mouseover", this.addClass);
-//       ele.addEventListener("mouseleave", this.removeClass);
-//       let button = document.getElementById(`playButton${this.props.album.id}`);
-//       button.addEventListener("mouseover", this.addClass);
-//       button.addEventListener("mouseover", (e) => this.addHover(e));
-//       button.addEventListener("mouseleave", this.removeClass);
-//       button.addEventListener("mouseleave", (e) => this.removeHover(e));
-//     }
-//   }
-//   componentDidUpdate() {
-//     debugger
-//     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && 
-//       this.props.state.ui.mediaPlayer.songs[0]) {
-//         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
-//           debugger
-//           let pic = document.getElementById(`pic${this.props.album.id}`);
-//           pic.removeEventListener("mouseover", this.addClass);
-//           pic.removeEventListener("mouseleave", this.removeClass);
-//           let button;
-//           if (document.getElementById(`playButton${this.props.album.id}`)) {
-//             button = document.getElementById(`playButton${this.props.album.id}`);
-//           } else {
-//             button = document.getElementById(`pauseButton`);
-//           }
-//           $(button).addClass("visibleButton");
-//           button.addEventListener("mouseover", this.addPauseHover);
-//           button.addEventListener("mouseleave", this.removePauseHover);
-//           if (this.props.state.ui.mediaPlayer.playing && !this.state.playing) {
-//             this.setState({
-//               playing: true
-//             });
-//           } else if (!this.props.state.ui.mediaPlayer.playing && this.state.playing) {
-//             this.setState({
-//               playing: false
-//             });
-//           } else if (!this.state.currentSong) {
-//             this.setState({
-//               currentSong: this.props.album
-//             });
-//           }
-//         } else {
-//           let pic = document.getElementById(`pic${this.props.album.id}`);
-//           pic.addEventListener("mouseover", this.addClass);
-//           pic.addEventListener("mouseleave", this.removeClass);
-//           let ele = document.getElementById(`playButton${this.props.album.id}`);
-//           $(ele).removeClass("visibleButton");
-//           ele.addEventListener("mouseover", (e) => this.addHover(e));
-//           ele.addEventListener("mouseleave", (e) => this.removeHover(e));
-//           if (this.state.currentSong || this.state.playing) {
-//             this.setState({ currentSong: null, playing: false });
-//           }
-//         }
-//     } else {
-//       debugger
-//       if (this.state.currentSong || this.state.playing) {
-//         this.setState({currentSong: null, playing: false});
-//       }
-//       // let pic = document.getElementById(`pic${this.props.album.id}`);
-//       // pic.addEventListener("mouseover", this.addClass);
-//       // pic.addEventListener("mouseleave", this.removeClass);
-//       // let ele = document.getElementById(`play${this.props.album.id}`);
-//       // ele.addEventListener("mouseover", (e) => this.addHover(e));
-//       // ele.addEventListener("mouseleave", (e) => this.removeHover(e));
-//     }
-//   }
-//   componentWillUnmount() {
-//     let ele = document.getElementById(`pic${this.props.album.id}`);
-//     ele.removeEventListener("mouseover", this.addClass);
-//     ele.removeEventListener("mouseleave", this.removeClass);
-//     let button = document.getElementById(`playButton${this.props.album.id}`);
-//     button.removeEventListener("mouseover", this.addClass);
-//     button.removeEventListener("mouseover", (e) => this.addHover(e));
-//     button.removeEventListener("mouseleave", this.removeClass);
-//     button.removeEventListener("mouseleave", (e) => this.removeHover(e));
-//     button.removeEventListener("mouseover", this.addPauseHover);
-//     button.removeEventListener("mouseleave", this.removePauseHover);
-//   }
-//   addClass() {
-//     // debugger
-//     let ele = document.getElementById(`play${this.props.album.id}`);
-//     $(ele).addClass("visibleButton");
-//   }
-//   removeClass() {
-//     let ele = document.getElementById(`play${this.props.album.id}`);
-//     $(ele).removeClass("visibleButton");
-//   }
-//   addHover(e) {
-//     // debugger
-//     let eles = document.getElementById(e.currentTarget.id);
-//     $(eles).addClass("playHovered");
-//   }
-//   removeHover(e) {
-//     let eles = document.getElementById(e.currentTarget.id);
-//     $(eles).removeClass("playHovered");
-//   }
-//   addPauseHover(e) {
-//     // debugger
-//     let eles = document.getElementById(e.currentTarget.id);
-//     $(eles).addClass("playHovered");
-//   }
-//   removePauseHover(e) {
-//     let eles = document.getElementById(e.currentTarget.id);
-//     $(eles).removeClass("playHovered");
-//   }
-//   playSong() {
-//     let player = document.getElementById("media");
-//     let play;
-//     debugger
-//     if (!this.state.currentSong) {
-//       play = this.props.album.songs[0];
-//       if (this.props.state.ui.mediaPlayer.songs) {
-//         debugger
-//         this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
-//         this.props.pauseSong();
-//         player.pause();
-//       }
-//       this.props.addSong(play);
-//       this.setState({
-//         currentSong: play,
-//         playing: true
-//       });
-//     }
-//     this.afterClick(player, play);
-//   }
-//   afterClick(player) {
-//     if (player.paused) {
-//       this.props.playSong();
-//       this.setState({ playing: true });
-//     } else {
-//       this.props.pauseSong();
-//       this.setState({ playing: false });
-//     }
-//   }
-//   render() {
-//     const { album } = this.props;
-//     if (!album) {
-//       return null;
-//     } else {
-//       // debugger
-//       return (
-//         <div className="songBoundaries">
-//           <li className="album" >
-//             <Link to={`/albums/${album.id}`} id={`pic${album.id}`}><img className="albumArt" src={album.photoUrl} /></Link>
-//             <Link to={`/albums/${album.id}`} className="albumTitle">{album.title}</Link>
-//             <Link to={`/artists/${album.artist.id}`} className="albumArtist">{album.artist.username}</Link>
-//             <button className="playSong" id={`play${album.id}`} onClick={this.playSong}>
-//               {(this.state.playing) ?
-//                 <i className="fas fa-pause-circle" id={`pauseButton`}></i>
-//                 :
-//                 <i className="fas fa-play-circle" id={`playButton${album.id}`}></i>
-//               }
-//             </button>
-//           </li>
-//         </div>
-//       )
-//     }
-//   }
-// }
-// export default Album;
+/* harmony default export */ __webpack_exports__["default"] = (Album);
 
 /***/ }),
 
@@ -969,7 +771,6 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // debugger
       window.scrollTo(0, 0);
       var id = +this.props.albumId - 1;
 
@@ -1003,12 +804,11 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      var button = document.getElementById("albumPlayButton"); // debugger
+      var button = document.getElementById("albumPlayButton");
 
       if (button) {
         if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
           if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.state.album.id) {
-            // debugger
             button.removeEventListener("mouseover", this.addHover);
             button.removeEventListener("mouseleave", this.removeHover);
             button.addEventListener("mouseover", this.addPauseHover);
@@ -1047,7 +847,6 @@ function (_React$Component) {
       //     button.addEventListener("mouseover", this.addPauseHover);
       //     button.addEventListener("mouseleave", this.removePauseHover);
       //   } else { 
-      //     debugger
       //     button.removeEventListener("mouseover", this.addPauseHover);
       //     button.removeEventListener("mouseleave", this.removePauseHover);
       //     button.addEventListener("mouseover", this.addHover);
@@ -1071,7 +870,6 @@ function (_React$Component) {
   }, {
     key: "addPauseHover",
     value: function addPauseHover() {
-      // debugger
       var eles = document.getElementById("albumPlayButton");
       $(eles).addClass("playHovered");
     }
@@ -1085,13 +883,12 @@ function (_React$Component) {
     key: "playSong",
     value: function playSong() {
       var player = document.getElementById("media");
-      var button = document.getElementById("albumPlayButton"); // debugger
+      var button = document.getElementById("albumPlayButton");
 
       if (!this.state.currentSong) {
         var play = this.state.album.songs[0];
 
         if (this.props.state.ui.mediaPlayer.songs) {
-          // debugger
           this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
           this.props.pauseSong();
           player.pause();
@@ -1112,7 +909,6 @@ function (_React$Component) {
   }, {
     key: "afterClick",
     value: function afterClick(player) {
-      // debugger
       if (player.paused) {
         this.props.playSong();
         var button = document.getElementById("albumPlayButton");
@@ -1166,7 +962,6 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
-        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc,
           history: this.props.history
@@ -1374,7 +1169,6 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // debugger
       if (this.albums[6]) {
         this.categorize(this.props.max);
       } else {
@@ -1468,7 +1262,6 @@ function (_React$Component) {
             });
           }));
         } else {
-          // debugger
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             className: "listed"
           }, this.albums.map(function (album) {
@@ -1861,8 +1654,7 @@ function (_React$Component) {
     _classCallCheck(this, App);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = _this.props.store.getState(); // debugger
-
+    _this.state = _this.props.store.getState();
     return _this;
   }
 
@@ -2019,7 +1811,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      window.scrollTo(0, 0); // debugger
+      window.scrollTo(0, 0);
 
       if (this.props.state.entities.users[this.props.artistId]) {
         this.setState({
@@ -2092,8 +1884,7 @@ function (_React$Component) {
           loc = {
             url: "/library"
           };
-        } // debugger
-
+        }
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
@@ -2126,7 +1917,6 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
         }, artistAlbums.map(function (album) {
-          // debugger 
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_show_album__WEBPACK_IMPORTED_MODULE_4__["default"], {
             key: album.id,
             album: album,
@@ -2225,10 +2015,8 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
-          // debugger
           var ele = document.getElementById("showPagePlay".concat(this.props.album.id));
           ele.removeEventListener("mouseover", function (e) {
             return _this2.addHover(e);
@@ -2277,26 +2065,15 @@ function (_React$Component) {
         _ele2.addEventListener("mouseleave", function (e) {
           return _this2.removeHover(e);
         });
-      } // if (!this.waveSurfer) {
-      //   this.waveSurfer = WaveSurfer.create({
-      //     container: '#waveform',
-      //     scrollParent: true,
-      //     progressColor: "#af74ca"
-      //   });
-      //   debugger
-      // }
-      // this.waveSurfer.load(window.song);
-
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
-          // debugger
           var ele = document.getElementById("showPagePlay".concat(this.props.album.id));
           ele.removeEventListener("mouseover", function (e) {
             return _this3.addHover(e);
@@ -2350,7 +2127,6 @@ function (_React$Component) {
   }, {
     key: "addHover",
     value: function addHover(e) {
-      // debugger
       var eles = document.getElementById(e.currentTarget.id);
       $(eles).addClass("playHovered");
     }
@@ -2363,7 +2139,6 @@ function (_React$Component) {
   }, {
     key: "addPauseHover",
     value: function addPauseHover(e) {
-      // debugger
       var eles = document.getElementById(e.currentTarget.id);
       $(eles).addClass("playHovered");
     }
@@ -2376,7 +2151,7 @@ function (_React$Component) {
   }, {
     key: "playSong",
     value: function playSong() {
-      var player = document.getElementById("media"); // debugger
+      var player = document.getElementById("media");
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
         var play = this.props.state.entities.songs[this.props.album.songs[0].id];
@@ -2882,9 +2657,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // let indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
-      var indices = this.getRandom(); // debugger
-
+      var indices = this.getRandom();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "listeningBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3044,8 +2817,7 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      // debugger
-      var currentSong = null; // = this.props.state.ui.mediaPlayer.songs[0];
+      var currentSong = null;
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         currentSong = this.props.state.ui.mediaPlayer.songs[0];
@@ -3071,8 +2843,7 @@ function (_React$Component) {
         this.play();
       } else if (this.props.state.ui.mediaPlayer.playing === false) {
         this.pause();
-      } // debugger
-
+      }
 
       if (this.state.player || document.getElementById('media')) {
         if (!this.state.player) {
@@ -3085,16 +2856,13 @@ function (_React$Component) {
           var mediaPlayer = this.state.player;
           var juice = document.getElementsByClassName('pink-juice');
           mediaPlayer.addEventListener('timeupdate', function () {
-            // debugger
             var juicePos = mediaPlayer.currentTime / mediaPlayer.duration;
             var currentTime = document.getElementsByClassName('mediaCurrentTime');
-            juice[0].style.width = juicePos * 100 + "%"; // debugger
-
+            juice[0].style.width = juicePos * 100 + "%";
             var time = Math.floor(mediaPlayer.currentTime);
             currentTime[0].innerHTML = _this3.getTime(time);
             var remainingTime = document.getElementsByClassName('mediaRemainingTime');
-            time = Math.floor(mediaPlayer.duration) - Math.floor(mediaPlayer.currentTime); // debugger
-
+            time = Math.floor(mediaPlayer.duration) - Math.floor(mediaPlayer.currentTime);
             remainingTime[0].innerHTML = _this3.getTime(time);
           });
           this.setState({
@@ -3130,36 +2898,30 @@ function (_React$Component) {
   }, {
     key: "play",
     value: function play() {
-      // debugger
-      var currentSong = null; // debugger
+      var currentSong = null;
 
       if (this.state.currentSong) {
         currentSong = this.state.songs[this.state.currentSong.id];
       } else {
-        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
 
       if (!currentSong.audio_fileUrl) {
-        // debugger
         currentSong = Object.values(this.state.songs)[102];
       }
 
-      var player = document.getElementById("media"); // player.load();
-
+      var player = document.getElementById("media");
       player.play();
     }
   }, {
     key: "pause",
     value: function pause() {
-      // debugger
       var player = document.getElementById("media");
       player.pause();
     }
   }, {
     key: "clicked",
     value: function clicked() {
-      // debugger
       if (this.props.state.ui.mediaPlayer.playing) {
         this.play();
       } else {
@@ -3177,7 +2939,6 @@ function (_React$Component) {
   }, {
     key: "clicking",
     value: function clicking() {
-      // debugger
       if (this.props.state.ui.mediaPlayer.playing) {
         this.props.pauseSong();
       } else {
@@ -3196,20 +2957,17 @@ function (_React$Component) {
           id: "mediaLoader"
         }));
       } else {
-        var currentSong = null; // debugger
+        var currentSong = null;
 
         if (this.state.currentSong) {
           currentSong = this.state.songs[this.state.currentSong.id];
         } else {
-          // debugger
           currentSong = Object.values(this.state.songs)[102];
         }
 
         if (!currentSong.audio_fileUrl) {
-          // debugger
           currentSong = Object.values(this.state.songs)[102];
-        } // debugger
-
+        }
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaBar",
@@ -3461,8 +3219,7 @@ function (_React$Component) {
     _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
     _this.loggingOut = _this.loggingOut.bind(_assertThisInitialized(_this));
     _this.sendSearch = _this.sendSearch.bind(_assertThisInitialized(_this));
-    _this.updateSearch = _this.updateSearch.bind(_assertThisInitialized(_this)); // debugger
-
+    _this.updateSearch = _this.updateSearch.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3518,10 +3275,9 @@ function (_React$Component) {
   }, {
     key: "loggingOut",
     value: function loggingOut() {
-      // debugger
       this.logout().then(function () {
         window.location.reload();
-      }); // .then( () => this.forceUpdate());
+      });
     }
   }, {
     key: "updateSearch",
@@ -3529,15 +3285,13 @@ function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        // debugger
         _this2.setState(_defineProperty({}, search, e.currentTarget.value));
       };
     }
   }, {
     key: "sendSearch",
     value: function sendSearch() {
-      var search = this.state.search.split(" ").join("%20"); // debugger
-
+      var search = this.state.search.split(" ").join("%20");
       this.props.history.push("/search?query=".concat(search));
     }
   }, {
@@ -3633,7 +3387,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // debugger
   return {
     currentUser: state.entities.users[state.session.id],
     loc: ownProps.loc,
@@ -3724,7 +3477,7 @@ function (_React$Component) {
   function SearchAlbum(props) {
     _classCallCheck(this, SearchAlbum);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchAlbum).call(this, props)); // debugger
+    return _possibleConstructorReturn(this, _getPrototypeOf(SearchAlbum).call(this, props));
   }
 
   _createClass(SearchAlbum, [{
@@ -3814,8 +3567,7 @@ function (_React$Component) {
       searched: false,
       category: "Everything"
     };
-    _this.changeState = _this.changeState.bind(_assertThisInitialized(_this)); // debugger
-
+    _this.changeState = _this.changeState.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3843,8 +3595,9 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this2 = this;
 
+      window.scrollTo(0, 0);
+
       if (this.props.state.entities.albums[10] && this.props.state.entities.users[10] && this.props.state.entities.songs[10]) {
-        // debugger
         if (!this.state.searched || this.props.search !== prevProps.location.search.split("=")[1]) {
           var searched = {
             artists: [],
@@ -3875,14 +3628,13 @@ function (_React$Component) {
               searched.songs.push(song);
             }
           });
-          console.log(searched); // debugger
-
+          console.log(searched);
           this.setState({
             searched: searched
           });
         }
 
-        var temp = this.props.location.search.split("=")[1].split("%20").join(" "); // temp = temp.split("%20").join(" ");
+        var temp = this.props.location.search.split("=")[1].split("%20").join(" ");
 
         if (this.state.search !== temp) {
           this.setState({
@@ -3890,36 +3642,16 @@ function (_React$Component) {
             searched: null
           });
         }
-      } // if (prevProps.artistId !== this.props.artistId) {
-      //   this.props.fetchUser(this.props.artistId)
-      //     .then((res) => artst = res.user)
-      //     .then(() => this.props.fetchAlbums())
-      //     .then((res) => this.setState({
-      //       artist: artst,
-      //       albums: res.albums
-      //     }));
-      // }
-
+      }
     }
   }, {
     key: "changeState",
     value: function changeState(ele) {
-      // debugger
       if (this.state.category !== ele) {
         this.setState({
           category: ele
         });
       }
-    }
-  }, {
-    key: "getAlbums",
-    value: function getAlbums() {// let artistAlbums = [];
-      // this.state.albums.forEach((alb) => {
-      //   if (alb.user_id === this.state.artist.id) {
-      //     artistAlbums.push(alb);
-      //   }
-      // });
-      // return artistAlbums;
     }
   }, {
     key: "render",
@@ -3948,23 +3680,60 @@ function (_React$Component) {
           "Everything": [artists, albums, songs]
         };
         var category = this.state.category;
+        var paragraph = null;
+        debugger;
 
-        if (artists) {
+        if (artists.length) {
           categories["artists"] = artists;
+
+          if (!paragraph) {
+            if (artists.length === 1) {
+              paragraph = ["Found ".concat(artists.length, " artist")];
+            } else {
+              paragraph = ["Found ".concat(artists.length, " artists")];
+            }
+          }
         }
 
-        if (albums) {
+        if (albums.length) {
           categories["albums"] = albums;
+
+          if (!paragraph) {
+            if (albums.length === 1) {
+              paragraph = ["Found ".concat(albums.length, " album")];
+            } else {
+              paragraph = ["Found ".concat(albums.length, " albums")];
+            }
+          } else {
+            if (albums.length === 1) {
+              paragraph.push("".concat(albums.length, " album"));
+            } else {
+              paragraph.push("".concat(albums.length, " albums"));
+            }
+          }
         }
 
-        if (songs) {
+        if (songs.length) {
           categories["songs"] = songs;
-        } // debugger
-        // if (!this.state.category) {
-        //   this.setState({category: "Everything"})
-        // }
-        // debugger
 
+          if (!paragraph) {
+            if (songs.length === 1) {
+              paragraph = ["Found ".concat(songs.length, " song")];
+            } else {
+              paragraph = ["Found ".concat(songs.length, " songs")];
+            }
+          } else {
+            if (songs.length === 1) {
+              paragraph.push("".concat(songs.length, " song"));
+            } else {
+              paragraph.push("".concat(songs.length, " songs"));
+            }
+          }
+        }
+
+        if (paragraph) {
+          paragraph = paragraph.join(", ");
+        }
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchShowBackground"
@@ -3986,11 +3755,14 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchCategorySubSec"
         }, Object.keys(categories).map(function (ele) {
-          // debugger
           if (ele === category) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "highLighted"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "searchHighlighted"
-            }, ele.charAt(0).toUpperCase() + ele.slice(1));
+            }, ele.charAt(0).toUpperCase() + ele.slice(1)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "searchHighlightedTriangle"
+            }, "*Triangle*"));
           } else {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "searchSubCat",
@@ -3999,7 +3771,9 @@ function (_React$Component) {
               }
             }, ele.charAt(0).toUpperCase() + ele.slice(1));
           }
-        }))), this.state.category === "Everything" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "foundParagraph"
+        }, " ", paragraph, " "), this.state.category === "Everything" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchResults"
         }, artists.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4076,7 +3850,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // debugger
   return {
     history: ownProps.history,
     currentUserId: state.session.id,
@@ -4130,31 +3903,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-// import React from 'react';
-// class SearchSong extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     debugger
-//   }
-//   render() {
-//     return (
-//       <div className="searchUser">
-//         <div className="searchUser-pic">
-//           <img src={this.props.ele.photoUrl} className="searchUser-pic-photo" />
-//         </div>
-//         <div className="searchUser-info">
-//           <div className="searchUser-title">
-//             {this.props.ele.username}
-//           </div>
-//           <div className="searchUser-albums">
-//             Albums: {Object.values(this.props.ele.albums).length}
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-// export default SearchSong;
 
 
 
@@ -4175,8 +3923,7 @@ function (_React$Component) {
       playing: false
     };
     _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
-    _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this)); // this.waveSurfer = null;
-
+    _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -4185,10 +3932,8 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.ele.album.id) {
-          // debugger
           var ele = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
           ele.removeEventListener("mouseover", function (e) {
             return _this2.addHover(e);
@@ -4237,26 +3982,15 @@ function (_React$Component) {
         _ele2.addEventListener("mouseleave", function (e) {
           return _this2.removeHover(e);
         });
-      } // if (!this.waveSurfer) {
-      //   this.waveSurfer = WaveSurfer.create({
-      //     container: '#waveform',
-      //     scrollParent: true,
-      //     progressColor: "#af74ca"
-      //   });
-      //   debugger
-      // }
-      // this.waveSurfer.load(window.song);
-
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      // debugger
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.ele.album.id) {
-          // debugger
           var ele = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
           ele.removeEventListener("mouseover", function (e) {
             return _this3.addHover(e);
@@ -4310,7 +4044,6 @@ function (_React$Component) {
   }, {
     key: "addHover",
     value: function addHover(e) {
-      // debugger
       var eles = document.getElementById(e.currentTarget.id);
       $(eles).addClass("playHovered");
     }
@@ -4323,7 +4056,6 @@ function (_React$Component) {
   }, {
     key: "addPauseHover",
     value: function addPauseHover(e) {
-      // debugger
       var eles = document.getElementById(e.currentTarget.id);
       $(eles).addClass("playHovered");
     }
@@ -4336,7 +4068,7 @@ function (_React$Component) {
   }, {
     key: "playSong",
     value: function playSong() {
-      var player = document.getElementById("media"); // debugger
+      var player = document.getElementById("media");
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
         var play = this.props.state.entities.songs[this.props.ele.id];
@@ -4460,7 +4192,7 @@ function (_React$Component) {
   function SearchUser(props) {
     _classCallCheck(this, SearchUser);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchUser).call(this, props)); // debugger
+    return _possibleConstructorReturn(this, _getPrototypeOf(SearchUser).call(this, props));
   }
 
   _createClass(SearchUser, [{
@@ -4549,7 +4281,6 @@ function (_React$Component) {
   _createClass(Discover, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
       window.scrollTo(0, 0);
 
       if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
@@ -5010,8 +4741,7 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var user = Object.assign({}, this.state); // debugger
-
+      var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
         return _this2.props.closeModal();
       }).then(function () {
@@ -5023,8 +4753,7 @@ function (_React$Component) {
     value: function handleDemo(e) {
       var _this3 = this;
 
-      e.preventDefault(); // debugger
-
+      e.preventDefault();
       this.setState({
         username: 'GlasgowFan65',
         password: 'shoegaze'
@@ -5037,7 +4766,6 @@ function (_React$Component) {
     value: function update(field) {
       var _this4 = this;
 
-      // debugger
       return function (e) {
         _this4.setState(_defineProperty({}, field, e.currentTarget.value));
       };
@@ -5284,8 +5012,7 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var user = Object.assign({}, this.state); // debugger
-
+      var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
         return _this2.props.history.push('/discover');
       }).then(function () {
@@ -5299,8 +5026,7 @@ function (_React$Component) {
     value: function handleDemo(e) {
       var _this3 = this;
 
-      e.preventDefault(); // debugger
-
+      e.preventDefault();
       this.setState({
         username: 'GlasgowFan65',
         password: 'shoegaze'
@@ -5506,7 +5232,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_modal__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "webPage"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5640,7 +5365,6 @@ function (_React$Component) {
   _createClass(AlbumShowSong, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       window.scrollTo(0, 0);
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
@@ -5667,7 +5391,6 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.song.id) {
-          debugger;
           var song = document.getElementById("albumShowSong".concat(this.props.song.id));
           var text = document.getElementById("albumShowText".concat(this.props.song.id));
           var title = document.getElementById("albumShowTitle".concat(this.props.song.id));
@@ -5692,8 +5415,6 @@ function (_React$Component) {
             });
           }
         } else {
-          debugger;
-
           var _song = document.getElementById("albumShowSong".concat(this.props.song.id));
 
           var _text = document.getElementById("albumShowText".concat(this.props.song.id));
@@ -5711,49 +5432,31 @@ function (_React$Component) {
   }, {
     key: "playSong",
     value: function playSong() {
-      var player = document.getElementById("media"); // let button = document.getElementById(`play${this.props.album.id}`);
-
-      debugger;
+      var player = document.getElementById("media");
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
         var play = this.props.state.entities.songs[this.props.song.id];
 
         if (this.props.state.ui.mediaPlayer.songs) {
-          debugger;
           this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
           this.props.pauseSong();
           player.pause();
         }
 
-        this.props.addSong(play); // let visible = document.getElementsByClassName("visibleButton");
-        // $(visible).removeClass("visibleButton");
-        // $(button).addClass("visibleButton");
-
+        this.props.addSong(play);
         this.setState({
           currentSong: play,
           playing: true
         });
       }
 
-      debugger;
       this.afterClick(player);
     }
   }, {
     key: "afterClick",
     value: function afterClick(player) {
-      debugger;
-
       if (player.paused) {
-        this.props.playSong(); // let ele = document.getElementById(`pic${this.props.album.id}`);
-        // ele.removeEventListener("mouseover", this.addClass);
-        // ele.removeEventListener("mouseleave", this.removeClass);
-        // let button = document.getElementById(`play${this.props.album.id}`);
-        // button.removeEventListener("mouseover", this.addClass);
-        // button.removeEventListener("mouseleave", this.removeClass);
-        // button.addEventListener("mouseover", this.addPauseHover);
-        // button.addEventListener("mouseleave", this.removePauseHover);
-        // $(button).addClass("visibleButton");
-
+        this.props.playSong();
         var song = document.getElementById("albumShowSong".concat(this.props.song.id));
         var text = document.getElementById("albumShowText".concat(this.props.song.id));
         var title = document.getElementById("albumShowTitle".concat(this.props.song.id));
@@ -5764,16 +5467,7 @@ function (_React$Component) {
           playing: true
         });
       } else {
-        debugger;
-        this.props.pauseSong(); // let ele = document.getElementById(`pic${this.props.album.id}`);
-        // ele.addEventListener("mouseover", this.addClass);
-        // ele.addEventListener("mouseleave", this.removeClass);
-        // let button = document.getElementById(`play${this.props.album.id}`);
-        // $(button).removeClass("visibleButton");
-        // button.addEventListener("mouseover", this.addClass);
-        // button.addEventListener("mouseleave", this.removeClass);
-        // button.removeEventListener("mouseover", this.addPauseHover);
-        // button.removeEventListener("mouseleave", this.removePauseHover);
+        this.props.pauseSong();
 
         var _song2 = document.getElementById("albumShowSong".concat(this.props.song.id));
 
@@ -5787,8 +5481,7 @@ function (_React$Component) {
         this.setState({
           playing: false
         });
-      } // }
-
+      }
     }
   }, {
     key: "render",
@@ -5849,7 +5542,7 @@ var Song = function Song(_ref) {
       users = _ref.users,
       albums = _ref.albums;
   var artist;
-  var album; // debugger
+  var album;
 
   for (var i = 0; i < users.length; i++) {
     if (users[i].id === song.user_id) {
@@ -6216,12 +5909,10 @@ function (_React$Component) {
   }, {
     key: "handleFile",
     value: function handleFile(e) {
-      // debugger
       this.setState({
         name: e.currentTarget.files[0].name,
         audioFile: e.currentTarget.files[0]
-      }); // debugger
-
+      });
       var midPage = document.getElementsByClassName("uploadForm");
       $(midPage).addClass("uploadFormAfterClick");
       var slideForm = document.getElementsByClassName("uploadInputFields");
@@ -6234,7 +5925,6 @@ function (_React$Component) {
   }, {
     key: "handlePic",
     value: function handlePic(e) {
-      // debugger
       this.setState({
         picture: e.currentTarget.files[0],
         picName: e.currentTarget.files[0].name
@@ -6266,8 +5956,7 @@ function (_React$Component) {
     value: function render() {
       var loc = {
         url: "/upload"
-      }; // debugger
-
+      };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flexing"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -6493,7 +6182,6 @@ function mediaPlayerReducer() {
 
   switch (action.type) {
     case _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_0__["ADD_SONG"]:
-      // debugger
       if (newState.songs) {
         newState.songs.push(action.song);
       } else {
@@ -6511,8 +6199,6 @@ function mediaPlayerReducer() {
       return newState;
 
     case _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_SONG"]:
-      debugger; // delete newState.songs[action.song.id];
-
       newState.songs.pop();
       return newState;
 
@@ -6602,7 +6288,6 @@ function mediaPlayerReducer() {
 
   switch (action.type) {
     case _actions_search_action__WEBPACK_IMPORTED_MODULE_0__["SEARCH"]:
-      // debugger
       return newState;
 
     default:
@@ -6993,7 +6678,6 @@ var Auth = function Auth(_ref) {
       path = _ref.path,
       loggedIn = _ref.loggedIn,
       exact = _ref.exact;
-  // debugger 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: path,
     exact: exact,

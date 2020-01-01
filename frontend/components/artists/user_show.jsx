@@ -19,7 +19,6 @@ class UserShow extends React.Component {
 
   componentDidMount() { 
     window.scrollTo(0, 0);
-    // debugger
     if (this.props.state.entities.users[this.props.artistId]) {
       
       this.setState({
@@ -79,7 +78,6 @@ class UserShow extends React.Component {
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };
       }
-      // debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} history={this.props.history} />
@@ -106,7 +104,6 @@ class UserShow extends React.Component {
                 <div className="showLeftAndRight">
                   <div className="userAlbumList">
                     {artistAlbums.map((album) => {
-                      // debugger 
                       return (
                         <UserShowAlbum 
                           key={album.id}

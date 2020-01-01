@@ -6,7 +6,6 @@ export default function mediaPlayerReducer(oldState = {}, action) {
 
   switch (action.type) {
     case SEARCH:
-      // debugger
       return newState;
     default:
       return oldState;

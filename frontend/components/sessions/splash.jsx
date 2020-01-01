@@ -14,7 +14,6 @@ class Splash extends React.Component {
   }
 
   render() {
-    // debugger
     return(
       <div>
         <Modal />

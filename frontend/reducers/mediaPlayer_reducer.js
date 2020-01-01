@@ -6,7 +6,6 @@ export default function mediaPlayerReducer(oldState = {}, action) {
 
   switch (action.type) {
     case ADD_SONG:
-      // debugger
       if (newState.songs) {
         newState.songs.push(action.song);
       } else {
@@ -20,8 +19,6 @@ export default function mediaPlayerReducer(oldState = {}, action) {
       newState.playing = true;
       return newState;
     case REMOVE_SONG:
-      debugger
-      // delete newState.songs[action.song.id];
       newState.songs.pop();
       return newState;
     default:

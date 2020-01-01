@@ -11,7 +11,6 @@ class Discover extends React.Component {
   }
 
   componentDidMount() {
-    // debugger
     window.scrollTo(0, 0);
     if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
       this.setState({ fetchingUsers: "done" });

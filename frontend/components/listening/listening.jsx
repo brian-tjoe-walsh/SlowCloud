@@ -22,9 +22,7 @@ class Listening extends React.Component {
 
 
   render() {
-    // let indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
     let indices = this.getRandom();
-    // debugger
     return (
       <div className="listeningBox">
        <div className="listeningAlbums">

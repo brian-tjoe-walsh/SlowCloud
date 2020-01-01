@@ -3,7 +3,6 @@ import React from 'react';
 const Song = ({type, num, song, users, albums}) => {
   let artist;
   let album;
-  // debugger
 
   for (let i = 0; i < users.length; i++) {
     if(users[i].id === song.user_id) {

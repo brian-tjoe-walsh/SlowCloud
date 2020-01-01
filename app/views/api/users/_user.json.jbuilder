@@ -1,6 +1,5 @@
 json.extract! user, :id, :username
 
-# debugger
 json.set! "albums" do 
   user.albums.each do |album|
     json.set! album.id do

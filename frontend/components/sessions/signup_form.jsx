@@ -23,7 +23,6 @@ class SignupForm extends React.Component {
     e.preventDefault();
 
     const user = Object.assign({}, this.state);
-    // debugger
     this.props.processForm(user)
       .then(() => this.props.history.push('/discover'))
       .then(() => this.props.closeModal())
@@ -33,7 +32,6 @@ class SignupForm extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
-    // debugger
     this.setState({
       username: 'GlasgowFan65',
       password: 'shoegaze'

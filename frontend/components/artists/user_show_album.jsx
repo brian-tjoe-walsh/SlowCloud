@@ -15,11 +15,9 @@ class UserShowAlbum extends React.Component {
   }
 
   componentDidMount() {
-    // debugger
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
       if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
-        // debugger
         let ele = document.getElementById(`showPagePlay${this.props.album.id}`);
         ele.removeEventListener("mouseover", (e) => this.addHover(e));
         ele.removeEventListener("mouseleave", (e) => this.removeHover(e));
@@ -51,24 +49,12 @@ class UserShowAlbum extends React.Component {
       ele.addEventListener("mouseover", (e) => this.addHover(e));
       ele.addEventListener("mouseleave", (e) => this.removeHover(e));
     }
-    
-    // if (!this.waveSurfer) {
-    //   this.waveSurfer = WaveSurfer.create({
-    //     container: '#waveform',
-    //     scrollParent: true,
-    //     progressColor: "#af74ca"
-    //   });
-    //   debugger
-    // }
-    // this.waveSurfer.load(window.song);
   }
 
   componentDidUpdate() {
-    // debugger
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
-          // debugger
           let ele = document.getElementById(`showPagePlay${this.props.album.id}`);
           ele.removeEventListener("mouseover", (e) => this.addHover(e));
           ele.removeEventListener("mouseleave", (e) => this.removeHover(e));
@@ -101,7 +87,6 @@ class UserShowAlbum extends React.Component {
   }
 
   addHover(e) {
-    // debugger
     let eles = document.getElementById(e.currentTarget.id);
     $(eles).addClass("playHovered");
   }
@@ -111,7 +96,6 @@ class UserShowAlbum extends React.Component {
   }
 
   addPauseHover(e) {
-    // debugger
     let eles = document.getElementById(e.currentTarget.id);
     $(eles).addClass("playHovered");
   }
@@ -122,7 +106,6 @@ class UserShowAlbum extends React.Component {
 
   playSong() {
     let player = document.getElementById("media");
-    // debugger
     if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
       let play = this.props.state.entities.songs[this.props.album.songs[0].id];
       if (this.props.state.ui.mediaPlayer.songs) {

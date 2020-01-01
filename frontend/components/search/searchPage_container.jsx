@@ -4,7 +4,6 @@ import { fetchAlbums } from '../../actions/album_actions';
 import SearchPage from './searchPage';
 
 const mapStateToProps = (state, ownProps) => {
-  // debugger
   return({
   history: ownProps.history,
   currentUserId: state.session.id,

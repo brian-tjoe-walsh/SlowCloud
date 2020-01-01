@@ -11,11 +11,9 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
-    // debugger
   }
 
   componentDidMount() {
-    // this.props.errors = [];
     this.props.clearErrors();
 
     let background = document.getElementsByClassName("preModal");
@@ -26,7 +24,6 @@ class SessionForm extends React.Component {
     e.preventDefault();
     
     const user = Object.assign({}, this.state);
-    // debugger
     this.props.processForm(user)
     .then(() => this.props.history.push('/discover'))
     .then(() => this.props.closeModal());
@@ -34,7 +31,6 @@ class SessionForm extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
-    // debugger
     this.setState({
       username: 'GlasgowFan65',
       email:'iloveshoegaze@gmail.com',

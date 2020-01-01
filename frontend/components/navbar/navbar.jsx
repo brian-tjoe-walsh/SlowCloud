@@ -17,7 +17,6 @@ class NavBar extends React.Component {
     this.loggingOut = this.loggingOut.bind(this);
     this.sendSearch = this.sendSearch.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
-    // debugger
   }
 
   componentDidMount() {
@@ -57,22 +56,18 @@ class NavBar extends React.Component {
   }
 
   loggingOut() {
-    // debugger
     this.logout()
     .then(() => { window.location.reload(); });
-    // .then( () => this.forceUpdate());
   }
 
   updateSearch(search) {
     return (e) => {
-      // debugger
       this.setState({ [search]: e.currentTarget.value});
-    }
+    };
   }
 
   sendSearch() {
     let search = this.state.search.split(" ").join("%20");
-    // debugger
     this.props.history.push(`/search?query=${search}`);
   }
 
