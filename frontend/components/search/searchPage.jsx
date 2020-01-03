@@ -37,7 +37,10 @@ class SearchPage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    window.scrollTo(0,0);
+    // debugger
+    if (prevProps.location.search !== this.props.location.search) {
+      window.scrollTo(0,0);
+    }
 
     if (this.props.state.entities.albums[10] && this.props.state.entities.users[10] && this.props.state.entities.songs[10]) {
       if (!this.state.searched || this.props.search !== prevProps.location.search.split("=")[1]) {
@@ -85,6 +88,7 @@ class SearchPage extends React.Component {
   changeState(ele) {
     if (this.state.category !== ele) {
       this.setState({category: ele});
+      window.scrollTo(0, 0);
     }
   }
 
@@ -200,7 +204,15 @@ class SearchPage extends React.Component {
                       return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
                     })}
                     {songs.map( (ele, idx) => {
-                      return (<div key={idx}><SearchSong ele={ele} state={this.props.state} history={this.props.history} /></div>)
+                      return (<div key={idx}><SearchSong
+                        ele={ele}
+                        state={this.props.state}
+                        history={this.props.history}
+                        addSong={this.props.addSong}
+                        deleteSong={this.props.deleteSong}
+                        playSong={this.props.playSong}
+                        pauseSong={this.props.pauseSong}
+                      /></div>)
                     })}
                   </div>)
                     : (this.state.category === "artists") ? (<div className="searchResults">
@@ -218,7 +230,15 @@ class SearchPage extends React.Component {
                     : 
                       (<div className="searchResults">
                         {this.state.searched[this.state.category].map((ele, idx) => {
-                          return (<div key={idx}><SearchSong ele={ele} state={this.props.state} history={this.props.history} /></div>)
+                          return (<div key={idx}><SearchSong 
+                            ele={ele} 
+                            state={this.props.state} 
+                            history={this.props.history} 
+                            addSong={this.props.addSong}
+                            deleteSong={this.props.deleteSong}
+                            playSong={this.props.playSong}
+                            pauseSong={this.props.pauseSong}
+                          /></div>)
                         })}
                       </div>
                     )

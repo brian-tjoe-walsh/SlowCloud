@@ -234,7 +234,7 @@ class AlbumShow extends React.Component {
                   <div className="albumShowMidLeft">
                     <div className="addComment">
                     <img className="albumShowMiniProfPic" src={profilePic} />
-                      <input type="text" className="addingComment"placeholder="Write a comment"/>
+                      <input type="text" className="addingComment"placeholder="Writing a comment would go here if the application allowed it--unfortunately does not"/>
                     </div>
                     <div className="albumShowTracklist">
                       {Object.values(this.state.album.songs).map( (song, index) => <AlbumShowSong 

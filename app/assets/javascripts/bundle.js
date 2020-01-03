@@ -1011,7 +1011,7 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           className: "addingComment",
-          placeholder: "Write a comment"
+          placeholder: "Writing a comment would go here if the application allowed it--unfortunately does not"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowTracklist"
         }, Object.values(this.state.album.songs).map(function (song, index) {
@@ -3624,7 +3624,10 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this2 = this;
 
-      window.scrollTo(0, 0);
+      // debugger
+      if (prevProps.location.search !== this.props.location.search) {
+        window.scrollTo(0, 0);
+      }
 
       if (this.props.state.entities.albums[10] && this.props.state.entities.users[10] && this.props.state.entities.songs[10]) {
         if (!this.state.searched || this.props.search !== prevProps.location.search.split("=")[1]) {
@@ -3680,6 +3683,7 @@ function (_React$Component) {
         this.setState({
           category: ele
         });
+        window.scrollTo(0, 0);
       }
     }
   }, {
@@ -3823,7 +3827,11 @@ function (_React$Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchSong__WEBPACK_IMPORTED_MODULE_4__["default"], {
             ele: ele,
             state: _this3.props.state,
-            history: _this3.props.history
+            history: _this3.props.history,
+            addSong: _this3.props.addSong,
+            deleteSong: _this3.props.deleteSong,
+            playSong: _this3.props.playSong,
+            pauseSong: _this3.props.pauseSong
           }));
         })) : this.state.category === "artists" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchResults"
@@ -3851,7 +3859,11 @@ function (_React$Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchSong__WEBPACK_IMPORTED_MODULE_4__["default"], {
             ele: ele,
             state: _this3.props.state,
-            history: _this3.props.history
+            history: _this3.props.history,
+            addSong: _this3.props.addSong,
+            deleteSong: _this3.props.deleteSong,
+            playSong: _this3.props.playSong,
+            pauseSong: _this3.props.pauseSong
           }));
         })))))));
       }
@@ -3878,6 +3890,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _searchPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./searchPage */ "./frontend/components/search/searchPage.jsx");
+/* harmony import */ var _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/mediaPlayer_actions */ "./frontend/actions/mediaPlayer_actions.js");
+
 
 
 
@@ -3899,6 +3913,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchAlbums: function fetchAlbums() {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAlbums"])());
+    },
+    addSong: function addSong(song) {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["addSong"])(song));
+    },
+    deleteSong: function deleteSong(song) {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["deleteSong"])(song));
+    },
+    playSong: function playSong() {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["playSong"])());
+    },
+    pauseSong: function pauseSong() {
+      return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["pauseSong"])());
     }
   };
 };
@@ -3950,8 +3976,8 @@ function (_React$Component) {
 
     _classCallCheck(this, SearchSong);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchSong).call(this, props));
-    debugger;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchSong).call(this, props)); // debugger
+
     _this.state = {
       currentSong: null,
       playing: false
@@ -3967,8 +3993,8 @@ function (_React$Component) {
       var _this2 = this;
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
-        if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.ele.album.id) {
-          var ele = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
+        if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id) {
+          var ele = document.getElementById("showPagePlay".concat(this.props.ele.id));
           ele.removeEventListener("mouseover", function (e) {
             return _this2.addHover(e);
           });
@@ -3987,16 +4013,17 @@ function (_React$Component) {
               playing: true
             });
           } else if (!this.props.state.ui.mediaPlayer.playing && this.state.playing) {
+            // debugger
             this.setState({
               playing: false
             });
           } else if (!this.state.currentSong) {
             this.setState({
-              currentSong: this.props.ele.album
+              currentSong: this.props.ele
             });
           }
         } else {
-          var _ele = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
+          var _ele = document.getElementById("showPagePlay".concat(this.props.ele.id));
 
           _ele.addEventListener("mouseover", function (e) {
             return _this2.addHover(e);
@@ -4007,7 +4034,14 @@ function (_React$Component) {
           });
         }
       } else {
-        var _ele2 = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
+        if (this.state.currentSong) {
+          this.setState({
+            currentSong: null,
+            playing: false
+          });
+        }
+
+        var _ele2 = document.getElementById("showPagePlay".concat(this.props.ele.id));
 
         _ele2.addEventListener("mouseover", function (e) {
           return _this2.addHover(e);
@@ -4024,8 +4058,8 @@ function (_React$Component) {
       var _this3 = this;
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
-        if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.ele.album.id) {
-          var ele = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
+        if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id) {
+          var ele = document.getElementById("showPagePlay".concat(this.props.ele.id));
           ele.removeEventListener("mouseover", function (e) {
             return _this3.addHover(e);
           });
@@ -4049,11 +4083,11 @@ function (_React$Component) {
             });
           } else if (!this.state.currentSong) {
             this.setState({
-              currentSong: this.props.ele.album
+              currentSong: this.props.ele
             });
           }
         } else {
-          var _ele3 = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
+          var _ele3 = document.getElementById("showPagePlay".concat(this.props.ele.id));
 
           _ele3.addEventListener("mouseover", function (e) {
             return _this3.addHover(e);
@@ -4064,7 +4098,7 @@ function (_React$Component) {
           });
         }
       } else {
-        var _ele4 = document.getElementById("showPagePlay".concat(this.props.ele.album.id));
+        var _ele4 = document.getElementById("showPagePlay".concat(this.props.ele.id));
 
         _ele4.addEventListener("mouseover", function (e) {
           return _this3.addHover(e);
@@ -4102,9 +4136,10 @@ function (_React$Component) {
   }, {
     key: "playSong",
     value: function playSong() {
+      // debugger
       var player = document.getElementById("media");
 
-      if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
+      if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
         var play = this.props.state.entities.songs[this.props.ele.id];
 
         if (this.props.state.ui.mediaPlayer.songs) {
@@ -4140,12 +4175,11 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "userIndividualAlbum",
-        key: this.props.ele.album.id
+        key: this.props.ele.id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
-        to: "/albums/".concat(this.props.ele.album.id)
+        to: "/albums/".concat(this.props.ele.album_id)
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         className: "albumArt",
         id: "showPagePic",
@@ -4154,13 +4188,13 @@ function (_React$Component) {
         className: "showTitleSpacing"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "showTitleAdjustments"
-      }, this.props.state.ui.mediaPlayer.songs && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.ele.album.id && this.state.playing ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+      }, this.props.state.ui.mediaPlayer.songs && this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id && this.state.playing ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
         className: "fas fa-pause-circle user-pause",
-        id: "showPagePlay".concat(this.props.ele.album.id),
+        id: "showPagePlay".concat(this.props.ele.id),
         onClick: this.playSong
       }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
         className: "fas fa-play-circle user-play",
-        id: "showPagePlay".concat(this.props.ele.album.id),
+        id: "showPagePlay".concat(this.props.ele.id),
         onClick: this.playSong
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "showJustTitles"
@@ -4168,7 +4202,7 @@ function (_React$Component) {
         to: "/artists/".concat(this.props.ele.artist.id),
         className: "showAlbumArtist"
       }, this.props.ele.artist.username), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
-        to: "/albums/".concat(this.props.ele.album.id),
+        to: "/albums/".concat(this.props.ele.album_id),
         className: "showAlbumTitle"
       }, this.props.ele.title))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
