@@ -33,7 +33,7 @@ class SignupForm extends React.Component {
   handleDemo(e) {
     e.preventDefault();
     this.setState({
-      username: 'GlasgowFan65',
+      username: 'ShoegazeFan91',
       password: 'shoegaze'
     }, () => this.handleSubmit(e));
   }

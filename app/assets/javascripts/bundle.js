@@ -4835,7 +4835,7 @@ function (_React$Component) {
 
       e.preventDefault();
       this.setState({
-        username: 'GlasgowFan65',
+        username: 'ShoegazeFan91',
         password: 'shoegaze'
       }, function () {
         return _this3.handleSubmit(e);
@@ -5108,7 +5108,7 @@ function (_React$Component) {
 
       e.preventDefault();
       this.setState({
-        username: 'GlasgowFan65',
+        username: 'ShoegazeFan91',
         password: 'shoegaze'
       }, function () {
         return _this3.handleSubmit(e);

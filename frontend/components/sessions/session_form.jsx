@@ -32,7 +32,7 @@ class SessionForm extends React.Component {
   handleDemo(e) {
     e.preventDefault();
     this.setState({
-      username: 'GlasgowFan65',
+      username: 'ShoegazeFan91',
       email:'iloveshoegaze@gmail.com',
       password: 'shoegaze'
     }, () => this.handleSubmit(e));
