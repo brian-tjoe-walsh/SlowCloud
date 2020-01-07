@@ -4646,13 +4646,13 @@ function (_React$Component) {
           className: "mainText"
         }, "Upload your first track and begin your journey. SlowCloud gives you space to create, find your fans, and connect with other artists.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "lowerLinks"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "",
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://github.com/bbriannwalshh",
           className: "greetingLearnMore"
-        }, "Learn more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "",
+        }, "Learn more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
           className: "greetingUploading"
-        }, "Start uploading today"))));
+        }, "View more projects"))));
       }
     }
   }]);
@@ -5268,6 +5268,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _album_albums_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../album/albums_container */ "./frontend/components/album/albums_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -5276,9 +5278,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -5296,10 +5298,19 @@ var Splash =
 function (_React$Component) {
   _inherits(Splash, _React$Component);
 
-  function Splash() {
+  function Splash(props) {
+    var _this;
+
     _classCallCheck(this, Splash);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Splash).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Splash).call(this, props));
+    _this.state = {
+      search: ""
+    };
+    _this.sendSearch = _this.sendSearch.bind(_assertThisInitialized(_this));
+    _this.updateSearch = _this.updateSearch.bind(_assertThisInitialized(_this));
+    _this.handleKeyPress = _this.handleKeyPress.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Splash, [{
@@ -5308,6 +5319,29 @@ function (_React$Component) {
       window.scrollTo(0, 0);
       var background = document.getElementsByClassName("preModal");
       return $(background).removeClass("modal");
+    }
+  }, {
+    key: "updateSearch",
+    value: function updateSearch(search) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, search, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "sendSearch",
+    value: function sendSearch() {
+      var search = this.state.search.split(" ").join("%20");
+      this.props.history.push("/search?query=".concat(search));
+    }
+  }, {
+    key: "handleKeyPress",
+    value: function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        var search = this.state.search.split(" ").join("%20");
+        this.props.history.push("/search?query=".concat(search));
+      }
     }
   }, {
     key: "render",
@@ -5320,14 +5354,21 @@ function (_React$Component) {
         className: "mainSearch"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        onChange: this.updateSearch('search'),
+        value: this.state.search,
         className: "splashBar",
-        placeholder: "Search for artists, bands, or tracks"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        placeholder: "Search for artists, bands, or tracks",
+        onKeyPress: this.handleKeyPress
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-search",
+        id: "splashSearch",
+        onClick: this.sendSearch
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "or"
       }, "or"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "",
+        to: "/discover",
         className: "uploadRoute"
-      }, "Upload for free")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Discover Music")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splashTrend"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "discoverTitles"

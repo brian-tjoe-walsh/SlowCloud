@@ -40,8 +40,8 @@ class Greeting extends React.Component {
               </p>
             </div>
             <div className="lowerLinks">
-              <Link to="" className="greetingLearnMore">Learn more</Link>
-              <Link to="" className="greetingUploading">Start uploading today</Link>
+              <a href="https://github.com/bbriannwalshh" className="greetingLearnMore">Learn more</a>
+              <a href="https://www.linkedin.com/in/brian-tjoe-walsh-89086991/" className="greetingUploading">View more projects</a>
             </div>
           </div>
         </div>

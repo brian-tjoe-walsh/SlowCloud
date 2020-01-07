@@ -96,6 +96,7 @@
     box-sizing: border-box;
     font-size: .9em;
     color: #646464;
+    cursor: text;
 }
 
 .upload {
