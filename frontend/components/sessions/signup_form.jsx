@@ -24,7 +24,7 @@ class SignupForm extends React.Component {
 
     const user = Object.assign({}, this.state);
     this.props.processForm(user)
-      .then(() => this.props.history.push('/discover'))
+      // .then(() => this.props.history.push('/discover'))
       .then(() => this.props.closeModal())
       .then(() => { window.location.reload(); });
 

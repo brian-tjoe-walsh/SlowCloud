@@ -1848,18 +1848,22 @@ function (_React$Component) {
 
       var artistAlbums = [];
       var albums;
+      debugger;
 
-      if (Array.isArray(this.state.albums)) {
-        albums = this.state.albums;
-      } else {
-        albums = Object.values(this.state.albums);
+      if (this.state.albums) {
+        if (Array.isArray(this.state.albums)) {
+          albums = this.state.albums;
+        } else {
+          albums = Object.values(this.state.albums);
+        }
+
+        albums.forEach(function (alb) {
+          if (alb.user_id === _this4.state.artist.id) {
+            artistAlbums.push(alb);
+          }
+        });
       }
 
-      albums.forEach(function (alb) {
-        if (alb.user_id === _this4.state.artist.id) {
-          artistAlbums.push(alb);
-        }
-      });
       return artistAlbums;
     }
   }, {
@@ -5093,9 +5097,8 @@ function (_React$Component) {
 
       e.preventDefault();
       var user = Object.assign({}, this.state);
-      this.props.processForm(user).then(function () {
-        return _this2.props.history.push('/discover');
-      }).then(function () {
+      this.props.processForm(user) // .then(() => this.props.history.push('/discover'))
+      .then(function () {
         return _this2.props.closeModal();
       }).then(function () {
         window.location.reload();

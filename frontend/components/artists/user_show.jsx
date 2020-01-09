@@ -49,17 +49,21 @@ class UserShow extends React.Component {
   getAlbums() {
     let artistAlbums = [];
     let albums; 
+
+    debugger
     
-    if (Array.isArray(this.state.albums)) {
-      albums = this.state.albums;
-    } else {
-      albums = Object.values(this.state.albums);
-    }
-    albums.forEach((alb) => {
-      if (alb.user_id === this.state.artist.id) {
-        artistAlbums.push(alb);
+    if (this.state.albums) {
+      if (Array.isArray(this.state.albums)) {
+        albums = this.state.albums;
+      } else {
+        albums = Object.values(this.state.albums);
       }
-    });
+      albums.forEach((alb) => {
+        if (alb.user_id === this.state.artist.id) {
+          artistAlbums.push(alb);
+        }
+      });
+    }
 
     return artistAlbums;
   }
