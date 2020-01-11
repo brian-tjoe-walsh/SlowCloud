@@ -1908,7 +1908,9 @@ function (_React$Component) {
     value: function render() {
       var _this5 = this;
 
-      var artist = this.state.artist;
+      var _this$state = this.state,
+          artist = _this$state.artist,
+          currentUserId = _this$state.currentUserId;
       var loc = {
         url: "/artists"
       };
@@ -1941,10 +1943,10 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "artistMainArt",
           src: artist.photoUrl
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }), artist.id === this.state.currentUserId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "file",
           onChange: this.handleSubmit.bind(this)
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "artistShowTitleOuter"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "artistShowTitle"
@@ -39413,7 +39415,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

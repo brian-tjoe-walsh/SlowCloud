@@ -93,7 +93,7 @@ class UserShow extends React.Component {
   }
 
   render() {
-    const { artist, } = this.state;
+    const { artist, currentUserId} = this.state;
     
     let loc = { url: "/artists" };
 
@@ -114,7 +114,7 @@ class UserShow extends React.Component {
             <div className="userBanner">
               <div className="artistBannerPic">
                 <img className="artistMainArt" src={artist.photoUrl} />
-                <input type="file" onChange={this.handleSubmit.bind(this)}/>
+                {(artist.id === this.state.currentUserId) ? (<input type="file" onChange={this.handleSubmit.bind(this)} />) : (null)}
               </div>
 
               <div className="artistShowTitleOuter">
