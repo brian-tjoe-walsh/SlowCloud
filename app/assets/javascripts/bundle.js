@@ -335,6 +335,8 @@ var updateUser = function updateUser(user) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["update"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
+    }).then(function (ele) {
+      return location.reload(true);
     });
   };
 };
@@ -1889,9 +1891,13 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var file = e.currentTarget.files[0]; // if (file) {
-      //   this.setState({ photoFile: file });
-      // }
+      var file = e.currentTarget.files[0];
+
+      if (file) {
+        this.setState({
+          photoFile: file
+        });
+      }
 
       var formData = new FormData();
       formData.append("user[photo]", file);

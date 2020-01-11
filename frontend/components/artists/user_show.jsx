@@ -83,9 +83,9 @@ class UserShow extends React.Component {
 
     let file = e.currentTarget.files[0];
 
-    // if (file) {
-    //   this.setState({ photoFile: file });
-    // }
+    if (file) {
+      this.setState({ photoFile: file });
+    }
     
     const formData = new FormData();
     formData.append(`user[photo]`, file);
