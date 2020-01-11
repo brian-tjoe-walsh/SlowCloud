@@ -13,7 +13,8 @@ class UserShow extends React.Component {
       currentAlbum: null,
       artist: null,
       albums: null,
-      playing: false
+      playing: false,
+      photoFile: null
     };
   }
 
@@ -50,7 +51,7 @@ class UserShow extends React.Component {
     let artistAlbums = [];
     let albums; 
 
-    debugger
+    // debugger
     
     if (this.state.albums) {
       if (Array.isArray(this.state.albums)) {
@@ -68,8 +69,31 @@ class UserShow extends React.Component {
     return artistAlbums;
   }
 
+  handleFile(e) {
+    let file = e.currentTarget.files[0];
+
+    if (file) {
+      this.setState({ photoFile: file});
+    }
+    
+  }
+  
+  handleSubmit(e) {
+    e.preventDefault(); 
+
+    let file = e.currentTarget.files[0];
+
+    // if (file) {
+    //   this.setState({ photoFile: file });
+    // }
+    
+    const formData = new FormData();
+    formData.append(`user[photo]`, file);
+    this.props.updateUser(formData);
+  }
+
   render() {
-    const { artist } = this.state;
+    const { artist, } = this.state;
     
     let loc = { url: "/artists" };
 
@@ -90,6 +114,7 @@ class UserShow extends React.Component {
             <div className="userBanner">
               <div className="artistBannerPic">
                 <img className="artistMainArt" src={artist.photoUrl} />
+                <input type="file" onChange={this.handleSubmit.bind(this)}/>
               </div>
 
               <div className="artistShowTitleOuter">

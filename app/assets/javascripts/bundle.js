@@ -260,7 +260,7 @@ var openModal = function openModal(search) {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_ERRORS, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearErrors, login, logout, signup */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, CLEAR_ERRORS, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearErrors, login, logout, signup, updateUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -276,6 +276,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUser", function() { return updateUser; });
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
  // import { Session } from 'inspector';
 
@@ -328,6 +329,13 @@ var signup = function signup(user) {
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
     }); // .fail(errors => dispatch(receiveErrors(errors)));
+  };
+};
+var updateUser = function updateUser(user) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["update"](user).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
   };
 };
 
@@ -1801,7 +1809,8 @@ function (_React$Component) {
       currentAlbum: null,
       artist: null,
       albums: null,
-      playing: false
+      playing: false,
+      photoFile: null
     };
     return _this;
   }
@@ -1847,8 +1856,7 @@ function (_React$Component) {
       var _this4 = this;
 
       var artistAlbums = [];
-      var albums;
-      debugger;
+      var albums; // debugger
 
       if (this.state.albums) {
         if (Array.isArray(this.state.albums)) {
@@ -1865,6 +1873,29 @@ function (_React$Component) {
       }
 
       return artistAlbums;
+    }
+  }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var file = e.currentTarget.files[0];
+
+      if (file) {
+        this.setState({
+          photoFile: file
+        });
+      }
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var file = e.currentTarget.files[0]; // if (file) {
+      //   this.setState({ photoFile: file });
+      // }
+
+      var formData = new FormData();
+      formData.append("user[photo]", file);
+      this.props.updateUser(formData);
     }
   }, {
     key: "render",
@@ -1904,6 +1935,9 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "artistMainArt",
           src: artist.photoUrl
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "file",
+          onChange: this.handleSubmit.bind(this)
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "artistShowTitleOuter"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -2253,6 +2287,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _user_show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_show */ "./frontend/components/artists/user_show.jsx");
 /* harmony import */ var _actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/mediaPlayer_actions */ "./frontend/actions/mediaPlayer_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -2286,6 +2322,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteSong: function deleteSong() {
       return dispatch(Object(_actions_mediaPlayer_actions__WEBPACK_IMPORTED_MODULE_4__["deleteSong"])());
+    },
+    updateUser: function updateUser(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["updateUser"])(user));
     }
   };
 };
@@ -6839,7 +6878,7 @@ var ProtectedRoute = Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRoute
 /*!*******************************************!*\
   !*** ./frontend/util/session_api_util.js ***!
   \*******************************************/
-/*! exports provided: login, signup, logout */
+/*! exports provided: login, signup, logout, update */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6847,6 +6886,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
 var login = function login(user) {
   return $.ajax({
     url: '/api/session',
@@ -6869,6 +6909,15 @@ var logout = function logout() {
   return $.ajax({
     url: '/api/session',
     method: 'DELETE'
+  });
+};
+var update = function update(user) {
+  return $.ajax({
+    url: "/api/users/".concat(user.id),
+    method: 'PATCH',
+    data: user,
+    contentType: false,
+    processData: false
   });
 };
 

@@ -24,6 +24,16 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = current_user
+    debugger
+    if @user && @user.update(user_params)
+        render :show
+    else
+        render json: @user.errors.full_messages, status: 422
+    end
+  end
+
 
   def delete
     @user = User.find(params[:id])
@@ -34,6 +44,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :photo)
   end
 end
