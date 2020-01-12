@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AlbumForm from './album_form';
 import { login, signup, clearErrors } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
-import CreateAlbum from '../../actions/album_actions';
+import { createAlbum } from '../../actions/album_actions';
 
 
 const mapStateToProps = (state) => {

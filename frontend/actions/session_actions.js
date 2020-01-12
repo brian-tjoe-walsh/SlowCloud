@@ -48,6 +48,7 @@ export const signup = (user) => (dispatch) => {
 };
 
 export const updateUser = (user) => dispatch => {
+  debugger
   return SessionApiUtil.update(user)
     .then(user => dispatch(receiveCurrentUser(user)))
     .then( ele => location.reload(true));

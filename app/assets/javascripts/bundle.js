@@ -152,8 +152,11 @@ var deleteAlbum = function deleteAlbum(albumId) {
 };
 var createAlbum = function createAlbum(album) {
   return function (dispatch) {
+    debugger;
     return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createAlbum"](album).then(function (album) {
       return dispatch(receiveAlbum(album));
+    }).then(function (ele) {
+      return location.reload(true);
     });
   };
 };
@@ -333,6 +336,7 @@ var signup = function signup(user) {
 };
 var updateUser = function updateUser(user) {
   return function (dispatch) {
+    debugger;
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["update"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }).then(function (ele) {
@@ -789,11 +793,18 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      debugger;
       var formData = new FormData();
       formData.append("album[title]", this.state.title);
       formData.append("album[user_id]", this.props.currentUserId);
       formData.append("album[photo]", this.state.photoFile);
-      this.props.createAlbum(formData);
+      $.ajax({
+        url: 'api/albums',
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false
+      });
     }
   }, {
     key: "update",
@@ -846,7 +857,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         className: "album-create-submit",
-        value: "Create"
+        value: "Create",
+        onClick: this.handleSubmit.bind(this)
       })));
     }
   }]);
@@ -893,19 +905,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     clearErrors: function clearErrors() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["clearErrors"])());
     },
-    createAlbum: function (_createAlbum) {
-      function createAlbum(_x) {
-        return _createAlbum.apply(this, arguments);
-      }
-
-      createAlbum.toString = function () {
-        return _createAlbum.toString();
-      };
-
-      return createAlbum;
-    }(function (album) {
-      return dispatch(createAlbum(album));
-    }),
+    createAlbum: function createAlbum(album) {
+      return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_5__["createAlbum"])(album));
+    },
     closeModal: function closeModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["closeModal"])());
     }
@@ -2155,6 +2157,7 @@ function (_React$Component) {
           });
         }
 
+        debugger;
         var formData = new FormData();
         formData.append("user[photo]", file);
         this.props.updateUser(formData);
@@ -7054,6 +7057,7 @@ var fetchAlbum = function fetchAlbum(id) {
   });
 };
 var createAlbum = function createAlbum(album) {
+  debugger;
   return $.ajax({
     method: 'POST',
     url: 'api/albums',

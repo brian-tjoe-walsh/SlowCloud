@@ -32,12 +32,19 @@ class AlbumForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    debugger
 
     const formData = new FormData();
     formData.append(`album[title]`, this.state.title);
     formData.append(`album[user_id]`, this.props.currentUserId);
     formData.append(`album[photo]`, this.state.photoFile);
-    this.props.createAlbum(formData);
+    $.ajax({
+      url: 'api/albums',
+      method: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false
+    });
   }
 
   update(field) {
@@ -72,7 +79,7 @@ class AlbumForm extends React.Component {
               </div>
             </div>
             <div className="album-form-lower">
-              <input type="submit" className="album-create-submit" value="Create"/>  
+              <input type="submit" className="album-create-submit" value="Create" onClick={this.handleSubmit.bind(this)}/>  
             </div>
       </div>
     );
