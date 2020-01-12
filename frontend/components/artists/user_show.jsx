@@ -4,6 +4,7 @@ import Album from '../album/album';
 import { Link, Redirect } from 'react-router-dom';
 import NavBarContainer from '../navbar/navbar_container';
 import UserShowAlbum from './user_show_album';
+import AlbumModal from '../album/album_modal_container';
 
 class UserShow extends React.Component {
   constructor(props) {
@@ -68,28 +69,23 @@ class UserShow extends React.Component {
 
     return artistAlbums;
   }
-
-  handleFile(e) {
-    let file = e.currentTarget.files[0];
-
-    if (file) {
-      this.setState({ photoFile: file});
-    }
-    
-  }
   
   handleSubmit(e) {
     e.preventDefault(); 
+    if (this.state.currentUserId === 35) {
+      alert("You cannot switch the Demo's profile picture! Please create an account to use this feature.");
 
-    let file = e.currentTarget.files[0];
-
-    if (file) {
-      this.setState({ photoFile: file });
+    } else {
+      let file = e.currentTarget.files[0];
+  
+      if (file) {
+        this.setState({ photoFile: file });
+      }
+      
+      const formData = new FormData();
+      formData.append(`user[photo]`, file);
+      this.props.updateUser(formData);
     }
-    
-    const formData = new FormData();
-    formData.append(`user[photo]`, file);
-    this.props.updateUser(formData);
   }
 
   render() {
@@ -106,6 +102,7 @@ class UserShow extends React.Component {
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };
       }
+      debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} history={this.props.history} />
@@ -114,7 +111,7 @@ class UserShow extends React.Component {
             <div className="userBanner">
               <div className="artistBannerPic">
                 <img className="artistMainArt" src={artist.photoUrl} />
-                {(artist.id === this.state.currentUserId) ? (<input type="file" onChange={this.handleSubmit.bind(this)} />) : (null)}
+                {(artist.id === this.state.currentUserId) ? (<input type="file" className="changeProfilePicture" onChange={this.handleSubmit.bind(this)} />) : (null)}
               </div>
 
               <div className="artistShowTitleOuter">
@@ -128,6 +125,8 @@ class UserShow extends React.Component {
               <div className="showMidLeft">
                 <div className="showUserTitles">
                   <h3 className="showUserTitle"> Albums</h3>
+                  <input type="button" className="createAlbum" value="Create A New Album"/>
+                  <AlbumModal currentUserId={this.props.currentUserId}/>
                 </div>
 
                 <div className="showLeftAndRight">
