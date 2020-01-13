@@ -81,8 +81,6 @@ class UserShow extends React.Component {
       if (file) {
         this.setState({ photoFile: file });
       }
-
-      debugger
       
       const formData = new FormData();
       formData.append(`user[photo]`, file);
@@ -127,11 +125,12 @@ class UserShow extends React.Component {
               <div className="showMidLeft">
                 <div className="showUserTitles">
                   <h3 className="showUserTitle"> Albums</h3>
-                  <input type="button" className="createAlbum" value="Create A New Album"/>
                   <AlbumModal currentUserId={this.props.currentUserId}/>
                 </div>
 
                 <div className="showLeftAndRight">
+                  {(artistAlbums.length) ? 
+                  (
                   <div className="userAlbumList">
                     {artistAlbums.map((album) => {
                       return (
@@ -148,6 +147,23 @@ class UserShow extends React.Component {
                         />
                       )})}
                   </div>
+                  ) : 
+                  (
+                    <div className="no-songs-page">
+                      <div className="no-songs-background">
+                        <i className="fas fa-music" id="big-music"></i>
+                        <div className="no-songs-text">
+                          <p>
+                            There are no songs currently in this album.
+                            </p>
+                          {(artist.id === this.props.state.session.id)}
+                          <p>
+                            <Link to={`/upload/`} className="upload-song-button-large">Upload A Song Now!</Link>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )} 
 
                   <div className="showMidRight">
                     <div className="showMidRightCont">

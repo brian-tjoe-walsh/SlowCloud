@@ -8,7 +8,6 @@ class Api::AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
-    debugger
 
     if @album.save
       render :show

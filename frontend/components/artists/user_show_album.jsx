@@ -135,26 +135,45 @@ class UserShowAlbum extends React.Component {
   }
 
   render() {
+    debugger
     return (
       <div className="userIndividualAlbum" key={this.props.album.id}>
         <Link to={`/albums/${this.props.album.id}`}><img className="albumArt" id="showPagePic" src={this.props.album.albumUrl}></img></Link>
 
         <div className="showTitleSpacing">
-          <div className="showTitleAdjustments">
-            {(this.props.state.ui.mediaPlayer.songs && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id && this.state.playing) ?
-              <i className="fas fa-pause-circle user-pause" id={`showPagePlay${this.props.album.id}`} onClick={this.playSong}></i>
-              :
-              <i className="fas fa-play-circle user-play" id={`showPagePlay${this.props.album.id}`} onClick={this.playSong}></i>
-            }
-            <div className="showJustTitles">
-              <Link to={`/artists/${this.props.artistId}`} className="showAlbumArtist">{this.props.artist.username}</Link>
-              <Link to={`/albums/${this.props.album.id}`} className="showAlbumTitle">{this.props.album.title}</Link>
+          <div className="space-between">
+            <div className="showTitleAdjustments">
+              {(this.props.state.ui.mediaPlayer.songs && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id && this.state.playing) ?
+                <i className="fas fa-pause-circle user-pause" id={`showPagePlay${this.props.album.id}`} onClick={this.playSong}></i>
+                :
+                <i className="fas fa-play-circle user-play" id={`showPagePlay${this.props.album.id}`} onClick={this.playSong}></i>
+              }
+              <div className="showJustTitles">
+                <Link to={`/artists/${this.props.artistId}`} className="showAlbumArtist">{this.props.artist.username}</Link>
+                <Link to={`/albums/${this.props.album.id}`} className="showAlbumTitle">{this.props.album.title}</Link>
+              </div>
             </div>
+            {(!this.props.album.songs) ? 
+            (<div className="empty-user-show-container">
+              0 Songs
+              <Link to={`/upload/`} className="upload-song-button">Upload A Song</Link>
+            </div>) 
+            : 
+            (<div className="empty-user-show-container">
+                {Object.values(this.props.album.songs).length} Songs
+            </div>)}
           </div>
-          <div className="waveFormContainer">
-            {/* <div id="waveform"></div> */}
-            <img className="waveForm" src={window.waveform} />
-          </div>
+          {(this.props.album.songs) ? 
+          ( <div className="waveFormContainer">
+              {/* <div id="waveform"></div> */}
+              <img className="waveForm" src={window.waveform} />
+            </div>
+          ) : 
+            (<div className="waveFormContainer">
+              {/* <div id="waveform"></div> */}
+              <img className="waveForm-opacity" src={window.waveform} />
+            </div>
+          )}
         </div>
       </div>
     )

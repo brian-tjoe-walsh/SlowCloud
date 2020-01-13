@@ -5,14 +5,15 @@ import { openModal } from '../../actions/modal_actions';
 
 function AlbumModal(props) {
   let user = props.currentUserId;
+  debugger
 
   if (user) {
     return (
-      <div className={props.background} onClick={props.albumModal}>Create A New Album</div>
+      <div className="create-album-button" onClick={props.albumModal}>Create A New Album</div>
     )
   } else {
     return (
-      <div className={props.background} onClick={props.login}>Create A New Album</div>
+      <div className="create-album-button" onClick={props.login}>Create A New Album</div>
     )
   }
 }

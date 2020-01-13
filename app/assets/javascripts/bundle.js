@@ -152,7 +152,6 @@ var deleteAlbum = function deleteAlbum(albumId) {
 };
 var createAlbum = function createAlbum(album) {
   return function (dispatch) {
-    debugger;
     return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createAlbum"](album).then(function (album) {
       return dispatch(receiveAlbum(album));
     }).then(function (ele) {
@@ -336,7 +335,6 @@ var signup = function signup(user) {
 };
 var updateUser = function updateUser(user) {
   return function (dispatch) {
-    debugger;
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["update"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }).then(function (ele) {
@@ -766,7 +764,6 @@ function (_React$Component) {
     }; // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDemo = this.handleDemo.bind(this);
 
-    debugger;
     return _this;
   }
 
@@ -793,7 +790,6 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
       var formData = new FormData();
       formData.append("album[title]", this.state.title);
       formData.append("album[user_id]", this.props.currentUserId);
@@ -938,15 +934,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function AlbumModal(props) {
   var user = props.currentUserId;
+  debugger;
 
   if (user) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: props.background,
+      className: "create-album-button",
       onClick: props.albumModal
     }, "Create A New Album");
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: props.background,
+      className: "create-album-button",
       onClick: props.login
     }, "Create A New Album");
   }
@@ -1028,7 +1025,8 @@ function (_React$Component) {
       album: "hello",
       artist: "null",
       currentSong: null,
-      playing: false
+      playing: false,
+      songs: null
     };
     _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
     _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this));
@@ -1078,6 +1076,18 @@ function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var button = document.getElementById("albumPlayButton");
+
+      if (this.props.album.songs) {
+        if (this.state.songs !== Object.values(this.props.album.songs).length) this.setState({
+          songs: Object.values(this.props.album.songs).length
+        });
+      } else {
+        if (this.state.songs !== 0) {
+          this.setState({
+            songs: 0
+          });
+        }
+      }
 
       if (button) {
         if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
@@ -1235,6 +1245,7 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc,
           history: this.props.history
@@ -1277,17 +1288,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowMidLeft"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "addComment"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "albumShowMiniProfPic",
-          src: profilePic
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          className: "addingComment",
-          placeholder: "Writing a comment would go here if the application allowed it--unfortunately does not"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowTracklist"
-        }, Object.values(this.state.album.songs).map(function (song, index) {
+        }, this.state.album.songs ? Object.values(this.state.album.songs).map(function (song, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_songs_album_show_song__WEBPACK_IMPORTED_MODULE_4__["default"], {
             key: index,
             index: index,
@@ -1299,13 +1301,25 @@ function (_React$Component) {
             deleteSong: _this3.props.deleteSong,
             pauseSong: _this3.props.pauseSong
           });
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-page"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-background"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-music",
+          id: "big-music"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-text"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "There are no songs currently in this album."), this.state.album.user_id === this.props.state.session.id, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/upload/",
+          className: "upload-song-button-large"
+        }, "Upload A Song Now!"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowMidRight"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightCont"
         }, "Songs", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightNum"
-        }, this.state.album.songs.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, this.state.album.songs ? Object.values(this.state.album.songs).length : 0)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
@@ -2157,7 +2171,6 @@ function (_React$Component) {
           });
         }
 
-        debugger;
         var formData = new FormData();
         formData.append("user[photo]", file);
         this.props.updateUser(formData);
@@ -2220,15 +2233,11 @@ function (_React$Component) {
           className: "showUserTitles"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "showUserTitle"
-        }, " Albums"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "button",
-          className: "createAlbum",
-          value: "Create A New Album"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        }, " Albums"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           currentUserId: this.props.currentUserId
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showLeftAndRight"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, artistAlbums.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
         }, artistAlbums.map(function (album) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_show_album__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2242,7 +2251,19 @@ function (_React$Component) {
             pauseSong: _this5.props.pauseSong,
             playSong: _this5.props.playSong
           });
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-page"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-background"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-music",
+          id: "big-music"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-text"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "There are no songs currently in this album."), artist.id === this.props.state.session.id, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/upload/",
+          className: "upload-song-button-large"
+        }, "Upload A Song Now!"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRight"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightCont"
@@ -2503,6 +2524,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "userIndividualAlbum",
         key: this.props.album.id
@@ -2514,6 +2536,8 @@ function (_React$Component) {
         src: this.props.album.albumUrl
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "showTitleSpacing"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "space-between"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "showTitleAdjustments"
       }, this.props.state.ui.mediaPlayer.songs && this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id && this.state.playing ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -2532,10 +2556,22 @@ function (_React$Component) {
       }, this.props.artist.username), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/albums/".concat(this.props.album.id),
         className: "showAlbumTitle"
-      }, this.props.album.title))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, this.props.album.title))), !this.props.album.songs ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "empty-user-show-container"
+      }, "0 Songs", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
+        to: "/upload/",
+        className: "upload-song-button"
+      }, "Upload A Song")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "empty-user-show-container"
+      }, Object.values(this.props.album.songs).length, " Songs")), this.props.album.songs ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         className: "waveForm",
+        src: window.waveform
+      })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "waveFormContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        className: "waveForm-opacity",
         src: window.waveform
       }))));
     }
@@ -7057,7 +7093,6 @@ var fetchAlbum = function fetchAlbum(id) {
   });
 };
 var createAlbum = function createAlbum(album) {
-  debugger;
   return $.ajax({
     method: 'POST',
     url: 'api/albums',

@@ -40,7 +40,6 @@ export const deleteAlbum = (albumId) => dispatch => (
 );
 
 export const createAlbum = (album) => dispatch => {
-  debugger
   return (
     AlbumApiUtil.createAlbum(album)
       .then((album) => dispatch(receiveAlbum(album)))

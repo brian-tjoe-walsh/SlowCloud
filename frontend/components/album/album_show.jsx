@@ -12,7 +12,8 @@ class AlbumShow extends React.Component {
       album: "hello",           
       artist: "null",
       currentSong: null,
-      playing: false
+      playing: false,
+      songs: null
     };
 
     this.playSong = this.playSong.bind(this);
@@ -59,6 +60,15 @@ class AlbumShow extends React.Component {
 
   componentDidUpdate() {
     let button = document.getElementById(`albumPlayButton`);
+
+    if (this.props.album.songs) {
+      if (this.state.songs !== Object.values(this.props.album.songs).length)
+      this.setState({songs: Object.values(this.props.album.songs).length});
+    } else {
+      if (this.state.songs !== 0) {
+        this.setState({songs: 0});
+      }
+    }
 
 
     if (button) {
@@ -199,6 +209,7 @@ class AlbumShow extends React.Component {
           history={this.props.history} />
       </div>)
     } else {
+      debugger
       return (
         <div>
           <NavBarContainer loc={loc} history={this.props.history}/>
@@ -232,29 +243,49 @@ class AlbumShow extends React.Component {
 
                 <div className="albumShowLeftAndRight">
                   <div className="albumShowMidLeft">
-                    <div className="addComment">
-                    <img className="albumShowMiniProfPic" src={profilePic} />
+                    {/* <div className="addComment">
+                      <img className="albumShowMiniProfPic" src={profilePic} />
                       <input type="text" className="addingComment"placeholder="Writing a comment would go here if the application allowed it--unfortunately does not"/>
-                    </div>
+                    </div> */}
                     <div className="albumShowTracklist">
-                      {Object.values(this.state.album.songs).map( (song, index) => <AlbumShowSong 
-                        key={index} 
-                        index={index} 
-                        song={song} 
-                        album={this.state.album}
-                        state={this.props.state}
-                        addSong={this.props.addSong}
-                        playSong={this.props.playSong}
-                        deleteSong={this.props.deleteSong}
-                        pauseSong={this.props.pauseSong}/>)}
+                      {(this.state.album.songs) ?
+                      (
+                        Object.values(this.state.album.songs).map((song, index) => <AlbumShowSong
+                          key={index}
+                          index={index}
+                          song={song}
+                          album={this.state.album}
+                          state={this.props.state}
+                          addSong={this.props.addSong}
+                          playSong={this.props.playSong}
+                          deleteSong={this.props.deleteSong}
+                          pauseSong={this.props.pauseSong} />)
+                      )
+                      : 
+                      ( 
+                        <div className="no-songs-page">
+                          <div className="no-songs-background">
+                            <i className="fas fa-music" id="big-music"></i>
+                            <div className="no-songs-text">
+                              <p>
+                                There are no songs currently in this album.
+                              </p>
+                              {(this.state.album.user_id === this.props.state.session.id)}
+                              <p>
+                                <Link to={`/upload/`} className="upload-song-button-large">Upload A Song Now!</Link>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                   
                   <div className="albumShowMidRight">
                     <div className="showMidRightCont">
                       Songs
-                        <div className="showMidRightNum">
-                        {this.state.album.songs.length}
+                      <div className="showMidRightNum">
+                        {(this.state.album.songs) ? (Object.values(this.state.album.songs).length) : (0)}
                       </div>
                     </div>
                     <div className="shamelessPlug">

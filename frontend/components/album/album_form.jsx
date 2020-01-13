@@ -10,7 +10,6 @@ class AlbumForm extends React.Component {
     };
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDemo = this.handleDemo.bind(this);
-    debugger
   }
 
   componentDidMount() {
@@ -32,7 +31,6 @@ class AlbumForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
 
     const formData = new FormData();
     formData.append(`album[title]`, this.state.title);
