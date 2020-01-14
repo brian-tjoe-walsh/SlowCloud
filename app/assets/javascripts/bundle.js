@@ -1310,10 +1310,10 @@ function (_React$Component) {
           id: "big-music"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "no-songs-text"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "There are no songs currently in this album."), this.state.album.user_id === this.props.state.session.id, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "There are no songs currently in this album."), this.state.album.user_id === this.props.state.session.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: "/upload/",
           className: "upload-song-button-large"
-        }, "Upload A Song Now!"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Upload A Song Now!")) : null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowMidRight"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightCont"
@@ -2233,9 +2233,9 @@ function (_React$Component) {
           className: "showUserTitles"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "showUserTitle"
-        }, " Albums"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        }, " Albums"), artist.id === this.state.currentUserId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           currentUserId: this.props.currentUserId
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showLeftAndRight"
         }, artistAlbums.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
@@ -2558,10 +2558,10 @@ function (_React$Component) {
         className: "showAlbumTitle"
       }, this.props.album.title))), !this.props.album.songs ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "empty-user-show-container"
-      }, "0 Songs", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
+      }, "0 Songs", this.props.state.session && this.props.state.session.id === this.props.album.user_id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/upload/",
         className: "upload-song-button"
-      }, "Upload A Song")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Upload A Song") : null) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "empty-user-show-container"
       }, Object.values(this.props.album.songs).length, " Songs")), this.props.album.songs ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
@@ -39725,7 +39725,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

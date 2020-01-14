@@ -125,7 +125,7 @@ class UserShow extends React.Component {
               <div className="showMidLeft">
                 <div className="showUserTitles">
                   <h3 className="showUserTitle"> Albums</h3>
-                  <AlbumModal currentUserId={this.props.currentUserId}/>
+                  {(artist.id === this.state.currentUserId) ? (<AlbumModal currentUserId={this.props.currentUserId} />) : (null)}
                 </div>
 
                 <div className="showLeftAndRight">

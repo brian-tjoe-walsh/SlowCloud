@@ -270,10 +270,12 @@ class AlbumShow extends React.Component {
                               <p>
                                 There are no songs currently in this album.
                               </p>
-                              {(this.state.album.user_id === this.props.state.session.id)}
-                              <p>
-                                <Link to={`/upload/`} className="upload-song-button-large">Upload A Song Now!</Link>
-                              </p>
+                              {(this.state.album.user_id === this.props.state.session.id) ?
+                                (<p>
+                                  <Link to={`/upload/`} className="upload-song-button-large">Upload A Song Now!</Link>
+                                </p>) :
+                              (null)
+                              }
                             </div>
                           </div>
                         </div>

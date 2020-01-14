@@ -156,7 +156,7 @@ class UserShowAlbum extends React.Component {
             {(!this.props.album.songs) ? 
             (<div className="empty-user-show-container">
               0 Songs
-              <Link to={`/upload/`} className="upload-song-button">Upload A Song</Link>
+              {(this.props.state.session && this.props.state.session.id === this.props.album.user_id) ? (<Link to={`/upload/`} className="upload-song-button">Upload A Song</Link>) : (null)}
             </div>) 
             : 
             (<div className="empty-user-show-container">
