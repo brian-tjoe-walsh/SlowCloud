@@ -3964,7 +3964,6 @@ function (_React$Component) {
   _createClass(SearchPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log(this.props.search);
       var search = this.props.search.split("%20").join(" ");
 
       if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
@@ -4021,7 +4020,6 @@ function (_React$Component) {
               searched.songs.push(song);
             }
           });
-          console.log(searched);
           this.setState({
             searched: searched
           });

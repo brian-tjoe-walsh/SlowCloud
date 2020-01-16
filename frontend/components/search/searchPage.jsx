@@ -17,8 +17,6 @@ class SearchPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.search);
-
     let search = this.props.search.split("%20").join(" ");
 
     if (this.props.state.entities.albums[10] && this.props.state.entities.users[10]) {
@@ -71,7 +69,6 @@ class SearchPage extends React.Component {
           }
         });
 
-        console.log(searched);
         this.setState({searched: searched});
       }
 
