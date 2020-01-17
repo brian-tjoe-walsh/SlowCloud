@@ -1320,11 +1320,13 @@ function (_React$Component) {
         }, this.state.album.songs ? Object.values(this.state.album.songs).length : 0)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
+          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
+          target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-linkedin"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://github.com/bbriannwalshh"
+          href: "https://github.com/bbriannwalshh",
+          target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-github"
         }))))))));
@@ -2266,11 +2268,13 @@ function (_React$Component) {
         }, artistAlbums.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
+          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
+          target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-linkedin"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://github.com/bbriannwalshh"
+          href: "https://github.com/bbriannwalshh",
+          target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-github"
         })))))))));
@@ -3031,11 +3035,13 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "shamelessPlug"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"
+        href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-linkedin"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://github.com/bbriannwalshh"
+        href: "https://github.com/bbriannwalshh",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-github"
       }))));
@@ -5008,11 +5014,13 @@ function (_React$Component) {
           className: "lowerLinks"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "https://github.com/bbriannwalshh",
-          className: "greetingLearnMore"
-        }, "Learn more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
-          className: "greetingUploading"
-        }, "View more projects"))));
+          className: "greetingLearnMore",
+          target: "_blank"
+        }, "Checkout Github"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "https://bbriannwalshh.github.io/personal-portfolio/",
+          className: "greetingUploading",
+          target: "_blank"
+        }, "View Portfolio"))));
       }
     }
   }]);
