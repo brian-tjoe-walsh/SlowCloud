@@ -35,7 +35,6 @@ class SearchPage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // debugger
     if (prevProps.location.search !== this.props.location.search) {
       window.scrollTo(0,0);
     }
@@ -107,8 +106,11 @@ class SearchPage extends React.Component {
       let categories = {"Everything": [artists, albums, songs]};
       let category = this.state.category;
       let paragraph = null;
+
+      // if (artists.length || albums.length || songs.length) {
+
+      // }
       
-      // debugger
       if (artists.length) {
         categories["artists"] = artists;
         if (!paragraph) {
@@ -155,7 +157,7 @@ class SearchPage extends React.Component {
       if (paragraph) { 
         paragraph = paragraph.join(", ") 
       }
-      
+      // debugger
       return (
         <div className="searchShowBackground">
           <NavBarContainer loc={loc} history={this.props.history}/>
@@ -192,122 +194,69 @@ class SearchPage extends React.Component {
                     </div>
                   </div>
                     <p className="foundParagraph"> {paragraph} </p>
-                  {(this.state.category === "Everything") ?
-                  (<div className="searchResults">
-                    {artists.map( (ele, idx) => {
-                      return (<div key={idx}><SearchUser ele={ele} history={this.props.history}/></div>)
-                    })}
-                    {albums.map( (ele, idx) => {
-                      return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
-                    })}
-                    {songs.map( (ele, idx) => {
-                      return (<div key={idx}><SearchSong
-                        ele={ele}
-                        state={this.props.state}
-                        history={this.props.history}
-                        addSong={this.props.addSong}
-                        deleteSong={this.props.deleteSong}
-                        playSong={this.props.playSong}
-                        pauseSong={this.props.pauseSong}
-                      /></div>)
-                    })}
-                  </div>)
-                    : (this.state.category === "artists") ? (<div className="searchResults">
-                        {this.state.searched[this.state.category].map( (ele, idx) => {
-                          return (<div key={idx}><SearchUser ele={ele} history={this.props.history} /></div>)
-                        })} 
+                  
+                  {(artists.length || albums.length || songs.length) ? 
+                  ((this.state.category === "Everything") ?
+                    (<div className="searchResults">
+                      {artists.map( (ele, idx) => {
+                        return (<div key={idx}><SearchUser ele={ele} history={this.props.history}/></div>)
+                      })}
+                      {albums.map( (ele, idx) => {
+                        return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
+                      })}
+                      {songs.map( (ele, idx) => {
+                        return (<div key={idx}><SearchSong
+                          ele={ele}
+                          state={this.props.state}
+                          history={this.props.history}
+                          addSong={this.props.addSong}
+                          deleteSong={this.props.deleteSong}
+                          playSong={this.props.playSong}
+                          pauseSong={this.props.pauseSong}
+                        /></div>)
+                      })}
+                    </div>)
+                      : (this.state.category === "artists") ? (<div className="searchResults">
+                          {this.state.searched[this.state.category].map( (ele, idx) => {
+                            return (<div key={idx}><SearchUser ele={ele} history={this.props.history} /></div>)
+                          })} 
+                        </div>
+                      )
+                      : (this.state.category === "albums") ? 
+                        (<div className="searchResults">
+                          {this.state.searched[this.state.category].map((ele, idx) => {
+                            return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
+                          })}
+                        </div>)
+                      : 
+                        (<div className="searchResults">
+                          {this.state.searched[this.state.category].map((ele, idx) => {
+                            return (<div key={idx}><SearchSong 
+                              ele={ele} 
+                              state={this.props.state} 
+                              history={this.props.history} 
+                              addSong={this.props.addSong}
+                              deleteSong={this.props.deleteSong}
+                              playSong={this.props.playSong}
+                              pauseSong={this.props.pauseSong}
+                            /></div>)
+                          })}
+                        </div>
+                      )
+                  ): 
+                  (
+                    <div className="no-searches">
+                      <i className="fas fa-search no-search"></i>  
+                      <div className="no-songs-text no-top-margin">
+                        <p>Sorry we didn't find any results for "fjewaiofewjaif;wejfiowe;ff".</p>                  
+                        <p>Check the spelling, or try a different search.</p>                  
                       </div>
-                    )
-                    : (this.state.category === "albums") ? 
-                      (<div className="searchResults">
-                        {this.state.searched[this.state.category].map((ele, idx) => {
-                          return (<div key={idx}><SearchAlbum ele={ele} history={this.props.history} /></div>)
-                        })}
-                      </div>)
-                    : 
-                      (<div className="searchResults">
-                        {this.state.searched[this.state.category].map((ele, idx) => {
-                          return (<div key={idx}><SearchSong 
-                            ele={ele} 
-                            state={this.props.state} 
-                            history={this.props.history} 
-                            addSong={this.props.addSong}
-                            deleteSong={this.props.deleteSong}
-                            playSong={this.props.playSong}
-                            pauseSong={this.props.pauseSong}
-                          /></div>)
-                        })}
-                      </div>
-                    )
-                  }
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="userShowMid">
-
-            <div className="userBanner">
-              <div className="artistBannerPic">
-                <img className="artistMainArt" src={artist.photoUrl} />
-              </div>
-
-              <div className="artistShowTitleOuter">
-                <h3 className="artistShowTitle">{artist.username}</h3>
-              </div>
-
-            </div>
-
-            <div className="showMidLower">
-
-              <div className="showMidLeft">
-                <div className="showUserTitles">
-                  <h3 className="showUserTitle"> Albums</h3>
-                </div>
-
-                <div className="showLeftAndRight">
-                  <div className="userAlbumList">
-                    {artistAlbums.map((album) => (
-                      <div className="userIndividualAlbum" key={album.id}>
-                        <Link to={`/albums/${album.id}`}><img className="albumArt" id="showPagePic" src={album.photoUrl}></img></Link>
-
-                        <div className="showTitleSpacing">
-                          <div className="showTitleAdjustments">
-                            <i className="fas fa-play-circle" id="showPagePlay"></i>
-                            <div className="showJustTitles">
-                              <Link to={`/artists/${this.props.artistId}`} className="showAlbumArtist">{artist.username}</Link>
-                              <Link to={`/albums/${album.id}`} className="showAlbumTitle">{album.title}</Link>
-                            </div>
-                          </div>
-                          <div className="waveFormContainer">
-                            <img className="waveForm" src={window.waveform} />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="showMidRight">
-                    <div className="showMidRightCont">
-                      Albums
-                      <div className="showMidRightNum">
-                        {artistAlbums.length}
-                      </div>
-                    </div>
-
-                    <div className="shamelessPlug">
-                      <a href="https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"><i className="fab fa-linkedin"></i></a>
-                      <a href="https://github.com/bbriannwalshh"><i className="fab fa-github"></i></a>
-                    </div>
-                  </div>
-
-                </div>
-
-              </div>
-
-
-            </div>
-
-          </div> */}
         </div>
       )
     }

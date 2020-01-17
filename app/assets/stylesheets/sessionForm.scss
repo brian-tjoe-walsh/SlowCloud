@@ -81,6 +81,7 @@ font-family: 'Source Sans Pro', sans-serif; */
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .signup {
@@ -97,6 +98,7 @@ font-family: 'Source Sans Pro', sans-serif; */
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .greetingBar {
@@ -174,6 +176,7 @@ font-family: 'Source Sans Pro', sans-serif; */
   border-radius: 4px;
   font-size: 1em;
   margin: 5px;
+  cursor: text;
 }
 
 .button {
@@ -191,6 +194,15 @@ font-family: 'Source Sans Pro', sans-serif; */
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
+}
+
+.innerText {
+  cursor: pointer;
+}
+
+.btn {
+  cursor: pointer;
 }
 
 .inputs {
@@ -243,11 +255,13 @@ label {
 #demo {
   background-color: rgb(161, 106, 187);
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 #switch {
   background-color: rgb(119, 78, 138);
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .or {

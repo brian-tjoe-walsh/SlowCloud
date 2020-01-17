@@ -135,7 +135,6 @@ class UserShowAlbum extends React.Component {
   }
 
   render() {
-    debugger
     return (
       <div className="userIndividualAlbum" key={this.props.album.id}>
         <Link to={`/albums/${this.props.album.id}`}><img className="albumArt" id="showPagePic" src={this.props.album.albumUrl}></img></Link>

@@ -67,8 +67,10 @@
   display: flex;
   align-items: center;
   font-size: 30px;
-  background-color: #464646;
-  color: white;
+  // background-color: #464646;
+  color: #464646;
+  font-weight: bold;
+  // color: white;
 }
 
 .artistShowTitleOuter {
@@ -180,6 +182,7 @@
   color: rgb(97, 97, 97);
   font-size: 18px;
   height: 30px;
+  cursor: pointer;
 }
 
 .showTitleAdjustments {
@@ -214,12 +217,14 @@
 .waveForm {
   width: 95%;
   height: 130%;
+  cursor: pointer;
 }
 
 .waveForm-opacity {
   width: 95%;
   height: 130%;
   opacity: 0.2;
+  cursor: default;
 }
 
 .space-between {
@@ -239,6 +244,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 
 .albumShowSong:hover {
@@ -371,6 +377,7 @@ input[type='file'] {
   border: 1px solid rgb(187, 187, 187);
   vertical-align: middle;
   margin: 15px 0px 10px 0px;
+  cursor: pointer;
 }
 
 .empty-user-show-container {

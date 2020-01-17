@@ -21,7 +21,7 @@ class SearchUser extends React.Component {
             {this.props.ele.username}
           </div>
           <div className="searchUser-albums" onClick={this.goHome}>
-            <i class="fas fa-compact-disc"></i>
+            <i className="fas fa-compact-disc"></i>
             {(this.props.ele.albums) ? (Object.values(this.props.ele.albums).length) : ("0")}
           </div>
         </div>

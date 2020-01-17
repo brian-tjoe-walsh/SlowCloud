@@ -29,7 +29,7 @@ class SearchAlbum extends React.Component {
             {this.props.ele.title}
           </div>
           <div className="searchUser-albums" onClick={this.goToAlbum}>
-            <i class="fas fa-music"></i>
+            <i className="fas fa-music"></i>
             {Object.values(this.props.ele.songs).length}
           </div>
         </div>

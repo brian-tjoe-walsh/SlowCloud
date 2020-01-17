@@ -31,6 +31,7 @@ h3 {
   border: solid rgb(167, 167, 167) 1px;
   height: 173px;
   width: 173px;
+  cursor: pointer;
 }
 
 .albumArtist {
@@ -39,6 +40,7 @@ h3 {
   color: rgb(201, 200, 200);
   font-size: 13px;
   word-wrap: break-word;
+  cursor: pointer;
 }
 
 .albumTitle {
@@ -46,6 +48,7 @@ h3 {
   color: rgb(97, 97, 97);
   font-size: 15px;
   word-wrap: break-word;
+  cursor: pointer;
 }
 
 .playSong {
@@ -59,6 +62,7 @@ h3 {
   border: none;
   border-radius: 50%;
   outline: none;
+  cursor: pointer;
 }
 
 
@@ -78,6 +82,7 @@ h3 {
 .albumSongPic {
   height: 30px;
   width: 30px;
+  cursor: pointer;
 }
 .songPosition {
   font-size: 20px;

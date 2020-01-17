@@ -5,7 +5,6 @@ import { openModal } from '../../actions/modal_actions';
 
 function AlbumModal(props) {
   let user = props.currentUserId;
-  debugger
 
   if (user) {
     return (

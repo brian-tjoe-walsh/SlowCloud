@@ -14,6 +14,7 @@
 .fas {
   font-size: 60px;
   color: rgb(175, 116, 202);
+  cursor: pointer;
 }
 
 .bannerLeft {
@@ -35,11 +36,14 @@
   display: flex;
   align-items: center;
   font-size: 15px;
-  background-color: rgb(70, 70, 70);
-  color: rgb(231, 231, 231);
-  margin-bottom: 5px;
+  // background-color: rgb(70, 70, 70);
+  color: rgb(112, 111, 111);
+  font-weight: bold;
+  // color: rgb(231, 231, 231);
+  // margin-bottom: 5px;
   padding: 1px 2px 0px 2px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .showTrack {
@@ -47,9 +51,11 @@
   padding: 2px 2px 2px 2px;
   display: flex;
   align-items: center;
-  font-size: 25px;
-  background-color: rgb(70, 70, 70);
-  color: white;
+  font-size: 32px;
+  color: rgb(70, 70, 70);
+  // font-weight: bold;
+  // background-color: rgb(70, 70, 70);
+  // color: white;
 }
 
 .albumArtBackground {
@@ -139,7 +145,7 @@
 .albumShowTitle {
   // font-family: 'Lato', sans-serif;
   // font-weight: lighter;
-  
+  cursor: pointer;
   margin: 0px 0px 0px 10px;
 }
 
@@ -148,11 +154,14 @@
   flex-direction: row;
   margin: 0px 0px 0px 10px;
   color: rgb(109, 108, 108);
+  cursor: pointer;
 }
 
 .albumShowMiniPic {
   width: 30px;
   height: 30px;
+  min-width: 30px;
+  cursor: pointer;
 }
 
 .albumSpread {
@@ -161,6 +170,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .fa-play {
@@ -182,14 +192,16 @@
   // border-left: 1px solid rgb(245, 245, 245);
 }
 
-// .playCount {
+.playCount {
+  cursor: pointer;
 //   color: rgb(196, 196, 196); 
-// }
+}
 
 .albumShowTitleRightSide {
   display: flex;
   flex-direction: row;
   color: rgb(196, 196, 196); 
+  cursor: pointer;
 }
 
 .no-songs-page {
@@ -213,6 +225,7 @@
 #big-music {
   font-size: 200px;
   color: rgba(218, 218, 218, 0.596);
+  cursor: default;
 }
 
 .no-songs-text {
@@ -240,4 +253,5 @@
   border: 1px solid rgb(187, 187, 187);
   vertical-align: middle;
   margin: 15px 0px 10px 0px;
+  cursor: pointer;
 }

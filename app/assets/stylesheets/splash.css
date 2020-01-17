@@ -22,6 +22,7 @@
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .or {
@@ -57,4 +58,5 @@
   left: 565px;
   top: 20px;
   width: 15px;
+  cursor: pointer;
 }

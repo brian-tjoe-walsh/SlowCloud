@@ -5,7 +5,6 @@ class SearchSong extends React.Component {
 
   constructor(props) {
     super(props);
-    // debugger
     this.state = {
       currentSong: null,
       playing: false
@@ -29,7 +28,6 @@ class SearchSong extends React.Component {
             playing: true
           });
         } else if (!this.props.state.ui.mediaPlayer.playing && this.state.playing) {
-          // debugger
           this.setState({
             playing: false
           });
@@ -112,7 +110,6 @@ class SearchSong extends React.Component {
   }
 
   playSong() {
-    // debugger
     let player = document.getElementById("media");
     if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
       let play = this.props.state.entities.songs[this.props.ele.id];
@@ -155,7 +152,7 @@ class SearchSong extends React.Component {
               <i className="fas fa-play-circle user-play" id={`showPagePlay${this.props.ele.id}`} onClick={this.playSong}></i>
             }
             <div className="showJustTitles">
-              <Link to={`/artists/${this.props.ele.artist.id}`} className="showAlbumArtist">{this.props.ele.artist.username}</Link>
+              <Link to={`/artists/${this.props.ele.artist.id}`} className="showAlbumArtist search-cursor">{this.props.ele.artist.username}</Link>
               <Link to={`/albums/${this.props.ele.album_id}`} className="showAlbumTitle">{this.props.ele.title}</Link>
             </div>
           </div>

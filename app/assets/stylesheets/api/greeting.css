@@ -13,8 +13,8 @@
   text-align: center;
   vertical-align: middle;
   letter-spacing: 0.01em;
-  margin-right: 10px
-
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .greetingUploading {
@@ -32,6 +32,7 @@
   text-align: center;
   vertical-align: middle;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .lowerLinks {

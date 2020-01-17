@@ -10,6 +10,7 @@ class SignupForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
+    this.submitDemo = this.submitDemo.bind(this);
   }
 
   componentDidMount() {
@@ -29,13 +30,23 @@ class SignupForm extends React.Component {
       .then(() => { window.location.reload(); });
 
   }
+  submitDemo(e) {
+    e.preventDefault();
+
+    const user = Object.assign({}, this.state);
+    this.props.login(user)
+      // .then(() => this.props.history.push('/discover'))
+      .then(() => this.props.closeModal())
+      .then(() => { window.location.reload(); });
+
+  }
 
   handleDemo(e) {
     e.preventDefault();
     this.setState({
       username: 'ShoegazeFan91',
       password: 'shoegaze'
-    }, () => this.handleSubmit(e));
+    }, () => this.submitDemo(e));
   }
 
   update(field) {

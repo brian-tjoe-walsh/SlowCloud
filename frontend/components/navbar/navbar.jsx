@@ -119,16 +119,16 @@ class NavBar extends React.Component {
                 <div className="dropDown" onClick={this.toggle}>
                   {(this.state.open) ? (
                     <div className="dropDown">
-                      <div>...</div>
+                      <div className="dot-dot-dot">...</div>
                       <div className="flexingRight">
                         <button
                           onClick={this.loggingOut}
-                          className="loggingOut"
-                        >Logout
-                    </button>
+                          className="loggingOut" >
+                          Logout
+                        </button>
                       </div>
                     </div>
-                  ) : <div>...</div>}
+                  ) : <div className="dot-dot-dot">...</div>}
                 </div>
               </div>
             </div>)

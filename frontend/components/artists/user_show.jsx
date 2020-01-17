@@ -51,8 +51,6 @@ class UserShow extends React.Component {
   getAlbums() {
     let artistAlbums = [];
     let albums; 
-
-    // debugger
     
     if (this.state.albums) {
       if (Array.isArray(this.state.albums)) {
@@ -102,7 +100,6 @@ class UserShow extends React.Component {
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };
       }
-      debugger
       return (
         <div className="userShowBackground">
           <NavBarContainer loc={loc} history={this.props.history} />
@@ -154,12 +151,15 @@ class UserShow extends React.Component {
                         <i className="fas fa-music" id="big-music"></i>
                         <div className="no-songs-text">
                           <p>
-                            There are no songs currently in this album.
+                            There are no albums currently by this artist.
                             </p>
-                          {(artist.id === this.props.state.session.id)}
-                          <p>
+                          {(artist.id === this.props.state.session.id) ? 
+                            (<p>Create An Album Today!</p>)
+                          :
+                          (null)}
+                          {/* <p>
                             <Link to={`/upload/`} className="upload-song-button-large">Upload A Song Now!</Link>
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                     </div>

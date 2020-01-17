@@ -934,7 +934,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function AlbumModal(props) {
   var user = props.currentUserId;
-  debugger;
 
   if (user) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1245,7 +1244,6 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc,
           history: this.props.history
@@ -2137,7 +2135,7 @@ function (_React$Component) {
       var _this4 = this;
 
       var artistAlbums = [];
-      var albums; // debugger
+      var albums;
 
       if (this.state.albums) {
         if (Array.isArray(this.state.albums)) {
@@ -2202,7 +2200,6 @@ function (_React$Component) {
           };
         }
 
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userShowBackground"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2260,10 +2257,7 @@ function (_React$Component) {
           id: "big-music"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "no-songs-text"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "There are no songs currently in this album."), artist.id === this.props.state.session.id, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: "/upload/",
-          className: "upload-song-button-large"
-        }, "Upload A Song Now!"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "There are no albums currently by this artist."), artist.id === this.props.state.session.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Create An Album Today!") : null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRight"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightCont"
@@ -2524,7 +2518,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "userIndividualAlbum",
         key: this.props.album.id
@@ -3719,12 +3712,16 @@ function (_React$Component) {
         onClick: this.toggle
       }, this.state.open ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropDown"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dot-dot-dot"
+      }, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flexingRight"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.loggingOut,
         className: "loggingOut"
-      }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "...")))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dot-dot-dot"
+      }, "...")))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "logSign"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_login_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
         background: "navBarLogin"
@@ -3889,7 +3886,7 @@ function (_React$Component) {
         className: "searchUser-albums",
         onClick: this.goToAlbum
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-music"
+        className: "fas fa-music"
       }), Object.values(this.props.ele.songs).length)));
     }
   }]);
@@ -3984,7 +3981,6 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this2 = this;
 
-      // debugger
       if (prevProps.location.search !== this.props.location.search) {
         window.scrollTo(0, 0);
       }
@@ -4072,7 +4068,8 @@ function (_React$Component) {
           "Everything": [artists, albums, songs]
         };
         var category = this.state.category;
-        var paragraph = null; // debugger
+        var paragraph = null; // if (artists.length || albums.length || songs.length) {
+        // }
 
         if (artists.length) {
           categories["artists"] = artists;
@@ -4124,7 +4121,8 @@ function (_React$Component) {
 
         if (paragraph) {
           paragraph = paragraph.join(", ");
-        }
+        } // debugger
+
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchShowBackground"
@@ -4164,7 +4162,7 @@ function (_React$Component) {
           }
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "foundParagraph"
-        }, " ", paragraph, " "), this.state.category === "Everything" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " ", paragraph, " "), artists.length || albums.length || songs.length ? this.state.category === "Everything" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "searchResults"
         }, artists.map(function (ele, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4224,7 +4222,13 @@ function (_React$Component) {
             playSong: _this3.props.playSong,
             pauseSong: _this3.props.pauseSong
           }));
-        })))))));
+        })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-searches"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-search no-search"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "no-songs-text no-top-margin"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sorry we didn't find any results for \"fjewaiofewjaif;wejfiowe;ff\"."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Check the spelling, or try a different search."))))))));
       }
     }
   }]);
@@ -4335,8 +4339,7 @@ function (_React$Component) {
 
     _classCallCheck(this, SearchSong);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchSong).call(this, props)); // debugger
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchSong).call(this, props));
     _this.state = {
       currentSong: null,
       playing: false
@@ -4372,7 +4375,6 @@ function (_React$Component) {
               playing: true
             });
           } else if (!this.props.state.ui.mediaPlayer.playing && this.state.playing) {
-            // debugger
             this.setState({
               playing: false
             });
@@ -4495,7 +4497,6 @@ function (_React$Component) {
   }, {
     key: "playSong",
     value: function playSong() {
-      // debugger
       var player = document.getElementById("media");
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
@@ -4559,7 +4560,7 @@ function (_React$Component) {
         className: "showJustTitles"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/artists/".concat(this.props.ele.artist.id),
-        className: "showAlbumArtist"
+        className: "showAlbumArtist search-cursor"
       }, this.props.ele.artist.username), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/albums/".concat(this.props.ele.album_id),
         className: "showAlbumTitle"
@@ -4651,7 +4652,7 @@ function (_React$Component) {
         className: "searchUser-albums",
         onClick: this.goHome
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-compact-disc"
+        className: "fas fa-compact-disc"
       }), this.props.ele.albums ? Object.values(this.props.ele.albums).length : "0")));
     }
   }]);
@@ -5435,6 +5436,7 @@ function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleDemo = _this.handleDemo.bind(_assertThisInitialized(_this));
+    _this.submitDemo = _this.submitDemo.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -5460,31 +5462,45 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "submitDemo",
+    value: function submitDemo(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var user = Object.assign({}, this.state);
+      this.props.login(user) // .then(() => this.props.history.push('/discover'))
+      .then(function () {
+        return _this3.props.closeModal();
+      }).then(function () {
+        window.location.reload();
+      });
+    }
+  }, {
     key: "handleDemo",
     value: function handleDemo(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       e.preventDefault();
       this.setState({
         username: 'ShoegazeFan91',
         password: 'shoegaze'
       }, function () {
-        return _this3.handleSubmit(e);
+        return _this4.submitDemo(e);
       });
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this4 = this;
+      var _this5 = this;
 
       return function (e) {
-        _this4.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this5.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var errors;
 
@@ -5502,13 +5518,13 @@ function (_React$Component) {
         className: "form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: function onSubmit(e) {
-          return _this5.handleSubmit(e);
+          return _this6.handleSubmit(e);
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "button",
         id: "demo",
         onClick: function onClick(e) {
-          return _this5.handleDemo(e);
+          return _this6.handleDemo(e);
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "innerText"
