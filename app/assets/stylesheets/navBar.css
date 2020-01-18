@@ -243,6 +243,7 @@ a {
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 .navBarSignup {
   display: flex;
@@ -258,6 +259,7 @@ a {
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 
