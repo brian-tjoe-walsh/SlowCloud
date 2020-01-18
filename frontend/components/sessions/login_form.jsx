@@ -46,6 +46,9 @@ class LoginForm extends React.Component {
 
     return (
       <div className="form">
+        {/* <div className="form-title">
+          SLOWCLOUD
+        </div> */}
         <ul>
           {errors}
         </ul>

@@ -844,6 +844,7 @@ function (_React$Component) {
         className: "uploadPicButton"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
+        accept: ".jpeg,.jpg,.tiff,.gif,.png,.pdf",
         onChange: this.handleFile.bind(this),
         className: "choosePicFile"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1244,6 +1245,7 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc,
           history: this.props.history
@@ -1287,7 +1289,7 @@ function (_React$Component) {
           className: "albumShowMidLeft"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowTracklist"
-        }, this.state.album.songs ? Object.values(this.state.album.songs).map(function (song, index) {
+        }, this.state.album.songs && this.state.album.songs.length ? Object.values(this.state.album.songs).map(function (song, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_songs_album_show_song__WEBPACK_IMPORTED_MODULE_4__["default"], {
             key: index,
             index: index,
@@ -1317,7 +1319,7 @@ function (_React$Component) {
           className: "showMidRightCont"
         }, "Songs", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightNum"
-        }, this.state.album.songs ? Object.values(this.state.album.songs).length : 0)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, this.state.album.songs && this.state.album.songs.length ? Object.values(this.state.album.songs).length : 0)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
@@ -2218,6 +2220,7 @@ function (_React$Component) {
           src: artist.photoUrl
         }), artist.id === this.state.currentUserId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "file",
+          accept: ".jpeg,.jpg,.tiff,.gif,.png,.pdf",
           className: "changeProfilePicture",
           onChange: this.handleSubmit.bind(this)
         }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2522,6 +2525,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "userIndividualAlbum",
         key: this.props.album.id
@@ -2553,14 +2557,14 @@ function (_React$Component) {
       }, this.props.artist.username), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/albums/".concat(this.props.album.id),
         className: "showAlbumTitle"
-      }, this.props.album.title))), !this.props.album.songs ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, this.props.album.title))), this.props.album.songs && this.props.album.songs.length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "empty-user-show-container"
+      }, Object.values(this.props.album.songs).length, " Songs") : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "empty-user-show-container"
       }, "0 Songs", this.props.state.session && this.props.state.session.id === this.props.album.user_id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/upload/",
         className: "upload-song-button"
-      }, "Upload A Song") : null) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "empty-user-show-container"
-      }, Object.values(this.props.album.songs).length, " Songs")), this.props.album.songs ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Upload A Song") : null)), this.props.album.songs && this.props.album.songs.length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         className: "waveForm",
@@ -4234,7 +4238,7 @@ function (_React$Component) {
           className: "fas fa-search no-search"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "no-songs-text no-top-margin"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sorry we didn't find any results for \"fjewaiofewjaif;wejfiowe;ff\"."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Check the spelling, or try a different search."))))))));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sorry we didn't find any results for \"", this.state.search, "\"."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Check the spelling, or try a different search."))))))));
       }
     }
   }]);
@@ -6475,6 +6479,7 @@ function (_React$Component) {
         className: "uploadButton"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
+        accept: ".flac,.mp3,.mp4,.m4a,.aac,.wav,.alac,.aiff",
         onChange: this.handleFile.bind(this),
         className: "chooseFile"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {

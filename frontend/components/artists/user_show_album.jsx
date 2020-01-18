@@ -135,6 +135,7 @@ class UserShowAlbum extends React.Component {
   }
 
   render() {
+    debugger
     return (
       <div className="userIndividualAlbum" key={this.props.album.id}>
         <Link to={`/albums/${this.props.album.id}`}><img className="albumArt" id="showPagePic" src={this.props.album.albumUrl}></img></Link>
@@ -152,17 +153,20 @@ class UserShowAlbum extends React.Component {
                 <Link to={`/albums/${this.props.album.id}`} className="showAlbumTitle">{this.props.album.title}</Link>
               </div>
             </div>
-            {(!this.props.album.songs) ? 
-            (<div className="empty-user-show-container">
-              0 Songs
-              {(this.props.state.session && this.props.state.session.id === this.props.album.user_id) ? (<Link to={`/upload/`} className="upload-song-button">Upload A Song</Link>) : (null)}
-            </div>) 
-            : 
+            {(this.props.album.songs && this.props.album.songs.length) ? 
             (<div className="empty-user-show-container">
                 {Object.values(this.props.album.songs).length} Songs
+            </div>)
+            : 
+            (<div className="empty-user-show-container">
+              0 Songs
+              {(this.props.state.session && this.props.state.session.id === this.props.album.user_id) ? 
+                (<Link to={`/upload/`} className="upload-song-button">Upload A Song</Link>) 
+              : 
+              (null)}
             </div>)}
           </div>
-          {(this.props.album.songs) ? 
+          {(this.props.album.songs && this.props.album.songs.length) ? 
           ( <div className="waveFormContainer">
               {/* <div id="waveform"></div> */}
               <img className="waveForm" src={window.waveform} />

@@ -72,7 +72,7 @@ class AlbumForm extends React.Component {
             <div className="album-create-pic">
               {(this.state.picture) ? <img src={this.state.picture} /> : null}
               <div className="uploadPicButton">
-                <input type="file" onChange={this.handleFile.bind(this)} className="choosePicFile" />
+                <input type="file" accept=".jpeg,.jpg,.tiff,.gif,.png,.pdf" onChange={this.handleFile.bind(this)} className="choosePicFile" />
                 <button className="fakePicButton">Upload Image</button>
               </div>
             </div>

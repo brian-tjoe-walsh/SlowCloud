@@ -81,7 +81,7 @@ class Uploading extends React.Component {
             </div>
 
             <div className="uploadButton">
-              <input type="file" onChange={this.handleFile.bind(this)} className="chooseFile" />
+              <input type="file" accept=".flac,.mp3,.mp4,.m4a,.aac,.wav,.alac,.aiff" onChange={this.handleFile.bind(this)} className="chooseFile" />
               <button className="fakeButton">Choose file to upload </button>
             </div>
 

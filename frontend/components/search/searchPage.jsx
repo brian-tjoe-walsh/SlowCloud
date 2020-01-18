@@ -248,7 +248,7 @@ class SearchPage extends React.Component {
                     <div className="no-searches">
                       <i className="fas fa-search no-search"></i>  
                       <div className="no-songs-text no-top-margin">
-                        <p>Sorry we didn't find any results for "fjewaiofewjaif;wejfiowe;ff".</p>                  
+                      <p>Sorry we didn't find any results for "{this.state.search}".</p>                  
                         <p>Check the spelling, or try a different search.</p>                  
                       </div>
                     </div>

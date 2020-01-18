@@ -108,7 +108,7 @@ class UserShow extends React.Component {
             <div className="userBanner">
               <div className="artistBannerPic">
                 <img className="artistMainArt" src={artist.photoUrl} />
-                {(artist.id === this.state.currentUserId) ? (<input type="file" className="changeProfilePicture" onChange={this.handleSubmit.bind(this)} />) : (null)}
+                {(artist.id === this.state.currentUserId) ? (<input type="file" accept=".jpeg,.jpg,.tiff,.gif,.png,.pdf" className="changeProfilePicture" onChange={this.handleSubmit.bind(this)} />) : (null)}
               </div>
 
               <div className="artistShowTitleOuter">
