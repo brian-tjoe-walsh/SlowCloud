@@ -153,7 +153,7 @@ class UserShowAlbum extends React.Component {
                 <Link to={`/albums/${this.props.album.id}`} className="showAlbumTitle">{this.props.album.title}</Link>
               </div>
             </div>
-            {(this.props.album.songs && this.props.album.songs.length) ? 
+            {(this.props.album.songs && Object.values(this.props.album.songs).length) ? 
             (<div className="empty-user-show-container">
                 {Object.values(this.props.album.songs).length} Songs
             </div>)
@@ -166,7 +166,7 @@ class UserShowAlbum extends React.Component {
               (null)}
             </div>)}
           </div>
-          {(this.props.album.songs && this.props.album.songs.length) ? 
+          {(this.props.album.songs && Object.values(this.props.album.songs).length) ? 
           ( <div className="waveFormContainer">
               {/* <div id="waveform"></div> */}
               <img className="waveForm" src={window.waveform} />

@@ -248,7 +248,7 @@ class AlbumShow extends React.Component {
                       <input type="text" className="addingComment"placeholder="Writing a comment would go here if the application allowed it--unfortunately does not"/>
                     </div> */}
                     <div className="albumShowTracklist">
-                      {(this.state.album.songs && this.state.album.songs.length) ?
+                      {(this.state.album.songs && Object.values(this.state.album.songs).length) ?
                       (
                         Object.values(this.state.album.songs).map((song, index) => <AlbumShowSong
                           key={index}
@@ -287,7 +287,7 @@ class AlbumShow extends React.Component {
                     <div className="showMidRightCont">
                       Songs
                       <div className="showMidRightNum">
-                        {(this.state.album.songs && this.state.album.songs.length) ? (Object.values(this.state.album.songs).length) : (0)}
+                        {(this.state.album.songs && Object.values(this.state.album.songs).length) ? (Object.values(this.state.album.songs).length) : (0)}
                       </div>
                     </div>
                     <div className="shamelessPlug">

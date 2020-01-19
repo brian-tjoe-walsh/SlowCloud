@@ -38,6 +38,7 @@ class UserShow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    debugger
     if (prevProps.artistId !== this.props.artistId) {
       this.props.fetchUser(this.props.artistId)
         .then((res) => this.setState({
@@ -126,7 +127,7 @@ class UserShow extends React.Component {
                 </div>
 
                 <div className="showLeftAndRight">
-                  {(artistAlbums.length) ? 
+                  {(Object.values(this.state.albums).length) ? 
                   (
                   <div className="userAlbumList">
                     {artistAlbums.map((album) => {

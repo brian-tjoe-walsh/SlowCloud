@@ -1289,7 +1289,7 @@ function (_React$Component) {
           className: "albumShowMidLeft"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "albumShowTracklist"
-        }, this.state.album.songs && this.state.album.songs.length ? Object.values(this.state.album.songs).map(function (song, index) {
+        }, this.state.album.songs && Object.values(this.state.album.songs).length ? Object.values(this.state.album.songs).map(function (song, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_songs_album_show_song__WEBPACK_IMPORTED_MODULE_4__["default"], {
             key: index,
             index: index,
@@ -1319,7 +1319,7 @@ function (_React$Component) {
           className: "showMidRightCont"
         }, "Songs", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showMidRightNum"
-        }, this.state.album.songs && this.state.album.songs.length ? Object.values(this.state.album.songs).length : 0)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, this.state.album.songs && Object.values(this.state.album.songs).length ? Object.values(this.state.album.songs).length : 0)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "shamelessPlug"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "https://www.linkedin.com/in/brian-tjoe-walsh-89086991/",
@@ -2124,6 +2124,8 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
+      debugger;
+
       if (prevProps.artistId !== this.props.artistId) {
         this.props.fetchUser(this.props.artistId).then(function (res) {
           return _this3.setState({
@@ -2239,7 +2241,7 @@ function (_React$Component) {
           currentUserId: this.props.currentUserId
         }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showLeftAndRight"
-        }, artistAlbums.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, Object.values(this.state.albums).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
         }, artistAlbums.map(function (album) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_show_album__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2557,14 +2559,14 @@ function (_React$Component) {
       }, this.props.artist.username), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/albums/".concat(this.props.album.id),
         className: "showAlbumTitle"
-      }, this.props.album.title))), this.props.album.songs && this.props.album.songs.length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, this.props.album.title))), this.props.album.songs && Object.values(this.props.album.songs).length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "empty-user-show-container"
       }, Object.values(this.props.album.songs).length, " Songs") : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "empty-user-show-container"
       }, "0 Songs", this.props.state.session && this.props.state.session.id === this.props.album.user_id ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"], {
         to: "/upload/",
         className: "upload-song-button"
-      }, "Upload A Song") : null)), this.props.album.songs && this.props.album.songs.length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Upload A Song") : null)), this.props.album.songs && Object.values(this.props.album.songs).length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         className: "waveForm",
