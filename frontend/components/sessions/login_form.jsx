@@ -6,10 +6,33 @@ class LoginForm extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      mounted: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
+  }
+
+  componentDidMount() {
+    let btn = document.getElementById("log/sign");
+
+    if (!this.state.mounted && btn) {
+      // Execute a function when the user releases a key on the keyboard
+      btn.addEventListener("keydown", function (event) {
+        debugger
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+          // Cancel the default action, if needed
+          event.preventDefault();
+          // Trigger the button element with a click
+          btn.click();
+        }
+      });
+    }
+  }
+
+  componentWillUnmount() {
+
   }
 
   handleSubmit(e) {
@@ -83,7 +106,7 @@ class LoginForm extends React.Component {
               placeholder="Your Password"
             />
 
-            <input className="button" type="submit" value="Sign In"/>
+            <input id="log/sign" className="button" type="submit" value="Sign In"/>
           </div>
 
         </form>

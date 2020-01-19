@@ -5022,11 +5022,11 @@ function (_React$Component) {
           href: "https://github.com/bbriannwalshh",
           className: "greetingLearnMore",
           target: "_blank"
-        }, "Checkout Github"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        }, "Github"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "https://bbriannwalshh.github.io/personal-portfolio/",
           className: "greetingUploading",
           target: "_blank"
-        }, "View Portfolio"))));
+        }, "Portfolio"))));
       }
     }
   }]);
@@ -5182,7 +5182,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(LoginForm).call(this, props));
     _this.state = {
       username: "",
-      password: ""
+      password: "",
+      mounted: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleDemo = _this.handleDemo.bind(_assertThisInitialized(_this));
@@ -5190,6 +5191,28 @@ function (_React$Component) {
   }
 
   _createClass(LoginForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var btn = document.getElementById("log/sign");
+
+      if (!this.state.mounted && btn) {
+        // Execute a function when the user releases a key on the keyboard
+        btn.addEventListener("keydown", function (event) {
+          debugger; // Number 13 is the "Enter" key on the keyboard
+
+          if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault(); // Trigger the button element with a click
+
+            btn.click();
+          }
+        });
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {}
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       var _this2 = this;
@@ -5277,6 +5300,7 @@ function (_React$Component) {
         onChange: this.update('password'),
         placeholder: "Your Password"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "log/sign",
         className: "button",
         type: "submit",
         value: "Sign In"

@@ -114,7 +114,11 @@
 }
 
 .profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin: 15px 0px 0px 5px;
+  min-width: 90px;
   width: 30%;
   border: none;
   background: transparent;
