@@ -22,13 +22,11 @@ class Uploading extends React.Component {
   }
 
   handleFile(e) {
-    // debugger
     this.setState({
       name: e.currentTarget.files[0].name,
       audioFile: e.currentTarget.files[0]
     });
 
-    // debugger
     let midPage =document.getElementsByClassName("uploadForm");
     $(midPage).addClass("uploadFormAfterClick");
 
@@ -45,7 +43,6 @@ class Uploading extends React.Component {
   }
 
   handlePic(e) {
-    // debugger
     this.setState({
       picture: e.currentTarget.files[0],
       picName: e.currentTarget.files[0].name
@@ -74,10 +71,9 @@ class Uploading extends React.Component {
 
   render() {
     let loc = {url: "/upload"}
-    // debugger
     return(
       <div className="flexing">
-        <NavBarContainer loc={loc}/>
+        <NavBarContainer loc={loc} history={this.props.history}/>
         <div className="uploadMidPage">
           <div className="uploadForm">
             <div className="uploadTitle">
@@ -85,7 +81,7 @@ class Uploading extends React.Component {
             </div>
 
             <div className="uploadButton">
-              <input type="file" onChange={this.handleFile.bind(this)} className="chooseFile" />
+              <input type="file" accept=".flac,.mp3,.mp4,.m4a,.aac,.wav,.alac,.aiff" onChange={this.handleFile.bind(this)} className="chooseFile" />
               <button className="fakeButton">Choose file to upload </button>
             </div>
 
@@ -122,11 +118,6 @@ class Uploading extends React.Component {
                   <div className="uploadTitleBox">
                     <p>Album</p>
                     <input type="text" className="titleInput" placeholder="Name your album"/>
-                    {/* <div className="uploadAlbumList">
-                      <div value=""></div>
-                      <div value=""></div>
-                      <div value="New Album">New Album</div>
-                    </div> */}
                   </div>
 
                   <div className="uploadDescriptionBox">

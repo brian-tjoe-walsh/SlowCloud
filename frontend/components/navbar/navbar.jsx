@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LoginButton from '../sessions/login_button';
+import SignupButton from '../sessions/signup_button';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -8,8 +10,14 @@ class NavBar extends React.Component {
     this.logout = this.props.logout;
     this.state = { 
       currentUser: this.props.currentUser,
-      open: false };
+      open: false,
+      search: "" 
+    };
     this.toggle = this.toggle.bind(this);
+    this.loggingOut = this.loggingOut.bind(this);
+    this.sendSearch = this.sendSearch.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -40,118 +48,100 @@ class NavBar extends React.Component {
     }
   }
 
-  // clicked() {
-    
-  //   return e => {
-  //     ele = e.currentTarget;
-  //     ($(ele).addClass("clicked"));
-  //   };
-  // }
-
   toggle() {
-    // return e => {
       if (this.state.open) {
         this.setState({open: false});
       } else {
         this.setState({open: true});
       }
-    
-      // ele = e.currentTarget;
-      // return ($(ele).addClass("clicked"));
-    // };
+  }
+
+  loggingOut() {
+    this.logout()
+    .then(() => { window.location.reload(); });
+  }
+
+  updateSearch(search) {
+    return (e) => {
+      this.setState({ [search]: e.currentTarget.value});
+    };
+  }
+
+  sendSearch() {
+    let search = this.state.search.split(" ").join("%20");
+    this.props.history.push(`/search?query=${search}`);
+  }
+
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      let search = this.state.search.split(" ").join("%20");
+      this.props.history.push(`/search?query=${search}`);
+    }
   }
 
   render() {
-    // debugger
-    if (this.state.currentUser) {
-      return (
-        <div className="navBar">
-          <div className="components">
-            <Link to="/discover" className="mainLogo">
-              <img className="navShoe" src={window.shoe} />
-              {/* <Link to="/discover" className="mainLogoText">SLOWCLOUD</Link> */}
-            </Link>
-            <Link to="/discover" className="link home">Home</Link>
-            <Link to={`/artists/${this.state.currentUser.id}`} className="link library">Library</Link>
-            <form className="search" >
-              <input type="text"
-                className="bar"
-                placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
-              />
-            </form>
-            <Link to="/upload" className="link upload">Upload</Link>
-
-            {/* <button className="profile">This is empty</button> */}
-            <Link to={`/artists/${this.state.currentUser.id}`}>
-              <div className="navBarProfile">
-                <img src={this.state.currentUser.photoUrl} className="albumShowMiniPic navBarProfPic"/>
-                <div className="profile" >{this.state.currentUser.username}</div>
-              </div>
-            </Link>
-
-            <div className="menu">
-              <div className="dropDown" onClick={this.toggle}>
-                {(this.state.open) ? (
-                  <div className="dropDown">
-                    <div>...</div>
-                    <div className="flexingRight">
-                      <button
-                        onClick={this.logout}
-                        className="loggingOut"
-                      >Logout
-                    </button>
-                    </div>
-                  </div>
-                ) : <div>...</div>}
-              </div>
+    return (
+      <div className="navBar">
+        <div className="components">
+          <Link to="/discover" className="mainLogo">
+            <img className="navShoe" src={window.shoe} />
+          </Link>
+          <Link to="/discover" className="link home">Home</Link>
+          {(this.state.currentUser) ? 
+          (<Link to={`/artists/${this.state.currentUser.id}`} className="link library">Library</Link>)
+          :
+          (<Link to="/library" className="link library">Library</Link>)
+          }
+          <form className="search" >
+            <input className="bar"
+              type="text"
+              value={this.state.search}
+              onChange={this.updateSearch('search')}
+              placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
+              onKeyPress={this.handleKeyPress}
+            />
+            <div>
+              <i className="fas fa-search" onClick={this.sendSearch}></i>
             </div>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="navBar">
-          <div className="components">
-            <Link to="/discover" className="mainLogo">
-              <img className="navShoe" src={window.shoe} />
-              {/* <Link to="/discover" className="mainLogoText">SLOWCLOUD</Link> */}
-            </Link>
-            <Link to="/discover" className="link home">Home</Link>
-            <Link to="/library" className="link library">Library</Link>
-            <form className="search" >
-              <input type="text"
-                className="bar"
-                placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
-              />
-              <div>
-                <i className="far fa-search"></i>
-              </div>
-            </form>
-            <Link to="/upload" className="upload">Upload</Link>
+          </form>
+          {
+          (this.state.currentUser) ? 
+            (<div className="navBarArrange">
+              <Link to="/upload" className="link upload">Upload</Link>
 
-            {/* <button className="profile">This is empty</button> */}
-            <Link to="/login" className="profile" >Login</Link>
-
-            <div className="menu">
-              <div className="dropDown" onClick={this.toggle}>
-                {(this.state.open) ? (
-                  <div className="dropDown">
-                    <div>...</div>
-                    <div className="flexingRight">
-                      <button
-                        onClick={this.logout}
-                        className="loggingOut"
-                      >Logout
-                    </button>
+              <Link to={`/artists/${this.state.currentUser.id}`}>
+                <div className="navBarProfile">
+                  <img src={this.state.currentUser.photoUrl} className="albumShowMiniPic navBarProfPic" />
+                  <div className="profile" >{this.state.currentUser.username}</div>
+                </div>
+              </Link>
+              <div className="menu">
+                <div className="dropDown" onClick={this.toggle}>
+                  {(this.state.open) ? (
+                    <div className="dropDown">
+                      <div className="dot-dot-dot">...</div>
+                      <div className="flexingRight">
+                        <button
+                          onClick={this.loggingOut}
+                          className="loggingOut" >
+                          Logout
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ) : <div>...</div>}
+                  ) : <div className="dot-dot-dot">...</div>}
+                </div>
               </div>
-            </div>
-          </div>
+            </div>)
+          :
+            (<div className="logSign">
+              <LoginButton background="navBarLogin" />
+
+              <SignupButton background="navBarSignup" />
+            </div>)
+          }
         </div>
-      )
-    }
+      </div>
+    )
   }
 }
 

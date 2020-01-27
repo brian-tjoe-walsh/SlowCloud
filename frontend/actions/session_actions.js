@@ -47,3 +47,8 @@ export const signup = (user) => (dispatch) => {
   // .fail(errors => dispatch(receiveErrors(errors)));
 };
 
+export const updateUser = (user) => dispatch => {
+  return SessionApiUtil.update(user)
+    .then(user => dispatch(receiveCurrentUser(user)))
+    .then( ele => location.reload(true));
+};

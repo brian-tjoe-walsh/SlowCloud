@@ -1,17 +1,7 @@
-.showMidPage {
-  width: 80%;
-  max-width: 1180px;
-  min-width: 750px;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  // height:1400px;
-}
-
 .songBanner {
   width: 100%;
   height: 380px;
-  background-image: linear-gradient(to bottom right, #f9f9f9, #7c7c7c);
+  background-image: linear-gradient(to bottom right, rgb(255, 227, 240), rgb(201, 183, 209));
   display: flex;
   justify-content: space-between;
 }
@@ -24,6 +14,7 @@
 .fas {
   font-size: 60px;
   color: rgb(175, 116, 202);
+  cursor: pointer;
 }
 
 .bannerLeft {
@@ -45,11 +36,14 @@
   display: flex;
   align-items: center;
   font-size: 15px;
-  background-color: rgb(70, 70, 70);
-  color: rgb(231, 231, 231);
-  margin-bottom: 5px;
+  // background-color: rgb(70, 70, 70);
+  color: rgb(112, 111, 111);
+  font-weight: bold;
+  // color: rgb(231, 231, 231);
+  // margin-bottom: 5px;
   padding: 1px 2px 0px 2px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .showTrack {
@@ -57,9 +51,11 @@
   padding: 2px 2px 2px 2px;
   display: flex;
   align-items: center;
-  font-size: 25px;
-  background-color: rgb(70, 70, 70);
-  color: white;
+  font-size: 32px;
+  color: rgb(70, 70, 70);
+  font-weight: bold;
+  // background-color: rgb(70, 70, 70);
+  // color: white;
 }
 
 .albumArtBackground {
@@ -74,7 +70,7 @@
   display: flex;
   flex-direction: column;
   background: white;
-  // height:1400px;
+  min-height:700px;
 }
 
 .showFlexing {
@@ -83,6 +79,7 @@
   flex-direction: column;
   align-items: center;
   background: #f0f0f0;
+  min-height: 700px;
 }
 
 .albumShowMidLeft {
@@ -100,7 +97,7 @@
   border-left: 1px solid #f0f0f0;
   margin: 0px 0px 40px 0px;
   // position: fixed;
-  // height: 700px;
+  min-height: 300px;
 }
 
 .albumShowLeftAndRight {
@@ -136,16 +133,19 @@
   box-sizing: border-box;
   font-size: .9em;
   color: #a89e9e;
+  cursor: text;
 }
 
 .albumShowTracklist {
   margin: 20px 20px 100px 20px;
+  // display: flex;
+  // justify-content: flex-end;
 }
 
 .albumShowTitle {
   // font-family: 'Lato', sans-serif;
   // font-weight: lighter;
-  
+  cursor: pointer;
   margin: 0px 0px 0px 10px;
 }
 
@@ -154,11 +154,14 @@
   flex-direction: row;
   margin: 0px 0px 0px 10px;
   color: rgb(109, 108, 108);
+  cursor: pointer;
 }
 
 .albumShowMiniPic {
   width: 30px;
   height: 30px;
+  min-width: 30px;
+  cursor: pointer;
 }
 
 .albumSpread {
@@ -167,9 +170,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .fa-play {
+  font-size: 12px;
+  color: inherit;
+  margin: 0px 5px 0px 5px;
+}
+.fa-pause {
   font-size: 12px;
   color: rgb(196, 196, 196);
   margin: 0px 5px 0px 5px;
@@ -184,10 +193,65 @@
 }
 
 .playCount {
-  color: rgb(196, 196, 196); 
+  cursor: pointer;
+//   color: rgb(196, 196, 196); 
 }
 
 .albumShowTitleRightSide {
   display: flex;
   flex-direction: row;
+  color: rgb(196, 196, 196); 
+  cursor: pointer;
+}
+
+.no-songs-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 800px;
+}
+
+.no-songs-background {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: rgba(197, 195, 195, 0.596);
+}
+
+#big-music {
+  font-size: 200px;
+  color: rgba(218, 218, 218, 0.596);
+  cursor: default;
+}
+
+.no-songs-text {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-song-button-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  background-color: rgb(255, 255, 255);
+  color: rgba(102, 102, 102, 0.753);
+  border-radius: 4px;
+  width: 170px;
+  height: 20px;
+  font-size: 15px;
+  // margin: 10px 20px 10px 0px;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid rgb(187, 187, 187);
+  vertical-align: middle;
+  margin: 15px 0px 10px 0px;
+  cursor: pointer;
 }

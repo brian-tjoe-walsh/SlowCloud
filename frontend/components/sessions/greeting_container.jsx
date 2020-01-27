@@ -8,7 +8,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  login: () => dispatch(openModal('login')),
+  signup: () => dispatch(openModal('signup'))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Greeting);

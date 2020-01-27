@@ -6,6 +6,7 @@
   width: 100%;
   height: 46px;
   background: #323232;
+  /* background: #3f3f3f; */
   z-index: 5;
 }
 
@@ -75,6 +76,15 @@
   position: relative;
 }
 
+.fa-search {
+  color: gray;
+  position:absolute;
+  top: 15px;
+  right: 17px;
+  /* left: 510px; */
+  font-size: 15px;
+}
+
 .bar {
     height: 60%;
     width: 100%;
@@ -86,10 +96,11 @@
     box-sizing: border-box;
     font-size: .9em;
     color: #646464;
+    cursor: text;
 }
 
 .upload {
-  width: 5%;
+  width: 15%;
   border:none;
   background: transparent;
   font-size: .9em;
@@ -103,13 +114,18 @@
 }
 
 .profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin: 15px 0px 0px 5px;
+  min-width: 90px;
   width: 30%;
   border: none;
   background: transparent;
   font-size: .9em;
   color: #c8c8c8;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .profile:hover {
@@ -127,6 +143,7 @@
   background: transparent;
   font-size: 30px;
   color: #c8c8c8;
+  cursor: pointer;
 }
 
 .menu:hover {
@@ -145,6 +162,11 @@
   flex-direction: column; 
   align-items: center;
   width: 50px;
+  cursor: pointer;
+}
+
+.dot-dot-dot {
+  cursor: pointer;
 }
 
 .loggingOut {
@@ -156,6 +178,7 @@
   border: none;
   color:white;
   z-index: 2;
+  cursor: pointer;
 }
 
 .flexingRight {
@@ -182,6 +205,7 @@
   vertical-align: middle;
   font-size: .9em;
   color: #c8c8c8;
+  cursor: pointer;
 }
 
 .navBarProfile {
@@ -200,4 +224,53 @@
 
 a {
   text-decoration: none;
+}
+
+.logSign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBarLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.719);
+  border: 1px solid rgba(255, 255, 255, 0.644);
+  border-radius: 4px;
+  width: 90px;
+  height: 25px;
+  font-size: 15px;
+  margin: 0px 0px 0px 20px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.navBarSignup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(175, 116, 202);
+  color: rgba(255, 255, 255, 0.767);
+  border-radius: 4px;
+  width: 130px;
+  height: 25px;
+  font-size: 15px;
+  margin: 0px 0px 0px 30px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+
+
+
+.navBarArrange {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

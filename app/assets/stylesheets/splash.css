@@ -22,6 +22,7 @@
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .or {
@@ -41,6 +42,7 @@
   border-radius: 4px;
   box-sizing: border-box;
   font-size: .9em;
+  cursor: text;
 }
 
 .splashTrend {
@@ -50,4 +52,11 @@
 
 .trendingRows {
   margin: 0px 20px 0px 20px;
+}
+
+#splashSearch {
+  left: 565px;
+  top: 20px;
+  width: 15px;
+  cursor: pointer;
 }

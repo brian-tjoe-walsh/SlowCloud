@@ -1,7 +1,14 @@
+button {
+  padding: 0px;
+  background: none;
+  border:none;
+}
+
 .mediaBar {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   border-top: 1px solid #c8c8c8;  
   height: 49px;
   width: 100%;
@@ -10,12 +17,112 @@
   bottom:0;
 }
 
+// .loadingBar {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   border-top: 1px solid #c8c8c8;  
+//   height: 49px;
+//   width: 100%;
+//   background: #f0f0f0;
+//   position:fixed;
+//   bottom:0;
+// }
+
+
+
+.mediaControls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px;
+  width: 10%;
+}
+
+.mediaProgress {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 45%;
+  height: 100%;
+}
+
+.mediaCurrentTime {
+  font-size: 15px;
+  color: rgb(210, 128, 248);
+}
+
+.mediaRemainingTime {
+  font-size: 15px;
+  color: rgb(210, 128, 248);
+}
+
+.mediaDescription {
+  width: 20%;
+  height: 100%;
+}
 .mediaPlayer {
-  width: 100%;
+  display: none;
 }
 
-.mediaPlayer:focus {
-  // width: 100%;
-  outline: 0;
+// .mediaPlayer:focus {
+//     width: 100%;
+//   outline: 0;
+// }
+
+.mediaBack .mediaPlay  .mediaForward .mediaRepeat{
+  display: flex;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+  outline: none;
 }
 
+*:focus {
+    outline: none;
+}
+
+#mediaBack {
+  position: static;
+  font-size: 14px;
+  color: rgb(204, 202, 202);
+  outline: none;
+}
+#mediaPlay {
+  position: static;
+  font-size: 14px;
+  color: rgb(92, 91, 91);
+  outline: none;
+}
+#mediaPause {
+  position: static;
+  font-size: 14px;
+  color: rgb(92, 91, 91);
+  outline: none;
+}
+#mediaForward {
+  position: static;
+  font-size: 14px;
+  color: rgb(204, 202, 202);
+}
+
+#mediaRepeat {
+  position: static;
+  font-size: 14px;
+  color: rgb(204, 202, 202);
+}
+
+.pink-bar {
+  height: 2px;
+  width: 80%;
+  background: rgb(201, 201, 201);
+
+}
+
+.pink-juice {
+  height: 2px;
+  width: 0%;
+  background: rgb(210, 128, 248);
+}

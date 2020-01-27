@@ -10,6 +10,7 @@ class UsersIndex extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.fetchUsers()
       .then((res) => this.setState({ users: Object.values(res.users) }));
   }
@@ -23,7 +24,7 @@ class UsersIndex extends React.Component {
 
       return (
       <div>
-        <NavBarContainer loc={loc} />
+          <NavBarContainer loc={loc} history={this.props.history} />
       </div>
       );
 
@@ -31,7 +32,7 @@ class UsersIndex extends React.Component {
 
       return (
         <div>
-          <NavBarContainer loc={loc}/>
+          <NavBarContainer loc={loc} history={this.props.history}/>
           <div className="indexBackground">
             <div className="indexMidpage">
 

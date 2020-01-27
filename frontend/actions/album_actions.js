@@ -39,7 +39,10 @@ export const deleteAlbum = (albumId) => dispatch => (
     )
 );
 
-export const createAlbum = (album) => dispatch => (
-  AlbumApiUtil.createAlbum(album)
-    .then((album) => dispatch(receiveAlbum(album)))
-)
+export const createAlbum = (album) => dispatch => {
+  return (
+    AlbumApiUtil.createAlbum(album)
+      .then((album) => dispatch(receiveAlbum(album)))
+      .then(ele => location.reload(true))
+  );
+};

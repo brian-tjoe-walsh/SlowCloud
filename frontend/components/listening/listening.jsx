@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import Modal from '../modals/modal_container';
+import Modal from '../modals/modal';
 import NavBarContainer from '../navbar/navbar_container';
 
 class Listening extends React.Component {
@@ -10,7 +10,7 @@ class Listening extends React.Component {
     let num;
 
     while (indices.length < 3) {
-      num = Math.floor(Math.random() * this.props.albums.length);
+      num = Math.floor(Math.random() * Object.keys(this.props.albums).length);
 
       if (!indices.includes(this.props.albums[num])) {
         indices.push(this.props.albums[num]);
@@ -22,8 +22,7 @@ class Listening extends React.Component {
 
 
   render() {
-    let indices = [this.props.albums[17], this.props.albums[27], this.props.albums[42]];
-    // debugger
+    let indices = this.getRandom();
     return (
       <div className="listeningBox">
        <div className="listeningAlbums">
@@ -38,8 +37,8 @@ class Listening extends React.Component {
         ))}
        </div>
        <div className="shamelessPlug">
-          <a href="https://www.linkedin.com/in/brian-tjoe-walsh-89086991/"><i className="fab fa-linkedin"></i></a>
-          <a href="https://github.com/bbriannwalshh"><i className="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/brian-tjoe-walsh-89086991/" target="_blank"><i className="fab fa-linkedin"></i></a>
+          <a href="https://github.com/bbriannwalshh" target="_blank"><i className="fab fa-github"></i></a>
        </div>
       </div>
     );
