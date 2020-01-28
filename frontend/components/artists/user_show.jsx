@@ -38,7 +38,6 @@ class UserShow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    debugger
     if (prevProps.artistId !== this.props.artistId) {
       this.props.fetchUser(this.props.artistId)
         .then((res) => this.setState({
@@ -50,6 +49,7 @@ class UserShow extends React.Component {
   }
 
   getAlbums() {
+    // debugger
     let artistAlbums = [];
     let albums; 
     
@@ -97,6 +97,7 @@ class UserShow extends React.Component {
         <NavBarContainer loc={loc} history={this.props.history} />
       </div>);
     } else {
+      debugger
       let artistAlbums = this.getAlbums();
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };
@@ -127,7 +128,7 @@ class UserShow extends React.Component {
                 </div>
 
                 <div className="showLeftAndRight">
-                  {(Object.values(this.state.albums).length) ? 
+                  {(this.state.albums && Object.values(this.state.albums).length) ? 
                   (
                   <div className="userAlbumList">
                     {artistAlbums.map((album) => {

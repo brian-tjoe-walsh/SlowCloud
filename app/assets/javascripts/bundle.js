@@ -2124,8 +2124,6 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
-      debugger;
-
       if (prevProps.artistId !== this.props.artistId) {
         this.props.fetchUser(this.props.artistId).then(function (res) {
           return _this3.setState({
@@ -2140,6 +2138,7 @@ function (_React$Component) {
     value: function getAlbums() {
       var _this4 = this;
 
+      // debugger
       var artistAlbums = [];
       var albums;
 
@@ -2198,6 +2197,7 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
+        debugger;
         var artistAlbums = this.getAlbums();
 
         if (artist.id === this.state.currentUserId) {
@@ -2241,7 +2241,7 @@ function (_React$Component) {
           currentUserId: this.props.currentUserId
         }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "showLeftAndRight"
-        }, Object.values(this.state.albums).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, this.state.albums && Object.values(this.state.albums).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "userAlbumList"
         }, artistAlbums.map(function (album) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_show_album__WEBPACK_IMPORTED_MODULE_4__["default"], {
