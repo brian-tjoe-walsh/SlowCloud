@@ -18,6 +18,9 @@ Users can upload, delete, and listen to music.
 Users have a profile that shows their uploaded songs, as well as many of the artists and songs that birthed the genre.
 
 ## Login & Sign Up
+
+![](slowcloud-intro.gif)
+
 SoundCloud's login and signup use a modal, in order to layer multiple components without allowing the user to interact with components in the background. Also, the process of animating a login/signup form similar to SoundCloud can be implemented using a number of methods, with this example using the @keyframes HTML rule. 
 
 ```
