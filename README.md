@@ -32,6 +32,9 @@ SoundCloud's login and signup use a modal, in order to layer multiple components
 ```
 
 ## Media Player
+
+![](slowcloud-song.gif)
+
 In order to emulate the original SoundCloud website, the media player is implemented in a way that will continually play while users switch from different pages. The music player uses the same functionality as soundcloud, with a play/pause button, a scroll bar, displaying the current time of the song's progress, as well as the added option of downloading the audio file directly. React was used in order to create a seamless music player. Although the player will re-render on website refreshing, the component only has to render once upon the site's initial loading. 
 
 ```
