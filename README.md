@@ -58,6 +58,9 @@ In order to emulate the original SoundCloud website, the media player is impleme
 ```
 
 ### Albums
+
+![](slowcloud-album.gif)
+
 An engineering decision made for SlowCloud is the incorporation of specific albums, in order to bridge the gap between SoundCloud's flexible song-uploading and a conventional streaming platform. While songs on Soundcloud can be arranged and sorted into playlists--which can operate similarly to albums--SlowCloud operates under the assumption that the content being uploaded is intended for professional consumption, and will be classified under an Album tag by default. This constituted a separate MVP to categorize albums, which are not only connected to users, but also songs. 
 
 ### Uploading Songs
