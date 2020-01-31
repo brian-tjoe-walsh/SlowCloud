@@ -15,10 +15,9 @@ class Uploading extends React.Component {
     };
 
     this.changePhoto = this.changePhoto.bind(this);
-  }
-
-  createAlbum() {
-
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
+    this.uploadingModal = this.uploadingModal.bind(this);
   }
 
   handleFile(e) {
@@ -57,6 +56,7 @@ class Uploading extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    debugger
 
     const formData = new FormData();
 
@@ -67,6 +67,8 @@ class Uploading extends React.Component {
     formData.append('song[audio_file]', this.state.audioFile);
 
     this.props.createNewSong(formData);
+    this.uploadingModal();
+
     // $.ajax({
     //   url: 'api/songs',
     //   method: 'POST',
@@ -75,6 +77,10 @@ class Uploading extends React.Component {
     //   processData: false
     // });
   } 
+
+  uploadingModal() {
+    
+  }
 
   update(field) {
     return e => {
@@ -181,7 +187,7 @@ class Uploading extends React.Component {
               </div>
               <div className="uploadSubBottom">
                 <Link to="/discover" className="uploadCancel">Cancel</Link>
-                <Link to="/library" className="uploadUpload">Upload</Link>
+                <div onClick={this.handleSubmit} className="uploadUpload">Upload</div>
               </div>
             </div>
           </div>

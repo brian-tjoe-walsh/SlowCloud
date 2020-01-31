@@ -31,12 +31,11 @@ export const createNewSong = (song) => dispatch => {
   debugger
   return(
     SongApiUtil.createNewSong(song)
-      .then(song => dispatch(receiveSong(song))
+      .then(song => dispatch(receiveSong(song)))
       .then((ele) => {
         debugger
         return (location.reload(true));
       })
-    )
   );
 };
 

@@ -414,10 +414,10 @@ var createNewSong = function createNewSong(song) {
   return function (dispatch) {
     debugger;
     return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["createNewSong"](song).then(function (song) {
-      return dispatch(receiveSong(song)).then(function (ele) {
-        debugger;
-        return location.reload(true);
-      });
+      return dispatch(receiveSong(song));
+    }).then(function (ele) {
+      debugger;
+      return location.reload(true);
     });
   };
 };
@@ -6474,13 +6474,13 @@ function (_React$Component) {
       photoPreview: null
     };
     _this.changePhoto = _this.changePhoto.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    _this.uploadingModal = _this.uploadingModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Uploading, [{
-    key: "createAlbum",
-    value: function createAlbum() {}
-  }, {
     key: "handleFile",
     value: function handleFile(e) {
       e.preventDefault();
@@ -6517,13 +6517,15 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      debugger;
       var formData = new FormData();
       formData.append('song[title]', this.state.title);
       formData.append('song[album_id]', this.state.album.id);
       formData.append('song[user_id]', this.state.album.user_id);
       formData.append('song[genre]', this.state.genre);
       formData.append('song[audio_file]', this.state.audioFile);
-      this.props.createNewSong(formData); // $.ajax({
+      this.props.createNewSong(formData);
+      this.uploadingModal(); // $.ajax({
       //   url: 'api/songs',
       //   method: 'POST',
       //   data: formData,
@@ -6531,6 +6533,9 @@ function (_React$Component) {
       //   processData: false
       // });
     }
+  }, {
+    key: "uploadingModal",
+    value: function uploadingModal() {}
   }, {
     key: "update",
     value: function update(field) {
@@ -6639,8 +6644,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/discover",
         className: "uploadCancel"
-      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/library",
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.handleSubmit,
         className: "uploadUpload"
       }, "Upload"))))));
     }
