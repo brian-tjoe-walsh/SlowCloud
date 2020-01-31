@@ -1,20 +1,20 @@
 import React from 'react';
 import NavBarContainer from '../navbar/navbar_container';
 import {Link} from 'react-router-dom';
+import AlbumModal from '../album/album_modal_container';
 
 class Uploading extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      audioFile: null,
-      album: "",
-      picture: null,
-      picName: null,
       title: "",
-      description: ""
+      audioFile: null,
+      album: null,
+      genre: "",
+      photoPreview: null
     };
 
+    this.changePhoto = this.changePhoto.bind(this);
   }
 
   createAlbum() {
@@ -22,6 +22,7 @@ class Uploading extends React.Component {
   }
 
   handleFile(e) {
+    e.preventDefault();
     this.setState({
       name: e.currentTarget.files[0].name,
       audioFile: e.currentTarget.files[0]
@@ -42,11 +43,16 @@ class Uploading extends React.Component {
 
   }
 
-  handlePic(e) {
-    this.setState({
-      picture: e.currentTarget.files[0],
-      picName: e.currentTarget.files[0].name
-    });
+  changePhoto(e) {
+    debugger
+    let currentUserId = this.props.state.session.id;
+    let albumId= e.currentTarget.options[e.currentTarget.selectedIndex].value
+    if (!this.state.photoPreview || this.state.photoPreview.id !== albumId) {
+      let user = this.props.state.entities.users[currentUserId];
+      let album = user.albums[albumId];
+      this.setState({photoPreview: album.albumUrl, album: album});
+    }
+
   }
 
   handleSubmit(e) {
@@ -54,12 +60,20 @@ class Uploading extends React.Component {
 
     const formData = new FormData();
 
-    formData.append('song[name]', this.state.name);
-    formData.append('song[audioFile]', this.state.audioFile);
-    formData.append('song[picture]', this.state.picture);
-    formData.append('song[picName]', this.state.picName);
     formData.append('song[title]', this.state.title);
-    formData.append('song[description]', this.state.description);
+    formData.append('song[album_id]', this.state.album.id);
+    formData.append('song[user_id]', this.state.album.user_id);
+    formData.append('song[genre]', this.state.genre);
+    formData.append('song[audio_file]', this.state.audioFile);
+
+
+    $.ajax({
+      url: 'api/songs',
+      method: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false
+    });
   } 
 
   update(field) {
@@ -70,6 +84,14 @@ class Uploading extends React.Component {
 
 
   render() {
+    debugger
+    let albums = this.props.state.entities.users[this.props.state.session.id].albums;
+    let keys = Object.keys(albums);
+    let albumsArr = [];
+    for (let i = 0; i < keys.length; i++) {
+      albumsArr.push(albums[keys[i]]);
+    }
+
     let loc = {url: "/upload"}
     return(
       <div className="flexing">
@@ -97,11 +119,11 @@ class Uploading extends React.Component {
             <div className="uploadSubBox">
               <div className="uploadSubTop">
                 <div className="uploadPic">
-                  {(this.state.picture) ? <img src={this.state.picture}/>: null}
-                  <div className="uploadPicButton">
+                  {(this.state.photoPreview) ? <img  className="uploadPic noMargin" src={this.state.photoPreview}/>: null}
+                  {/* <div className="uploadPicButton">
                     <input type="file" onChange={this.handlePic.bind(this)} className="choosePicFile" />
                     <button className="fakePicButton">Upload Image</button>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="uploadDescription">
                   
@@ -117,17 +139,30 @@ class Uploading extends React.Component {
 
                   <div className="uploadTitleBox">
                     <p>Album</p>
-                    <input type="text" className="titleInput" placeholder="Name your album"/>
+                    {(albums) ? 
+                      <select className="titleInput" onChange={this.changePhoto}>
+                        <option value="option" selected disabled>Choose an Album</option>
+                        {(albumsArr.map( ele => {
+                         return (<option value={ele.id}>{ele.title}</option>);
+                        }))}
+                      </select>
+                    : 
+                    (<div>
+                      <AlbumModal currentUserId={this.props.state.session.id} />
+                    </div>
+                    )}    
                   </div>
-
+                  <div className="uploadTitleBox">
+                    <p>Genre</p>
+                    <input className="titleInput"
+                      type="genre"
+                      value={this.state.genre}
+                      onChange={this.update('genre')}
+                      placeholder="Choose your genre"
+                    />
+                  </div>
                   <div className="uploadDescriptionBox">
-                    <p>Description</p>
-                    <textarea className="textArea" 
-                      cols="30" 
-                      rows="10" 
-                      value={this.state.description} 
-                      onChange={this.update('description')}
-                      placeholder="Describe your song" />
+                    <AlbumModal currentUserId={this.props.state.session.id} />
                   </div>
                 </div>
               </div>

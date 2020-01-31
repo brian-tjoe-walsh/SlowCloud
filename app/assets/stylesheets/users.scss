@@ -360,6 +360,13 @@ input[type='file'] {
   border-bottom: 1px solid #f0f0f0;
 }
 
+.album-preview {
+  height: 260px;
+  width: 260px;
+  background: #ebe9e9;
+  border-bottom: 1px solid #f0f0f0;
+}
+
 .create-album-button {
   display: flex;
   align-items: center;

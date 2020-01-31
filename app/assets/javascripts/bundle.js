@@ -760,7 +760,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AlbumForm).call(this, props));
     _this.state = {
       photoFile: null,
-      title: ""
+      title: "",
+      photoPreview: null
     }; // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDemo = this.handleDemo.bind(this);
 
@@ -777,13 +778,21 @@ function (_React$Component) {
   }, {
     key: "handleFile",
     value: function handleFile(e) {
+      var _this2 = this;
+
       e.preventDefault();
       var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this2.setState({
+          photoFile: file,
+          photoPreview: fileReader.result
+        });
+      };
 
       if (file) {
-        this.setState({
-          photoFile: file
-        });
+        fileReader.readAsDataURL(file);
       }
     }
   }, {
@@ -805,10 +814,10 @@ function (_React$Component) {
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
@@ -838,9 +847,12 @@ function (_React$Component) {
         placeholder: "Name your album"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "album-create-pic"
-      }, this.state.picture ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.picture
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.photoPreview ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "album-preview",
+        src: this.state.photoPreview
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "album-preview"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadPicButton"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
@@ -2611,10 +2623,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var artistId = ownProps.artistId || ownProps.match.params.artistId;
+  debugger;
   return {
     currentUserId: state.session.id,
     state: state,
-    artistId: ownProps.match.params.artistId
+    // artistId: ownProps.match.params.artistId,
+    artistId: artistId
   };
 };
 
@@ -6389,6 +6404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../album/album_modal_container */ "./frontend/components/album/album_modal_container.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -6401,13 +6417,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -6425,14 +6442,13 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Uploading).call(this, props));
     _this.state = {
-      name: "",
-      audioFile: null,
-      album: "",
-      picture: null,
-      picName: null,
       title: "",
-      description: ""
+      audioFile: null,
+      album: null,
+      genre: "",
+      photoPreview: null
     };
+    _this.changePhoto = _this.changePhoto.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -6442,6 +6458,7 @@ function (_React$Component) {
   }, {
     key: "handleFile",
     value: function handleFile(e) {
+      e.preventDefault();
       this.setState({
         name: e.currentTarget.files[0].name,
         audioFile: e.currentTarget.files[0]
@@ -6456,24 +6473,38 @@ function (_React$Component) {
       $(uploadFinePrint).addClass("uploadFinePrintAfterClick");
     }
   }, {
-    key: "handlePic",
-    value: function handlePic(e) {
-      this.setState({
-        picture: e.currentTarget.files[0],
-        picName: e.currentTarget.files[0].name
-      });
+    key: "changePhoto",
+    value: function changePhoto(e) {
+      debugger;
+      var currentUserId = this.props.state.session.id;
+      var albumId = e.currentTarget.options[e.currentTarget.selectedIndex].value;
+
+      if (!this.state.photoPreview || this.state.photoPreview.id !== albumId) {
+        var user = this.props.state.entities.users[currentUserId];
+        var album = user.albums[albumId];
+        this.setState({
+          photoPreview: album.albumUrl,
+          album: album
+        });
+      }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
       var formData = new FormData();
-      formData.append('song[name]', this.state.name);
-      formData.append('song[audioFile]', this.state.audioFile);
-      formData.append('song[picture]', this.state.picture);
-      formData.append('song[picName]', this.state.picName);
       formData.append('song[title]', this.state.title);
-      formData.append('song[description]', this.state.description);
+      formData.append('song[album_id]', this.state.album.id);
+      formData.append('song[user_id]', this.state.album.user_id);
+      formData.append('song[genre]', this.state.genre);
+      formData.append('song[audio_file]', this.state.audioFile);
+      $.ajax({
+        url: 'api/songs',
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false
+      });
     }
   }, {
     key: "update",
@@ -6487,6 +6518,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
+      var albums = this.props.state.entities.users[this.props.state.session.id].albums;
+      var keys = Object.keys(albums);
+      var albumsArr = [];
+
+      for (var i = 0; i < keys.length; i++) {
+        albumsArr.push(albums[keys[i]]);
+      }
+
       var loc = {
         url: "/upload"
       };
@@ -6522,17 +6562,10 @@ function (_React$Component) {
         className: "uploadSubTop"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadPic"
-      }, this.state.picture ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.picture
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "uploadPicButton"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file",
-        onChange: this.handlePic.bind(this),
-        className: "choosePicFile"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "fakePicButton"
-      }, "Upload Image"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.photoPreview ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "uploadPic noMargin",
+        src: this.state.photoPreview
+      }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadDescription"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadTitleBox"
@@ -6544,19 +6577,31 @@ function (_React$Component) {
         placeholder: "Name your song"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadTitleBox"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), albums ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "titleInput",
-        placeholder: "Name your album"
+        onChange: this.changePhoto
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "option",
+        selected: true,
+        disabled: true
+      }, "Choose an Album"), albumsArr.map(function (ele) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: ele.id
+        }, ele.title);
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        currentUserId: this.props.state.session.id
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadTitleBox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Genre"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "titleInput",
+        type: "genre",
+        value: this.state.genre,
+        onChange: this.update('genre'),
+        placeholder: "Choose your genre"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadDescriptionBox"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        className: "textArea",
-        cols: "30",
-        rows: "10",
-        value: this.state.description,
-        onChange: this.update('description'),
-        placeholder: "Describe your song"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        currentUserId: this.props.state.session.id
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadSubBottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -6594,7 +6639,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    song: {}
+    song: {},
+    state: state
   };
 };
 
@@ -39778,7 +39824,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

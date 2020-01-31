@@ -5,11 +5,16 @@ import UserShow from './user_show';
 import { addSong, playSong, pauseSong, deleteSong } from '../../actions/mediaPlayer_actions';
 import { updateUser } from '../../actions/session_actions';
 
-const mapStateToProps = (state, ownProps) => ({
-  currentUserId: state.session.id,
-  state: state,
-  artistId: ownProps.match.params.artistId,
-});
+const mapStateToProps = (state, ownProps) => {
+  let artistId = ownProps.artistId || ownProps.match.params.artistId;
+  debugger
+  return({
+    currentUserId: state.session.id,
+    state: state,
+    // artistId: ownProps.match.params.artistId,
+    artistId: artistId,
+  });
+}
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUser: (id) => dispatch(fetchUser(id)),

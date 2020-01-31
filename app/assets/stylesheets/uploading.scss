@@ -136,8 +136,12 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
+.noMargin {
+  margin: 0px;
+}
+
 .uploadPicButton {
-  position: relative;
+  position: fixed;
   width: 150px;
   height: 40px;
   margin: 5px;

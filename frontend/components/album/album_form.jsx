@@ -7,6 +7,7 @@ class AlbumForm extends React.Component {
     this.state = {
       photoFile: null,
       title: "",
+      photoPreview: null
     };
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDemo = this.handleDemo.bind(this);
@@ -23,9 +24,13 @@ class AlbumForm extends React.Component {
     e.preventDefault();
 
     let file = e.currentTarget.files[0];
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      this.setState({photoFile: file, photoPreview: fileReader.result});
+    };
 
     if (file) {
-      this.setState({ photoFile: file });
+      fileReader.readAsDataURL(file);
     }
   }
 
@@ -70,7 +75,7 @@ class AlbumForm extends React.Component {
                   placeholder="Name your album" />
               {/* </div> */}
             <div className="album-create-pic">
-              {(this.state.picture) ? <img src={this.state.picture} /> : null}
+              {(this.state.photoPreview) ? <img className="album-preview" src={this.state.photoPreview} /> : <div className="album-preview"></div>}
               <div className="uploadPicButton">
                 <input type="file" accept=".jpeg,.jpg,.tiff,.gif,.png,.pdf" onChange={this.handleFile.bind(this)} className="choosePicFile" />
                 <button className="fakePicButton">Upload Image</button>

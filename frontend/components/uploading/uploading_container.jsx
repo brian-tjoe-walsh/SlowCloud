@@ -4,7 +4,8 @@ import { createSong } from '../../actions/song_actions';
 
 
 const mapStateToProps = (state) => ({
-  song: {}
+  song: {},
+  state: state
 });
 
 const mapDispatchToProps = (dispatch) => ({
