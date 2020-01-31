@@ -23,6 +23,19 @@ export const createAlbum = album => {
   );
 };
 
+export const createNewAlbum = formData => {
+  debugger
+  return(
+    $.ajax({
+      method: 'POST',
+      url: 'api/albums',
+      data: formData,
+      contentType: false,
+      processData: false
+    })
+  );
+};
+
 export const updateAlbum = album => (
   $.ajax({
     method: 'PATCH',

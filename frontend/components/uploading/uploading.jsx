@@ -44,7 +44,7 @@ class Uploading extends React.Component {
   }
 
   changePhoto(e) {
-    debugger
+    // debugger
     let currentUserId = this.props.state.session.id;
     let albumId= e.currentTarget.options[e.currentTarget.selectedIndex].value
     if (!this.state.photoPreview || this.state.photoPreview.id !== albumId) {
@@ -66,14 +66,14 @@ class Uploading extends React.Component {
     formData.append('song[genre]', this.state.genre);
     formData.append('song[audio_file]', this.state.audioFile);
 
-
-    $.ajax({
-      url: 'api/songs',
-      method: 'POST',
-      data: formData,
-      contentType: false,
-      processData: false
-    });
+    this.props.createNewSong(formData);
+    // $.ajax({
+    //   url: 'api/songs',
+    //   method: 'POST',
+    //   data: formData,
+    //   contentType: false,
+    //   processData: false
+    // });
   } 
 
   update(field) {
@@ -84,7 +84,7 @@ class Uploading extends React.Component {
 
 
   render() {
-    debugger
+    // debugger
     let albums = this.props.state.entities.users[this.props.state.session.id].albums;
     let keys;
     let albumsArr;

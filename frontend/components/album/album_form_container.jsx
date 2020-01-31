@@ -4,6 +4,7 @@ import AlbumForm from './album_form';
 import { login, signup, clearErrors } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { createAlbum } from '../../actions/album_actions';
+import { createNewAlbum } from '../../actions/album_actions';
 
 
 const mapStateToProps = (state) => {
@@ -18,7 +19,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   clearErrors: () => dispatch(clearErrors()),
   createAlbum: album => dispatch(createAlbum(album)),
-  closeModal: () => dispatch(closeModal())
+  closeModal: () => dispatch(closeModal()),
+  createNewAlbum: (album) => dispatch(createNewAlbum(album))
 });
 
 export default connect(

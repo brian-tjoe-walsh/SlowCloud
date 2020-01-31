@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/album_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALBUMS, RECEIVE_ALBUM, REMOVE_ALBUM, fetchAlbums, fetchAlbum, deleteAlbum, createAlbum */
+/*! exports provided: RECEIVE_ALBUMS, RECEIVE_ALBUM, REMOVE_ALBUM, fetchAlbums, fetchAlbum, deleteAlbum, createAlbum, createNewAlbum */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -102,6 +102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbum", function() { return fetchAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAlbum", function() { return deleteAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAlbum", function() { return createAlbum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNewAlbum", function() { return createNewAlbum; });
 /* harmony import */ var _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/album_api_util */ "./frontend/util/album_api_util.js");
 
 var RECEIVE_ALBUMS = "RECEIVE_ALBUMS";
@@ -152,9 +153,22 @@ var deleteAlbum = function deleteAlbum(albumId) {
 };
 var createAlbum = function createAlbum(album) {
   return function (dispatch) {
+    debugger;
     return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createAlbum"](album).then(function (album) {
       return dispatch(receiveAlbum(album));
     }).then(function (ele) {
+      debugger;
+      return location.reload(true);
+    });
+  };
+};
+var createNewAlbum = function createNewAlbum(album) {
+  return function (dispatch) {
+    debugger;
+    return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createNewAlbum"](album).then(function (album) {
+      return dispatch(receiveAlbum(album));
+    }).then(function (ele) {
+      debugger;
       return location.reload(true);
     });
   };
@@ -349,7 +363,7 @@ var updateUser = function updateUser(user) {
 /*!******************************************!*\
   !*** ./frontend/actions/song_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_SONGS, RECEIVE_SONG, REMOVE_SONG, createSong, fetchSongs, fetchSong, deleteSong */
+/*! exports provided: RECEIVE_SONGS, RECEIVE_SONG, REMOVE_SONG, createSong, createNewSong, fetchSongs, fetchSong, deleteSong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,6 +372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SONG", function() { return RECEIVE_SONG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_SONG", function() { return REMOVE_SONG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSong", function() { return createSong; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNewSong", function() { return createNewSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSongs", function() { return fetchSongs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSong", function() { return fetchSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteSong", function() { return deleteSong; });
@@ -392,6 +407,17 @@ var createSong = function createSong(song) {
   return function (dispatch) {
     return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["createSong"](song).then(function (song) {
       return dispatch(receiveSong(song));
+    });
+  };
+};
+var createNewSong = function createNewSong(song) {
+  return function (dispatch) {
+    debugger;
+    return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["createNewSong"](song).then(function (song) {
+      return dispatch(receiveSong(song)).then(function (ele) {
+        debugger;
+        return location.reload(true);
+      });
     });
   };
 };
@@ -468,8 +494,10 @@ var fetchUser = function fetchUser(id) {
 };
 var createUser = function createUser(user) {
   return function (dispatch) {
-    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).thern(function (user) {
-      return dispatch(receiveUser(user));
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (user) {
+      return dispatch(receiveUser(user)).then(function (ele) {
+        return location.reload(true);
+      });
     });
   };
 };
@@ -803,13 +831,7 @@ function (_React$Component) {
       formData.append("album[title]", this.state.title);
       formData.append("album[user_id]", this.props.currentUserId);
       formData.append("album[photo]", this.state.photoFile);
-      $.ajax({
-        url: 'api/albums',
-        method: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false
-      });
+      this.props.createNewAlbum(formData);
     }
   }, {
     key: "update",
@@ -902,6 +924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     errors: Object.values(state.errors),
@@ -919,6 +942,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     closeModal: function closeModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["closeModal"])());
+    },
+    createNewAlbum: function createNewAlbum(album) {
+      return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_5__["createNewAlbum"])(album));
     }
   };
 };
@@ -1257,7 +1283,7 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
-        debugger;
+        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc,
           history: this.props.history
@@ -2209,7 +2235,7 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
-        debugger;
+        // debugger
         var artistAlbums = this.getAlbums();
 
         if (artist.id === this.state.currentUserId) {
@@ -2539,7 +2565,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "userIndividualAlbum",
         key: this.props.album.id
@@ -2623,8 +2648,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var artistId = ownProps.artistId || ownProps.match.params.artistId;
-  debugger;
+  var artistId = ownProps.artistId || ownProps.match.params.artistId; // debugger
+
   return {
     currentUserId: state.session.id,
     state: state,
@@ -5213,8 +5238,8 @@ function (_React$Component) {
       if (!this.state.mounted && btn) {
         // Execute a function when the user releases a key on the keyboard
         btn.addEventListener("keydown", function (event) {
-          debugger; // Number 13 is the "Enter" key on the keyboard
-
+          // debugger
+          // Number 13 is the "Enter" key on the keyboard
           if (event.keyCode === 13) {
             // Cancel the default action, if needed
             event.preventDefault(); // Trigger the button element with a click
@@ -6475,7 +6500,7 @@ function (_React$Component) {
   }, {
     key: "changePhoto",
     value: function changePhoto(e) {
-      debugger;
+      // debugger
       var currentUserId = this.props.state.session.id;
       var albumId = e.currentTarget.options[e.currentTarget.selectedIndex].value;
 
@@ -6498,13 +6523,13 @@ function (_React$Component) {
       formData.append('song[user_id]', this.state.album.user_id);
       formData.append('song[genre]', this.state.genre);
       formData.append('song[audio_file]', this.state.audioFile);
-      $.ajax({
-        url: 'api/songs',
-        method: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false
-      });
+      this.props.createNewSong(formData); // $.ajax({
+      //   url: 'api/songs',
+      //   method: 'POST',
+      //   data: formData,
+      //   contentType: false,
+      //   processData: false
+      // });
     }
   }, {
     key: "update",
@@ -6518,7 +6543,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
+      // debugger
       var albums = this.props.state.entities.users[this.props.state.session.id].albums;
       var keys;
       var albumsArr;
@@ -6655,6 +6680,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createSong: function createSong(song) {
       return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_2__["createSong"])(song));
+    },
+    createNewSong: function createNewSong(song) {
+      return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_2__["createNewSong"])(song));
     }
   };
 };
@@ -7173,7 +7201,7 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/album_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchAlbums, fetchAlbum, createAlbum, updateAlbum, deleteAlbum */
+/*! exports provided: fetchAlbums, fetchAlbum, createAlbum, createNewAlbum, updateAlbum, deleteAlbum */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7181,6 +7209,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbums", function() { return fetchAlbums; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbum", function() { return fetchAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAlbum", function() { return createAlbum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNewAlbum", function() { return createNewAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateAlbum", function() { return updateAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAlbum", function() { return deleteAlbum; });
 var fetchAlbums = function fetchAlbums(data) {
@@ -7205,6 +7234,16 @@ var createAlbum = function createAlbum(album) {
     data: {
       album: album
     }
+  });
+};
+var createNewAlbum = function createNewAlbum(formData) {
+  debugger;
+  return $.ajax({
+    method: 'POST',
+    url: 'api/albums',
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 var updateAlbum = function updateAlbum(album) {
@@ -7351,7 +7390,7 @@ var update = function update(user) {
 /*!****************************************!*\
   !*** ./frontend/util/song_api_util.js ***!
   \****************************************/
-/*! exports provided: fetchSongs, fetchSong, createSong, updateSong, deleteSong */
+/*! exports provided: fetchSongs, fetchSong, createSong, createNewSong, updateSong, deleteSong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7359,6 +7398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSongs", function() { return fetchSongs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSong", function() { return fetchSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSong", function() { return createSong; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNewSong", function() { return createNewSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSong", function() { return updateSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteSong", function() { return deleteSong; });
 var fetchSongs = function fetchSongs(data) {
@@ -7383,6 +7423,16 @@ var createSong = function createSong(song) {
     data: {
       song: song
     }
+  });
+};
+var createNewSong = function createNewSong(formData) {
+  debugger;
+  return $.ajax({
+    method: 'POST',
+    url: 'api/songs',
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 var updateSong = function updateSong(song) {

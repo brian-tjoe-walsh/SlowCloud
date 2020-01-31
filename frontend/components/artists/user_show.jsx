@@ -97,7 +97,7 @@ class UserShow extends React.Component {
         <NavBarContainer loc={loc} history={this.props.history} />
       </div>);
     } else {
-      debugger
+      // debugger
       let artistAlbums = this.getAlbums();
       if (artist.id === this.state.currentUserId) {
         loc = { url: "/library" };

@@ -209,7 +209,7 @@ class AlbumShow extends React.Component {
           history={this.props.history} />
       </div>)
     } else {
-      debugger
+      // debugger
       return (
         <div>
           <NavBarContainer loc={loc} history={this.props.history}/>

@@ -41,13 +41,8 @@ class AlbumForm extends React.Component {
     formData.append(`album[title]`, this.state.title);
     formData.append(`album[user_id]`, this.props.currentUserId);
     formData.append(`album[photo]`, this.state.photoFile);
-    $.ajax({
-      url: 'api/albums',
-      method: 'POST',
-      data: formData,
-      contentType: false,
-      processData: false
-    });
+
+    this.props.createNewAlbum(formData);
   }
 
   update(field) {

@@ -27,6 +27,7 @@ export const fetchUser = (id) => dispatch => {
 
 export const createUser = (user) => dispatch => {
   return (UserApiUtil.createUser(user)
-    .thern((user) => dispatch(receiveUser(user))
+    .then((user) => dispatch(receiveUser(user))
+    .then(ele => location.reload(true))
   ));
 };

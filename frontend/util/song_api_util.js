@@ -23,6 +23,19 @@ export const createSong = song => (
   })
 );
 
+export const createNewSong = formData => {
+  debugger
+  return (
+    $.ajax({
+      method: 'POST',
+      url: 'api/songs',
+      data: formData,
+      contentType: false,
+      processData: false
+    })
+  );
+};
+
 export const updateSong = song => (
   $.ajax({
     method: 'PATCH',

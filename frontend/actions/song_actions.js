@@ -27,6 +27,19 @@ export const createSong = (song) => dispatch => (
   )
 );
 
+export const createNewSong = (song) => dispatch => {
+  debugger
+  return(
+    SongApiUtil.createNewSong(song)
+      .then(song => dispatch(receiveSong(song))
+      .then((ele) => {
+        debugger
+        return (location.reload(true));
+      })
+    )
+  );
+};
+
 export const fetchSongs = () => dispatch => (
   SongApiUtil.fetchSongs()
     .then(songs => dispatch(receiveSongs(songs))

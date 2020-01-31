@@ -7,7 +7,7 @@ import { updateUser } from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => {
   let artistId = ownProps.artistId || ownProps.match.params.artistId;
-  debugger
+  // debugger
   return({
     currentUserId: state.session.id,
     state: state,
