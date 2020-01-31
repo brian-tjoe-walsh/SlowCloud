@@ -216,21 +216,36 @@
   border-radius: 4px;
 }
 
+.or-line {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.album-modal-center {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  max-height: 30px;
+}
+
 .uploadCancel {
   display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    color: rgb(114, 113, 113);
-    border: 1px solid rgb(221, 221, 221);
-    border-radius: 4px;
-    width: 80px;
-    height: 30px;
-    font-size: 1em;
-    margin: 10px 10px 10px 10px;
-    text-decoration: none;
-    text-align: center;
-    vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: rgb(114, 113, 113);
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 4px;
+  width: 80px;
+  height: 30px;
+  font-size: 1em;
+  margin: 10px 10px 10px 10px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .uploadUpload {

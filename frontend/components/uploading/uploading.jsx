@@ -86,10 +86,14 @@ class Uploading extends React.Component {
   render() {
     debugger
     let albums = this.props.state.entities.users[this.props.state.session.id].albums;
-    let keys = Object.keys(albums);
-    let albumsArr = [];
-    for (let i = 0; i < keys.length; i++) {
-      albumsArr.push(albums[keys[i]]);
+    let keys;
+    let albumsArr;
+    if (albums) {
+      keys = Object.keys(albums);
+      albumsArr = [];
+      for (let i = 0; i < keys.length; i++) {
+        albumsArr.push(albums[keys[i]]);
+      }
     }
 
     let loc = {url: "/upload"}
@@ -140,12 +144,21 @@ class Uploading extends React.Component {
                   <div className="uploadTitleBox">
                     <p>Album</p>
                     {(albums) ? 
+                    (<div>
                       <select className="titleInput" onChange={this.changePhoto}>
                         <option value="option" selected disabled>Choose an Album</option>
                         {(albumsArr.map( ele => {
-                         return (<option value={ele.id}>{ele.title}</option>);
+                          return (<option value={ele.id}>{ele.title}</option>);
                         }))}
                       </select>
+                      <div className="or-line">
+                        ------------------ or ------------------
+                      </div>
+                      <div className="album-modal-center">
+                        <AlbumModal currentUserId={this.props.state.session.id} />
+                      </div>
+                    </div>
+                    )
                     : 
                     (<div>
                       <AlbumModal currentUserId={this.props.state.session.id} />
@@ -161,9 +174,9 @@ class Uploading extends React.Component {
                       placeholder="Choose your genre"
                     />
                   </div>
-                  <div className="uploadDescriptionBox">
+                  {/* <div className="uploadDescriptionBox">
                     <AlbumModal currentUserId={this.props.state.session.id} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="uploadSubBottom">

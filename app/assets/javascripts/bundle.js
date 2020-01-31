@@ -6520,11 +6520,16 @@ function (_React$Component) {
     value: function render() {
       debugger;
       var albums = this.props.state.entities.users[this.props.state.session.id].albums;
-      var keys = Object.keys(albums);
-      var albumsArr = [];
+      var keys;
+      var albumsArr;
 
-      for (var i = 0; i < keys.length; i++) {
-        albumsArr.push(albums[keys[i]]);
+      if (albums) {
+        keys = Object.keys(albums);
+        albumsArr = [];
+
+        for (var i = 0; i < keys.length; i++) {
+          albumsArr.push(albums[keys[i]]);
+        }
       }
 
       var loc = {
@@ -6577,7 +6582,7 @@ function (_React$Component) {
         placeholder: "Name your song"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadTitleBox"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), albums ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Album"), albums ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "titleInput",
         onChange: this.changePhoto
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -6588,7 +6593,13 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           value: ele.id
         }, ele.title);
-      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "or-line"
+      }, "------------------ or ------------------"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "album-modal-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        currentUserId: this.props.state.session.id
+      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         currentUserId: this.props.state.session.id
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadTitleBox"
@@ -6598,10 +6609,6 @@ function (_React$Component) {
         value: this.state.genre,
         onChange: this.update('genre'),
         placeholder: "Choose your genre"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "uploadDescriptionBox"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_album_modal_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        currentUserId: this.props.state.session.id
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadSubBottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
