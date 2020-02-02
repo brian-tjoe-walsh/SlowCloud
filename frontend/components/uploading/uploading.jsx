@@ -79,7 +79,7 @@ class Uploading extends React.Component {
   } 
 
   uploadingModal() {
-    
+    this.props.openModal();
   }
 
   update(field) {
@@ -188,6 +188,7 @@ class Uploading extends React.Component {
               <div className="uploadSubBottom">
                 <Link to="/discover" className="uploadCancel">Cancel</Link>
                 <div onClick={this.handleSubmit} className="uploadUpload">Upload</div>
+                <div onClick={this.uploadingModal} className="uploadUpload">Modal</div>
               </div>
             </div>
           </div>

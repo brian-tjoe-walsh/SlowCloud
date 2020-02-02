@@ -34,6 +34,11 @@ export const createNewSong = (song) => dispatch => {
       .then(song => dispatch(receiveSong(song)))
       .then((ele) => {
         debugger
+        // return (window.location = `albums/${ele.song.album.id}`);
+        return (window.location.hash = `#/albums/${ele.song.album.id}`);
+      })
+      .then((ele) => {
+        debugger
         return (location.reload(true));
       })
   );

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginFormContainer from '../sessions/login_form_container';
 import SignupFormContainer from '../sessions/signup_form_container';
 import AlbumFormContainer from '../album/album_form_container';
+import Loading from '../uploading/loading';
 
 function Modal({ modal, closeModal }) {
   if (!modal) {
@@ -20,17 +21,30 @@ function Modal({ modal, closeModal }) {
     case ('album'):
       component = <AlbumFormContainer />;
       break;
+    case ('uploading'):
+      component = <Loading />;
+      break;
     default:
       return null;
   }
 
-  return (
-    <div className="preModal" onClick={closeModal}>
-      <div onClick={e => e.stopPropagation()}>
-        {component}
+  debugger
+  if (modal === 'uploading') {
+    return(
+      <div className="loader-page" >
+          {component}
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="preModal" onClick={closeModal}>
+        <div onClick={e => e.stopPropagation()}>
+          {component}
+        </div>
+      </div>
+    );
+  }
+
 }
 
 const mapStateToProps = state => {
