@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
   clearErrors: () => dispatch(clearErrors()),
   createAlbum: album => dispatch(createAlbum(album)),
   closeModal: () => dispatch(closeModal()),
-  createNewAlbum: (album) => dispatch(createNewAlbum(album))
+  createNewAlbum: (album) => dispatch(createNewAlbum(album)),
+  openModal: () => dispatch(openModal('create_album'))
 });
 
 export default connect(

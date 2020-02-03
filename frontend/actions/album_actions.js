@@ -57,6 +57,11 @@ export const createNewAlbum = (album) => dispatch => {
       .then((album) => dispatch(receiveAlbum(album)))
       .then((ele) => {
         debugger
+        // return (window.location = `albums/${ele.song.album.id}`);
+        return (window.location.hash = `#/albums/${ele.album.id}`);
+      })
+      .then((ele) => {
+        debugger
         return(location.reload(true));
       })
   );

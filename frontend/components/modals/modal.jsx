@@ -5,6 +5,7 @@ import LoginFormContainer from '../sessions/login_form_container';
 import SignupFormContainer from '../sessions/signup_form_container';
 import AlbumFormContainer from '../album/album_form_container';
 import Loading from '../uploading/loading';
+import AlbumLoading from '../uploading/album_loading';
 
 function Modal({ modal, closeModal }) {
   if (!modal) {
@@ -24,12 +25,15 @@ function Modal({ modal, closeModal }) {
     case ('uploading'):
       component = <Loading />;
       break;
+    case ('create_album'):
+      component = <AlbumLoading />;
+      break;
     default:
       return null;
   }
 
   debugger
-  if (modal === 'uploading') {
+  if (modal === 'uploading' || modal === 'create_album') {
     return(
       <div className="loader-page" >
           {component}

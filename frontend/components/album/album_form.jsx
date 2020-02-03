@@ -43,6 +43,7 @@ class AlbumForm extends React.Component {
     formData.append(`album[photo]`, this.state.photoFile);
 
     this.props.createNewAlbum(formData);
+    this.props.openModal();
   }
 
   update(field) {
