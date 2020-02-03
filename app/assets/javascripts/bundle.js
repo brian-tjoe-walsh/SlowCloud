@@ -6805,10 +6805,7 @@ function (_React$Component) {
       }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.handleSubmit,
         className: "uploadUpload"
-      }, "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        onClick: this.uploadingModal,
-        className: "uploadUpload"
-      }, "Modal"))))));
+      }, "Upload"))))));
     }
   }]);
 
