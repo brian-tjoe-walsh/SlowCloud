@@ -36,14 +36,20 @@ class AlbumForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    debugger
 
-    const formData = new FormData();
-    formData.append(`album[title]`, this.state.title);
-    formData.append(`album[user_id]`, this.props.currentUserId);
-    formData.append(`album[photo]`, this.state.photoFile);
+    if (!this.state.title || !this.props.currentUserId || !this.state.photoFile) {
+      alert("To create an album you need to provide a title & photo.");
+    } else {
+      const formData = new FormData();
+      formData.append(`album[title]`, this.state.title);
+      formData.append(`album[user_id]`, this.props.currentUserId);
+      formData.append(`album[photo]`, this.state.photoFile);
 
-    this.props.createNewAlbum(formData);
-    this.props.openModal();
+      this.props.createNewAlbum(formData);
+      this.props.openModal();
+    }
+
   }
 
   update(field) {
