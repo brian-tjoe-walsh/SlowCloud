@@ -97,7 +97,7 @@ class NavBar extends React.Component {
               type="text"
               value={this.state.search}
               onChange={this.updateSearch('search')}
-              placeholder="Search for artists or songs (e.g.My Bloody Valentine)"
+              placeholder="Search for artists or songs (e.g. My Bloody Valentine)"
               onKeyPress={this.handleKeyPress}
             />
             <div>
