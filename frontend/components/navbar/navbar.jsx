@@ -90,7 +90,7 @@ class NavBar extends React.Component {
           {(this.state.currentUser) ? 
           (<Link to={`/artists/${this.state.currentUser.id}`} className="link library">Library</Link>)
           :
-          (<Link to="/library" className="link library">Library</Link>)
+          (<LoginButton background="link library" />)
           }
           <form className="search" >
             <input className="bar"

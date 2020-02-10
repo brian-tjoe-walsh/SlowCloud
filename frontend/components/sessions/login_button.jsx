@@ -10,6 +10,10 @@ function LoginButton(props) {
     return (
       <div className={props.background} onClick={props.logout}>Logout</div>
     )
+  } else if (props.background === "link library") {
+    return (
+      <div className={props.background} onClick={props.login}>Library</div>
+    )
   } else {
     return (
       <div className={props.background} onClick={props.login}>Login</div>

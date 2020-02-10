@@ -3766,10 +3766,9 @@ function (_React$Component) {
       }, "Home"), this.state.currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/artists/".concat(this.state.currentUser.id),
         className: "link library"
-      }, "Library") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/library",
-        className: "link library"
-      }, "Library"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Library") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sessions_login_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        background: "link library"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "search"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "bar",
@@ -5178,6 +5177,11 @@ function LoginButton(props) {
       className: props.background,
       onClick: props.logout
     }, "Logout");
+  } else if (props.background === "link library") {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: props.background,
+      onClick: props.login
+    }, "Library");
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: props.background,
