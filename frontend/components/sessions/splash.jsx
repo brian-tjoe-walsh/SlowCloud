@@ -51,7 +51,7 @@ class Splash extends React.Component {
                 onChange={this.updateSearch('search')}
                 value={this.state.search}
                 className="splashBar"
-                placeholder="Search for artists, bands, or tracks, (e.g. My Slowdive)"
+                placeholder="Search for artists, bands, or tracks, (e.g. Slowdive, Just Like Honey, etc.)"
                 onKeyPress={this.handleKeyPress}
               />
               <div>

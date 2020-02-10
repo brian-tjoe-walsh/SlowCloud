@@ -5846,7 +5846,7 @@ function (_React$Component) {
         onChange: this.updateSearch('search'),
         value: this.state.search,
         className: "splashBar",
-        placeholder: "Search for artists, bands, or tracks, (e.g. My Slowdive)",
+        placeholder: "Search for artists, bands, or tracks, (e.g. Slowdive, Just Like Honey, etc.)",
         onKeyPress: this.handleKeyPress
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search",
