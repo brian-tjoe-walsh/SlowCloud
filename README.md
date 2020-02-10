@@ -64,7 +64,10 @@ In order to emulate the original SoundCloud website, the media player is impleme
 An engineering decision made for SlowCloud is the incorporation of specific albums, in order to bridge the gap between SoundCloud's flexible song-uploading and a conventional streaming platform. While songs on Soundcloud can be arranged and sorted into playlists--which can operate similarly to albums--SlowCloud operates under the assumption that the content being uploaded is intended for professional consumption, and will be classified under an Album tag by default. This constituted a separate MVP to categorize albums, which are not only connected to users, but also songs. 
 
 ### Uploading Songs
-Uploading a song can be done at any page in the Navbar. The form, similarly to SoundCloud's website, has two main parts-- uploading a specific file, and adding titles/pictures/descriptions to the file. Switching from these parts uses animation, as well as jQuery calls in order to add and remove class's from the React components modularly, depending on the user's actions. 
+
+![](slowcloud-upload.gif)
+
+Uploading a song can be done at any page in the Navbar. The form, similarly to SoundCloud's website, has two main parts-- choosing a specific media file, and adding the title/genre, and allocating it to a specific album. Switching from these parts uses animation, as well as jQuery calls in order to add and remove class's from the React components modularly, depending on the user's actions. You are also able to create a new album in the middle of uploading your file, through a modal. After clicking the "upload" button, a loading modal is brought up to explain that the file is currently being uploaded, and one complete the website will direct you to the new file you uploaded on the specific album page.
 
 ```
 let midPage = document.getElementsByClassName("uploadForm");
