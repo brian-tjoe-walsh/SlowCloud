@@ -123,7 +123,7 @@ class Discover extends React.Component {
 
             <div className="rightSide">
               <div className="listeningHistory">
-                <p>Listening History</p>
+                <p>Try These Out!</p>
 
                 {(this.props.albums.length <= 1 || this.props.users.length <= 1) ?
                   (<div className="loaderContainer">
