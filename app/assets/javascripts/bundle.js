@@ -3214,6 +3214,8 @@ function (_React$Component) {
     _this.getTime = _this.getTime.bind(_assertThisInitialized(_this));
     _this.clicked = _this.clicked.bind(_assertThisInitialized(_this));
     _this.clicking = _this.clicking.bind(_assertThisInitialized(_this));
+    _this.speedUp = _this.speedUp.bind(_assertThisInitialized(_this));
+    _this.findX = _this.findX.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3364,6 +3366,30 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "findX",
+    value: function findX(e) {
+      debugger;
+      var bar = document.getElementsByClassName("pink-bar")[0];
+      var offset = e.clientX - bar.getClientRects()[0].x;
+
+      if (offset < 0) {
+        return 0;
+      } else if (offset > 500) {
+        return 1;
+      } else {
+        return offset / 500;
+      }
+    }
+  }, {
+    key: "speedUp",
+    value: function speedUp(e) {
+      e.preventDefault();
+      var offset = this.findX(e);
+      offset = offset * this.state.player.duration;
+      this.state.player.currentTime = offset;
+      debugger; // let mediaPlayer = document.getElementsByClassName('mediaCurrentTime')[0];
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.state.songs) {
@@ -3428,7 +3454,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mediaCurrentTime"
         }, this.state.currentTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "pink-bar"
+          className: "pink-bar",
+          onClick: this.speedUp
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "pink-juice"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

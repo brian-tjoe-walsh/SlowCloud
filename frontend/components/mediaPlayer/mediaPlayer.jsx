@@ -20,6 +20,8 @@ class MediaPlayer extends React.Component {
     this.getTime = this.getTime.bind(this);
     this.clicked = this.clicked.bind(this);
     this.clicking = this.clicking.bind(this);
+    this.speedUp = this.speedUp.bind(this);
+    this.findX = this.findX.bind(this);
   }
 
   componentDidMount() {
@@ -63,7 +65,7 @@ class MediaPlayer extends React.Component {
       }
 
       if (this.state.player && !this.state.eventListener) {
-        let mediaPlayer = this.state.player
+        let mediaPlayer = this.state.player;
         let juice = document.getElementsByClassName('pink-juice');
         mediaPlayer.addEventListener('timeupdate', () => {
           let juicePos = mediaPlayer.currentTime / mediaPlayer.duration;
@@ -150,6 +152,31 @@ class MediaPlayer extends React.Component {
       this.props.playSong();
     }
   }
+
+  findX(e) {
+    debugger
+    let bar = document.getElementsByClassName("pink-bar")[0];
+    let offset = e.clientX - bar.getClientRects()[0].x;
+    
+    if (offset < 0) {
+      return 0;
+    } else if (offset > 500) {
+      return 1;
+    } else {
+      return offset / 500;
+    }
+  }
+  
+
+  speedUp(e) {
+    e.preventDefault();
+    let offset = this.findX(e);
+    offset = offset * this.state.player.duration;
+    this.state.player.currentTime = offset;
+    debugger
+
+    // let mediaPlayer = document.getElementsByClassName('mediaCurrentTime')[0];
+  }
   
   render() {
 
@@ -205,7 +232,7 @@ class MediaPlayer extends React.Component {
             <div className="mediaCurrentTime">
               {(this.state.currentTime)}
             </div>
-            <div className="pink-bar">
+            <div className="pink-bar" onClick={this.speedUp}>
               <div className="pink-juice"></div>
             </div>
             <div className="mediaRemainingTime">
