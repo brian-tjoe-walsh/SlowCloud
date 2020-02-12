@@ -893,7 +893,7 @@ function (_React$Component) {
         className: "uploadPicButton"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
-        accept: ".jpeg,.jpg,.tiff,.gif,.png,.pdf",
+        accept: ".jpeg,.jpg,.tiff,.png",
         onChange: this.handleFile.bind(this),
         className: "choosePicFile"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -6705,21 +6705,27 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
-      var formData = new FormData();
-      formData.append('song[title]', this.state.title);
-      formData.append('song[album_id]', this.state.album.id);
-      formData.append('song[user_id]', this.state.album.user_id);
-      formData.append('song[genre]', this.state.genre);
-      formData.append('song[audio_file]', this.state.audioFile);
-      this.props.createNewSong(formData);
-      this.uploadingModal(); // $.ajax({
+
+      if (!this.state.title.length || !this.state.album.id || !this.state.album.user_id || !this.state.genre.length || !this.state.audioFile) {
+        alert("You must fill out all of the areas in order to upload a song!");
+      } else {
+        debugger;
+        var formData = new FormData();
+        formData.append('song[title]', this.state.title);
+        formData.append('song[album_id]', this.state.album.id);
+        formData.append('song[user_id]', this.state.album.user_id);
+        formData.append('song[genre]', this.state.genre);
+        formData.append('song[audio_file]', this.state.audioFile);
+        this.props.createNewSong(formData);
+        this.uploadingModal();
+      } // $.ajax({
       //   url: 'api/songs',
       //   method: 'POST',
       //   data: formData,
       //   contentType: false,
       //   processData: false
       // });
+
     }
   }, {
     key: "uploadingModal",
@@ -40079,7 +40085,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
