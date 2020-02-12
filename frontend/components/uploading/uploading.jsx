@@ -56,18 +56,23 @@ class Uploading extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
-
-    const formData = new FormData();
-
-    formData.append('song[title]', this.state.title);
-    formData.append('song[album_id]', this.state.album.id);
-    formData.append('song[user_id]', this.state.album.user_id);
-    formData.append('song[genre]', this.state.genre);
-    formData.append('song[audio_file]', this.state.audioFile);
-
-    this.props.createNewSong(formData);
-    this.uploadingModal();
+    if (!this.state.title.length || !this.state.album.id || !this.state.album.user_id || !this.state.genre.length || !this.state.audioFile) {
+      alert("You must fill out all of the areas in order to upload a song!");
+      
+    } else {
+      debugger
+  
+      const formData = new FormData();
+  
+      formData.append('song[title]', this.state.title);
+      formData.append('song[album_id]', this.state.album.id);
+      formData.append('song[user_id]', this.state.album.user_id);
+      formData.append('song[genre]', this.state.genre);
+      formData.append('song[audio_file]', this.state.audioFile);
+  
+      this.props.createNewSong(formData);
+      this.uploadingModal();
+    }
 
     // $.ajax({
     //   url: 'api/songs',
