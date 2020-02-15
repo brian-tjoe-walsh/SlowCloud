@@ -360,6 +360,11 @@ input[type='file'] {
   border-bottom: 1px solid #f0f0f0;
 }
 
+.album-errors {
+  color: red;
+  margin-top: 10px;
+}
+
 .album-preview {
   height: 260px;
   width: 260px;

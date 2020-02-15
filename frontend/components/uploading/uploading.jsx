@@ -11,7 +11,8 @@ class Uploading extends React.Component {
       audioFile: null,
       album: null,
       genre: "",
-      photoPreview: null
+      photoPreview: null,
+      errors: null
     };
 
     this.changePhoto = this.changePhoto.bind(this);
@@ -57,7 +58,7 @@ class Uploading extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.title.length || !this.state.album.id || !this.state.album.user_id || !this.state.genre.length || !this.state.audioFile) {
-      alert("You must fill out all of the areas in order to upload a song!");
+      this.setState({errors: "All areas must be filled in to upload a song!"});
       
     } else {
       debugger
@@ -191,8 +192,19 @@ class Uploading extends React.Component {
                 </div>
               </div>
               <div className="uploadSubBottom">
-                <Link to="/discover" className="uploadCancel">Cancel</Link>
-                <div onClick={this.handleSubmit} className="uploadUpload">Upload</div>
+                <div className="uploadSubBottom-left">
+                  {(this.state.errors) ? (
+                  <div>
+                    <i class="fas fa-exclamation-circle"></i> 
+                    {this.state.errors}
+                  </div>
+                  ) : 
+                  (null)}
+                </div>
+                <div className="uploadSubBottom-right">
+                  <Link to="/discover" className="uploadCancel">Cancel</Link>
+                  <div onClick={this.handleSubmit} className="uploadUpload">Upload</div>
+                </div>
               </div>
             </div>
           </div>

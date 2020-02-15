@@ -797,7 +797,8 @@ function (_React$Component) {
     _this.state = {
       photoFile: null,
       title: "",
-      photoPreview: null
+      photoPreview: null,
+      error: null
     }; // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDemo = this.handleDemo.bind(this);
 
@@ -835,10 +836,11 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
 
       if (!this.state.title || !this.props.currentUserId || !this.state.photoFile) {
-        alert("To create an album you need to provide a title & photo.");
+        this.setState({
+          error: "You must provide a title & photo"
+        });
       } else {
         var formData = new FormData();
         formData.append("album[title]", this.state.title);
@@ -846,6 +848,9 @@ function (_React$Component) {
         formData.append("album[photo]", this.state.photoFile);
         this.props.createNewAlbum(formData);
         this.props.openModal();
+        this.setState({
+          error: null
+        });
       }
     }
   }, {
@@ -883,6 +888,10 @@ function (_React$Component) {
         onChange: this.update('title'),
         placeholder: "Name your album"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "album-errors"
+      }, this.state.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-circle"
+      }), this.state.error) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "album-create-pic"
       }, this.state.photoPreview ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "album-preview",
@@ -6659,7 +6668,8 @@ function (_React$Component) {
       audioFile: null,
       album: null,
       genre: "",
-      photoPreview: null
+      photoPreview: null,
+      errors: null
     };
     _this.changePhoto = _this.changePhoto.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -6707,7 +6717,9 @@ function (_React$Component) {
       e.preventDefault();
 
       if (!this.state.title.length || !this.state.album.id || !this.state.album.user_id || !this.state.genre.length || !this.state.audioFile) {
-        alert("You must fill out all of the areas in order to upload a song!");
+        this.setState({
+          errors: "All areas must be filled in to upload a song!"
+        });
       } else {
         debugger;
         var formData = new FormData();
@@ -6837,13 +6849,19 @@ function (_React$Component) {
         placeholder: "Choose your genre"
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "uploadSubBottom"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadSubBottom-left"
+      }, this.state.errors ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-circle"
+      }), this.state.errors) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "uploadSubBottom-right"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/discover",
         className: "uploadCancel"
       }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.handleSubmit,
         className: "uploadUpload"
-      }, "Upload"))))));
+      }, "Upload")))))));
     }
   }]);
 
@@ -40085,7 +40103,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

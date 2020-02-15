@@ -7,7 +7,8 @@ class AlbumForm extends React.Component {
     this.state = {
       photoFile: null,
       title: "",
-      photoPreview: null
+      photoPreview: null,
+      error: null
     };
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleDemo = this.handleDemo.bind(this);
@@ -36,10 +37,9 @@ class AlbumForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
 
     if (!this.state.title || !this.props.currentUserId || !this.state.photoFile) {
-      alert("To create an album you need to provide a title & photo.");
+      this.setState({ error: "You must provide a title & photo" });
     } else {
       const formData = new FormData();
       formData.append(`album[title]`, this.state.title);
@@ -48,6 +48,7 @@ class AlbumForm extends React.Component {
 
       this.props.createNewAlbum(formData);
       this.props.openModal();
+      this.setState({error: null});
     }
 
   }
@@ -68,24 +69,32 @@ class AlbumForm extends React.Component {
 
     return (
       <div className="album-form">
-              {/* <div className="uploadTitleBox"> */}
-                <p className="create-album-title">Create An Album</p>
-                <input type="text" 
-                  className="titleInput" 
-                  value={this.state.album}
-                  onChange={this.update('title')}
-                  placeholder="Name your album" />
-              {/* </div> */}
-            <div className="album-create-pic">
-              {(this.state.photoPreview) ? <img className="album-preview" src={this.state.photoPreview} /> : <div className="album-preview"></div>}
-              <div className="uploadPicButton">
-                <input type="file" accept=".jpeg,.jpg,.tiff,.png" onChange={this.handleFile.bind(this)} className="choosePicFile" />
-                <button className="fakePicButton">Upload Image</button>
-              </div>
-            </div>
-            <div className="album-form-lower">
-              <input type="submit" className="album-create-submit" value="Create" onClick={this.handleSubmit.bind(this)}/>  
-            </div>
+        {/* <div className="uploadTitleBox"> */}
+        <p className="create-album-title">Create An Album</p>
+        <input type="text" 
+          className="titleInput" 
+          value={this.state.album}
+          onChange={this.update('title')}
+          placeholder="Name your album" />
+        {/* </div> */}
+        <div className="album-errors">
+          {(this.state.error) ? (
+            <div>
+              <i class="fas fa-exclamation-circle"></i>
+              {this.state.error}
+            </div>) 
+          : null}
+        </div>
+        <div className="album-create-pic">
+          {(this.state.photoPreview) ? <img className="album-preview" src={this.state.photoPreview} /> : <div className="album-preview"></div>}
+          <div className="uploadPicButton">
+            <input type="file" accept=".jpeg,.jpg,.tiff,.png" onChange={this.handleFile.bind(this)} className="choosePicFile" />
+            <button className="fakePicButton">Upload Image</button>
+          </div>
+        </div>
+        <div className="album-form-lower">
+          <input type="submit" className="album-create-submit" value="Create" onClick={this.handleSubmit.bind(this)}/>  
+        </div>
       </div>
     );
   }
