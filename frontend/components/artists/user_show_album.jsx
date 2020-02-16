@@ -11,6 +11,7 @@ class UserShowAlbum extends React.Component {
     };
     this.playSong = this.playSong.bind(this);
     this.afterClick = this.afterClick.bind(this);
+    
     // this.waveSurfer = null;
   }
 
