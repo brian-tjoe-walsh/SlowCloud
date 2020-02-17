@@ -2423,9 +2423,9 @@ function (_React$Component) {
 
       var wavesurfer = wavesurfer_js__WEBPACK_IMPORTED_MODULE_2___default.a.create({
         container: this.waveform.current,
-        progressColor: '#3134FF',
+        progressColor: '#AF74CA',
         cursorWidth: 0,
-        height: 100,
+        height: 60,
         barWidth: 1.2,
         barGap: 0,
         normalize: 0,
