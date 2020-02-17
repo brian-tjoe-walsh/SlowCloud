@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
+import WaveSurfer from 'wavesurfer.js';
 
 class UserShowAlbum extends React.Component {
 
@@ -11,11 +12,56 @@ class UserShowAlbum extends React.Component {
     };
     this.playSong = this.playSong.bind(this);
     this.afterClick = this.afterClick.bind(this);
-    
-    // this.waveSurfer = null;
+
+    this.waveform = React.createRef();
   }
 
   componentDidMount() {
+
+    const wavesurfer = WaveSurfer.create({
+      container: this.waveform.current,
+      progressColor: '#3134FF',
+      cursorWidth: 0,
+      height: 100,
+      barWidth: 1.2,
+      barGap: 0,
+      normalize: 0,
+      backend: 'MediaElement'
+    });
+
+    const playButton = document.getElementById(`showPagePlay${this.props.album.id}`);
+
+    playButton.addEventListener("click", () => {
+      if (playButton.getAttribute('user-pause')) {
+        wavesurfer.play();
+      } else if (playButton.getAttribute('user-play')) {
+        wavesurfer.pause();
+      }
+    }, false);
+
+    // wavesurfer.on('ready', () => {
+    //   playButton.disabled = false;
+    // });
+
+    // wavesurfer.on('finish', () => {
+    //   playButton.setAttribute('playing', 'false');
+    //   playButton.classList.remove('btn-pause');
+    //   playButton.classList.add('btn-play');
+    // });
+
+    // wavesurfer.load(this.props.sample.fileUrl);
+    // debugger
+
+    wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
+
+    // // debugger
+    // wavesurfer.on('ready', () => {
+    //   // debugger
+
+    //   wavesurfer.params.container.style.opacity = 0.9;
+    //   console.log("this should be ready");
+    // });
+
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
       if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -53,6 +99,8 @@ class UserShowAlbum extends React.Component {
   }
 
   componentDidUpdate() {
+    // debugger
+
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -87,6 +135,8 @@ class UserShowAlbum extends React.Component {
     }
   }
 
+
+
   addHover(e) {
     let eles = document.getElementById(e.currentTarget.id);
     $(eles).addClass("playHovered");
@@ -107,7 +157,9 @@ class UserShowAlbum extends React.Component {
 
   playSong() {
     let player = document.getElementById("media");
-    if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].album_id) {
+
+    debugger
+    if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
       let play = this.props.state.entities.songs[this.props.album.songs[0].id];
       if (this.props.state.ui.mediaPlayer.songs) {
         this.props.deleteSong(this.props.state.ui.mediaPlayer.songs[0]);
@@ -168,13 +220,13 @@ class UserShowAlbum extends React.Component {
           </div>
           {(this.props.album.songs && Object.values(this.props.album.songs).length) ? 
           ( <div className="waveFormContainer">
-              {/* <div id="waveform"></div> */}
-              <img className="waveForm" src={window.waveform} />
+              <div ref={this.waveform} className='audio-container'></div>
+              {/* <img className="waveForm" src={window.waveform} /> */}
             </div>
           ) : 
             (<div className="waveFormContainer">
-              {/* <div id="waveform"></div> */}
-              <img className="waveForm-opacity" src={window.waveform} />
+              <div ref={this.waveform} className='audio-container'></div>
+              {/* <img className="waveForm-opacity" src={window.waveform} /> */}
             </div>
           )}
         </div>
