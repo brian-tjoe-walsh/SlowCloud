@@ -9,18 +9,20 @@ class UserShowAlbum extends React.Component {
     this.state = {
       currentSong: null,
       playing: false,
-      audioFile: null
+      audioFile: null,
+      ready: false
     };
     this.playSong = this.playSong.bind(this);
     this.afterClick = this.afterClick.bind(this);
 
+    this.wavesurfer = null;
     this.waveform = React.createRef();
   }
 
   componentDidMount() {
 
     if (this.props.album.songs && Object.values(this.props.album.songs).length) {
-      const wavesurfer = WaveSurfer.create({
+      this.wavesurfer = WaveSurfer.create({
         container: this.waveform.current,
         progressColor: '#AF74CA',
         cursorWidth: 0,
@@ -35,14 +37,14 @@ class UserShowAlbum extends React.Component {
   
       playButton.addEventListener("click", () => {
         if (playButton.getAttribute('user-pause')) {
-          wavesurfer.play();
+          this.wavesurfer.play();
         } else if (playButton.getAttribute('user-play')) {
-          wavesurfer.pause();
+          this.wavesurfer.pause();
         }
       }, false);
   
-      // wavesurfer.on('ready', () => {
-      //   playButton.disabled = false;
+      // this.wavesurfer.on('ready', () => {
+      //   this.setState({ready: true});
       // });
   
       // wavesurfer.on('finish', () => {
@@ -57,13 +59,13 @@ class UserShowAlbum extends React.Component {
       if (!this.state.audioFile) {
         debugger
         if (this.props.album.songs && this.props.album.songs[0].audio_fileUrl) {
-          wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
+          this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
           this.setState({ audioFile: true });
         } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
-          wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
+          this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
           this.setState({audioFile: true});
         } else if (Object.values(this.props.state.entities.songs).length && this.props.album.songs && this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl) {
-          wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
+          this.wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
           this.setState({ audioFile: true });
         }
       }
@@ -118,13 +120,13 @@ class UserShowAlbum extends React.Component {
     if (!this.state.audioFile) {
       debugger
       if (this.props.album.songs && this.props.album.songs[0].audio_fileUrl) {
-        wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
+        this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
         this.setState({ audioFile: true });
       } else if (Object.values(this.props.state.entities.albums).length && Object.values(this.props.state.entities.albums[this.props.album.id].songs).length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
-        wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
+        this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
         this.setState({ audioFile: true });
       } else if (Object.values(this.props.state.entities.songs).length && this.props.album.songs && this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl) {
-        wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
+        this.wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
         this.setState({ audioFile: true });
       }
     }
