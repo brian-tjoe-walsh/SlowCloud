@@ -220,13 +220,13 @@ class UserShowAlbum extends React.Component {
           </div>
           {(this.props.album.songs && Object.values(this.props.album.songs).length) ? 
           ( <div className="waveFormContainer">
-              <div ref={this.waveform} className='audio-container'></div>
-              {/* <img className="waveForm" src={window.waveform} /> */}
+              {/* <div ref={this.waveform} className='audio-container'></div> */}
+              <img className="waveForm" src={window.waveform} />
             </div>
           ) : 
             (<div className="waveFormContainer">
-              <div ref={this.waveform} className='audio-container'></div>
-              {/* <img className="waveForm-opacity" src={window.waveform} /> */}
+              {/* <div ref={this.waveform} className='audio-container'></div> */}
+              <img className="waveForm-opacity" src={window.waveform} />
             </div>
           )}
         </div>
