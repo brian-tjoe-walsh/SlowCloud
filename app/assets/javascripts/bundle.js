@@ -2672,14 +2672,14 @@ function (_React$Component) {
         className: "upload-song-button"
       }, "Upload A Song") : null)), this.props.album.songs && Object.values(this.props.album.songs).length ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        className: "waveForm",
-        src: window.waveform
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        ref: this.waveform,
+        className: "audio-container"
       })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        className: "waveForm-opacity",
-        src: window.waveform
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        ref: this.waveform,
+        className: "audio-container"
       }))));
     }
   }]);
