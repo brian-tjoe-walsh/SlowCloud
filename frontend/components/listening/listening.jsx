@@ -38,7 +38,7 @@ class Listening extends React.Component {
        </div>
        <div className="shamelessPlug">
           <a href="https://www.linkedin.com/in/brian-tjoe-walsh-89086991/" target="_blank"><i className="fab fa-linkedin"></i></a>
-          <a href="https://github.com/bbriannwalshh" target="_blank"><i className="fab fa-github"></i></a>
+          <a href="https://github.com/brian-tjoe-walsh" target="_blank"><i className="fab fa-github"></i></a>
        </div>
       </div>
     );
