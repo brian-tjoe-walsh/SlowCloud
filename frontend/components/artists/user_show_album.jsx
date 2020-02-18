@@ -15,11 +15,10 @@ class UserShowAlbum extends React.Component {
     };
     this.playSong = this.playSong.bind(this);
     this.afterClick = this.afterClick.bind(this);
-
     this.wavesurfer = null;
     this.waveform = React.createRef();
-    this.findSong = this.findSong.bind(this);
     this.loadSong = this.loadSong.bind(this);
+    this.regularLoad = this.regularLoad.bind(this);
   }
 
   componentDidMount() {
@@ -56,23 +55,10 @@ class UserShowAlbum extends React.Component {
         this.setState({ready: true});
       });
   
-      // wavesurfer.on('finish', () => {
-      //   playButton.setAttribute('playing', 'false');
-      //   playButton.classList.remove('btn-pause');
-      //   playButton.classList.add('btn-play');
-      // });
-  
-      // wavesurfer.load(this.props.sample.fileUrl);
       if (!this.state.loaded) {
         this.loadSong();
       }
     }
-
-    // wavesurfer.on('ready', () => {
-
-    //   wavesurfer.params.container.style.opacity = 0.9;
-    //   console.log("this should be ready");
-    // });
 
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
@@ -148,11 +134,6 @@ class UserShowAlbum extends React.Component {
       ele.addEventListener("mouseover", (e) => this.addHover(e));
       ele.addEventListener("mouseleave", (e) => this.removeHover(e));
     }
-  }
-
-  findSong() {
-    // if (document.getElementById("media")) {
-    // }
   }
 
   loadSong() {

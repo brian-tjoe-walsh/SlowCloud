@@ -7,13 +7,62 @@ class SearchSong extends React.Component {
     super(props);
     this.state = {
       currentSong: null,
-      playing: false
+      playing: false,
+      audioFile: null,
+      ready: false,
+      loaded: false
     };
     this.playSong = this.playSong.bind(this);
     this.afterClick = this.afterClick.bind(this);
+    this.wavesurfer = null;
+    this.waveform = React.createRef();
+    this.loadSong = this.loadSong.bind(this);
+    this.regularLoad = this.regularLoad.bind(this);
   }
 
   componentDidMount() {
+    debugger
+
+    if (this.props.ele) {
+      this.wavesurfer = WaveSurfer.create({
+        container: this.waveform.current,
+        progressColor: '#AF74CA',
+        cursorWidth: 0,
+        height: 60,
+        barWidth: 1.2,
+        barGap: 0,
+        normalize: 0,
+        backend: 'MediaElement'
+      });
+
+      const playButton = document.getElementById(`showPagePlay${this.props.ele.id}`);
+      debugger
+
+      playButton.addEventListener("click", () => {
+
+        if (playButton.classList.contains("user-play")) {
+          debugger
+          let idTag = Number(playButton.id.split("showPagePlay")[1]);
+          let wave = document.getElementById(`wave-form-${idTag}`);
+          wave.children[1].volume = 0;
+          wave.children[1].play();
+        } else if (playButton.classList.contains("user-pause")) {
+          let idTag = Number(playButton.id.split("showPagePlay")[1]);
+          let wave = document.getElementById(`wave-form-${idTag}`);
+          wave.children[1].pause();
+        }
+      }, false);
+
+      this.wavesurfer.on('ready', () => {
+        this.setState({ ready: true });
+      });
+
+      if (!this.state.loaded) {
+        this.loadSong();
+      }
+    }
+
+
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
       if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id) {
@@ -57,6 +106,11 @@ class SearchSong extends React.Component {
   }
 
   componentDidUpdate() {
+
+    if (!this.state.loaded) {
+      this.loadSong();
+    }
+
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
       if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id) {
@@ -88,6 +142,52 @@ class SearchSong extends React.Component {
       let ele = document.getElementById(`showPagePlay${this.props.ele.id}`);
       ele.addEventListener("mouseover", (e) => this.addHover(e));
       ele.addEventListener("mouseleave", (e) => this.removeHover(e));
+    }
+  }
+
+  loadSong() {
+    if (!this.state.audioFile) {
+      if (document.getElementById("media")) {
+        let currentSong = document.getElementById("media").src;
+        currentSong = currentSong.split("/song")[1];
+        currentSong = currentSong.split(".")[0];
+        let currentId = Number(currentSong) + 1;
+
+        let song = this.props.ele;
+        let found = false;
+
+        
+        if (song.id === currentId) {
+          this.wavesurfer.load(this.props.ele.audio_fileUrl);
+          this.setState({ audioFile: true, currentSong: this.props.ele });
+          found = true;
+        }
+
+        debugger
+
+        if (found && document.getElementById('media').currentTime) {
+          let seconds = document.getElementById('media').currentTime;
+          this.wavesurfer.setVolume(0);
+          this.wavesurfer.play(seconds);
+          if (!this.props.state.ui.mediaPlayer.playing) {
+            this.wavesurfer.pause();
+          }
+        } else {
+          this.regularLoad();
+        }
+
+      } else {
+        this.regularLoad();
+      }
+    }
+
+    this.setState({ loaded: true });
+  }
+
+  regularLoad() {
+    if (this.props.ele && this.props.ele.audio_fileUrl) {
+      this.wavesurfer.load(this.props.ele.audio_fileUrl);
+      this.setState({ audioFile: true });
     }
   }
 
@@ -157,7 +257,8 @@ class SearchSong extends React.Component {
             </div>
           </div>
           <div className="waveFormContainer">
-            <img className="waveForm" src={window.waveform} />
+            <div ref={this.waveform} id={`wave-form-${this.props.ele.id}`} className='audio-container'></div>
+            {/* <img className="waveForm" src={window.waveform} /> */}
           </div>
         </div>
       </div>

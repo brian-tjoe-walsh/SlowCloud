@@ -2408,8 +2408,8 @@ function (_React$Component) {
     _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this));
     _this.wavesurfer = null;
     _this.waveform = react__WEBPACK_IMPORTED_MODULE_1___default.a.createRef();
-    _this.findSong = _this.findSong.bind(_assertThisInitialized(_this));
     _this.loadSong = _this.loadSong.bind(_assertThisInitialized(_this));
+    _this.regularLoad = _this.regularLoad.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2448,21 +2448,12 @@ function (_React$Component) {
           _this2.setState({
             ready: true
           });
-        }); // wavesurfer.on('finish', () => {
-        //   playButton.setAttribute('playing', 'false');
-        //   playButton.classList.remove('btn-pause');
-        //   playButton.classList.add('btn-play');
-        // });
-        // wavesurfer.load(this.props.sample.fileUrl);
+        });
 
         if (!this.state.loaded) {
           this.loadSong();
         }
-      } // wavesurfer.on('ready', () => {
-      //   wavesurfer.params.container.style.opacity = 0.9;
-      //   console.log("this should be ready");
-      // });
-
+      }
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -2576,11 +2567,6 @@ function (_React$Component) {
           return _this3.removeHover(e);
         });
       }
-    }
-  }, {
-    key: "findSong",
-    value: function findSong() {// if (document.getElementById("media")) {
-      // }
     }
   }, {
     key: "loadSong",
@@ -4413,6 +4399,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchUser__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: idx,
             ele: ele,
             history: _this3.props.history
           }));
@@ -4420,6 +4407,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchAlbum__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: idx,
             ele: ele,
             history: _this3.props.history
           }));
@@ -4427,6 +4415,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchSong__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            key: idx,
             ele: ele,
             state: _this3.props.state,
             history: _this3.props.history,
@@ -4441,6 +4430,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchUser__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: idx,
             ele: ele,
             history: _this3.props.history
           }));
@@ -4450,6 +4440,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchAlbum__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: idx,
             ele: ele,
             history: _this3.props.history
           }));
@@ -4459,6 +4450,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             key: idx
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchSong__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            key: idx,
             ele: ele,
             state: _this3.props.state,
             history: _this3.props.history,
@@ -4587,10 +4579,17 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchSong).call(this, props));
     _this.state = {
       currentSong: null,
-      playing: false
+      playing: false,
+      audioFile: null,
+      ready: false,
+      loaded: false
     };
     _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
     _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this));
+    _this.wavesurfer = null;
+    _this.waveform = react__WEBPACK_IMPORTED_MODULE_1___default.a.createRef();
+    _this.loadSong = _this.loadSong.bind(_assertThisInitialized(_this));
+    _this.regularLoad = _this.regularLoad.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -4598,6 +4597,47 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
+
+      debugger;
+
+      if (this.props.ele) {
+        this.wavesurfer = WaveSurfer.create({
+          container: this.waveform.current,
+          progressColor: '#AF74CA',
+          cursorWidth: 0,
+          height: 60,
+          barWidth: 1.2,
+          barGap: 0,
+          normalize: 0,
+          backend: 'MediaElement'
+        });
+        var playButton = document.getElementById("showPagePlay".concat(this.props.ele.id));
+        debugger;
+        playButton.addEventListener("click", function () {
+          if (playButton.classList.contains("user-play")) {
+            debugger;
+            var idTag = Number(playButton.id.split("showPagePlay")[1]);
+            var wave = document.getElementById("wave-form-".concat(idTag));
+            wave.children[1].volume = 0;
+            wave.children[1].play();
+          } else if (playButton.classList.contains("user-pause")) {
+            var _idTag = Number(playButton.id.split("showPagePlay")[1]);
+
+            var _wave = document.getElementById("wave-form-".concat(_idTag));
+
+            _wave.children[1].pause();
+          }
+        }, false);
+        this.wavesurfer.on('ready', function () {
+          _this2.setState({
+            ready: true
+          });
+        });
+
+        if (!this.state.loaded) {
+          this.loadSong();
+        }
+      }
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id) {
@@ -4663,6 +4703,10 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
+      if (!this.state.loaded) {
+        this.loadSong();
+      }
+
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].id === this.props.ele.id) {
           var ele = document.getElementById("showPagePlay".concat(this.props.ele.id));
@@ -4712,6 +4756,59 @@ function (_React$Component) {
 
         _ele4.addEventListener("mouseleave", function (e) {
           return _this3.removeHover(e);
+        });
+      }
+    }
+  }, {
+    key: "loadSong",
+    value: function loadSong() {
+      if (!this.state.audioFile) {
+        if (document.getElementById("media")) {
+          var currentSong = document.getElementById("media").src;
+          currentSong = currentSong.split("/song")[1];
+          currentSong = currentSong.split(".")[0];
+          var currentId = Number(currentSong) + 1;
+          var song = this.props.ele;
+          var found = false;
+
+          if (song.id === currentId) {
+            this.wavesurfer.load(this.props.ele.audio_fileUrl);
+            this.setState({
+              audioFile: true,
+              currentSong: this.props.ele
+            });
+            found = true;
+          }
+
+          debugger;
+
+          if (found && document.getElementById('media').currentTime) {
+            var seconds = document.getElementById('media').currentTime;
+            this.wavesurfer.setVolume(0);
+            this.wavesurfer.play(seconds);
+
+            if (!this.props.state.ui.mediaPlayer.playing) {
+              this.wavesurfer.pause();
+            }
+          } else {
+            this.regularLoad();
+          }
+        } else {
+          this.regularLoad();
+        }
+      }
+
+      this.setState({
+        loaded: true
+      });
+    }
+  }, {
+    key: "regularLoad",
+    value: function regularLoad() {
+      if (this.props.ele && this.props.ele.audio_fileUrl) {
+        this.wavesurfer.load(this.props.ele.audio_fileUrl);
+        this.setState({
+          audioFile: true
         });
       }
     }
@@ -4811,9 +4908,10 @@ function (_React$Component) {
         className: "showAlbumTitle"
       }, this.props.ele.title))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        className: "waveForm",
-        src: window.waveform
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        ref: this.waveform,
+        id: "wave-form-".concat(this.props.ele.id),
+        className: "audio-container"
       }))));
     }
   }]);
