@@ -54,6 +54,13 @@ class UserShowAlbum extends React.Component {
       this.wavesurfer.on('ready', () => {
         this.setState({ready: true});
       });
+
+      this.wavesurfer.on('seek', (progress) => {
+        let media = document.getElementById('media');
+        let totalTime = media.duration;
+        let partial = totalTime * progress;
+        media.currentTime = partial;
+      });
   
       if (!this.state.loaded) {
         this.loadSong();

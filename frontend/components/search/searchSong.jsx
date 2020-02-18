@@ -57,6 +57,14 @@ class SearchSong extends React.Component {
         this.setState({ ready: true });
       });
 
+      this.wavesurfer.on('seek', (progress) => {
+        let media = document.getElementById('media');
+        let totalTime = media.duration;
+        let partial = totalTime * progress;
+        media.currentTime = partial;
+
+      });
+
       if (!this.state.loaded) {
         this.loadSong();
       }

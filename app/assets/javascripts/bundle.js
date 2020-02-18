@@ -2449,6 +2449,12 @@ function (_React$Component) {
             ready: true
           });
         });
+        this.wavesurfer.on('seek', function (progress) {
+          var media = document.getElementById('media');
+          var totalTime = media.duration;
+          var partial = totalTime * progress;
+          media.currentTime = partial;
+        });
 
         if (!this.state.loaded) {
           this.loadSong();
@@ -4632,6 +4638,12 @@ function (_React$Component) {
           _this2.setState({
             ready: true
           });
+        });
+        this.wavesurfer.on('seek', function (progress) {
+          var media = document.getElementById('media');
+          var totalTime = media.duration;
+          var partial = totalTime * progress;
+          media.currentTime = partial;
         });
 
         if (!this.state.loaded) {
