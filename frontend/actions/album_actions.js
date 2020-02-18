@@ -40,28 +40,23 @@ export const deleteAlbum = (albumId) => dispatch => (
 );
 
 export const createAlbum = (album) => dispatch => {
-  debugger
   return (
     AlbumApiUtil.createAlbum(album)
       .then((album) => dispatch(receiveAlbum(album)))
       .then((ele) => {
-        debugger
         return(location.reload(true));
       })
   );
 };
 export const createNewAlbum = (album) => dispatch => {
-  debugger
   return (
     AlbumApiUtil.createNewAlbum(album)
       .then((album) => dispatch(receiveAlbum(album)))
       .then((ele) => {
-        debugger
         // return (window.location = `albums/${ele.song.album.id}`);
         return (window.location.hash = `#/albums/${ele.album.id}`);
       })
       .then((ele) => {
-        debugger
         return(location.reload(true));
       })
   );

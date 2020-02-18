@@ -36,10 +36,19 @@ class UserShowAlbum extends React.Component {
       const playButton = document.getElementById(`showPagePlay${this.props.album.id}`);
   
       playButton.addEventListener("click", () => {
-        if (playButton.getAttribute('user-pause')) {
-          this.wavesurfer.play();
-        } else if (playButton.getAttribute('user-play')) {
-          this.wavesurfer.pause();
+        debugger
+
+        if (playButton.classList.contains("user-play")) {
+          let idTag = Number(playButton.id.split("showPagePlay")[1]);
+          debugger
+          let wave = document.getElementById(`wave-form-${idTag}`);
+          wave.children[1].volume = 0;
+          wave.children[1].play();
+        } else if (playButton.classList.contains("user-pause")) {
+          let idTag = Number(playButton.id.split("showPagePlay")[1]);
+          debugger
+          let wave = document.getElementById(`wave-form-${idTag}`);
+          wave.children[1].pause();
         }
       }, false);
   
@@ -54,14 +63,14 @@ class UserShowAlbum extends React.Component {
       // });
   
       // wavesurfer.load(this.props.sample.fileUrl);
-      debugger
   
       if (!this.state.audioFile) {
         debugger
-        if (this.props.album.songs && this.props.album.songs[0].audio_fileUrl) {
+        if (Object.values(this.props.album.songs).length && this.props.album.songs[0].audio_fileUrl) {
           this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
           this.setState({ audioFile: true });
-        } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
+        } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
+          debugger
           this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
           this.setState({audioFile: true});
         } else if (Object.values(this.props.state.entities.songs).length && this.props.album.songs && this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl) {
@@ -71,9 +80,7 @@ class UserShowAlbum extends React.Component {
       }
     }
 
-    // // debugger
     // wavesurfer.on('ready', () => {
-    //   // debugger
 
     //   wavesurfer.params.container.style.opacity = 0.9;
     //   console.log("this should be ready");
@@ -118,8 +125,7 @@ class UserShowAlbum extends React.Component {
   componentDidUpdate() {
 
     if (!this.state.audioFile) {
-      debugger
-      if (this.props.album.songs && this.props.album.songs[0].audio_fileUrl) {
+      if (this.props.album.songs && this.props.album.length && this.props.album.songs[0].audio_fileUrl) {
         this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
         this.setState({ audioFile: true });
       } else if (Object.values(this.props.state.entities.albums).length && Object.values(this.props.state.entities.albums[this.props.album.id].songs).length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
@@ -130,7 +136,6 @@ class UserShowAlbum extends React.Component {
         this.setState({ audioFile: true });
       }
     }
-    // debugger
 
     if (Object.values(this.props.state.ui.mediaPlayer).length > 0 &&
       this.props.state.ui.mediaPlayer.songs[0]) {
@@ -189,7 +194,6 @@ class UserShowAlbum extends React.Component {
   playSong() {
     let player = document.getElementById("media");
 
-    debugger
     if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
       let play = this.props.state.entities.songs[this.props.album.songs[0].id];
       if (this.props.state.ui.mediaPlayer.songs) {
@@ -251,7 +255,7 @@ class UserShowAlbum extends React.Component {
           </div>
           {(this.props.album.songs && Object.values(this.props.album.songs).length) ? 
           ( <div className="waveFormContainer">
-              <div ref={this.waveform} className='audio-container'></div>
+              <div ref={this.waveform} id={`wave-form-${this.props.album.id}`} className='audio-container'></div>
               {/* <img className="waveForm" src={window.waveform} /> */}
             </div>
           ) : 

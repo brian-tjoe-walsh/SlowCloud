@@ -32,7 +32,6 @@ function Modal({ modal, closeModal }) {
       return null;
   }
 
-  debugger
   if (modal === 'uploading' || modal === 'create_album') {
     return(
       <div className="loader-page" >

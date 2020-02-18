@@ -24,7 +24,6 @@ export const createSong = song => (
 );
 
 export const createNewSong = formData => {
-  debugger
   return (
     $.ajax({
       method: 'POST',

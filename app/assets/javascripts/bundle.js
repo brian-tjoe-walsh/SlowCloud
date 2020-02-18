@@ -153,26 +153,21 @@ var deleteAlbum = function deleteAlbum(albumId) {
 };
 var createAlbum = function createAlbum(album) {
   return function (dispatch) {
-    debugger;
     return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createAlbum"](album).then(function (album) {
       return dispatch(receiveAlbum(album));
     }).then(function (ele) {
-      debugger;
       return location.reload(true);
     });
   };
 };
 var createNewAlbum = function createNewAlbum(album) {
   return function (dispatch) {
-    debugger;
     return _util_album_api_util__WEBPACK_IMPORTED_MODULE_0__["createNewAlbum"](album).then(function (album) {
       return dispatch(receiveAlbum(album));
     }).then(function (ele) {
-      debugger; // return (window.location = `albums/${ele.song.album.id}`);
-
+      // return (window.location = `albums/${ele.song.album.id}`);
       return window.location.hash = "#/albums/".concat(ele.album.id);
     }).then(function (ele) {
-      debugger;
       return location.reload(true);
     });
   };
@@ -416,15 +411,12 @@ var createSong = function createSong(song) {
 };
 var createNewSong = function createNewSong(song) {
   return function (dispatch) {
-    debugger;
     return _util_song_api_util__WEBPACK_IMPORTED_MODULE_0__["createNewSong"](song).then(function (song) {
       return dispatch(receiveSong(song));
     }).then(function (ele) {
-      debugger; // return (window.location = `albums/${ele.song.album.id}`);
-
+      // return (window.location = `albums/${ele.song.album.id}`);
       return window.location.hash = "#/albums/".concat(ele.song.album.id);
     }).then(function (ele) {
-      debugger;
       return location.reload(true);
     });
   };
@@ -1310,7 +1302,6 @@ function (_React$Component) {
           history: this.props.history
         }));
       } else {
-        // debugger
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           loc: loc,
           history: this.props.history
@@ -2437,10 +2428,22 @@ function (_React$Component) {
         });
         var playButton = document.getElementById("showPagePlay".concat(this.props.album.id));
         playButton.addEventListener("click", function () {
-          if (playButton.getAttribute('user-pause')) {
-            _this2.wavesurfer.play();
-          } else if (playButton.getAttribute('user-play')) {
-            _this2.wavesurfer.pause();
+          debugger;
+
+          if (playButton.classList.contains("user-play")) {
+            var idTag = Number(playButton.id.split("showPagePlay")[1]);
+            debugger;
+            var wave = document.getElementById("wave-form-".concat(idTag));
+            wave.children[1].volume = 0;
+            wave.children[1].play();
+          } else if (playButton.classList.contains("user-pause")) {
+            var _idTag = Number(playButton.id.split("showPagePlay")[1]);
+
+            debugger;
+
+            var _wave = document.getElementById("wave-form-".concat(_idTag));
+
+            _wave.children[1].pause();
           }
         }, false); // this.wavesurfer.on('ready', () => {
         //   this.setState({ready: true});
@@ -2452,17 +2455,16 @@ function (_React$Component) {
         // });
         // wavesurfer.load(this.props.sample.fileUrl);
 
-        debugger;
-
         if (!this.state.audioFile) {
           debugger;
 
-          if (this.props.album.songs && this.props.album.songs[0].audio_fileUrl) {
+          if (Object.values(this.props.album.songs).length && this.props.album.songs[0].audio_fileUrl) {
             this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
             this.setState({
               audioFile: true
             });
-          } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
+          } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
+            debugger;
             this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
             this.setState({
               audioFile: true
@@ -2474,9 +2476,7 @@ function (_React$Component) {
             });
           }
         }
-      } // // debugger
-      // wavesurfer.on('ready', () => {
-      //   // debugger
+      } // wavesurfer.on('ready', () => {
       //   wavesurfer.params.container.style.opacity = 0.9;
       //   console.log("this should be ready");
       // });
@@ -2540,9 +2540,7 @@ function (_React$Component) {
       var _this3 = this;
 
       if (!this.state.audioFile) {
-        debugger;
-
-        if (this.props.album.songs && this.props.album.songs[0].audio_fileUrl) {
+        if (this.props.album.songs && this.props.album.length && this.props.album.songs[0].audio_fileUrl) {
           this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
           this.setState({
             audioFile: true
@@ -2558,8 +2556,7 @@ function (_React$Component) {
             audioFile: true
           });
         }
-      } // debugger
-
+      }
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
         if (this.props.state.ui.mediaPlayer.songs[0].album_id === this.props.album.id) {
@@ -2641,7 +2638,6 @@ function (_React$Component) {
     key: "playSong",
     value: function playSong() {
       var player = document.getElementById("media");
-      debugger;
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
         var play = this.props.state.entities.songs[this.props.album.songs[0].id];
@@ -2721,6 +2717,7 @@ function (_React$Component) {
         className: "waveFormContainer"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         ref: this.waveform,
+        id: "wave-form-".concat(this.props.album.id),
         className: "audio-container"
       })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "waveFormContainer"
@@ -2762,8 +2759,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var artistId = ownProps.artistId || ownProps.match.params.artistId; // debugger
-
+  var artistId = ownProps.artistId || ownProps.match.params.artistId;
   return {
     currentUserId: state.session.id,
     state: state,
@@ -3464,7 +3460,6 @@ function (_React$Component) {
   }, {
     key: "findX",
     value: function findX(e) {
-      debugger;
       var bar = document.getElementsByClassName("pink-bar")[0];
       var offset = e.clientX - bar.getClientRects()[0].x;
 
@@ -3482,8 +3477,7 @@ function (_React$Component) {
       e.preventDefault();
       var offset = this.findX(e);
       offset = offset * this.state.player.duration;
-      this.state.player.currentTime = offset;
-      debugger; // let mediaPlayer = document.getElementsByClassName('mediaCurrentTime')[0];
+      this.state.player.currentTime = offset; // let mediaPlayer = document.getElementsByClassName('mediaCurrentTime')[0];
     }
   }, {
     key: "render",
@@ -3689,8 +3683,6 @@ function Modal(_ref) {
     default:
       return null;
   }
-
-  debugger;
 
   if (modal === 'uploading' || modal === 'create_album') {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -6808,7 +6800,6 @@ function (_React$Component) {
           errors: "All areas must be filled in to upload a song!"
         });
       } else {
-        debugger;
         var formData = new FormData();
         formData.append('song[title]', this.state.title);
         formData.append('song[album_id]', this.state.album.id);
@@ -7546,7 +7537,6 @@ var createAlbum = function createAlbum(album) {
   });
 };
 var createNewAlbum = function createNewAlbum(formData) {
-  debugger;
   return $.ajax({
     method: 'POST',
     url: 'api/albums',
@@ -7735,7 +7725,6 @@ var createSong = function createSong(song) {
   });
 };
 var createNewSong = function createNewSong(formData) {
-  debugger;
   return $.ajax({
     method: 'POST',
     url: 'api/songs',

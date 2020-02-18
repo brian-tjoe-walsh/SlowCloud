@@ -61,7 +61,6 @@ class Uploading extends React.Component {
       this.setState({errors: "All areas must be filled in to upload a song!"});
       
     } else {
-      debugger
   
       const formData = new FormData();
   

@@ -154,7 +154,6 @@ class MediaPlayer extends React.Component {
   }
 
   findX(e) {
-    debugger
     let bar = document.getElementsByClassName("pink-bar")[0];
     let offset = e.clientX - bar.getClientRects()[0].x;
     
@@ -173,7 +172,6 @@ class MediaPlayer extends React.Component {
     let offset = this.findX(e);
     offset = offset * this.state.player.duration;
     this.state.player.currentTime = offset;
-    debugger
 
     // let mediaPlayer = document.getElementsByClassName('mediaCurrentTime')[0];
   }

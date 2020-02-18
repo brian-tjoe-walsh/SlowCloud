@@ -24,7 +24,6 @@ export const createAlbum = album => {
 };
 
 export const createNewAlbum = formData => {
-  debugger
   return(
     $.ajax({
       method: 'POST',
