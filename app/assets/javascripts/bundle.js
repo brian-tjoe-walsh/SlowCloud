@@ -1383,7 +1383,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-linkedin"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://github.com/bbriannwalshh",
+          href: "https://github.com/brian-tjoe-walsh",
           target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-github"
@@ -2334,7 +2334,7 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-linkedin"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "https://github.com/bbriannwalshh",
+          href: "https://github.com/brian-tjoe-walsh",
           target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fab fa-github"
@@ -2401,12 +2401,15 @@ function (_React$Component) {
       currentSong: null,
       playing: false,
       audioFile: null,
-      ready: false
+      ready: false,
+      loaded: false
     };
     _this.playSong = _this.playSong.bind(_assertThisInitialized(_this));
     _this.afterClick = _this.afterClick.bind(_assertThisInitialized(_this));
     _this.wavesurfer = null;
     _this.waveform = react__WEBPACK_IMPORTED_MODULE_1___default.a.createRef();
+    _this.findSong = _this.findSong.bind(_assertThisInitialized(_this));
+    _this.loadSong = _this.loadSong.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2428,53 +2431,32 @@ function (_React$Component) {
         });
         var playButton = document.getElementById("showPagePlay".concat(this.props.album.id));
         playButton.addEventListener("click", function () {
-          debugger;
-
           if (playButton.classList.contains("user-play")) {
             var idTag = Number(playButton.id.split("showPagePlay")[1]);
-            debugger;
             var wave = document.getElementById("wave-form-".concat(idTag));
             wave.children[1].volume = 0;
             wave.children[1].play();
           } else if (playButton.classList.contains("user-pause")) {
             var _idTag = Number(playButton.id.split("showPagePlay")[1]);
 
-            debugger;
-
             var _wave = document.getElementById("wave-form-".concat(_idTag));
 
             _wave.children[1].pause();
           }
-        }, false); // this.wavesurfer.on('ready', () => {
-        //   this.setState({ready: true});
-        // });
-        // wavesurfer.on('finish', () => {
+        }, false);
+        this.wavesurfer.on('ready', function () {
+          _this2.setState({
+            ready: true
+          });
+        }); // wavesurfer.on('finish', () => {
         //   playButton.setAttribute('playing', 'false');
         //   playButton.classList.remove('btn-pause');
         //   playButton.classList.add('btn-play');
         // });
         // wavesurfer.load(this.props.sample.fileUrl);
 
-        if (!this.state.audioFile) {
-          debugger;
-
-          if (Object.values(this.props.album.songs).length && this.props.album.songs[0].audio_fileUrl) {
-            this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
-            this.setState({
-              audioFile: true
-            });
-          } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
-            debugger;
-            this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
-            this.setState({
-              audioFile: true
-            });
-          } else if (Object.values(this.props.state.entities.songs).length && this.props.album.songs && this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl) {
-            this.wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
-            this.setState({
-              audioFile: true
-            });
-          }
+        if (!this.state.loaded) {
+          this.loadSong();
         }
       } // wavesurfer.on('ready', () => {
       //   wavesurfer.params.container.style.opacity = 0.9;
@@ -2539,23 +2521,8 @@ function (_React$Component) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      if (!this.state.audioFile) {
-        if (this.props.album.songs && this.props.album.length && this.props.album.songs[0].audio_fileUrl) {
-          this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
-          this.setState({
-            audioFile: true
-          });
-        } else if (Object.values(this.props.state.entities.albums).length && Object.values(this.props.state.entities.albums[this.props.album.id].songs).length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
-          this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
-          this.setState({
-            audioFile: true
-          });
-        } else if (Object.values(this.props.state.entities.songs).length && this.props.album.songs && this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl) {
-          this.wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
-          this.setState({
-            audioFile: true
-          });
-        }
+      if (!this.state.loaded) {
+        this.loadSong();
       }
 
       if (Object.values(this.props.state.ui.mediaPlayer).length > 0 && this.props.state.ui.mediaPlayer.songs[0]) {
@@ -2611,6 +2578,79 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "findSong",
+    value: function findSong() {// if (document.getElementById("media")) {
+      // }
+    }
+  }, {
+    key: "loadSong",
+    value: function loadSong() {
+      if (!this.state.audioFile) {
+        if (document.getElementById("media")) {
+          var currentSong = document.getElementById("media").src;
+          currentSong = currentSong.split("/song")[1];
+          currentSong = currentSong.split(".")[0];
+          var currentId = Number(currentSong) + 1;
+          var songs = Object.values(this.props.album.songs);
+          var found = false;
+
+          for (var i = 0; i < songs.length; i++) {
+            var song = songs[i];
+
+            if (song.id === currentId) {
+              this.wavesurfer.load(this.props.state.entities.songs[currentId].audio_fileUrl);
+              this.setState({
+                audioFile: true,
+                currentSong: this.props.state.entities.songs[currentId]
+              });
+              found = true;
+              break;
+            }
+          }
+
+          debugger;
+
+          if (found) {
+            var seconds = document.getElementById('media').currentTime;
+            this.wavesurfer.setVolume(0);
+            this.wavesurfer.play(seconds);
+
+            if (!this.props.state.ui.mediaPlayer.playing) {
+              this.wavesurfer.pause();
+            }
+          } else {
+            this.regularLoad();
+          }
+        } else {
+          this.regularLoad();
+        }
+      }
+
+      this.setState({
+        loaded: true
+      });
+    }
+  }, {
+    key: "regularLoad",
+    value: function regularLoad() {
+      if (Object.values(this.props.album.songs).length && this.props.album.songs[0].audio_fileUrl) {
+        this.wavesurfer.load(this.props.album.songs[0].audio_fileUrl);
+        this.setState({
+          audioFile: true
+        });
+      } else if (Object.values(this.props.state.entities.albums).length && this.props.state.entities.albums[this.props.album.id].songs && this.props.state.entities.albums[this.props.album.id].songs.length && this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl) {
+        this.wavesurfer.load(this.props.state.entities.albums[this.props.album.id].songs[0].audio_fileUrl);
+        this.setState({
+          audioFile: true
+        });
+      } else if (Object.values(this.props.state.entities.songs).length && this.props.album.songs && this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl) {
+        this.wavesurfer.load(this.props.state.entities.songs[this.props.album.songs[0].id].audio_fileUrl);
+        this.setState({
+          audioFile: true
+        });
+      }
+    }
+  }, {
     key: "addHover",
     value: function addHover(e) {
       var eles = document.getElementById(e.currentTarget.id);
@@ -2638,6 +2678,7 @@ function (_React$Component) {
     key: "playSong",
     value: function playSong() {
       var player = document.getElementById("media");
+      debugger;
 
       if (!this.state.currentSong || this.state.currentSong.id !== this.props.state.ui.mediaPlayer.songs[0].id) {
         var play = this.props.state.entities.songs[this.props.album.songs[0].id];
@@ -2660,7 +2701,7 @@ function (_React$Component) {
   }, {
     key: "afterClick",
     value: function afterClick(player) {
-      if (player.paused) {
+      if (player && player.paused) {
         this.props.playSong();
         this.setState({
           playing: true
@@ -3196,7 +3237,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-linkedin"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://github.com/bbriannwalshh",
+        href: "https://github.com/brian-tjoe-walsh",
         target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-github"
@@ -9020,6 +9061,20 @@ module.exports = invariant;
 
 /***/ }),
 
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/mini-create-react-context/dist/esm/index.js":
 /*!******************************************************************!*\
   !*** ./node_modules/mini-create-react-context/dist/esm/index.js ***!
@@ -9326,7 +9381,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(/*! isarray */ "./node_modules/path-to-regexp/node_modules/isarray/index.js")
+var isarray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
 
 /**
  * Expose `pathToRegexp`.
@@ -9752,20 +9807,6 @@ function pathToRegexp (path, keys, options) {
 
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/path-to-regexp/node_modules/isarray/index.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/path-to-regexp/node_modules/isarray/index.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
 
 
 /***/ }),
@@ -38692,9 +38733,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
 /* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_is__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Context */ "./node_modules/react-redux/es/components/Context.js");
-
+/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Context */ "./node_modules/react-redux/es/components/Context.js");
 
 
 
@@ -38722,20 +38761,26 @@ function storeStateUpdatesReducer(state, action) {
 
 var initStateUpdates = function initStateUpdates() {
   return [null, 0];
-};
+}; // React currently throws a warning when using useLayoutEffect on the server.
+// To get around it, we can conditionally useEffect on the server (no-op) and
+// useLayoutEffect in the browser. We need useLayoutEffect because we want
+// `connect` to perform sync updates to a ref to save the latest props after
+// a render is actually committed to the DOM.
 
+
+var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_4__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_4__["useEffect"];
 function connectAdvanced(
 /*
   selectorFactory is a func that is responsible for returning the selector function used to
   compute new props from state, props, and dispatch. For example:
-      export default connectAdvanced((dispatch, options) => (state, props) => ({
+     export default connectAdvanced((dispatch, options) => (state, props) => ({
       thing: state.things[props.thingId],
       saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
     }))(YourComponent)
-    Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
+   Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
   outside of their selector as an optimization. Options passed to connectAdvanced are passed to
   the selectorFactory, along with displayName and WrappedComponent, as the second argument.
-    Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
+   Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
   props. Do not use connectAdvanced directly without memoizing results between calls to your
   selector, otherwise the Connect component will re-render on every state or props change.
 */
@@ -38763,7 +38808,7 @@ _ref) {
       _ref2$forwardRef = _ref2.forwardRef,
       forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef,
       _ref2$context = _ref2.context,
-      context = _ref2$context === void 0 ? _Context__WEBPACK_IMPORTED_MODULE_8__["ReactReduxContext"] : _ref2$context,
+      context = _ref2$context === void 0 ? _Context__WEBPACK_IMPORTED_MODULE_7__["ReactReduxContext"] : _ref2$context,
       connectOptions = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
 
   invariant__WEBPACK_IMPORTED_MODULE_3___default()(renderCountProp === undefined, "renderCountProp is removed. render counting is built into the latest React Dev Tools profiling extension");
@@ -38823,15 +38868,12 @@ _ref) {
         return propsContext && propsContext.Consumer && Object(react_is__WEBPACK_IMPORTED_MODULE_5__["isContextConsumer"])(react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(propsContext.Consumer, null)) ? propsContext : Context;
       }, [propsContext, Context]); // Retrieve the store and ancestor subscription via context, if available
 
-      var contextValue = Object(react__WEBPACK_IMPORTED_MODULE_4__["useContext"])(ContextToUse); // The store _must_ exist as either a prop or in context.
-      // We'll check to see if it _looks_ like a Redux store first.
-      // This allows us to pass through a `store` prop that is just a plain value.
+      var contextValue = Object(react__WEBPACK_IMPORTED_MODULE_4__["useContext"])(ContextToUse); // The store _must_ exist as either a prop or in context
 
-      var didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
+      var didStoreComeFromProps = Boolean(props.store);
       var didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
-      invariant__WEBPACK_IMPORTED_MODULE_3___default()(didStoreComeFromProps || didStoreComeFromContext, "Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options.")); // Based on the previous check, one of these must be true
-
-      var store = didStoreComeFromProps ? props.store : contextValue.store;
+      invariant__WEBPACK_IMPORTED_MODULE_3___default()(didStoreComeFromProps || didStoreComeFromContext, "Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
+      var store = props.store || contextValue.store;
       var childPropsSelector = Object(react__WEBPACK_IMPORTED_MODULE_4__["useMemo"])(function () {
         // The child props selector needs the store reference as an input.
         // Re-create this selector whenever the store changes.
@@ -38906,7 +38948,7 @@ _ref) {
       // about useLayoutEffect in SSR, so we try to detect environment and fall back to
       // just useEffect instead to avoid the warning, since neither will run anyway.
 
-      Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_7__["useIsomorphicLayoutEffect"])(function () {
+      useIsomorphicLayoutEffect(function () {
         // We want to capture the wrapper props and child props we used for later comparisons
         lastWrapperProps.current = wrapperProps;
         lastChildProps.current = actualChildProps;
@@ -38918,7 +38960,7 @@ _ref) {
         }
       }); // Our re-subscribe logic only runs when the store/subscription setup changes
 
-      Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_7__["useIsomorphicLayoutEffect"])(function () {
+      useIsomorphicLayoutEffect(function () {
         // If we're not subscribed to the store, nothing to do here
         if (!shouldHandleStateChanges) return; // Capture values for checking if and when this component unmounts
 
@@ -38965,6 +39007,7 @@ _ref) {
             forceComponentUpdateDispatch({
               type: 'STORE_UPDATED',
               payload: {
+                latestStoreState: latestStoreState,
                 error: error
               }
             });
@@ -39608,14 +39651,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var invariant__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(invariant__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _useReduxContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useReduxContext */ "./node_modules/react-redux/es/hooks/useReduxContext.js");
 /* harmony import */ var _utils_Subscription__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/Subscription */ "./node_modules/react-redux/es/utils/Subscription.js");
-/* harmony import */ var _utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/useIsomorphicLayoutEffect */ "./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js");
-/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-redux/es/components/Context.js");
+/* harmony import */ var _components_Context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Context */ "./node_modules/react-redux/es/components/Context.js");
 
 
 
 
+ // React currently throws a warning when using useLayoutEffect on the server.
+// To get around it, we can conditionally useEffect on the server (no-op) and
+// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
+// subscription callback always has the selector from the latest render commit
+// available, otherwise a store update may happen between render and the effect,
+// which may cause missed updates; we also must ensure the store subscription
+// is created synchronously, otherwise a store update may occur before the
+// subscription is created and an inconsistent state may be observed
 
-
+var useIsomorphicLayoutEffect = typeof window !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_0__["useEffect"];
 
 var refEquality = function refEquality(a, b) {
   return a === b;
@@ -39642,7 +39692,7 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
       selectedState = latestSelectedState.current;
     }
   } catch (err) {
-    var errorMessage = "An error occurred while selecting the store state: " + err.message + ".";
+    var errorMessage = "An error occured while selecting the store state: " + err.message + ".";
 
     if (latestSubscriptionCallbackError.current) {
       errorMessage += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\nOriginal stack trace:";
@@ -39651,12 +39701,12 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
     throw new Error(errorMessage);
   }
 
-  Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_4__["useIsomorphicLayoutEffect"])(function () {
+  useIsomorphicLayoutEffect(function () {
     latestSelector.current = selector;
     latestSelectedState.current = selectedState;
     latestSubscriptionCallbackError.current = undefined;
   });
-  Object(_utils_useIsomorphicLayoutEffect__WEBPACK_IMPORTED_MODULE_4__["useIsomorphicLayoutEffect"])(function () {
+  useIsomorphicLayoutEffect(function () {
     function checkForUpdates() {
       try {
         var newSelectedState = latestSelector.current(store.getState());
@@ -39696,10 +39746,10 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
 
 function createSelectorHook(context) {
   if (context === void 0) {
-    context = _components_Context__WEBPACK_IMPORTED_MODULE_5__["ReactReduxContext"];
+    context = _components_Context__WEBPACK_IMPORTED_MODULE_4__["ReactReduxContext"];
   }
 
-  var useReduxContext = context === _components_Context__WEBPACK_IMPORTED_MODULE_5__["ReactReduxContext"] ? _useReduxContext__WEBPACK_IMPORTED_MODULE_2__["useReduxContext"] : function () {
+  var useReduxContext = context === _components_Context__WEBPACK_IMPORTED_MODULE_4__["ReactReduxContext"] ? _useReduxContext__WEBPACK_IMPORTED_MODULE_2__["useReduxContext"] : function () {
     return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(context);
   };
   return function useSelector(selector, equalityFn) {
@@ -40087,32 +40137,6 @@ function shallowEqual(objA, objB) {
 
   return true;
 }
-
-/***/ }),
-
-/***/ "./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js ***!
-  \************************************************************************/
-/*! exports provided: useIsomorphicLayoutEffect */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsomorphicLayoutEffect", function() { return useIsomorphicLayoutEffect; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
- // React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
-// subscription callback always has the selector from the latest render commit
-// available, otherwise a store update may happen between render and the effect,
-// which may cause missed updates; we also must ensure the store subscription
-// is created synchronously, otherwise a store update may occur before the
-// subscription is created and an inconsistent state may be observed
-
-var isHopefullyDomEnvironment = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined';
-var useIsomorphicLayoutEffect = isHopefullyDomEnvironment ? react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_0__["useEffect"];
 
 /***/ }),
 
